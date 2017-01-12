@@ -11,9 +11,11 @@
     <script src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")"></script>
     <script src="@Url.Content("~/Scripts/angular.min.js")"></script>
     <script src="@Url.Content("~/Scripts/angular-route.min.js")"></script>
-    <script src="@Url.Content("~/Client/Main/mainModule.js")"></script>
+    
+    @System.Web.Optimization.Scripts.Render("~/bundles/Client/Template")
 </head>
-<body ng-app="app">
+<body ng-app="template" ng-controller="TemplateController">
+    <h4>{{message}}</h4>
     Test angular: 2 + 2 = {{2+2}}
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">

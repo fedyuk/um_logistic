@@ -9,6 +9,8 @@ using System.Web.SessionState;
 using System.Web.Http;
 using UM_LOGISTIC_V1.Models;
 using System.Data.Entity;
+using UM_LOGISTIC_V1.App_Start;
+using System.Web.Optimization;
 
 namespace UM_LOGISTIC_V1
 {
@@ -17,6 +19,7 @@ namespace UM_LOGISTIC_V1
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
