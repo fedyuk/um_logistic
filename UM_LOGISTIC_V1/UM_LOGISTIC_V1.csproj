@@ -118,7 +118,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Client\Main\mainModule.js" />
+    <Content Include="Client\Controllers\User\UserController.js" />
+    <Content Include="Client\Modules\MainModule.js" />
+    <Content Include="Client\Services\Login\LoginService.js" />
+    <Content Include="Client\Services\User\UserService.js" />
     <Content Include="Client\Templates\TemplateController.js" />
     <Content Include="Client\Templates\TemplateModule.js" />
     <Content Include="Client\Templates\TemplateService.js" />
@@ -1061,6 +1064,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Client\Services\Login\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
