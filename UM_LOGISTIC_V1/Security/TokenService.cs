@@ -13,7 +13,7 @@ namespace UM_LOGISTIC_V1.Security
         {
             byte[] secretKey = JWT.JsonWebToken.Base64UrlDecode(user);
             var issued = DateTime.Now;
-            var expire = DateTime.Now.AddHours(10);
+            var expire = DateTime.Now.AddHours(24);
             var payload = new Dictionary<string, object>()
             {
               {"user", user},

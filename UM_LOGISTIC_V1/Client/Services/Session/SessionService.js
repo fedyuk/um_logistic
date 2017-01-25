@@ -1,7 +1,9 @@
 ﻿mainModule.service('SessionService', function ($cookieStore) {
     this.saveSessionToken = function (token, user) {
-        $cookieStore.put("token-session",token);
-		$cookieStore.put("user-session",user);
+		var expiresDate = new Date();
+		expiresDate.setDate(expireDate.getDate() + 1);
+        $cookieStore.put("token-session",token, {"expires": expiresDate});
+		$cookieStore.put("user-session",user, {"expires": expiresDate});
     }
 	
 	this.removeSessionToken = function () {
