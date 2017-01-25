@@ -9,7 +9,7 @@
 	
 	this.isSessionValid = function (token) {
         var sessionToken = $cookieStore.get("token-session");
-		return sessionToken != null ? true : false;
+		return sessionToken != undefined ? true : false;
     }
 	
 	this.closeSession = function () {
