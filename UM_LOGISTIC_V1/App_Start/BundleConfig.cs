@@ -21,9 +21,15 @@ namespace UM_LOGISTIC_V1.App_Start
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Services").Include(
                 "~/Client/Services/Login/LoginService.js",
+				"~/Client/Services/Account/AccountService.js",
+				"~/Client/Services/Cooperation/CooperationService.js",
+				"~/Client/Services/Session/SessionService.js",
+				"~/Client/Services/Transportation/TransportationService.js",
                 "~/Client/Services/User/UserService.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Controllers").Include(
+				"~/Client/Controllers/Profile/ProfileController.js",
+				"~/Client/Controllers/Login/LoginController.js",
                 "~/Client/Controllers/User/UserController.js"));
         }
     }
