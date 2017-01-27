@@ -5,6 +5,7 @@
 		LoginService.loginUser(userName, userPassword).success(function (user) {
 			if(user.Success) {
 				SessionService.saveSessionToken(user.Token, user.Result.UserName);
+				SessionService.saveProfileData(user.Result);
 				$log.log("User has been authorized");
 			}
 			else {

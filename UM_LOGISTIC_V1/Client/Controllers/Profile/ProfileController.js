@@ -13,13 +13,13 @@
 	}
 	
 	$scope.initProfileName = function() {
-		var sessionUserName = SessionService.getSessionUser();
-		$scope.profileName = sessionUserName != undefined ? sessionUserName : "Анонімний";
+		var sessionProfileName = SessionService.getSessionProfileName();
+		$scope.profileName = sessionProfileName != undefined ? sessionUserName : "Анонімний";
 	}
 	
 	$scope.initProfileLoginActions = function() {
-		var sessionUserName = SessionService.getSessionUser();
-		$scope.isAuthorized = sessionUserName != undefined ? true : false; 
+		var sessionProfileName = SessionService.getSessionProfileName();
+		$scope.isAuthorized = sessionProfileName != undefined ? true : false; 
 	}
 	
 	$scope.openLoginPage = function() {
