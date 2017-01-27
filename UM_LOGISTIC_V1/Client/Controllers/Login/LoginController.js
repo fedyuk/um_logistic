@@ -1,4 +1,4 @@
-﻿mainModule.controller('LoginController', function ($scope, $log, LoginService, SessionService) {
+﻿mainModule.controller('LoginController', function ($scope, $log, LoginService, SessionService, moduleConstants) {
 	
     //methods
     $scope.loginUser = function(userName, userPassword) {
@@ -6,10 +6,10 @@
 			if(user.Success) {
 				SessionService.saveSessionToken(user.Token, user.Result.UserName);
 				SessionService.saveProfileData(user.Result);
-				$log.log("User has been authorized");
+				$log.log(moduleConstants.authorizeSuccessCaption);
 			}
 			else {
-				$log.log("User was not found");
+				$log.log(moduleConstants.userNotFoundCaption);
 			}
 		}).error(function (error) {
 			$log.log(error);

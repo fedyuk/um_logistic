@@ -1,4 +1,4 @@
-﻿mainModule.controller('UserController', function ($scope, $log, UserService, SessionService) {
+﻿mainModule.controller('UserController', function ($scope, $log, UserService, SessionService, moduleConstants) {
 	
 	//methods
 	$scope.getUser = function(id) {
@@ -6,10 +6,10 @@
 		var token = SessionService.getSessionToken();
 		UserService.getUser(user, token, id).success(function (user) {
 			if(user.Success == true) {
-				$log.log("Get user success");
+				$log.log(moduleConstants.getUserSuccessCaption);
 			}
 			else {
-				$log.log("Get user no success");
+				$log.log(moduleConstants.getUserNotSuccessCaption);
 			}
 		}).error(function (error) {
 			$log.log(error);
@@ -21,10 +21,10 @@
 		var token = SessionService.getSessionToken();
 		UserService.getUsers(user, token , page, count).success(function (response) {
 			if(response.Success == true) {
-				$log.log("Get users success");
+				$log.log(moduleConstants.getUsersSuccessCaption);
 			}
 			else {
-				$log.log("Get users no success");
+				$log.log(moduleConstants.getUsersNotSuccessCaption);
 			}
 		}).error(function (error) {
 			$log.log(error);

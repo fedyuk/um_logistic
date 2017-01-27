@@ -1,7 +1,7 @@
-﻿mainModule.controller('ProfileController', function ($scope, $log, $route, $location, $routeParams, UserService, SessionService) {
+﻿mainModule.controller('ProfileController', function ($scope, $log, $route, $location, $routeParams, UserService, SessionService, moduleConstants) {
 	
 	//variables
-	$scope.profileName = "Анонімний";
+	$scope.profileName = moduleConstants.anonymousUserCaption;
 	$scope.isAuthorized = false;
 	//variables
 	
@@ -14,7 +14,7 @@
 	
 	$scope.initProfileName = function() {
 		var sessionProfileName = SessionService.getSessionProfileName();
-		$scope.profileName = sessionProfileName != undefined ? sessionUserName : "Анонімний";
+		$scope.profileName = sessionProfileName != undefined ? sessionUserName : moduleConstants.anonymousUserCaption;
 	}
 	
 	$scope.initProfileLoginActions = function() {

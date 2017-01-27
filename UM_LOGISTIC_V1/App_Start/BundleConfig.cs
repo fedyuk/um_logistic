@@ -17,7 +17,8 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Client/Templates/TemplateController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Modules").Include(
-                "~/Client/Modules/MainModule.js"));
+                "~/Client/Modules/MainModule.js",
+				"~/Client/Constants/ModuleConstants.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Services").Include(
                 "~/Client/Services/Login/LoginService.js",
