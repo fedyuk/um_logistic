@@ -1,4 +1,4 @@
-﻿mainModule.controller('ProfileController', function ($scope, $log, $route, $location, $routeParams, UserService, SessionService, moduleConstants) {
+﻿mainModule.controller('ProfileController', function ($scope, $log, $location, UserService, SessionService, moduleConstants, LoginService) {
 	
 	//variables
 	$scope.profileName = moduleConstants.anonymousUserCaption;

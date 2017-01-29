@@ -1,1 +1,1 @@
-﻿var mainModule = angular.module("mainModule", ["ngRoute", "ngCookies"]);
+﻿var mainModule = angular.module("mainModule", ["ngRoute","ngCookies", "ngMessages"]);  
