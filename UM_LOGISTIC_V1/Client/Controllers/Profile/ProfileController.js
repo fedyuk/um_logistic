@@ -1,15 +1,6 @@
 ﻿mainModule.controller('ProfileController', function ($scope, $log, $location, UserService,
 	SessionService, moduleConstants, LoginService, AccountService, NotificationService) {
 	
-	//variables
-	$scope.profileName = SessionService.getSessionProfileName() != undefined ?
-		SessionService.getSessionProfileName() : moduleConstants.anonymousUserCaption;
-	$scope.isAuthorized = false;
-	$scope.isStaffOrSupervisor = false;
-	$scope.loginUserName = "";
-	$scope.loginUserPassword = "";
-	//variables
-	
 	//methods
 	
 	$scope.logoutUser = function() {
@@ -37,24 +28,6 @@
 		$location.path(moduleConstants.settingsPath);
 	}
 	
-	$scope.loginUser = function() {
-		LoginService.loginUser($scope.loginUserName, $scope.loginUserPassword)
-		.success(function(response) {
-			if(response.Success) {
-				$scope.saveProfile(response);
-				$log.log(moduleConstants.authorizeSuccessCaption);
-				NotificationService.success(moduleConstants.authorizeSuccessCaption);
-			}
-			else {
-				$log.log(moduleConstants.authorizeNotSuccessCaption);
-				NotificationService.error(moduleConstants.authorizeNotSuccessCaption);
-			}
-		}).error(function(error) {
-			$log.log(moduleConstants.authorizeNotSuccessCaption);
-			NotificationService.error(moduleConstants.authorizeNotSuccessCaption);
-		});
-	}
-	
 	$scope.changeProfileData = function(isAuthorized, profileName, isStaffOrSupervisor) {
 		$scope.profileName = isAuthorized == true ? profileName : moduleConstants.anonymousUserCaption;
 		$scope.isAuthorized = isAuthorized;
@@ -66,6 +39,10 @@
 		SessionService.saveProfileData(response.Result);
 	    $scope.changeProfileData(true, response.Result.FullName, false);
 	}
+	
+	$scope.$on("userAuthorized", function(event, args) {
+		$scope.saveProfile(args);
+	});
 	
 	//methods
 	
