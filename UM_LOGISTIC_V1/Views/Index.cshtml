@@ -1,6 +1,6 @@
 ﻿
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="mainModule">
 <head>
     <meta charset="utf-8">
     <title>Index</title>
@@ -14,8 +14,7 @@
     @System.Web.Optimization.Scripts.Render("~/bundles/Client/Controllers")
 
 </head>
-<body ng-app="mainModule" ng-controller="ProfileController">
-<a href="#login">link</a>
+<body>
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -57,8 +56,10 @@
         </div>
     </div>
     <div class="container">
-        <div class="ng-view"></div>
-        <footer>
+	<a href="/login">link</a>
+        <div ui-view></div>
+    </div>
+	<footer>
             <div class="row">
                 <div class="col-lg-12">
                     <ul class="list-unstyled">
@@ -69,7 +70,6 @@
                 </div>
             </div>
         </footer>
-    </div>
     <script src="~/Style/bootswatch/bootstrap.min.js"></script>
     <script src="~/Style/bootswatch/custom.js"></script>
 </body>

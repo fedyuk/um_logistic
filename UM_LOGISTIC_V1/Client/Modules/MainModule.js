@@ -21,7 +21,7 @@ mainModule.config(['$stateProvider', '$locationProvider', function ($stateProvid
 
     $stateProvider
         .state('home', {
-            url: '/',
+            url: '/home',
             templateUrl: '/views/index'
 
         })
@@ -38,8 +38,8 @@ mainModule.config(['$stateProvider', '$locationProvider', function ($stateProvid
 
 }]);
  
- mainModule.run(['$rootScope', 'SessionService',
-  function($rootScope, SessionService) {
+ mainModule.run(['$rootScope', '$state', 'SessionService',
+  function ($rootScope, $state, SessionService) {
 	  $rootScope.$on('$stateChangeStart',
       function (event, toState, toParams, fromState, fromParams) {
 		  var sessionToken = SessionService.getSessionToken();
