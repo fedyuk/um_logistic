@@ -2,7 +2,8 @@
 	SessionService, moduleConstants, LoginService, AccountService) {
 	
 	//variables
-	$scope.profileName = moduleConstants.anonymousUserCaption;
+	$scope.profileName = SessionService.getSessionProfileName() != undefined ?
+		SessionService.getSessionProfileName() : moduleConstants.anonymousUserCaption;
 	$scope.isAuthorized = false;
 	$scope.isStaffOrSupervisor = false;
 	$scope.loginUserName = "";
