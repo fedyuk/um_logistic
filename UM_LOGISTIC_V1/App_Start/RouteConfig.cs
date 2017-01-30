@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using UM_LOGISTIC_V1.Routing;
 
 namespace UM_LOGISTIC_V1
 {
@@ -11,13 +12,15 @@ namespace UM_LOGISTIC_V1
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            /*routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+            );*/
+			
+			routes.Add("Default", new DefaultRoute());
 
         }
     }
