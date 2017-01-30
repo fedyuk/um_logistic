@@ -1,7 +1,7 @@
 ﻿var mainModule = angular.module("mainModule", ["ngRoute","ngCookies", "ngMessages"]);  
 
-mainModule.config(['$routeProvider',
-  function($routeProvider) {
+mainModule.config(['$routeProvider', '$locationProvider',
+  function($routeProvider, $locationProvider) {
     $routeProvider.
       when('/', {
         templateUrl: '/views/index',
@@ -14,11 +14,13 @@ mainModule.config(['$routeProvider',
       otherwise({
         redirectTo: '/'
       });
+	  
+	  $locationProvider.html5Mode(true);
   }]);
-  
- mainModule.run(function($rootScope, $state, $stateParams, SessionService) {
-	
-	$rootScope.$on('$stateChangeStart',
+ 
+ mainModule.run(['$rootScope', '$state', 'SessionService'
+  function($rootScope, $state, SessionService) {
+	  $rootScope.$on('$stateChangeStart',
       function (event, toState, toParams, fromState, fromParams) {
 		  var sessionToken = SessionService.getSessionToken();
 		  if(!SessionService.isSessionValid()) {
@@ -26,5 +28,8 @@ mainModule.config(['$routeProvider',
 		  }
       }
     );
- });
+  }]);
+ 
+ 
+ 
   
