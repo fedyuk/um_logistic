@@ -26,7 +26,8 @@ namespace UM_LOGISTIC_V1.App_Start
 				"~/Client/Services/Cooperation/CooperationService.js",
 				"~/Client/Services/Session/SessionService.js",
 				"~/Client/Services/Transportation/TransportationService.js",
-                "~/Client/Services/User/UserService.js"));
+                "~/Client/Services/User/UserService.js",
+				"~/Client/Services/Notification/NotificationService.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Controllers").Include(
 				"~/Client/Controllers/Profile/ProfileController.js",
@@ -38,7 +39,8 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Scripts/angular-cookies.min.js",
                 "~/Scripts/angular-route.min.js",
                 "~/Scripts/angular-messages.min.js",
-                "~/Scripts/jquery-1.10.2.min.js"));
+                "~/Scripts/jquery-1.10.2.min.js",
+				"~/Scripts/notify.min.js"));
         }
     }
 }

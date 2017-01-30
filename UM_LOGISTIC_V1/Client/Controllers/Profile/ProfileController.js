@@ -1,5 +1,5 @@
 ﻿mainModule.controller('ProfileController', function ($scope, $log, $location, UserService,
-	SessionService, moduleConstants, LoginService, AccountService) {
+	SessionService, moduleConstants, LoginService, AccountService, NotificationService) {
 	
 	//variables
 	$scope.profileName = SessionService.getSessionProfileName() != undefined ?
@@ -16,6 +16,7 @@
 		SessionService.closeSession();
 		$scope.changeProfileData(false, null, false);
 		$log.log(moduleConstants.closedSessionMeesage);
+		NotificationService.success(moduleConstants.closedSessionMeesage);
 	}
 	
 	$scope.initProfileName = function() {
@@ -42,12 +43,15 @@
 			if(response.Success) {
 				$scope.saveProfile(response);
 				$log.log(moduleConstants.authorizeSuccessCaption);
+				NotificationService.success(moduleConstants.authorizeSuccessCaption);
 			}
 			else {
 				$log.log(moduleConstants.authorizeNotSuccessCaption);
+				NotificationService.error(moduleConstants.authorizeNotSuccessCaption);
 			}
 		}).error(function(error) {
 			$log.log(moduleConstants.authorizeNotSuccessCaption);
+			NotificationService.error(moduleConstants.authorizeNotSuccessCaption);
 		});
 	}
 	
