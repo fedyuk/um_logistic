@@ -12,7 +12,7 @@ mainModule.config(['$routeProvider', '$locationProvider',
         controller: 'LoginController'
       }).
       otherwise({
-        redirectTo: '/'
+		templateUrl: '/views/404'
       });
 	  
 	  $locationProvider.html5Mode(true);
