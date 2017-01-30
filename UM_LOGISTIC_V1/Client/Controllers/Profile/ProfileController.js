@@ -1,15 +1,20 @@
-﻿mainModule.controller('ProfileController', function ($scope, $log, $location, UserService, SessionService, moduleConstants, LoginService) {
+﻿mainModule.controller('ProfileController', function ($scope, $log, $location, UserService,
+	SessionService, moduleConstants, LoginService, AccountService) {
 	
 	//variables
 	$scope.profileName = moduleConstants.anonymousUserCaption;
 	$scope.isAuthorized = false;
+	$scope.isStaffOrSupervisor = false;
+	$scope.loginUserName = "";
+	$scope.loginUserPassword = "";
 	//variables
 	
 	//methods
 	
 	$scope.logoutUser = function() {
 		SessionService.closeSession();
-		$log.log("Session has been closed");
+		$scope.changeProfileData(false, null, false);
+		$log.log(moduleConstants.closedSessionMeesage);
 	}
 	
 	$scope.initProfileName = function() {
@@ -23,7 +28,38 @@
 	}
 	
 	$scope.openLoginPage = function() {
-		$location.path("/login");
+		$location.path(moduleConstants.loginPath);
+	}
+	
+	$scope.openSettingsPage = function() {
+		$location.path(moduleConstants.settingsPath);
+	}
+	
+	$scope.loginUser = function() {
+		LoginService.loginUser($scope.loginUserName, $scope.loginUserPassword)
+		.success(function(response) {
+			if(response.Success) {
+				$scope.saveProfile(response);
+				$log.log(moduleConstants.authorizeSuccessCaption);
+			}
+			else {
+				$log.log(moduleConstants.authorizeNotSuccessCaption);
+			}
+		}).error(function(error) {
+			$log.log(moduleConstants.authorizeNotSuccessCaption);
+		});
+	}
+	
+	$scope.changeProfileData = function(isAuthorized, profileName, isStaffOrSupervisor) {
+		$scope.profileName = isAuthorized == true ? profileName : moduleConstants.anonymousUserCaption;
+		$scope.isAuthorized = isAuthorized;
+		$scope.isStaffOrSupervisor = isStaffOrSupervisor;
+	}
+	
+	$scope.saveProfile = function(response) {
+		SessionService.saveSessionToken(response.Token, $scope.loginUserName);
+		SessionService.saveProfileData(response.Result);
+	    $scope.changeProfileData(true, response.Result.FullName, false);
 	}
 	
 	//methods
