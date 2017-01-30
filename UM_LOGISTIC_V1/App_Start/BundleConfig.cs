@@ -37,6 +37,7 @@ namespace UM_LOGISTIC_V1.App_Start
             bundles.Add(new ScriptBundle("~/bundles/Client/Libraries").Include(
                 "~/Scripts/angular.min.js",
                 "~/Scripts/angular-cookies.min.js",
+                "~/Scripts/angular-ui-router.min.js",
                 "~/Scripts/angular-route.min.js",
                 "~/Scripts/angular-messages.min.js",
                 "~/Scripts/jquery-1.10.2.min.js",

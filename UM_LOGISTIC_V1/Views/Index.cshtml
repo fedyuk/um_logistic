@@ -6,8 +6,8 @@
     <title>Index</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="stylesheet" href="@Url.Content("~/Style/bootswatch/bootstrap.css")" media="screen">
-    <link rel="stylesheet" href="@Url.Content("~/Style/bootswatch/custom.min.css")">
+    <link rel="stylesheet" href="~/Style/bootswatch/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="~/Style/bootswatch/custom.min.css">
     @System.Web.Optimization.Scripts.Render("~/bundles/Client/Libraries")
     @System.Web.Optimization.Scripts.Render("~/bundles/Client/Modules")
     @System.Web.Optimization.Scripts.Render("~/bundles/Client/Services")
@@ -15,6 +15,7 @@
 
 </head>
 <body ng-app="mainModule" ng-controller="ProfileController">
+<a href="#login">link</a>
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -69,7 +70,7 @@
             </div>
         </footer>
     </div>
-    <script src="@Url.Content("~/Style/bootswatch/bootstrap.min.js")"></script>
-    <script src="@Url.Content("~/Style/bootswatch/custom.js")"></script>
+    <script src="~/Style/bootswatch/bootstrap.min.js"></script>
+    <script src="~/Style/bootswatch/custom.js"></script>
 </body>
 </html>

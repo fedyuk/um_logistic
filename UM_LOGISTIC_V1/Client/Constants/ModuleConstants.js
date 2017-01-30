@@ -8,6 +8,6 @@
 	getUsersSuccessCaption: "Get users success",
 	getUsersNotSuccessCaption: "Get users no success",
 	closedSessionMeesage: "Session has been closed",
-	loginPath: "/login",
-	settingsPath: "/settings"
+	loginPath: "login",
+	settingsPath: "settings"
 });
