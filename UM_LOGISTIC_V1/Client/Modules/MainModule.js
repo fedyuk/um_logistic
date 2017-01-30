@@ -9,7 +9,7 @@ mainModule.config(['$routeProvider', '$locationProvider',
       }).
       when('/login', {
         templateUrl: '/views/login',
-        controller: 'ProfileController'
+        controller: 'LoginController'
       }).
       otherwise({
         redirectTo: '/'
