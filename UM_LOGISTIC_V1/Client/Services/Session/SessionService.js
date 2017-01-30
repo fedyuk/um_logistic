@@ -14,7 +14,7 @@
         $cookieStore.remove("user-session");
     }
 	
-	this.isSessionValid = function (token) {
+	this.isSessionValid = function () {
         var sessionToken = $cookieStore.get("token-session");
 		return sessionToken != undefined ? true : false;
     }

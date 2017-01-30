@@ -1,6 +1,6 @@
 ﻿var mainModule = angular.module("mainModule", ["ngRoute","ngCookies", "ngMessages"]);  
 
-mainModule .config(['$routeProvider',
+mainModule.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/', {
@@ -15,3 +15,16 @@ mainModule .config(['$routeProvider',
         redirectTo: '/'
       });
   }]);
+  
+ mainModule.run(function($rootScope, $state, $stateParams, SessionService) {
+	
+	$rootScope.$on('$stateChangeStart',
+      function (event, toState, toParams, fromState, fromParams) {
+		  var sessionToken = SessionService.getSessionToken();
+		  if(!SessionService.isSessionValid()) {
+			  $state.go('/login')
+		  }
+      }
+    );
+ });
+  
