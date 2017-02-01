@@ -1,5 +1,5 @@
 ﻿mainModule.constant("moduleConstants", {
-	anonymousUserCaption: "Анонімний",
+	anonymousUserCaption: "Авторизуватись",
 	authorizeSuccessCaption: "User has been authorized",
 	authorizeNotSuccessCaption: "User has not been authorized",
 	userNotFoundCaption: "User was not found",
