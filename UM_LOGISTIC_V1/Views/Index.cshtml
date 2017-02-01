@@ -47,7 +47,7 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">{{profileName}}<span class="caret"></span></a>
                         <ul class="dropdown-menu" aria-labelledby="download">
                             <li ng-show="!isAuthorized"><a href="/login">Вхід</a></li>
-                            <li ng-show="isAuthorized"><a href="#" ng-click="logoutUser">Вихід</a></li>
+                            <li ng-show="isAuthorized"><a href="#" ng-click="logoutUser()">Вихід</a></li>
                         </ul>
                     </li>
                 </ul>

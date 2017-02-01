@@ -7,13 +7,13 @@
 		SessionService.closeSession();
 		$scope.changeProfileData(false, null, false);
 		$log.log(moduleConstants.closedSessionMeesage);
-		$scope.openHomePage();
-		NotificationService.success(moduleConstants.closedSessionMeesage);
+		$scope.openLoginPage();
+		//NotificationService.success(moduleConstants.closedSessionMeesage);
 	}
 	
 	$scope.initProfileName = function() {
 		var sessionProfileName = SessionService.getSessionProfileName();
-		$scope.profileName = sessionProfileName != undefined ? sessionUserName : moduleConstants.anonymousUserCaption;
+		$scope.profileName = sessionProfileName != undefined ? sessionProfileName : moduleConstants.anonymousUserCaption;
 	}
 	
 	$scope.initProfileLoginActions = function() {
@@ -40,9 +40,9 @@
 	}
 	
 	$scope.saveProfile = function(response) {
-		SessionService.saveSessionToken(response.Token, $scope.loginUserName);
+		SessionService.saveSessionToken(response.Token, response.Result.UserName);
 		SessionService.saveProfileData(response.Result);
-	    $scope.changeProfileData(true, response.Result.FullName, false);
+	    $scope.changeProfileData(true, response.Result.Account.FullName, false);
 	}
 	
 	$scope.$on("userAuthorized", function(event, args) {

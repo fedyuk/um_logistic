@@ -34,17 +34,17 @@
 	}
 	
 	this.getSessionProfileName = function() {
-		return $cookieStore.get("proile-name");
+		return $cookieStore.get("profile-name");
 	}
 	
 	this.saveProfileData = function(accountData) {
 		var expiresDate = new Date();
-		expiresDate.setDate(expireDate.getDate() + 1);
-        $cookieStore.put("proile-name",accountData.FullName, {"expires": expiresDate});
+		expiresDate.setDate(expiresDate.getDate() + 1);
+        $cookieStore.put("profile-name",accountData.Account.FullName, {"expires": expiresDate});
 	}
 	
 	this.clearProfileData = function() {
-        $cookieStore.remove("proile-name");
+        $cookieStore.remove("profile-name");
 	}
 	
 });

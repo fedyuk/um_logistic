@@ -1,4 +1,4 @@
-﻿mainModule.controller('LoginController', function ($scope, $log, $location, LoginService, SessionService, moduleConstants, NotificationService) {
+﻿mainModule.controller('LoginController', function ($rootScope, $scope, $log, $location, LoginService, SessionService, moduleConstants, NotificationService) {
 	
 	//variables 
 	$scope.loginUserName = "";
@@ -10,10 +10,11 @@
 		LoginService.loginUser($scope.loginUserName, $scope.loginUserPassword)
 		.success(function(response) {
 			if(response.Success) {
-				$scope.$emit("userAuthorized", response);
+				//$scope.$emit("userAuthorized", response);
+				$rootScope.$broadcast("userAuthorized", response);
 				$log.log(moduleConstants.authorizeSuccessCaption);
 				$location.path(moduleConstants.homePath);
-				NotificationService.success(moduleConstants.authorizeSuccessCaption);
+				//NotificationService.success(moduleConstants.authorizeSuccessCaption);
 			}
 			else {
 				$log.log(moduleConstants.authorizeNotSuccessCaption);
