@@ -1,4 +1,4 @@
-﻿mainModule.controller('LoginController', function ($scope, $log, LoginService, SessionService, moduleConstants, NotificationService) {
+﻿mainModule.controller('LoginController', function ($scope, $log, $location, LoginService, SessionService, moduleConstants, NotificationService) {
 	
 	//variables 
 	$scope.loginUserName = "";
@@ -12,6 +12,7 @@
 			if(response.Success) {
 				$scope.$emit("userAuthorized", response);
 				$log.log(moduleConstants.authorizeSuccessCaption);
+				$location.path(moduleConstants.homePath);
 				NotificationService.success(moduleConstants.authorizeSuccessCaption);
 			}
 			else {

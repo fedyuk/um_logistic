@@ -7,6 +7,7 @@
 		SessionService.closeSession();
 		$scope.changeProfileData(false, null, false);
 		$log.log(moduleConstants.closedSessionMeesage);
+		$scope.openHomePage();
 		NotificationService.success(moduleConstants.closedSessionMeesage);
 	}
 	
@@ -26,6 +27,10 @@
 	
 	$scope.openSettingsPage = function() {
 		$location.path(moduleConstants.settingsPath);
+	}
+	
+	$scope.openHomePage = function() {
+		$location.path(moduleConstants.homePath);
 	}
 	
 	$scope.changeProfileData = function(isAuthorized, profileName, isStaffOrSupervisor) {

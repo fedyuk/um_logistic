@@ -7,6 +7,11 @@ mainModule.config(['$stateProvider', '$locationProvider', function ($stateProvid
             url: '/login',
             templateUrl: '/views/login',
             controller: 'LoginController'
+        })
+		.state('home', {
+            url: '/home',
+            templateUrl: '/views/home',
+            controller: 'HomeController'
         });
 
     $locationProvider.html5Mode({
