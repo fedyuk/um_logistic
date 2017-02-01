@@ -42,12 +42,12 @@
                     </li>
                 </ul>
 
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" ng-controller="ProfileController">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Авторизація<span class="caret"></span></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">{{profileName}}<span class="caret"></span></a>
                         <ul class="dropdown-menu" aria-labelledby="download">
-                            <li><a href="../">Настройки</a></li>
-                            <li><a href="../">Вхід</a></li>
+                            <li ng-show="!isAuthorized"><a href="/login">Вхід</a></li>
+                            <li ng-show="isAuthorized"><a href="#" ng-click="logoutUser">Вихід</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -56,7 +56,6 @@
         </div>
     </div>
     <div class="container">
-	<a href="/login">link</a>
         <div ui-view></div>
     </div>
 	<footer>
