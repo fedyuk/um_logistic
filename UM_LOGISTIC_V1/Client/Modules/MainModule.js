@@ -21,13 +21,13 @@ mainModule.config(['$stateProvider', '$locationProvider', function ($stateProvid
 
 }]);
  
- mainModule.run(['$rootScope', '$state', 'SessionService',
-  function ($rootScope, $state, SessionService) {
-	  $rootScope.$on('$stateChangeStart',
-      function (event, toState, toParams, fromState, fromParams) {
+ mainModule.run(['$rootScope', '$state', '$location', 'SessionService', 'moduleConstants',
+  function ($rootScope, $state, $location, SessionService, moduleConstants) {
+	  $rootScope.$on('$routeChangeStart',
+      function (event) {
 		  var sessionToken = SessionService.getSessionToken();
 		  if(!SessionService.isSessionValid()) {
-		      $rootScope.$state.go('/login')
+		      $location.path(moduleConstants.loginPath);
 		  }
       }
     );
