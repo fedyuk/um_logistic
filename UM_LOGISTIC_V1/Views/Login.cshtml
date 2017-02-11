@@ -2,20 +2,26 @@
     <img src="~/Resources/Picture/loading.gif" align="center"/>
 </div>
 <div class="row" ng-show="!isLoading">
-    <h4>Увійдіть в систему</h4>
+    <h4></h4>
 </div>
-<div class="row" ng-show="!isLoading">
+<div class="row" style="margin-top: 50px;" ng-show="!isLoading">
     <form class="bs-component">
-        <div class="form-group">
+        <div class="row">
+        <div class="form-group col-md-6 col-md-offset-3">
             <label class="control-label">Логін:</label>
             <input class="form-control" ng-model="loginUserName" type="text" required>
         </div>
-        <div class="form-group">
-            <label class="control-label">Пароль:</label>
-            <input class="form-control" ng-model="loginUserPassword" type="text" required>
         </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary" ng-click="loginUser()">Увійти</button>
+        <div class="row">
+            <div class="form-group col-md-6  col-md-offset-3">
+                <label class="control-label">Пароль:</label>
+                <input class="form-control" ng-model="loginUserPassword" type="text" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6  col-md-offset-3">
+                <button type="submit" class="btn btn-primary" ng-click="loginUser()">Увійти</button>
+            </div>
         </div>
     </form>
 </div>

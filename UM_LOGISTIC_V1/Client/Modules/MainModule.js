@@ -8,6 +8,16 @@ mainModule.config(['$stateProvider', '$locationProvider', function ($stateProvid
             templateUrl: '/views/login',
             controller: 'LoginController'
         })
+        .state('cooperations', {
+            url: '/cooperations',
+            templateUrl: '/views/cooperation',
+            controller: 'CooperationController'
+        })
+        .state('index', {
+            url: '/',
+            templateUrl: '/views/home',
+            controller: 'HomeController'
+        })
 		.state('home', {
             url: '/home',
             templateUrl: '/views/home',

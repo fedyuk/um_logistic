@@ -13,19 +13,17 @@
 		.success(function (response) {
 		    $scope.isLoading = false;
 			if(response.Success) {
-				//$scope.$emit("userAuthorized", response);
 				$rootScope.$broadcast("userAuthorized", response);
 				$log.log(moduleConstants.authorizeSuccessCaption);
 				$location.path(moduleConstants.homePath);
-				//NotificationService.success(moduleConstants.authorizeSuccessCaption);
 			}
 			else {
-				$log.log(moduleConstants.authorizeNotSuccessCaption);
-				NotificationService.error(moduleConstants.authorizeNotSuccessCaption);
+				$log.log(response.Error);
+				NotificationService.error(response.Error);
 			}
 		}).error(function(error) {
 			$log.log(moduleConstants.authorizeNotSuccessCaption);
-			NotificationService.error(moduleConstants.authorizeNotSuccessCaption);
+			NotificationService.error(error);
 		});
 	}
 	//methods
