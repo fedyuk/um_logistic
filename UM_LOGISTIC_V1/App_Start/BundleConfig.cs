@@ -43,6 +43,10 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Scripts/angular-messages.min.js",
                 "~/Scripts/jquery-1.10.2.min.js",
 				"~/Scripts/notify.min.js"));
+
+            bundles.Add(new StyleBundle("~/bundles/Styles").Include(
+                "~/Style/bootswatch/bootstrap.css",
+                "~/Style/bootswatch/custom.min.css"));
         }
     }
 }

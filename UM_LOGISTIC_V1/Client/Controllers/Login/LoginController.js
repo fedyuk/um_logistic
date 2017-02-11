@@ -3,12 +3,15 @@
 	//variables 
 	$scope.loginUserName = "";
 	$scope.loginUserPassword = "";
+	$scope.isLoading = false;
 	//variables
 	
     //methods
-    $scope.loginUser = function() {
+	$scope.loginUser = function () {
+	    $scope.isLoading = true;
 		LoginService.loginUser($scope.loginUserName, $scope.loginUserPassword)
-		.success(function(response) {
+		.success(function (response) {
+		    $scope.isLoading = false;
 			if(response.Success) {
 				//$scope.$emit("userAuthorized", response);
 				$rootScope.$broadcast("userAuthorized", response);

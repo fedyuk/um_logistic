@@ -1,7 +1,10 @@
-﻿<div class="row">
-    <h4>Уввйдіть в систему</h4>
+﻿<div align="center" ng-show="isLoading">
+    <img src="~/Resources/Picture/loading.gif" align="center"/>
 </div>
-<div class="row">
+<div class="row" ng-show="!isLoading">
+    <h4>Увійдіть в систему</h4>
+</div>
+<div class="row" ng-show="!isLoading">
     <form class="bs-component">
         <div class="form-group">
             <label class="control-label">Логін:</label>
