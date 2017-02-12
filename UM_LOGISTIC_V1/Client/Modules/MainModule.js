@@ -18,6 +18,11 @@ mainModule.config(['$stateProvider', '$locationProvider', function ($stateProvid
             templateUrl: '/views/home',
             controller: 'HomeController'
         })
+        .state('coop_application', {
+            url: '/coop_application',
+            templateUrl: '/views/coop_application',
+            controller: 'CooperationApplicationController'
+        })
 		.state('home', {
             url: '/home',
             templateUrl: '/views/home',

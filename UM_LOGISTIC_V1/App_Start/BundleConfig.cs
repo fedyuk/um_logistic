@@ -34,7 +34,8 @@ namespace UM_LOGISTIC_V1.App_Start
 				"~/Client/Controllers/Login/LoginController.js",
                 "~/Client/Controllers/User/UserController.js",
 				"~/Client/Controllers/Home/HomeController.js",
-                "~/Client/Controllers/Cooperation/CooperationController.js"));
+                "~/Client/Controllers/Cooperation/CooperationController.js",
+                "~/Client/Controllers/Cooperation/CooperationApplicationController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Libraries").Include(
                 "~/Scripts/angular.min.js",

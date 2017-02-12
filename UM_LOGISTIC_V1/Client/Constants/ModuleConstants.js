@@ -10,5 +10,6 @@
 	closedSessionMeesage: "Session has been closed",
 	loginPath: "/login",
 	settingsPath: "/settings",
-	homePath: "/home"
+	homePath: "/home",
+	cooperationApplicationCreatingSuccess: "Дякуємо за виділений вами час, ми вам перетелефонуємо!"
 });
