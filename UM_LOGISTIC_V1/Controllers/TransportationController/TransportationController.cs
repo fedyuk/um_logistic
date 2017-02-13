@@ -112,7 +112,7 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
             }
         }
 
-        [Route("api/Transportation/update")]
+        [Route("api/transportation/update")]
         [HttpPost]
         public IHttpActionResult UpdateTransportationApplication([FromBody]UpdateTransportationApplicationRequest request)
         {
@@ -169,7 +169,7 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
             }
         }
 
-        [Route("api/Transportation/delete")]
+        [Route("api/transportation/delete")]
         [HttpPost]
         public IHttpActionResult RemoveTransportationApplication([FromBody]RemoveTransportationApplicationRequest request)
         {
@@ -212,7 +212,7 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
             }
         }
 
-        [Route("api/Transportations")]
+        [Route("api/transportations")]
         [HttpGet]
         public IHttpActionResult GetTransportationApplicationsByPageAndCount(int page, int count, string token, string user)
         {
