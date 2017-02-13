@@ -103,5 +103,13 @@ namespace UM_LOGISTIC_V1.Services
             return limitedApplications;
         }
 
+<<<<<<< HEAD
+=======
+        public List<ApplicationWorkType> GetApplicationWorkTypes()
+        {
+            return db.ApplicationWorkTypes.ToList();
+
+        }
+>>>>>>> 0f80f46... ApplicationWorkType
     }
 }

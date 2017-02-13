@@ -263,5 +263,17 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
                 return Ok(getCooperationApplicationsByPageAndCountResponse);
             }
         }
+<<<<<<< HEAD
+=======
+
+        [Route("api/appworktype")]
+        [HttpGet]
+        public IHttpActionResult GetApplicationWorkType()
+        {
+            var workTypes = applicationService.GetApplicationWorkTypes();
+            return Ok(workTypes);
+
+        }
+>>>>>>> 0f80f46... ApplicationWorkType
     }
 }
