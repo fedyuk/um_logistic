@@ -23,6 +23,16 @@ mainModule.config(['$stateProvider', '$locationProvider', function ($stateProvid
             templateUrl: '/views/coop_application',
             controller: 'CooperationApplicationController'
         })
+		.state('transportations', {
+            url: '/transportations',
+            templateUrl: '/views/transportation',
+            controller: 'TransportationController'
+        })
+		.state('trans_application', {
+            url: '/trans_application',
+            templateUrl: '/views/trans_application',
+            controller: 'TransportationApplicationController'
+        })
 		.state('home', {
             url: '/home',
             templateUrl: '/views/home',
@@ -38,8 +48,8 @@ mainModule.config(['$stateProvider', '$locationProvider', function ($stateProvid
  
  mainModule.run(['$rootScope', '$state', '$location', 'SessionService', 'moduleConstants',
   function ($rootScope, $state, $location, SessionService, moduleConstants) {
-	  $rootScope.$on('$routeChangeStart',
-      function (event) {
+	  $rootScope.$on('$locationChangeStart',
+      function (event, next, current) {
 		  var sessionToken = SessionService.getSessionToken();
 		  if(!SessionService.isSessionValid()) {
 		      $location.path(moduleConstants.loginPath);

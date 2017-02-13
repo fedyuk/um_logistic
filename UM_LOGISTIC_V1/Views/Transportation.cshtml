@@ -1,0 +1,19 @@
+﻿<div align="center" ng-show="isLoading">
+    <img src="~/Resources/Picture/loading.gif" align="center" />
+</div>
+<div class="row" ng-show="!isLoading">
+    <h4></h4>
+</div>
+<div class="row" style="margin-top: 50px;" ng-show="!isLoading">
+    <div class="list-group" ng-repeat="trans in transportations">
+    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{trans.title}}</h5>
+            <small>{{trans.contactPhone}}</small>
+        </div>
+        <p class="mb-1">{{trans.sendAddress}}</p>
+        <small>{{trans.deliveryAddress}}</small>
+    </a>
+    </div>
+    <button type="button" class="btn btn-primary" ng-click="loadMore()">Загрузити ще</button>
+</div>
