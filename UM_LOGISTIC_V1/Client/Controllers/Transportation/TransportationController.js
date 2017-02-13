@@ -10,7 +10,6 @@
     //methods
 
     $scope.listTransportations = function (page, count) {
-        $scope.isLoading = true;
         TransportationService.getTransportations(SessionService.getSessionUser(), SessionService.getSessionToken(),
             $scope.currentPage, $scope.currentCount)
 		.success(function (response) {
@@ -41,6 +40,7 @@
     }
 
     $scope.initTransportationsList = function () {
+		$scope.isLoading = true;
         $scope.listTransportations($scope.currentPage, $scope.currentCount);
     }
     //methods

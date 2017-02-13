@@ -10,7 +10,6 @@
     //methods
 
     $scope.listCooperations = function (page, count) {
-        $scope.isLoading = true;
         CooperationService.getCooperations(SessionService.getSessionUser(), SessionService.getSessionToken(),
             $scope.currentPage, $scope.currentCount)
 		.success(function (response) {
@@ -41,6 +40,7 @@
     }
 
     $scope.initCooperationsList = function () {
+		$scope.isLoading = true;
         $scope.listCooperations($scope.currentPage, $scope.currentCount);
     }
     //methods

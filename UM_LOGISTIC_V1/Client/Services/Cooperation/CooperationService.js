@@ -23,4 +23,8 @@
 	this.getCooperations = function (user, token, page, count) {
         return $http.get('/api/cooperations?page=' + page + '&count=' + count + '&token=' + token + "&user=" + user);
     }
+	
+	this.getWorkTypes = function () {
+		return $http.get("/api/appworktype");
+	}
 });

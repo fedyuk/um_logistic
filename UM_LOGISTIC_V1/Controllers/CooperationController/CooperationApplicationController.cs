@@ -263,8 +263,6 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
                 return Ok(getCooperationApplicationsByPageAndCountResponse);
             }
         }
-<<<<<<< HEAD
-=======
 
         [Route("api/appworktype")]
         [HttpGet]
@@ -274,6 +272,5 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
             return Ok(workTypes);
 
         }
->>>>>>> 0f80f46... ApplicationWorkType
     }
 }

@@ -51,7 +51,18 @@
     }
 	
 	$scope.loadWorkTypes = function() {
-		
+		CooperationService.getWorkTypes()
+		.success(function (response) {
+			for(var i = 0; i < response.length; i++) {
+				$scope.workTypes.options.push({
+					id: response[i].Id,
+					name: response[i].Name
+				});
+			}
+			$scope.workTypes.model = $scope.workTypes.options[0];
+		}).error(function (error) {
+		    NotificationService.error(error);
+		});
 	}
 	
 	// init
