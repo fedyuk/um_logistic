@@ -21,6 +21,6 @@
 	}
 	
 	this.getTransportations = function (user, token, page, count) {
-        return $http.get('/api/transportation?page=' + page + '&count=' + count + '&token=' + token + "&user=" + user);
+        return $http.get('/api/transportations?page=' + page + '&count=' + count + '&token=' + token + "&user=" + user);
     }
 });
