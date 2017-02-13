@@ -21,6 +21,8 @@
         user: "",
         token : ""
     };
+	
+	$scope.workTypes = [];
     $scope.isLoading = false;
     //variables
 
@@ -44,4 +46,12 @@
 		    NotificationService.error(error);
 		});
     }
+	
+	$scope.loadWorkTypes = function() {
+		
+	}
+	
+	// init
+	$scope.loadWorkTypes();
+	// init
 });
