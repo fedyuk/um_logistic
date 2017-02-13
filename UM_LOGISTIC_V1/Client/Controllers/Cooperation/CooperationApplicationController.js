@@ -22,7 +22,10 @@
         token : ""
     };
 	
-	$scope.workTypes = [];
+	$scope.workTypes = {
+		model: null,
+		options: []
+	};
     $scope.isLoading = false;
     //variables
 
