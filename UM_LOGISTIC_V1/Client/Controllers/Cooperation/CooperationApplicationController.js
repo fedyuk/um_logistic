@@ -34,6 +34,7 @@
         $scope.isLoading = true;
         $scope.cooperation.user = SessionService.getSessionUser();
         $scope.cooperation.token = SessionService.getSessionToken();
+		$scope.cooperation.WorkTypeId = $scope.workTypes.model != null ? $scope.workTypes.model.id : 1;
         CooperationService.createCooperation($scope.cooperation)
 		.success(function (response) {
 		    $scope.isLoading = false;
