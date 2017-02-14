@@ -25,12 +25,10 @@
 		        }
 		    }
 		    else {
-		        $log.log(response.Error);
-		        NotificationService.error(response.Error);
+		        NotificationService.error(JSON.stringify(response.Error));
 		    }
 		}).error(function (error) {
-		    $log.log(error);
-		    NotificationService.error(error);
+		    NotificationService.error(JSON.stringify(error));
 		});
     }
 

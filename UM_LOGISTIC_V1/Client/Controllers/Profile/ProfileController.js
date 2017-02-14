@@ -6,7 +6,6 @@
 	$scope.logoutUser = function() {
 		SessionService.closeSession();
 		$scope.changeProfileData(false, null, false);
-		$log.log(moduleConstants.closedSessionMeesage);
 		$scope.openLoginPage();
 		//NotificationService.success(moduleConstants.closedSessionMeesage);
 	}

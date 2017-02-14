@@ -32,11 +32,10 @@
 		        $location.path(moduleConstants.homePath);
 		    }
 		    else {
-		        $log.log(response.Error);
-		        NotificationService.error(response.Error);
+		        NotificationService.error(JSON.stringify(response.Error));
 		    }
 		}).error(function (error) {
-		    NotificationService.error(error);
+		    NotificationService.error(JSON.stringify(error));
 		});
     }
 });
