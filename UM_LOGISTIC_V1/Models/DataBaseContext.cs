@@ -15,5 +15,7 @@ namespace UM_LOGISTIC_V1.Models
         public DbSet<CooperationApplication.ApplicationWorkType> ApplicationWorkTypes { get; set; }
         public DbSet<TransportationApplication.TransportationApplication> TransportationApplications { get; set; }
         public DbSet<TransportationApplication.ShipmentType> ShipmentTypes { get; set; }
+		public DbSet<ApplicationPicture.TransportationPicture> TransportationPictures { get; set; }
+        public DbSet<ApplicationPicture.CooperationPicture> CooperationPictures { get; set; }
     }
 }
