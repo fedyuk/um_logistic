@@ -10,6 +10,7 @@ namespace UM_LOGISTIC_V1.Models.TransportationPicture
         public long Id { get; set; }
 		[ForeignKey("TransportationApplication")]
         public long TransportationApplicationId { get; set; }
+		public virtual TransportationApplication TransportationApplication { get; set; }
         public byte[] Image { get; set; }
     }
 }
