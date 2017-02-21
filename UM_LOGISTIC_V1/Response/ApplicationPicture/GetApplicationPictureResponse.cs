@@ -7,6 +7,6 @@ namespace UM_LOGISTIC_V1.Response.ApplicationPicture
 {
     public class GetApplicationPictureResponse : BaseResponse
     {
-        public byte[]? Result { get; set; }
+        public string Result { get; set; }
     }
 }

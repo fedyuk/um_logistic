@@ -6,12 +6,13 @@ using System.Net.Http;
 using System.Web.Http;
 using UM_LOGISTIC_V1.Services;
 using UM_LOGISTIC_V1.Request.ApplicationPicture;
-using UM_LOGISTIC_V1.Models.ApplicationPicture;
+using UM_LOGISTIC_V1.Models.TransportationPicture;
+using UM_LOGISTIC_V1.Models.CooperationPicture;
 using UM_LOGISTIC_V1.Response.ApplicationPicture;
 
-namespace UM_LOGISTIC_V1.Controllers.Account
+namespace UM_LOGISTIC_V1.Controllers.ApplicationPicture
 {
-    public class AccountController : ApiController
+    public class ApplicationPictureController : ApiController
     {
         private ApplicationPictureService service = new ApplicationPictureService();
 
@@ -37,7 +38,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
         public IHttpActionResult LoadPicture([FromBody]LoadApplicationPictureRequest request)
         {
 			var response = new LoadApplicationPictureResponse();
-            var isLoaded = service.LoadPicture(image, applicationId, type);
+            var isLoaded = service.LoadPicture(request.Image, request.ApplicationId, request.Type);
 			response.Success  = isLoaded;
 			return Ok(response);
         }
