@@ -13,6 +13,6 @@ namespace UM_LOGISTIC_V1.Models.CooperationPicture
 		[ForeignKey("CooperationApplication")]
         public long CooperationApplicationId { get; set; }
 		public virtual CooperationApplication.CooperationApplication CooperationApplication { get; set; }
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
     }
 }

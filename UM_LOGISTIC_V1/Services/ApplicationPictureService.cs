@@ -19,11 +19,11 @@ namespace UM_LOGISTIC_V1.Services
             {
                 case false:
                     var picture = db.CooperationPictures.Find(id);
-                    var data = picture != null ? picture.Image : null;
+                    var data = picture != null ? Convert.ToBase64String(picture.Image) : null;
                     return data;
                 case true:
                     var picture2 = db.TransportationPictures.Find(id);
-                    var data2 = picture2 != null ? picture2.Image : null;
+                    var data2 = picture2 != null ? Convert.ToBase64String(picture2.Image) : null;
                     return data2;
                 default:
                     return null;
@@ -37,7 +37,7 @@ namespace UM_LOGISTIC_V1.Services
                 case false:
                     var cooperationPicture = new CooperationPicture();
                     cooperationPicture.CooperationApplicationId = applicationId;
-                    cooperationPicture.Image = image;
+                    cooperationPicture.Image = Convert.FromBase64String(image);
                     db.CooperationPictures.Add(cooperationPicture);
                     try
                     {
@@ -52,7 +52,7 @@ namespace UM_LOGISTIC_V1.Services
                 case true:
                     var transportationPicture = new TransportationPicture();
                     transportationPicture.TransportationApplicationId = applicationId;
-                    transportationPicture.Image = image;
+                    transportationPicture.Image = Convert.FromBase64String(image);
                     db.TransportationPictures.Add(transportationPicture);
                     try
                     {

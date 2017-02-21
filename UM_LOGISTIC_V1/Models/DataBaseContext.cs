@@ -15,7 +15,7 @@ namespace UM_LOGISTIC_V1.Models
         public DbSet<CooperationApplication.ApplicationWorkType> ApplicationWorkTypes { get; set; }
         public DbSet<TransportationApplication.TransportationApplication> TransportationApplications { get; set; }
         public DbSet<TransportationApplication.ShipmentType> ShipmentTypes { get; set; }
-        public DbSet<UM_LOGISTIC_V1.Models.TransportationPicture.TransportationPicture> TransportationPictures { get; set; }
-        public DbSet<UM_LOGISTIC_V1.Models.CooperationPicture.CooperationPicture> CooperationPictures { get; set; }
+        public DbSet<TransportationPicture.TransportationPicture> TransportationPictures { get; set; }
+        public DbSet<CooperationPicture.CooperationPicture> CooperationPictures { get; set; }
     }
 }

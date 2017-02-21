@@ -21,12 +21,6 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationPicture
         public IHttpActionResult GetPicture(long applicationId, bool type)
         {
 			var response = new GetApplicationPictureResponse();
-			if(applicationId == null)
-			{
-				response.Success = false;
-				response.Error = "Picture was not found";
-				return Ok(response);
-			}
             var picture = service.GetPicture(applicationId, type);
 			response.Success = true;
 			response.Result = picture;
@@ -48,12 +42,6 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationPicture
         public IHttpActionResult RemovePicture(long applicationId, bool type)
         {
 			var response = new DeleteApplicationPictureResponse();
-			if(applicationId == null)
-			{
-				response.Success = false;
-				response.Error = "Picture was not found";
-				return Ok(response);
-			}
             var isRemoved = service.RemovePicture(applicationId, type);
 			response.Success = isRemoved;
 			return Ok(response);
