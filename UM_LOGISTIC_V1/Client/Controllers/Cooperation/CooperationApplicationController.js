@@ -72,7 +72,7 @@
 		var data = $scope.pictureData;
 		var request = {
 			ApplicationId: applicationId,
-			Image: data
+			Image: data,
 			Type: type
 		};
 		ApplicationPictureService.createApplicationPicture(request)
@@ -88,12 +88,12 @@
 	}
 	
 	$scope.addPicture = function() {
-		$scope.isLoading = true;
+		//$scope.isLoading = true;
 		var f = document.getElementById("coop-picture").files[0],
 		r = new FileReader();
 		if(f) {
 			r.onloadend = function(e){
-				$scope.isLoading = false;
+				//$scope.isLoading = false;
 				var data = e.target.result;
 				$scope.pictureData = data;
 			}

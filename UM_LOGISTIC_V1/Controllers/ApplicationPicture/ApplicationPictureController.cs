@@ -32,7 +32,8 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationPicture
         public IHttpActionResult LoadPicture([FromBody]LoadApplicationPictureRequest request)
         {
 			var response = new LoadApplicationPictureResponse();
-            var isLoaded = service.LoadPicture(request.Image, request.ApplicationId, request.Type);
+            var bytes = System.Text.Encoding.UTF8.GetBytes(request.Image);
+            var isLoaded = service.LoadPicture(bytes, request.ApplicationId, request.Type);
 			response.Success  = isLoaded;
 			return Ok(response);
         }
@@ -42,7 +43,8 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationPicture
         public IHttpActionResult UpdatePicture([FromBody]LoadApplicationPictureRequest request)
         {
 			var response = new LoadApplicationPictureResponse();
-            var isUpdated = service.UpdatePicture(request.Image, request.ApplicationId, request.Type);
+            var bytes = System.Text.Encoding.UTF8.GetBytes(request.Image);
+            var isUpdated = service.UpdatePicture(bytes, request.ApplicationId, request.Type);
 			response.Success  = isUpdated;
 			return Ok(response);
         }
