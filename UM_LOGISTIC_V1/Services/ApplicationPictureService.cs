@@ -30,14 +30,14 @@ namespace UM_LOGISTIC_V1.Services
             }
         }
         
-        public bool LoadPicture(string image, long applicationId, bool type)
+        public bool LoadPicture(byte[] image, long applicationId, bool type)
         {
             switch (type)
             {
                 case false:
                     var cooperationPicture = new CooperationPicture();
                     cooperationPicture.CooperationApplicationId = applicationId;
-                    cooperationPicture.Image = Convert.FromBase64String(image);
+                    cooperationPicture.Image = image;
                     db.CooperationPictures.Add(cooperationPicture);
                     try
                     {
@@ -52,7 +52,7 @@ namespace UM_LOGISTIC_V1.Services
                 case true:
                     var transportationPicture = new TransportationPicture();
                     transportationPicture.TransportationApplicationId = applicationId;
-                    transportationPicture.Image = Convert.FromBase64String(image);
+                    transportationPicture.Image = image;
                     db.TransportationPictures.Add(transportationPicture);
                     try
                     {
@@ -63,6 +63,52 @@ namespace UM_LOGISTIC_V1.Services
                         return false;
                     }
                     return true;
+                default:
+                    return false;
+            }
+        }
+		
+		public bool UpdatePicture(byte[] image, long applicationId, bool type)
+        {
+            switch (type)
+            {
+                case false:
+                    var cooperationPicture = db.CooperationPictures.Find(applicationId);
+					if(cooperationPicture != null)
+					{
+						cooperationPicture.CooperationApplicationId = applicationId;
+						cooperationPicture.Image = image;
+						db.Entry(cooperationPicture).State = EntityState.Modified;
+						try
+						{
+							db.SaveChanges();
+							return true;
+						}
+						catch (Exception)
+						{
+							return false;
+						}
+					}
+                    return false;
+
+                case true:
+                    var transportationPicture = db.TransportationPictures.Find(applicationId);
+					if(transportationPicture != null)
+					{
+						transportationPicture.TransportationApplicationId = applicationId;
+						transportationPicture.Image = image;
+						db.Entry(transportationPicture).State = EntityState.Modified;
+						try
+						{
+							db.SaveChanges();
+							return true;
+						}
+						catch (Exception)
+						{
+							return false;
+						}
+					}
+                    return false;
                 default:
                     return false;
             }

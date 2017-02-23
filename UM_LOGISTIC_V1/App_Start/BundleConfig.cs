@@ -27,6 +27,7 @@ namespace UM_LOGISTIC_V1.App_Start
 				"~/Client/Services/Session/SessionService.js",
 				"~/Client/Services/Transportation/TransportationService.js",
                 "~/Client/Services/User/UserService.js",
+				"~/Client/Services/ApplicationPicture/ApplicationPictureService.js",
 				"~/Client/Services/Notification/NotificationService.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Controllers").Include(

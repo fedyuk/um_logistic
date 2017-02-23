@@ -10,6 +10,6 @@ namespace UM_LOGISTIC_V1.Request.ApplicationPicture
     {
         public long ApplicationId { get; set; }
 		public bool Type { get; set; }
-		public string Image { get; set; }
+		public byte[] Image { get; set; }
     }
 }

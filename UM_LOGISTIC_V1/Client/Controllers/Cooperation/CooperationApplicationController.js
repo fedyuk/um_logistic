@@ -1,4 +1,4 @@
-﻿mainModule.controller('CooperationApplicationController', function ($rootScope, $scope, $log, $location, CooperationService, SessionService, moduleConstants, NotificationService) {
+﻿mainModule.controller('CooperationApplicationController', function ($rootScope, $scope, $log, $location, CooperationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService) {
 
     //variables 
     $scope.cooperation = {
@@ -22,6 +22,8 @@
         token : ""
     };
 	
+	$scope.pictureData = null;
+	
 	$scope.workTypes = {
 		model: null,
 		options: []
@@ -41,6 +43,7 @@
 		    if (response.Success) {
 		        NotificationService.success(moduleConstants.cooperationApplicationCreatingSuccess);
 		        $location.path(moduleConstants.homePath);
+				$scope.loadPicture(response.Result.Id, false);
 		    }
 		    else {
 		        NotificationService.error(JSON.stringify(response.Error));
@@ -63,6 +66,41 @@
 		}).error(function (error) {
 		    NotificationService.error(JSON.stringify(error));
 		});
+	}
+	
+	$scope.loadPicture = function(applicationId, type) {
+		var data = $scope.pictureData;
+		var request = {
+			ApplicationId: applicationId,
+			Image: data
+			Type: type
+		};
+		ApplicationPictureService.createApplicationPicture(request)
+		.success(function (response) {
+		    if (response.Success) {
+		    }
+		    else {
+		        NotificationService.error(JSON.stringify(response.Error));
+		    }
+		}).error(function (error) {
+		    NotificationService.error(JSON.stringify(error));
+		});
+	}
+	
+	$scope.addPicture = function() {
+		$scope.isLoading = true;
+		var f = document.getElementById("coop-picture").files[0],
+		r = new FileReader();
+		if(f) {
+			r.onloadend = function(e){
+				$scope.isLoading = false;
+				var data = e.target.result;
+				$scope.pictureData = data;
+			}
+			r.readAsBinaryString(f);
+		}
+		
+		//readAsArrayBuffer() for mobile
 	}
 	
 	// init

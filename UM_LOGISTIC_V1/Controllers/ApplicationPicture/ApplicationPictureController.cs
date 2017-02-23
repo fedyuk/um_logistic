@@ -36,6 +36,16 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationPicture
 			response.Success  = isLoaded;
 			return Ok(response);
         }
+		
+		[Route("api/picture/update")]
+        [HttpPost]
+        public IHttpActionResult UpdatePicture([FromBody]LoadApplicationPictureRequest request)
+        {
+			var response = new LoadApplicationPictureResponse();
+            var isUpdated = service.UpdatePicture(request.Image, request.ApplicationId, request.Type);
+			response.Success  = isUpdated;
+			return Ok(response);
+        }
 
         [Route("api/picture/delete")]
         [HttpGet]
