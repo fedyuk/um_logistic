@@ -66,7 +66,7 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
             {
                 createTransportationApplicationResponse.Success = false;
                 createTransportationApplicationResponse.Error = "Token is not valid";
-                createTransportationApplicationResponse.Result = null;
+                createTransportationApplicationResponse.Id = null;
                 return Ok(createTransportationApplicationResponse);
             }
             var tokenRole = TokenService.GetRole(request.user, request.token);
@@ -87,19 +87,19 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
                     ShipmentWeight = request.ShipmentWeight,
                     ShipmentWidth = request.ShipmentWidth
                 };
-                var isCreate = applicationService.CreateTransportationApplication(applicationToCreate);
-                if (isCreate)
+                var id = applicationService.CreateTransportationApplication(applicationToCreate);
+                if (id != null)
                 {
                     createTransportationApplicationResponse.Success = true;
                     createTransportationApplicationResponse.Error = "";
-                    createTransportationApplicationResponse.Result = null;
+                    createTransportationApplicationResponse.Id = id;
                     return Ok(createTransportationApplicationResponse);
                 }
                 else
                 {
                     createTransportationApplicationResponse.Success = false;
                     createTransportationApplicationResponse.Error = "";
-                    createTransportationApplicationResponse.Result = null;
+                    createTransportationApplicationResponse.Id = null;
                     return Ok(createTransportationApplicationResponse);
                 }
             }
@@ -107,7 +107,7 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
             {
                 createTransportationApplicationResponse.Success = false;
                 createTransportationApplicationResponse.Error = "Access is denied";
-                createTransportationApplicationResponse.Result = null;
+                createTransportationApplicationResponse.Id = null;
                 return Ok(createTransportationApplicationResponse);
             }
         }

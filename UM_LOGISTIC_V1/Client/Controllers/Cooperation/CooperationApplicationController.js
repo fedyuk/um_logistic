@@ -43,7 +43,7 @@
 		    if (response.Success) {
 		        NotificationService.success(moduleConstants.cooperationApplicationCreatingSuccess);
 		        $location.path(moduleConstants.homePath);
-				$scope.loadPicture(response.Result.Id, false);
+				$scope.loadPicture(response.Id, false);
 		    }
 		    else {
 		        NotificationService.error(JSON.stringify(response.Error));
@@ -87,7 +87,7 @@
 		});
 	}
 	
-	$scope.addPicture = function() {
+	$scope.fileChanged = function() {
 		//$scope.isLoading = true;
 		var f = document.getElementById("coop-picture").files[0],
 		r = new FileReader();

@@ -66,7 +66,7 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
             {
                 createCooperationApplicationResponse.Success = false;
                 createCooperationApplicationResponse.Error = "Token is not valid";
-                createCooperationApplicationResponse.Result = null;
+                createCooperationApplicationResponse.Id = null;
                 return Ok(createCooperationApplicationResponse);
             }
             var tokenRole = TokenService.GetRole(request.user, request.token);
@@ -92,19 +92,19 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
                     WorkTypeId = request.WorkTypeId,
                     DeliveryCost = request.DeliveryCost
                 };
-                var isCreate = applicationService.CreateCooperationApplication(applicationToCreate);
-                if (isCreate)
+                var id = applicationService.CreateCooperationApplication(applicationToCreate);
+                if (id != null)
                 {
                     createCooperationApplicationResponse.Success = true;
                     createCooperationApplicationResponse.Error = "";
-                    createCooperationApplicationResponse.Result = null;
+                    createCooperationApplicationResponse.Id = id;
                     return Ok(createCooperationApplicationResponse);
                 }
                 else
                 {
                     createCooperationApplicationResponse.Success = false;
                     createCooperationApplicationResponse.Error = "";
-                    createCooperationApplicationResponse.Result = null;
+                    createCooperationApplicationResponse.Id = null;
                     return Ok(createCooperationApplicationResponse);
                 }
             }
@@ -112,7 +112,7 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
             {
                 createCooperationApplicationResponse.Success = false;
                 createCooperationApplicationResponse.Error = "Access is denied";
-                createCooperationApplicationResponse.Result = null;
+                createCooperationApplicationResponse.Id = null;
                 return Ok(createCooperationApplicationResponse);
             }
         }

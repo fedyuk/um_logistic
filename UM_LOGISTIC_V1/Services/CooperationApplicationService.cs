@@ -18,7 +18,7 @@ namespace UM_LOGISTIC_V1.Services
             return application;
         }
 
-        public bool CreateCooperationApplication(CooperationApplication application)
+        public long? CreateCooperationApplication(CooperationApplication application)
         {
             if (application != null)
             {
@@ -29,11 +29,11 @@ namespace UM_LOGISTIC_V1.Services
                 }
                 catch (Exception)
                 {
-                    return false;
+                    return null;
                 }
-                return true;
+                return application.Id;
             }
-            return false;
+            return null;
         }
 
         public bool UpdateCooperationApplication(CooperationApplication application)

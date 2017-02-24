@@ -7,6 +7,6 @@ namespace UM_LOGISTIC_V1.Response.CooperationApplication
 {
     public class CreateCooperationApplicationResponse : BaseResponse
     {
-        public UM_LOGISTIC_V1.Models.CooperationApplication.CooperationApplication Result { get; set; }
+        public long? Id { get; set; }
     }
 }
