@@ -89,7 +89,7 @@
 	
 	$scope.fileChanged = function() {
 		//$scope.isLoading = true;
-		var f = document.getElementById("coop-picture").files[0],
+		/*var f = document.getElementById("coop-picture").files[0],
 		r = new FileReader();
 		if(f) {
 			r.onloadend = function(e){
@@ -98,19 +98,19 @@
 				$scope.pictureData = data;
 			}
 			r.readAsBinaryString(f);
-		}
+		}*/
 		
 	    //readAsArrayBuffer() for mobile
-		/*file = document.getElementById("coop-picture").files[0];
+		file = document.getElementById("coop-picture").files[0];
 		var reader = new FileReader();
 
 		reader.addEventListener("load", function () {
-		    preview.src = reader.result;
+		    $scope.pictureData = reader.result;
 		}, false);
 
 		if (file) {
 		    reader.readAsDataURL(file);
-		}*/
+		}
 	}
 	
 	// init
