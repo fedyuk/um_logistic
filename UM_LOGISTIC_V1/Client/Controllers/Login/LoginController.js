@@ -20,7 +20,7 @@
 				NotificationService.error(JSON.stringify(response.Error));
 			}
 		}).error(function(error) {
-			NotificationService.error(JSON.stringify(error));
+		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
 	}
 	//methods

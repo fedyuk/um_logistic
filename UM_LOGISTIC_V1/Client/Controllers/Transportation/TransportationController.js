@@ -32,7 +32,7 @@
 		    }
 		}).error(function (error) {
 		    $log.log(error);
-		    NotificationService.error(JSON.stringify(error));
+		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
     }
 
@@ -58,7 +58,7 @@
 		        $scope.pictures[id] = "";
 		    }
 		}).error(function (error) {
-		    NotificationService.error(JSON.stringify(error));
+		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		    $scope.pictures[id] = "";
 		});
     }

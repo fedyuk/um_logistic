@@ -49,7 +49,7 @@
 		        NotificationService.error(JSON.stringify(response.Error));
 		    }
 		}).error(function (error) {
-		    NotificationService.error(JSON.stringify(error));
+		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
     }
 	
@@ -64,12 +64,15 @@
 			}
 			$scope.workTypes.model = $scope.workTypes.options[0];
 		}).error(function (error) {
-		    NotificationService.error(JSON.stringify(error));
+		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
 	}
 	
 	$scope.loadPicture = function(applicationId, type) {
-		var data = $scope.pictureData;
+	    var data = $scope.pictureData;
+	    if (data == null) {
+	        return;
+	    }
 		var request = {
 			ApplicationId: applicationId,
 			Image: data,
@@ -83,7 +86,7 @@
 		        NotificationService.error(JSON.stringify(response.Error));
 		    }
 		}).error(function (error) {
-		    NotificationService.error(JSON.stringify(error));
+		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
 	}
 	
