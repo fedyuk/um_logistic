@@ -5,15 +5,24 @@
     <h4></h4>
 </div>
 <div class="row" style="margin-top: 50px;" ng-show="!isLoading">
-    <div class="list-group" ng-repeat="trans in transportations">
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{trans.title}}</h5>
-            <small>{{trans.contactPhone}}</small>
+    <div class="row" ng-repeat="trans in transportations">
+        <div class="col-md-6" style="margin-top:20px;">
+            <div class="media">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="media-object" style="width:200px;height:120px;" data-ng-src="{{pictures[trans.id]}}" alt="...">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">{{trans.title}}</h4>
+                    <h5 class="media-heading">Адреса відправлення: {{trans.sendAddress}}</h5>
+                    <h5 class="media-heading">Адреса отримання: {{trans.deliveryAddress}}</h5>
+                    <h5 class="media-heading">Контактний телефон: {{trans.contactPhone}}</h5>
+                    <h5 class="media-heading">Модель транспорту: {{trans.carModel}}</h5>
+                </div>
+            </div>
         </div>
-        <p class="mb-1">{{trans.sendAddress}}</p>
-        <small>{{trans.deliveryAddress}}</small>
-    </a>
     </div>
-    <button type="button" class="btn btn-primary" ng-click="loadMore()">Загрузити ще</button>
+
+    <button style="margin-top:20px;" type="button" class="btn btn-primary" ng-click="loadMore()">Загрузити ще</button>
 </div>

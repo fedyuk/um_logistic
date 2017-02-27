@@ -22,8 +22,8 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationPicture
         {
 			var response = new GetApplicationPictureResponse();
             var picture = service.GetPicture(applicationId, type);
-			response.Success = true;
-			response.Result = picture;
+			response.Success = picture != null ? true : false;
+			response.Result = picture != null ? picture : String.Empty;
 			return Ok(response);
         }
 

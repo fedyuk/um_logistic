@@ -54,7 +54,6 @@
 		        $scope.pictures[id] = response.Result;
 		    }
 		    else {
-		        NotificationService.error(JSON.stringify(response.Error));
 		        $scope.pictures[id] = "";
 		    }
 		}).error(function (error) {
