@@ -11,7 +11,7 @@ namespace UM_LOGISTIC_V1.Request.TransportationApplication
         public string ContactPhone { get; set; }
         public string SendAddress { get; set; }
         public string DeliveryAddress { get; set; }
-        public DateTime CompleteDate { get; set; }
+        public DateTime? CompleteDate { get; set; }
         public string ShipmentType { get; set; }
         public long ShipmentLength { get; set; }
         public long ShipmentWidth { get; set; }
