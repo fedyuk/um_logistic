@@ -88,19 +88,7 @@
 	}
 	
 	$scope.fileChanged = function() {
-		//$scope.isLoading = true;
-		/*var f = document.getElementById("coop-picture").files[0],
-		r = new FileReader();
-		if(f) {
-			r.onloadend = function(e){
-				//$scope.isLoading = false;
-				var data = e.target.result;
-				$scope.pictureData = data;
-			}
-			r.readAsBinaryString(f);
-		}*/
-		
-	    //readAsArrayBuffer() for mobile
+
 		file = document.getElementById("coop-picture").files[0];
 		var reader = new FileReader();
 
