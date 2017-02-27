@@ -13,7 +13,7 @@ namespace UM_LOGISTIC_V1.Models.TransportationApplication
         public string ContactPhone { get; set; }
         public string SendAddress { get; set; }
         public string DeliveryAddress { get; set; }
-        public DateTime CompleteDate { get; set; }
+        public DateTime? CompleteDate { get; set; }
         //public virtual ShipmentType ShipmentType { get; set; }
         //[ForeignKey("ShipmentType")]
         //public long ShipmentTypeId { get; set; }
