@@ -19,18 +19,18 @@ namespace UM_LOGISTIC_V1.Services
             {
                 case false:
                     var picture = db.CooperationPictures.Where(x => x.CooperationApplicationId == id).First();
-                    var data = picture != null ? Convert.ToBase64String(picture.Image) : null;
+                    var data = picture != null ? picture.Image : null;
                     return data;
                 case true:
                     var picture2 = db.TransportationPictures.Where(x => x.TransportationApplicationId == id).First();
-                    var data2 = picture2 != null ? Convert.ToBase64String(picture2.Image) : null;
+                    var data2 = picture2 != null ? picture2.Image : null;
                     return data2;
                 default:
                     return null;
             }
         }
         
-        public bool LoadPicture(byte[] image, long applicationId, bool type)
+        public bool LoadPicture(string image, long applicationId, bool type)
         {
             switch (type)
             {
@@ -68,7 +68,7 @@ namespace UM_LOGISTIC_V1.Services
             }
         }
 		
-		public bool UpdatePicture(byte[] image, long applicationId, bool type)
+		public bool UpdatePicture(string image, long applicationId, bool type)
         {
             switch (type)
             {

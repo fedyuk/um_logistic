@@ -1,4 +1,4 @@
-﻿mainModule.controller('TransportationApplicationController', function ($rootScope, $scope, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService) {
+﻿mainModule.controller('TransportationApplicationController', function ($rootScope, $scope, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService) {
 
     //variables 
     $scope.transportation = {
@@ -17,6 +17,7 @@
         token : ""
     };
     $scope.isLoading = false;
+    $scope.pictureData = null;
     //variables
 
     //methods
@@ -30,6 +31,7 @@
 		    if (response.Success) {
 		        NotificationService.success(moduleConstants.cooperationApplicationCreatingSuccess);
 		        $location.path(moduleConstants.homePath);
+		        $scope.loadPicture(response.Id, true);
 		    }
 		    else {
 		        NotificationService.error(JSON.stringify(response.Error));
@@ -37,5 +39,37 @@
 		}).error(function (error) {
 		    NotificationService.error(JSON.stringify(error));
 		});
+    }
+
+    $scope.loadPicture = function (applicationId, type) {
+        var data = $scope.pictureData;
+        var request = {
+            ApplicationId: applicationId,
+            Image: data,
+            Type: type
+        };
+        ApplicationPictureService.createApplicationPicture(request)
+		.success(function (response) {
+		    if (response.Success) {
+		    }
+		    else {
+		        NotificationService.error(JSON.stringify(response.Error));
+		    }
+		}).error(function (error) {
+		    NotificationService.error(JSON.stringify(error));
+		});
+    }
+
+    $scope.fileChanged = function () {
+        file = document.getElementById("trans-picture").files[0];
+        var reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+            $scope.pictureData = reader.result;
+        }, false);
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
     }
 });

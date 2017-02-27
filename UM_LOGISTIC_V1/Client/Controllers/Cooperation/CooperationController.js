@@ -20,6 +20,7 @@
 		            $scope.cooperations.push({
 		                id: response.Result[i].Id,
 		                title: response.Result[i].FullName,
+		                contactPhone: response.Result[i].ContactPhone,
 		                carModel: response.Result[i].CarModel,
 		                workCost: response.Result[i].WorkCost,
 		                residenceAddress: response.Result[i].ResidenceAddress
