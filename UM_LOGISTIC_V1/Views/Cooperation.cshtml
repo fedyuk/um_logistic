@@ -6,6 +6,7 @@
 </div>
 <div class="row" style="margin-top: 50px;" ng-show="!isLoading">
     <div class="list-group" ng-repeat="coop in cooperations">
+    <img data-ng-src="data:image/png;base64,{{pictures[coop.id]}}"/><!--data-err-src="images/png/avatar.png"-->
     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
         <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{coop.title}}</h5>

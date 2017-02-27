@@ -18,11 +18,11 @@ namespace UM_LOGISTIC_V1.Services
             switch (type)
             {
                 case false:
-                    var picture = db.CooperationPictures.Find(id);
+                    var picture = db.CooperationPictures.Where(x => x.CooperationApplicationId == id).First();
                     var data = picture != null ? Convert.ToBase64String(picture.Image) : null;
                     return data;
                 case true:
-                    var picture2 = db.TransportationPictures.Find(id);
+                    var picture2 = db.TransportationPictures.Where(x => x.TransportationApplicationId == id).First();
                     var data2 = picture2 != null ? Convert.ToBase64String(picture2.Image) : null;
                     return data2;
                 default:
