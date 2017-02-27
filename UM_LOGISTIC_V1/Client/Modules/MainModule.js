@@ -37,6 +37,10 @@ mainModule.config(['$stateProvider', '$locationProvider', function ($stateProvid
             url: '/home',
             templateUrl: '/views/home',
             controller: 'HomeController'
+		})
+        .state('404', {
+            url: '*path',
+            templateUrl: '/views/404'
         });
 
     $locationProvider.html5Mode({
