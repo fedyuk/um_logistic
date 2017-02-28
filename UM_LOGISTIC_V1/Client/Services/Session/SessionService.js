@@ -36,15 +36,21 @@
 	this.getSessionProfileName = function() {
 		return $cookieStore.get("profile-name");
 	}
+
+	this.isStaff = function () {
+	    return $cookieStore.get("profile-role") != undefined ? $cookieStore.get("profile-role") == "0" || $cookieStore.get("profile-role") == "1" : false;
+	}
 	
 	this.saveProfileData = function(accountData) {
 		var expiresDate = new Date();
 		expiresDate.setDate(expiresDate.getDate() + 1);
-        $cookieStore.put("profile-name",accountData.Account.FullName, {"expires": expiresDate});
+		$cookieStore.put("profile-name", accountData.Account.FullName, { "expires": expiresDate });
+		$cookieStore.put("profile-role", accountData.Role.Id, { "expires": expiresDate });
 	}
 	
 	this.clearProfileData = function() {
-        $cookieStore.remove("profile-name");
+	    $cookieStore.remove("profile-name");
+	    $cookieStore.remove("profile-role");
 	}
 	
 });

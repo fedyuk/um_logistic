@@ -19,6 +19,11 @@
 		var sessionProfileName = SessionService.getSessionProfileName();
 		$scope.isAuthorized = sessionProfileName != undefined ? true : false; 
 	}
+
+	$scope.initProfileMenu = function () {
+	    var isStaff = SessionService.isStaff();
+	    $scope.isStaff = isStaff;
+	}
 	
 	$scope.openLoginPage = function() {
 		$location.path(moduleConstants.loginPath);
@@ -32,16 +37,16 @@
 		$location.path(moduleConstants.homePath);
 	}
 	
-	$scope.changeProfileData = function(isAuthorized, profileName, isStaffOrSupervisor) {
+	$scope.changeProfileData = function(isAuthorized, profileName, isStaff) {
 		$scope.profileName = isAuthorized == true ? profileName : moduleConstants.anonymousUserCaption;
 		$scope.isAuthorized = isAuthorized;
-		$scope.isStaffOrSupervisor = isStaffOrSupervisor;
+		$scope.isStaff = isStaff;
 	}
 	
 	$scope.saveProfile = function(response) {
 		SessionService.saveSessionToken(response.Token, response.Result.UserName);
 		SessionService.saveProfileData(response.Result);
-	    $scope.changeProfileData(true, response.Result.Account.FullName, false);
+		$scope.changeProfileData(true, response.Result.Account.FullName, SessionService.isStaff());
 	}
 	
 	$scope.$on("userAuthorized", function(event, args) {
@@ -54,5 +59,7 @@
 	$scope.initProfileName();
 	
 	$scope.initProfileLoginActions();
+
+	$scope.initProfileMenu();
 	//init controller
 });

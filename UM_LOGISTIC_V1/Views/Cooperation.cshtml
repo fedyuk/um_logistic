@@ -6,7 +6,7 @@
 </div>
 <div class="row" style="margin-top: 50px;" ng-show="!isLoading">
     <div class="row" ng-repeat="coop in cooperations">
-        <div class="col-md-6" style="margin-top:20px;">
+        <div class="col-md-10 col-md-offset-4" style="margin-top:20px;">
             <div class="media">
                 <div class="media-left">
                     <a href="#">
@@ -24,5 +24,5 @@
         </div>
     </div>
     
-    <button style="margin-top:20px;" type="button" class="btn btn-primary" ng-click="loadMore()">Загрузити ще</button>
+    <button style="margin-top:20px;" type="button" class="btn btn-primary col-md-offset-6" ng-click="loadMore()">Загрузити ще</button>
 </div>
