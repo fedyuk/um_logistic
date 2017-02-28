@@ -25,7 +25,9 @@
 	$scope.pictureData = null;
 	
 	$scope.workTypes = {
-		model: null,
+	    model: {
+            id: 1
+	    },
 		options: []
 	};
     $scope.isLoading = false;
@@ -36,7 +38,7 @@
         $scope.isLoading = true;
         $scope.cooperation.user = SessionService.getSessionUser();
         $scope.cooperation.token = SessionService.getSessionToken();
-		$scope.cooperation.WorkTypeId = $scope.workTypes.model != null ? $scope.workTypes.model : 1;
+		$scope.cooperation.WorkTypeId = $scope.workTypes.model != null ? $scope.workTypes.model.id : 1;
         CooperationService.createCooperation($scope.cooperation)
 		.success(function (response) {
 		    $scope.isLoading = false;
