@@ -22,7 +22,8 @@
 		                title: response.Result[i].Name,
 		                contactPhone: response.Result[i].ContactPhone,
 		                sendAddress: response.Result[i].SendAddress,
-		                deliveryAddress: response.Result[i].DeliveryAddress
+		                deliveryAddress: response.Result[i].DeliveryAddress,
+		                createdOn: response.Result[i].CreatedOn
 		            });
 		            $scope.getPicture(response.Result[i].Id);
 		        }

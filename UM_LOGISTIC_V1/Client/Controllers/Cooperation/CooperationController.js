@@ -23,7 +23,8 @@
 		                contactPhone: response.Result[i].ContactPhone,
 		                carModel: response.Result[i].CarModel,
 		                workCost: response.Result[i].WorkCost,
-		                residenceAddress: response.Result[i].ResidenceAddress
+		                residenceAddress: response.Result[i].ResidenceAddress,
+		                createdOn : response.Result[i].CreatedOn
 		            });
 		            $scope.getPicture(response.Result[i].Id);
 		        }

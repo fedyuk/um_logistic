@@ -29,6 +29,8 @@ namespace UM_LOGISTIC_V1.Services
         {
             if (user != null)
             {
+                user.CreatedOn = DateTime.Now;
+                user.ModifiedOn = user.CreatedOn;
                 db.Users.Add(user);
                 try
                 {
@@ -52,6 +54,7 @@ namespace UM_LOGISTIC_V1.Services
                 userToUpdate.UserPassword = user.UserPassword;
                 userToUpdate.AccountId = user.AccountId;
                 userToUpdate.RoleId = user.RoleId;
+                userToUpdate.ModifiedOn = DateTime.Now;
                 db.Entry(userToUpdate).State = EntityState.Modified;
                 try
                 {

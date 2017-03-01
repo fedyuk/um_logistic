@@ -22,6 +22,8 @@ namespace UM_LOGISTIC_V1.Services
         {
             if (application != null)
             {
+                application.CreatedOn = DateTime.Now;
+                application.ModifiedOn = application.CreatedOn;
                 db.TransportationApplications.Add(application);
                 try
                 {
@@ -52,6 +54,7 @@ namespace UM_LOGISTIC_V1.Services
                 applicationToUpdate.ShipmentHeight = application.ShipmentHeight;
                 applicationToUpdate.ShipmentCapacity = application.ShipmentCapacity;
                 applicationToUpdate.ShipmentWeight = application.ShipmentWeight;
+                applicationToUpdate.ModifiedOn = DateTime.Now;
                 db.Entry(applicationToUpdate).State = EntityState.Modified;
                 try
                 {

@@ -16,19 +16,25 @@ namespace UM_LOGISTIC_V1.Models
             {
                 Id = 1,
                 Name = "admin",
-                Number = 0
+                Number = 0,
+                CreatedOn = DateTime.Now,
+                ModifiedOn = DateTime.Now
             });
             roles.Add(new Role.Role()
             {
                 Id = 2,
                 Name = "manager",
-                Number = 1
+                Number = 1,
+                CreatedOn = DateTime.Now,
+                ModifiedOn = DateTime.Now
             });
             roles.Add(new Role.Role()
             {
                 Id = 3,
                 Name = "client",
-                Number = 2
+                Number = 2,
+                CreatedOn = DateTime.Now,
+                ModifiedOn = DateTime.Now
             });
             foreach (Role.Role role in roles)
                 context.Roles.Add(role);
@@ -41,6 +47,8 @@ namespace UM_LOGISTIC_V1.Models
             account.City = "Львів";
             account.Street = "вул. Польова 29/a";
             account.Id = 1;
+            account.CreatedOn = DateTime.Now;
+            account.ModifiedOn = account.CreatedOn;
             context.Accounts.Add(account);
             context.SaveChanges();
 
@@ -51,7 +59,9 @@ namespace UM_LOGISTIC_V1.Models
                 UserName = "Supervisor",
                 UserPassword = "Supervisor",
                 AccountId = 1,
-                RoleId = 1
+                RoleId = 1,
+                CreatedOn = DateTime.Now,
+                ModifiedOn = DateTime.Now
             });
 
             foreach (User.User user in users)
@@ -62,12 +72,16 @@ namespace UM_LOGISTIC_V1.Models
             applicationWorkTypes.Add(new CooperationApplication.ApplicationWorkType()
             {
                 Id = 1,
-                Name = "грн/год"
+                Name = "грн/год",
+                CreatedOn = DateTime.Now,
+                ModifiedOn = DateTime.Now
             });
             applicationWorkTypes.Add(new CooperationApplication.ApplicationWorkType()
             {
                 Id = 2,
-                Name = "один підйом"
+                Name = "один підйом",
+                CreatedOn = DateTime.Now,
+                ModifiedOn = DateTime.Now
             });
 
             foreach (CooperationApplication.ApplicationWorkType applicationWorkType in applicationWorkTypes)

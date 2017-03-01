@@ -38,6 +38,8 @@ namespace UM_LOGISTIC_V1.Services
                     var cooperationPicture = new CooperationPicture();
                     cooperationPicture.CooperationApplicationId = applicationId;
                     cooperationPicture.Image = image;
+                    cooperationPicture.CreatedOn = DateTime.Now;
+                    cooperationPicture.ModifiedOn = cooperationPicture.CreatedOn;
                     db.CooperationPictures.Add(cooperationPicture);
                     try
                     {
@@ -53,6 +55,8 @@ namespace UM_LOGISTIC_V1.Services
                     var transportationPicture = new TransportationPicture();
                     transportationPicture.TransportationApplicationId = applicationId;
                     transportationPicture.Image = image;
+                    transportationPicture.CreatedOn = DateTime.Now;
+                    transportationPicture.ModifiedOn = transportationPicture.CreatedOn;
                     db.TransportationPictures.Add(transportationPicture);
                     try
                     {
@@ -78,7 +82,8 @@ namespace UM_LOGISTIC_V1.Services
 					{
 						cooperationPicture.CooperationApplicationId = applicationId;
 						cooperationPicture.Image = image;
-						db.Entry(cooperationPicture).State = EntityState.Modified;
+                        cooperationPicture.ModifiedOn = DateTime.Now;
+                        db.Entry(cooperationPicture).State = EntityState.Modified;
 						try
 						{
 							db.SaveChanges();
@@ -97,7 +102,8 @@ namespace UM_LOGISTIC_V1.Services
 					{
 						transportationPicture.TransportationApplicationId = applicationId;
 						transportationPicture.Image = image;
-						db.Entry(transportationPicture).State = EntityState.Modified;
+                        transportationPicture.ModifiedOn = DateTime.Now;
+                        db.Entry(transportationPicture).State = EntityState.Modified;
 						try
 						{
 							db.SaveChanges();

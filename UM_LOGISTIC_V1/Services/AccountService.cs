@@ -20,6 +20,8 @@ namespace UM_LOGISTIC_V1.Services
 
         public bool CreateAccount(Account account)
         {
+            account.CreatedOn = DateTime.Now;
+            account.ModifiedOn = account.CreatedOn;
             if (account != null)
             {
                 db.Accounts.Add(account);
@@ -41,6 +43,7 @@ namespace UM_LOGISTIC_V1.Services
             var accountToUpdate = db.Accounts.Find(account.Id);
             if (accountToUpdate != null)
             {
+                accountToUpdate.ModifiedOn = DateTime.Now;
                 accountToUpdate.FullName = account.FullName;
                 accountToUpdate.HomePhone = account.HomePhone;
                 accountToUpdate.WorkPhone = account.WorkPhone;

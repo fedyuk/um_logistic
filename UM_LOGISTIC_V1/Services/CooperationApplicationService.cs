@@ -22,6 +22,8 @@ namespace UM_LOGISTIC_V1.Services
         {
             if (application != null)
             {
+                application.CreatedOn = DateTime.Now;
+                application.ModifiedOn = application.CreatedOn;
                 db.CooperationApplications.Add(application);
                 try
                 {
@@ -57,6 +59,7 @@ namespace UM_LOGISTIC_V1.Services
                 applicationToUpdate.WorkCost = application.WorkCost;
                 applicationToUpdate.WorkTypeId = application.WorkTypeId;
                 applicationToUpdate.DeliveryCost = application.DeliveryCost;
+                applicationToUpdate.ModifiedOn = DateTime.Now;
                 db.Entry(applicationToUpdate).State = EntityState.Modified;
                 try
                 {

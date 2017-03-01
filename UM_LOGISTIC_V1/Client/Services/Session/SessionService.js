@@ -45,7 +45,7 @@
 		var expiresDate = new Date();
 		expiresDate.setDate(expiresDate.getDate() + 1);
 		$cookieStore.put("profile-name", accountData.Account.FullName, { "expires": expiresDate });
-		$cookieStore.put("profile-role", accountData.Role.Id, { "expires": expiresDate });
+		$cookieStore.put("profile-role", accountData.Role.Number, { "expires": expiresDate });
 	}
 	
 	this.clearProfileData = function() {
