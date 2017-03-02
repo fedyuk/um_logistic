@@ -1,6 +1,6 @@
 ﻿var mainModule = angular.module("mainModule", ["ui.router", "ngRoute", "ngCookies", "ngMessages"]);
 
-mainModule.config(['$stateProvider', '$locationProvider', function ($stateProvider, $locationProvider) {
+mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', function ($stateProvider, $locationProvider, $urlRouterProvider) {
 
     $stateProvider
         .state('login', {
@@ -27,6 +27,11 @@ mainModule.config(['$stateProvider', '$locationProvider', function ($stateProvid
             url: '/transportations',
             templateUrl: '/views/transportation',
             controller: 'TransportationController'
+		})
+        .state('transportationsDetail', {
+            url: '/transportation?id=:value',
+            templateUrl: '/views/transportationDetail',
+            controller: 'TransportationApplicationDetailController'
         })
 		.state('trans_application', {
             url: '/trans_application',
@@ -39,9 +44,11 @@ mainModule.config(['$stateProvider', '$locationProvider', function ($stateProvid
             controller: 'HomeController'
 		})
         .state('404', {
-            url: '*path',
+            url: '/404',
             templateUrl: '/views/404'
         });
+
+    $urlRouterProvider.otherwise('/404');
 
     $locationProvider.html5Mode({
         enabled: true,
