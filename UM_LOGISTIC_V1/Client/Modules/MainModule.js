@@ -29,7 +29,7 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
             controller: 'TransportationController'
 		})
         .state('transportationsDetail', {
-            url: '/transportation?id=:value',
+            url: '/transportation/:id',
             templateUrl: '/views/transportationDetail',
             controller: 'TransportationApplicationDetailController'
         })

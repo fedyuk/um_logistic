@@ -1,5 +1,9 @@
-﻿mainModule.controller('TransportationApplicationDetailController', function ($rootScope, $scope, $routeParams, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService) {
+﻿mainModule.controller('TransportationApplicationDetailController', function ($rootScope, $scope, $stateParams, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService) {
 
+    if (!$stateParams.id) {
+        $location.path("/404");
+        return;
+    }
     //variables 
     $scope.transportationToView = {
         Name: "",
@@ -23,7 +27,7 @@
         $scope.isLoading = true;
         var user = SessionService.getSessionUser();
         var token = SessionService.getSessionToken();
-        var id = $location.search().id;
+        var id = $stateParams.id;
         TransportationService.getTransportation(user, token, id)
 		.success(function (response) {
 		    $scope.isLoading = false;
