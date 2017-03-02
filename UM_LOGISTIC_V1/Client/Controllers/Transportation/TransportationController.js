@@ -32,7 +32,7 @@
 		        NotificationService.error(JSON.stringify(response.Error));
 		    }
 		}).error(function (error) {
-		    $log.log(error);
+		    $scope.isLoading = false;
 		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
     }
