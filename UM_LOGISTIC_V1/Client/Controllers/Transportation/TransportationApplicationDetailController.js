@@ -33,18 +33,23 @@
 		.success(function (response) {
 		    $scope.isLoading = false;
 		    if (response.Success) {
-		        $scope.transportationToView.Id = response.Result.Id;
-		        $scope.transportationToView.Name = response.Result.Name;
-		        $scope.transportationToView.ContactPhone = response.Result.ContactPhone;
-		        $scope.transportationToView.SendAddress = response.Result.SendAddress;
-		        $scope.transportationToView.DeliveryAddress = response.Result.DeliveryAddress;
-		        $scope.transportationToView.CompleteDate = response.Result.CompleteDate;
-		        $scope.transportationToView.ShipmentType = response.Result.ShipmentType;
-		        $scope.transportationToView.ShipmentLength = response.Result.ShipmentLength;
-		        $scope.transportationToView.ShipmentWidth = response.Result.ShipmentWidth;
-		        $scope.transportationToView.ShipmentHeight = response.Result.ShipmentHeight;
-		        $scope.transportationToView.ShipmentCapacity = response.Result.ShipmentCapacity;
-		        $scope.transportationToView.ShipmentWeight = response.Result.ShipmentWeight;
+		        if (response.Result != null) {
+		            $scope.transportationToView.Id = response.Result.Id;
+		            $scope.transportationToView.Name = response.Result.Name;
+		            $scope.transportationToView.ContactPhone = response.Result.ContactPhone;
+		            $scope.transportationToView.SendAddress = response.Result.SendAddress;
+		            $scope.transportationToView.DeliveryAddress = response.Result.DeliveryAddress;
+		            $scope.transportationToView.CompleteDate = response.Result.CompleteDate;
+		            $scope.transportationToView.ShipmentType = response.Result.ShipmentType;
+		            $scope.transportationToView.ShipmentLength = response.Result.ShipmentLength;
+		            $scope.transportationToView.ShipmentWidth = response.Result.ShipmentWidth;
+		            $scope.transportationToView.ShipmentHeight = response.Result.ShipmentHeight;
+		            $scope.transportationToView.ShipmentCapacity = response.Result.ShipmentCapacity;
+		            $scope.transportationToView.ShipmentWeight = response.Result.ShipmentWeight;
+		        }
+		        else {
+		            $location.path("/404");
+		        }
 		    }
 		    else {
 		        NotificationService.error(JSON.stringify(response.Error));

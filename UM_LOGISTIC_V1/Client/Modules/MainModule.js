@@ -13,6 +13,11 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
             templateUrl: '/views/cooperation',
             controller: 'CooperationController'
         })
+        .state('cooperationsDetail', {
+            url: '/cooperation/:id',
+            templateUrl: '/views/cooperationDetail',
+            controller: 'CooperationApplicationDetailController'
+        })
         .state('index', {
             url: '/',
             templateUrl: '/views/home',
