@@ -6,11 +6,12 @@
     }
     //variables 
     $scope.transportationToView = {
+        Id: 0,
         Name: "",
         ContactPhone: "",
         SendAddress: "",
         DeliveryAddress: "",
-        CompleteDate: new Date(),
+        CompleteDate: null,
         ShipmentType: "",
         ShipmentLength: 0,
         ShipmentWidth: 0,
@@ -19,7 +20,7 @@
         ShipmentWeight: 0,
     };
     $scope.isLoading = false;
-    $scope.pictureData = null;
+    $scope.pictures = [];
     //variables
 
     //methods
@@ -32,6 +33,18 @@
 		.success(function (response) {
 		    $scope.isLoading = false;
 		    if (response.Success) {
+		        $scope.transportationToView.Id = response.Result.Id;
+		        $scope.transportationToView.Name = response.Result.Name;
+		        $scope.transportationToView.ContactPhone = response.Result.ContactPhone;
+		        $scope.transportationToView.SendAddress = response.Result.SendAddress;
+		        $scope.transportationToView.DeliveryAddress = response.Result.DeliveryAddress;
+		        $scope.transportationToView.CompleteDate = response.Result.CompleteDate;
+		        $scope.transportationToView.ShipmentType = response.Result.ShipmentType;
+		        $scope.transportationToView.ShipmentLength = response.Result.ShipmentLength;
+		        $scope.transportationToView.ShipmentWidth = response.Result.ShipmentWidth;
+		        $scope.transportationToView.ShipmentHeight = response.Result.ShipmentHeight;
+		        $scope.transportationToView.ShipmentCapacity = response.Result.ShipmentCapacity;
+		        $scope.transportationToView.ShipmentWeight = response.Result.ShipmentWeight;
 		    }
 		    else {
 		        NotificationService.error(JSON.stringify(response.Error));
@@ -42,5 +55,22 @@
 		});
     }
 
+    $scope.getPictures = function (id) {
+        var type = true;
+        ApplicationPictureService.getApplicationPictures(id, type)
+		.success(function (response) {
+		    if (response.Success) {
+		        if(response.Result != null) {
+		            for(var i = 0; i < response.Result.length; i ++) {
+		                $scope.pictures.push({url: response.Result[i], number: i});
+		            }
+		        }
+		    }
+		}).error(function (error) {
+		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+		});
+    }
+
     $scope.getTransportation();
+    $scope.getPictures($stateParams.id);
 });

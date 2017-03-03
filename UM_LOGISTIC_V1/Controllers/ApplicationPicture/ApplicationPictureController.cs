@@ -27,6 +27,17 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationPicture
 			return Ok(response);
         }
 
+        [Route("api/pictures")]
+        [HttpGet]
+        public IHttpActionResult GetPictures(long applicationId, bool type)
+        {
+            var response = new GetApplicationPicturesResponse();
+            var pictures = service.GetPictures(applicationId, type);
+            response.Success = true;
+            response.Result = pictures;
+            return Ok(response);
+        }
+
         [Route("api/picture/load")]
         [HttpPost]
         public IHttpActionResult LoadPicture([FromBody]LoadApplicationPictureRequest request)
