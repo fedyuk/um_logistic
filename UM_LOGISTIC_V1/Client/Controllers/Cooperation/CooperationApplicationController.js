@@ -93,18 +93,27 @@
 		});
 	}
 	
-	$scope.fileChanged = function() {
+	$scope.fileChanged = function () {
+	    file = document.getElementById("coop-picture").files[0];
+	    var reader = new FileReader();
 
-		file = document.getElementById("coop-picture").files[0];
-		var reader = new FileReader();
+	    reader.addEventListener("load", function () {
+	        if (reader.result.indexOf("jpg") != -1 || reader.result.indexOf("jpeg") != -1 || reader.result.indexOf("png") != -1) {
+	            $scope.pictureData = reader.result;
+	        }
+	        else {
+	            NotificationService.error("Картинки повинні бути у форматі jpg, jpeg, png");
+	            document.getElementById("coop-picture").value = "";
+	        }
+	    }, false);
 
-		reader.addEventListener("load", function () {
-		    $scope.pictureData = reader.result;
-		}, false);
-
-		if (file) {
-		    reader.readAsDataURL(file);
-		}
+	    if (file && file.size <= 2000000) {
+	        reader.readAsDataURL(file);
+	    }
+	    else if (file && file.size > 2000000) {
+	        NotificationService.error("Розмір картинки повинен бути не більше 2 МБ");
+	        document.getElementById("coop-picture").value = "";
+	    }
 	}
 	
 	// init

@@ -69,11 +69,21 @@
         var reader = new FileReader();
 
         reader.addEventListener("load", function () {
-            $scope.pictureData = reader.result;
+            if (reader.result.indexOf("jpg") != -1 || reader.result.indexOf("jpeg") != -1 || reader.result.indexOf("png") != -1) {
+                $scope.pictureData = reader.result;
+            }
+            else {
+                NotificationService.error("Картинки повинні бути у форматі jpg, jpeg, png");
+                document.getElementById("trans-picture").value = "";
+            }
         }, false);
 
-        if (file) {
+        if (file && file.size <= 2000000) {
             reader.readAsDataURL(file);
+        }
+        else if (file && file.size > 2000000) {
+            NotificationService.error("Розмір картинки повинен бути не більше 2 МБ");
+            document.getElementById("trans-picture").value = "";
         }
     }
 });
