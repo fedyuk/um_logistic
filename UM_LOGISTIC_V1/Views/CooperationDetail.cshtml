@@ -2,4 +2,61 @@
     <img src="~/Resources/Picture/loading.gif" align="center" />
 </div>
 <div class="row" ng-show="!isLoading" align="center">
+    <div class="row" style="margin-top: 50px;">
+        <h4>Заявка на співробітництво:</h4>
+    </div>
+    <div class="row">
+        <h5>Номер заявки: {{cooperationToView.Id}}</h5>
+    </div>
+    <div class="row">
+        <h5>Водій(ПІБ): {{cooperationToView.Name}}</h5>
+    </div>
+    <div class="row">
+        <h5>Місце проживання: {{cooperationToView.ResidenceAddress}}</h5>
+    </div>
+    <div class="row">
+        <h5>Місце стоянки автомобіля: {{cooperationToView.ParkingPlace}}</h5>
+    </div>
+    <div class="row">
+        <h5>Фізична особа: {{cooperationToView.IsPhysicalPerson}}</h5>
+    </div>
+    <div class="row">
+        <h5>Підприємець:  {{cooperationToView.IsBussinessPerson}}</h5>
+    </div>
+    <div class="row">
+        <h5>Марка автомобіля: {{cooperationToView.CarModel}}</h5>
+    </div>
+    <div class="row">
+        <h5>Довжина: {{cooperationToView.TransportLength}}</h5>
+    </div>
+    <div class="row">
+        <h5>Ширина: {{cooperationToView.TransportWidth}}</h5>
+    </div>
+    <div class="row">
+        <h5>Висота: {{cooperationToView.TransportHeight}}</h5>
+    </div>
+    <div class="row">
+        <h5>Вантажність(т): {{cooperationToView.TransportWeight}}</h5>
+    </div>
+    <div class="row">
+        <h5>Об'єм(м3): {{cooperationToView.TransportCapacity}}</h5>
+    </div>
+    <div class="row">
+        <h5>Вміст стріли(м): {{cooperationToView.TransportArrow}}</h5>
+    </div>
+    <div class="row">
+        <h5>Вартість розвантажувальних робіт: {{cooperationToView.WorkCost}}</h5>
+    </div>
+    <div class="row">
+        <h5>Тип: {{cooperationToView.WorkType}}</h5>
+    </div>
+    <div class="row">
+        <h5>Вартість доставки(грн/км): {{cooperationToView.DeliveryCost}}</h5>
+    </div>
+</div>
+<div class="row" ng-show="!isLoading" align="center">
+    <div class="row" style="margin-top: 50px;">
+        <h4>Галерея:</h4>
+        <img ng-repeat="picture in pictures" class="media-object" style="width:200px;height:120px;" ng-src="{{picture.url || '/Resources/Picture/empty_application.jpg'}}" alt="...">
+    </div>
 </div>
