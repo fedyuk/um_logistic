@@ -52,6 +52,10 @@
 	$scope.$on("userAuthorized", function(event, args) {
 		$scope.saveProfile(args);
 	});
+
+	$scope.$on("userRegistrated", function (event, args) {
+	    $scope.saveProfile(args);
+	});
 	
 	//methods
 	

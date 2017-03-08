@@ -19,38 +19,18 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
         public IHttpActionResult GetTransportationApplication(long id, string token, string user)
         {
             var getTransportationApplicationResponse = new GetTransportationApplicationResponse();
-            var IsValidToken = TokenService.ValidateToken(user, token);
-            if (!IsValidToken)
+            var applicationInfo = applicationService.GetTransportationApplication(id);
+            if (user != null)
             {
-                getTransportationApplicationResponse.Success = false;
-                getTransportationApplicationResponse.Error = "Token is not valid";
-                getTransportationApplicationResponse.Result = null;
+                getTransportationApplicationResponse.Success = true;
+                getTransportationApplicationResponse.Error = "";
+                getTransportationApplicationResponse.Result = applicationInfo;
                 return Ok(getTransportationApplicationResponse);
-            }
-            var tokenRole = TokenService.GetRole(user, token);
-            var isAccessedToResource = RoleApiManager.CheckAccess(Operation.Read, tokenRole, Section.TransportationApplications);
-            if (isAccessedToResource)
-            {
-                var applicationInfo = applicationService.GetTransportationApplication(id);
-                if (user != null)
-                {
-                    getTransportationApplicationResponse.Success = true;
-                    getTransportationApplicationResponse.Error = "";
-                    getTransportationApplicationResponse.Result = applicationInfo;
-                    return Ok(getTransportationApplicationResponse);
-                }
-                else
-                {
-                    getTransportationApplicationResponse.Success = false;
-                    getTransportationApplicationResponse.Error = "";
-                    getTransportationApplicationResponse.Result = null;
-                    return Ok(getTransportationApplicationResponse);
-                }
             }
             else
             {
                 getTransportationApplicationResponse.Success = false;
-                getTransportationApplicationResponse.Error = "Access is denied";
+                getTransportationApplicationResponse.Error = "";
                 getTransportationApplicationResponse.Result = null;
                 return Ok(getTransportationApplicationResponse);
             }
@@ -61,52 +41,32 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
         public IHttpActionResult CreateTransportationApplication([FromBody]CreateTransportationApplicationRequest request)
         {
             var createTransportationApplicationResponse = new CreateTransportationApplicationResponse();
-            var isValidToken = TokenService.ValidateToken(request.user, request.token);
-            if (!isValidToken)
+            var applicationToCreate = new UM_LOGISTIC_V1.Models.TransportationApplication.TransportationApplication()
             {
-                createTransportationApplicationResponse.Success = false;
-                createTransportationApplicationResponse.Error = "Token is not valid";
-                createTransportationApplicationResponse.Id = null;
+                Name = request.Name,
+                ContactPhone = request.ContactPhone,
+                SendAddress = request.SendAddress,
+                DeliveryAddress = request.DeliveryAddress,
+                CompleteDate = request.CompleteDate,
+                ShipmentType = request.ShipmentType,
+                ShipmentCapacity = request.ShipmentCapacity,
+                ShipmentHeight = request.ShipmentHeight,
+                ShipmentLength = request.ShipmentLength,
+                ShipmentWeight = request.ShipmentWeight,
+                ShipmentWidth = request.ShipmentWidth
+            };
+            var id = applicationService.CreateTransportationApplication(applicationToCreate);
+            if (id != null)
+            {
+                createTransportationApplicationResponse.Success = true;
+                createTransportationApplicationResponse.Error = "";
+                createTransportationApplicationResponse.Id = id;
                 return Ok(createTransportationApplicationResponse);
-            }
-            var tokenRole = TokenService.GetRole(request.user, request.token);
-            var isAccessedToResource = RoleApiManager.CheckAccess(Operation.Create, tokenRole, Section.TransportationApplications);
-            if (isAccessedToResource)
-            {
-                var applicationToCreate = new UM_LOGISTIC_V1.Models.TransportationApplication.TransportationApplication()
-                {
-                    Name = request.Name,
-                    ContactPhone = request.ContactPhone,
-                    SendAddress = request.SendAddress,
-                    DeliveryAddress = request.DeliveryAddress,
-                    CompleteDate = request.CompleteDate,
-                    ShipmentType = request.ShipmentType,
-                    ShipmentCapacity = request.ShipmentCapacity,
-                    ShipmentHeight = request.ShipmentHeight,
-                    ShipmentLength = request.ShipmentLength,
-                    ShipmentWeight = request.ShipmentWeight,
-                    ShipmentWidth = request.ShipmentWidth
-                };
-                var id = applicationService.CreateTransportationApplication(applicationToCreate);
-                if (id != null)
-                {
-                    createTransportationApplicationResponse.Success = true;
-                    createTransportationApplicationResponse.Error = "";
-                    createTransportationApplicationResponse.Id = id;
-                    return Ok(createTransportationApplicationResponse);
-                }
-                else
-                {
-                    createTransportationApplicationResponse.Success = false;
-                    createTransportationApplicationResponse.Error = "";
-                    createTransportationApplicationResponse.Id = null;
-                    return Ok(createTransportationApplicationResponse);
-                }
             }
             else
             {
                 createTransportationApplicationResponse.Success = false;
-                createTransportationApplicationResponse.Error = "Access is denied";
+                createTransportationApplicationResponse.Error = "";
                 createTransportationApplicationResponse.Id = null;
                 return Ok(createTransportationApplicationResponse);
             }
@@ -117,53 +77,33 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
         public IHttpActionResult UpdateTransportationApplication([FromBody]UpdateTransportationApplicationRequest request)
         {
             var updateTransportationApplicationResponse = new UpdateTransportationApplicationResponse();
-            var isValidToken = TokenService.ValidateToken(request.user, request.token);
-            if (!isValidToken)
+            var applicationToUpdate = new UM_LOGISTIC_V1.Models.TransportationApplication.TransportationApplication()
             {
-                updateTransportationApplicationResponse.Success = false;
-                updateTransportationApplicationResponse.Error = "Token is not valid";
+                Id = request.Id,
+                Name = request.Name,
+                ContactPhone = request.ContactPhone,
+                SendAddress = request.SendAddress,
+                DeliveryAddress = request.DeliveryAddress,
+                CompleteDate = request.CompleteDate,
+                ShipmentType = request.ShipmentType,
+                ShipmentCapacity = request.ShipmentCapacity,
+                ShipmentHeight = request.ShipmentHeight,
+                ShipmentLength = request.ShipmentLength,
+                ShipmentWeight = request.ShipmentWeight,
+                ShipmentWidth = request.ShipmentWidth
+            };
+            var isUpdate = applicationService.UpdateTransportationApplication(applicationToUpdate);
+            if (isUpdate)
+            {
+                updateTransportationApplicationResponse.Success = true;
+                updateTransportationApplicationResponse.Error = "";
                 updateTransportationApplicationResponse.Result = null;
                 return Ok(updateTransportationApplicationResponse);
-            }
-            var tokenRole = TokenService.GetRole(request.user, request.token);
-            var isAccessedToResource = RoleApiManager.CheckAccess(Operation.Update, tokenRole, Section.TransportationApplications);
-            if (isAccessedToResource)
-            {
-                var applicationToUpdate = new UM_LOGISTIC_V1.Models.TransportationApplication.TransportationApplication()
-                {
-                    Id = request.Id,
-                    Name = request.Name,
-                    ContactPhone = request.ContactPhone,
-                    SendAddress = request.SendAddress,
-                    DeliveryAddress = request.DeliveryAddress,
-                    CompleteDate = request.CompleteDate,
-                    ShipmentType = request.ShipmentType,
-                    ShipmentCapacity = request.ShipmentCapacity,
-                    ShipmentHeight = request.ShipmentHeight,
-                    ShipmentLength = request.ShipmentLength,
-                    ShipmentWeight = request.ShipmentWeight,
-                    ShipmentWidth = request.ShipmentWidth
-                };
-                var isUpdate = applicationService.UpdateTransportationApplication(applicationToUpdate);
-                if (isUpdate)
-                {
-                    updateTransportationApplicationResponse.Success = true;
-                    updateTransportationApplicationResponse.Error = "";
-                    updateTransportationApplicationResponse.Result = null;
-                    return Ok(updateTransportationApplicationResponse);
-                }
-                else
-                {
-                    updateTransportationApplicationResponse.Success = false;
-                    updateTransportationApplicationResponse.Error = "";
-                    updateTransportationApplicationResponse.Result = null;
-                    return Ok(updateTransportationApplicationResponse);
-                }
             }
             else
             {
                 updateTransportationApplicationResponse.Success = false;
-                updateTransportationApplicationResponse.Error = "Access is denied";
+                updateTransportationApplicationResponse.Error = "";
                 updateTransportationApplicationResponse.Result = null;
                 return Ok(updateTransportationApplicationResponse);
             }
@@ -174,39 +114,19 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
         public IHttpActionResult RemoveTransportationApplication([FromBody]RemoveTransportationApplicationRequest request)
         {
             var deleteTransportationApplicationResponse = new DeleteTransportationApplicationResponse();
-            var isValidToken = TokenService.ValidateToken(request.user, request.token);
-            if (!isValidToken)
+            var applicationIdToDelete = request.Id;
+            var isDeleted = applicationService.RemoveTransportationApplication(applicationIdToDelete);
+            if (isDeleted)
             {
-                deleteTransportationApplicationResponse.Success = false;
-                deleteTransportationApplicationResponse.Error = "Token is not valid";
+                deleteTransportationApplicationResponse.Success = true;
+                deleteTransportationApplicationResponse.Error = "";
                 deleteTransportationApplicationResponse.Result = null;
                 return Ok(deleteTransportationApplicationResponse);
-            }
-            var tokenRole = TokenService.GetRole(request.user, request.token);
-            var isAccessedToResource = RoleApiManager.CheckAccess(Operation.Remove, tokenRole, Section.TransportationApplications);
-            if (isAccessedToResource)
-            {
-                var applicationIdToDelete = request.Id;
-                var isDeleted = applicationService.RemoveTransportationApplication(applicationIdToDelete);
-                if (isDeleted)
-                {
-                    deleteTransportationApplicationResponse.Success = true;
-                    deleteTransportationApplicationResponse.Error = "";
-                    deleteTransportationApplicationResponse.Result = null;
-                    return Ok(deleteTransportationApplicationResponse);
-                }
-                else
-                {
-                    deleteTransportationApplicationResponse.Success = false;
-                    deleteTransportationApplicationResponse.Error = "";
-                    deleteTransportationApplicationResponse.Result = null;
-                    return Ok(deleteTransportationApplicationResponse);
-                }
             }
             else
             {
                 deleteTransportationApplicationResponse.Success = false;
-                deleteTransportationApplicationResponse.Error = "Access is denied";
+                deleteTransportationApplicationResponse.Error = "";
                 deleteTransportationApplicationResponse.Result = null;
                 return Ok(deleteTransportationApplicationResponse);
             }
@@ -217,38 +137,18 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
         public IHttpActionResult GetTransportationApplicationsByPageAndCount(int page, int count, string token, string user)
         {
             var getTransportationApplicationsByPageAndCountResponse = new GetTransportationApplicationsByPageAndCountResponse();
-            var isValidToken = TokenService.ValidateToken(user, token);
-            if (!isValidToken)
+            var applications = applicationService.GetTransportationApplications(page, count);
+            if (applications != null)
             {
-                getTransportationApplicationsByPageAndCountResponse.Success = false;
-                getTransportationApplicationsByPageAndCountResponse.Error = "Token is not valid";
-                getTransportationApplicationsByPageAndCountResponse.Result = null;
+                getTransportationApplicationsByPageAndCountResponse.Success = true;
+                getTransportationApplicationsByPageAndCountResponse.Error = "";
+                getTransportationApplicationsByPageAndCountResponse.Result = applications;
                 return Ok(getTransportationApplicationsByPageAndCountResponse);
-            }
-            var tokenRole = TokenService.GetRole(user, token);
-            var isAccessedToResource = RoleApiManager.CheckAccess(Operation.Read, tokenRole, Section.TransportationApplications);
-            if (isAccessedToResource)
-            {
-                var applications = applicationService.GetTransportationApplications(page, count);
-                if (applications != null)
-                {
-                    getTransportationApplicationsByPageAndCountResponse.Success = true;
-                    getTransportationApplicationsByPageAndCountResponse.Error = "";
-                    getTransportationApplicationsByPageAndCountResponse.Result = applications;
-                    return Ok(getTransportationApplicationsByPageAndCountResponse);
-                }
-                else
-                {
-                    getTransportationApplicationsByPageAndCountResponse.Success = false;
-                    getTransportationApplicationsByPageAndCountResponse.Error = "";
-                    getTransportationApplicationsByPageAndCountResponse.Result = null;
-                    return Ok(getTransportationApplicationsByPageAndCountResponse);
-                }
             }
             else
             {
                 getTransportationApplicationsByPageAndCountResponse.Success = false;
-                getTransportationApplicationsByPageAndCountResponse.Error = "Access is denied";
+                getTransportationApplicationsByPageAndCountResponse.Error = "";
                 getTransportationApplicationsByPageAndCountResponse.Result = null;
                 return Ok(getTransportationApplicationsByPageAndCountResponse);
             }

@@ -48,6 +48,11 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
             templateUrl: '/views/home',
             controller: 'HomeController'
 		})
+        .state('register', {
+            url: '/register',
+            templateUrl: '/views/register',
+            controller: 'RegisterAccountController'
+        })
         .state('404', {
             url: '/404',
             templateUrl: '/views/404'
@@ -66,10 +71,10 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
   function ($rootScope, $state, $location, SessionService, moduleConstants) {
 	  $rootScope.$on('$locationChangeStart',
       function (event, next, current) {
-		  var sessionToken = SessionService.getSessionToken();
-		  if(!SessionService.isSessionValid()) {
-		      $location.path(moduleConstants.loginPath);
-		  }
+		  //var sessionToken = SessionService.getSessionToken();
+		  //if(!SessionService.isSessionValid()) {
+		  //    $location.path(moduleConstants.loginPath);
+		  //}
       }
     );
   }]);

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using UM_LOGISTIC_V1.Models;
 using UM_LOGISTIC_V1.Models.Account;
+using UM_LOGISTIC_V1.Models.User;
+using UM_LOGISTIC_V1.Request.Account;
 
 namespace UM_LOGISTIC_V1.Services
 {
@@ -95,6 +97,33 @@ namespace UM_LOGISTIC_V1.Services
             }
             var limitedAccounts = accounts.Skip(count * page).Take(count).ToList();
             return limitedAccounts;
+        }
+
+        public User RegisterAccount(RegisterAccountRequest userToRegister)
+        {
+            var user = new User();
+            var account = new Account();
+            user.UserName = userToRegister.Login;
+            user.UserPassword = userToRegister.Password;
+            user.CreatedOn = DateTime.Now;
+            user.ModifiedOn = DateTime.Now;
+            account.FullName = userToRegister.FullName;
+            account.WorkPhone = userToRegister.WorkPhone;
+            account.City = userToRegister.City;
+            account.CreatedOn = DateTime.Now;
+            account.ModifiedOn = DateTime.Now;
+            user.Account = account;
+            user.Role = db.Roles.Find(3);
+            db.Users.Add(user);
+            try
+            {
+                db.SaveChanges();
+                return user;
+            }
+            catch(Exception)
+            {
+                return null;
+            }
         }
     }
 }
