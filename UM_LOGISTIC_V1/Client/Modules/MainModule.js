@@ -1,6 +1,6 @@
 ﻿var mainModule = angular.module("mainModule", ["ui.router", "ngRoute", "ngCookies", "ngMessages"]);
 
-mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', function ($stateProvider, $locationProvider, $urlRouterProvider) {
+mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$cookiesProvider', function ($stateProvider, $locationProvider, $urlRouterProvider, $cookiesProvider) {
 
     $stateProvider
         .state('login', {
@@ -64,6 +64,10 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
         enabled: true,
         requireBase: false
     });
+
+    var expiresDate = new Date();
+    expiresDate.setDate(expiresDate.getDate() + 1);
+    $cookiesProvider.defaults.expires = expiresDate;
 
 }]);
  
