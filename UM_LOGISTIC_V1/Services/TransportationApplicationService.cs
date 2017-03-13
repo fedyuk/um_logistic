@@ -91,7 +91,7 @@ namespace UM_LOGISTIC_V1.Services
         public List<TransportationApplication> GetTransportationApplications(int page, int count)
         {
             var applications = from u in db.TransportationApplications
-                               orderby u.Id ascending
+                               orderby u.ModifiedOn descending
                                select u;
             if (applications == null)
             {

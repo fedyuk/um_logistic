@@ -96,7 +96,7 @@ namespace UM_LOGISTIC_V1.Services
         public List<CooperationApplication> GetCooperationApplications(int page, int count)
         {
             var applications = from u in db.CooperationApplications
-                        orderby u.Id ascending
+                        orderby u.ModifiedOn descending
                         select u;
             if (applications == null)
             {
