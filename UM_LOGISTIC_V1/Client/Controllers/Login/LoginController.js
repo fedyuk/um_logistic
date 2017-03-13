@@ -8,6 +8,9 @@
 	
     //methods
 	$scope.loginUser = function () {
+	    if (!$scope.loginForm.$valid) {
+	        return;
+	    }
 	    $scope.isLoading = true;
 		LoginService.loginUser($scope.loginUserName, $scope.loginUserPassword)
 		.success(function (response) {
