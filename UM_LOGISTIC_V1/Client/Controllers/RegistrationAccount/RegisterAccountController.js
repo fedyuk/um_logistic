@@ -15,6 +15,9 @@
 
     // methods
     $scope.registerUser = function () {
+        if (!$scope.registerForm.$valid) {
+            return;
+        }
         $scope.isLoading = true;
         AccountService.registerAccount($scope.userToRegister).success(function (response) {
             $scope.isLoading = false;

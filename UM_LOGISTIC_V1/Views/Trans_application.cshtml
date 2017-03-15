@@ -9,25 +9,31 @@
         <div class="row">
         <div class="form-group col-md-6 col-md-offset-3">
             <label class="control-label">ПІБ:</label>
-            <input class="form-control" ng-model="transportation.Name" type="text" required>
+            <input class="form-control" name="fullName" ng-model="transportation.Name" type="text" required>
+            <!--<div ng-messages="transForm.fullName.$error" style="color:maroon" role="alert">
+                <div ng-message="required">Ви не ввели ПІБ</div>
+            </div>-->
         </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6  col-md-offset-3">
                 <label class="control-label">Контактний телефон:</label>
-                <input class="form-control" ng-model="transportation.ContactPhone" type="text" required>
+                <input class="form-control" name="contactPhone" ng-model="transportation.ContactPhone" type="text" required>
+                <!--<div ng-messages="transForm.contactPhone.$error" style="color:maroon" role="alert">
+                    <div ng-message="required">Ви не ввели контактний телефон</div>
+                </div>-->
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6  col-md-offset-3">
                 <label class="control-label">Адреса відправки:</label>
-                <input class="form-control" ng-model="transportation.SendAddress" type="text" required>
+                <input class="form-control" ng-model="transportation.SendAddress" type="text">
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6  col-md-offset-3">
                 <label class="control-label">Адреса отримання:</label>
-                <input class="form-control" ng-model="transportation.DeliveryAddress" type="text" required>
+                <input class="form-control" ng-model="transportation.DeliveryAddress" type="text">
             </div>
         </div>
         <div class="row">

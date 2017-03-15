@@ -22,6 +22,9 @@
 
     //methods
     $scope.createTransportation = function () {
+        if (!$scope.transForm.$valid) {
+            return;
+        }
         $scope.isLoading = true;
         $scope.transportation.user = SessionService.getSessionUser();
         $scope.transportation.token = SessionService.getSessionToken();

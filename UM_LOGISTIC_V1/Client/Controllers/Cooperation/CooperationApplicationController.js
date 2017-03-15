@@ -35,6 +35,9 @@
 
     //methods
     $scope.createCooperation = function () {
+        if (!$scope.coopForm.$valid) {
+            return;
+        }
         $scope.isLoading = true;
         $scope.cooperation.user = SessionService.getSessionUser();
         $scope.cooperation.token = SessionService.getSessionToken();
