@@ -105,7 +105,25 @@
 
     $scope.acceptApplication = function(id, type)
     {
-
+        $scope.isLoading = true;
+        FilterService.acceptApplication(type, id)
+        .success(function (response) {
+            if (response.Success) {
+                for (var i = 0; i < $scope.applications.length; i++)
+                    if ($scope.applications[i].id === id) {
+                        $scope.applications.splice(i, 1);
+                        break;
+                    }
+                $scope.isLoading = false;
+            }
+            else {
+                $scope.isLoading = false;
+                NotificationService.error(response.Error);
+            }
+        }).error(function (error) {
+            $scope.isLoading = false;
+            NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+        });
     }
     //methods
 
