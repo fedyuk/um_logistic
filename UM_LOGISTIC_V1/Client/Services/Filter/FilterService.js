@@ -13,4 +13,8 @@
         };
         return $http.post('/api/application/accept', request);
     }
+
+    this.getNotFilteredApplicationsCount = function () {
+        return $http.get('/api/application/count');
+    }
 });

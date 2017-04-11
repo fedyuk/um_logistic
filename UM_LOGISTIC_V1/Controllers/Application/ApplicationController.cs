@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using UM_LOGISTIC_V1.Request.Application;
+using UM_LOGISTIC_V1.Response.Application;
 using UM_LOGISTIC_V1.Response.CooperationApplication;
 using UM_LOGISTIC_V1.Services;
 
@@ -26,6 +27,17 @@ namespace UM_LOGISTIC_V1.Controllers.Application
             }
             response.Success = true;
             response.Id = applicationId;
+            return Ok(response);
+        }
+
+        [Route("api/application/count")]
+        [HttpGet]
+        public IHttpActionResult GetApplicationsCount()
+        {
+            var response = new AppllicationCountResponse();
+            var count = service.GetNotFilteredApplicationsCount();
+            response.Result = count;
+            response.Success = true;
             return Ok(response);
         }
     }

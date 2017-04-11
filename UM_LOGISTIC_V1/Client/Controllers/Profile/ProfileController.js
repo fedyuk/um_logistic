@@ -1,6 +1,7 @@
 ﻿mainModule.controller('ProfileController', function ($scope, $log, $location, UserService,
-	SessionService, moduleConstants, LoginService, AccountService, NotificationService) {
+	SessionService, moduleConstants, LoginService, AccountService, NotificationService, FilterService) {
 	
+    $scope.notFilteredApplicationsCount = 0;
 	//methods
 	
 	$scope.logoutUser = function() {
@@ -13,6 +14,19 @@
 	$scope.initProfileName = function() {
 		var sessionProfileName = SessionService.getSessionProfileName();
 		$scope.profileName = sessionProfileName != undefined ? sessionProfileName : moduleConstants.anonymousUserCaption;
+	}
+
+	$scope.getNotFilteredApplicationsCount = function () {
+	    FilterService.getNotFilteredApplicationsCount().success(function (response) {
+	        if (response.Success) {
+	            $scope.notFilteredApplicationsCount = response.Result;
+	        }
+	        else {
+	            NotificationService.error(JSON.stringify(response.Error));
+	        }
+	    }).error(function (error) {
+	        NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+	    });
 	}
 	
 	$scope.initProfileLoginActions = function() {
@@ -65,5 +79,7 @@
 	$scope.initProfileLoginActions();
 
 	$scope.initProfileMenu();
+
+	$scope.getNotFilteredApplicationsCount();
 	//init controller
 });

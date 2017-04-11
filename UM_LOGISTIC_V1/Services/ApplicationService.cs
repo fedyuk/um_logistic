@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using UM_LOGISTIC_V1.Models;
 
@@ -51,6 +52,20 @@ namespace UM_LOGISTIC_V1.Services
                     break;
             }
             return 0L;
+        }
+
+        public long GetNotFilteredApplicationsCount()
+        {
+            /*var tasks = new List<Task>();
+            var transportationsCount = 0L;
+            var cooperationsCount = 0L;
+            tasks.Add(Task.Factory.StartNew(() => transportationsCount = db.TransportationApplications.Count(t => t.Filtered == false)));
+            tasks.Add(Task.Factory.StartNew(() => cooperationsCount = db.CooperationApplications.Count(t => t.Filtered == false)));
+            Task.WaitAll(tasks.ToArray());
+            return transportationsCount + cooperationsCount;*/
+            var transportationsCount = db.TransportationApplications.Count(t => t.Filtered == false);
+            var cooperationsCount = db.CooperationApplications.Count(t => t.Filtered == false);
+            return transportationsCount + cooperationsCount;
         }
     }
 }
