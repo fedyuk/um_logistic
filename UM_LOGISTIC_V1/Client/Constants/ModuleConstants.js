@@ -11,5 +11,6 @@
 	loginPath: "/login",
 	settingsPath: "/settings",
 	homePath: "/home",
-	cooperationApplicationCreatingSuccess: "Дякуємо за виділений вами час, ми вам перетелефонуємо!"
+	cooperationApplicationCreatingSuccess: "Дякуємо за виділений вами час, ми вам перетелефонуємо!",
+    emptyFormValue: "не вказано"
 });

@@ -1,4 +1,4 @@
-﻿mainModule.controller('TransportationController', function ($rootScope, $scope, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService) {
+﻿mainModule.controller('TransportationController', function ($rootScope, $scope, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService, FormHelper) {
 
     //variables 
     $scope.transportations = [];
@@ -18,12 +18,12 @@
 		    if (response.Success) {
 		        for (var i = 0; i < response.Result.length; i++) {
 		            $scope.transportations.push({
-		                id: response.Result[i].Id,
-		                title: response.Result[i].Name,
-		                contactPhone: response.Result[i].ContactPhone,
-		                sendAddress: response.Result[i].SendAddress,
-		                deliveryAddress: response.Result[i].DeliveryAddress,
-		                createdOn: response.Result[i].CreatedOn
+		                id: FormHelper.getFormValue(response.Result[i].Id),
+		                title: FormHelper.getFormValue(response.Result[i].Name),
+		                contactPhone: FormHelper.getFormValue(response.Result[i].ContactPhone),
+		                sendAddress: FormHelper.getFormValue(response.Result[i].SendAddress),
+		                deliveryAddress: FormHelper.getFormValue(response.Result[i].DeliveryAddress),
+		                createdOn: new Date(response.Result[i].CreatedOn).toLocaleString()
 		            });
 		            $scope.getPicture(response.Result[i].Id);
 		        }

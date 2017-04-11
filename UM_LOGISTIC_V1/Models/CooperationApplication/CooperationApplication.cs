@@ -27,5 +27,6 @@ namespace UM_LOGISTIC_V1.Models.CooperationApplication
         public long WorkTypeId { get; set; }
         public virtual ApplicationWorkType WorkType { get; set; }
         public decimal DeliveryCost { get; set; }
+        public bool Filtered { get; set; }
     }
 }

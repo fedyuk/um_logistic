@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Net;
 using System.Web.Http;
+using UM_LOGISTIC_V1.ApiModels.Filter;
+using UM_LOGISTIC_V1.Models.TransportationApplication;
 using UM_LOGISTIC_V1.Request.TransportationApplication;
 using UM_LOGISTIC_V1.Response.TransportationApplication;
-using UM_LOGISTIC_V1.Security;
 using UM_LOGISTIC_V1.Services;
 
 namespace UM_LOGISTIC_V1.Controllers.TransportationController
@@ -152,6 +153,50 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
                 getTransportationApplicationsByPageAndCountResponse.Result = null;
                 return Ok(getTransportationApplicationsByPageAndCountResponse);
             }
+        }
+
+        [Route("api/trans_not_filtered")]
+        [HttpGet]
+        public IHttpActionResult GetNotFilteredTransportationApplicationsByPageAndCount(int page, int count, string token, string user)
+        {
+            var getTransportationApplicationsByPageAndCountResponse = new GetTransportationApplicationsByPageAndCountResponse();
+            var applications = applicationService.GetNotFilteredTransportationApplications(page, count);
+            if (applications != null)
+            {
+                getTransportationApplicationsByPageAndCountResponse.Success = true;
+                getTransportationApplicationsByPageAndCountResponse.Error = "";
+                getTransportationApplicationsByPageAndCountResponse.Result = applications;
+                return Ok(getTransportationApplicationsByPageAndCountResponse);
+            }
+            else
+            {
+                getTransportationApplicationsByPageAndCountResponse.Success = false;
+                getTransportationApplicationsByPageAndCountResponse.Error = "";
+                getTransportationApplicationsByPageAndCountResponse.Result = null;
+                return Ok(getTransportationApplicationsByPageAndCountResponse);
+            }
+        }
+
+        [Route("api/t_applications")]
+        [HttpGet]
+        public IHttpActionResult GetApplications(string filter, int page, int count)
+        {
+            filter = WebUtility.UrlDecode(filter);
+            var response = new GetTransportationApplicationsByPageAndCountResponse();
+            var applications = new List<TransportationApplication>();
+            if (filter == String.Empty)
+            {
+                response.Success = false;
+                response.Error = "The filter is empty";
+                response.Result = applications;
+                return Ok(response);
+            }
+            var list = Parser.GetFilterList(filter);
+            applications = applicationService.GetApplications(list, page, count);
+            response.Success = true;
+            response.Error = null;
+            response.Result = applications;
+            return Ok(response);
         }
     }
 }

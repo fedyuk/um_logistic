@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Http;
+using UM_LOGISTIC_V1.ApiModels.Filter;
+using UM_LOGISTIC_V1.Models.CooperationApplication;
 using UM_LOGISTIC_V1.Request.CooperationApplication;
 using UM_LOGISTIC_V1.Response.CooperationApplication;
 using UM_LOGISTIC_V1.Security;
@@ -165,6 +168,28 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
             }
         }
 
+        [Route("api/coops_not_filtered")]
+        [HttpGet]
+        public IHttpActionResult GetNotFilteredCooperationApplicationsByPageAndCount(int page, int count, string token, string user)
+        {
+            var getCooperationApplicationsByPageAndCountResponse = new GetCooperationApplicationsByPageAndCountResponse();
+            var applications = applicationService.GetNotFilteredCooperationApplications(page, count);
+            if (applications != null)
+            {
+                getCooperationApplicationsByPageAndCountResponse.Success = true;
+                getCooperationApplicationsByPageAndCountResponse.Error = "";
+                getCooperationApplicationsByPageAndCountResponse.Result = applications;
+                return Ok(getCooperationApplicationsByPageAndCountResponse);
+            }
+            else
+            {
+                getCooperationApplicationsByPageAndCountResponse.Success = false;
+                getCooperationApplicationsByPageAndCountResponse.Error = "";
+                getCooperationApplicationsByPageAndCountResponse.Result = null;
+                return Ok(getCooperationApplicationsByPageAndCountResponse);
+            }
+        }
+
         [Route("api/appworktype")]
         [HttpGet]
         public IHttpActionResult GetApplicationWorkType()
@@ -172,6 +197,28 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
             var workTypes = applicationService.GetApplicationWorkTypes();
             return Ok(workTypes);
 
+        }
+
+        [Route("api/c_applications")]
+        [HttpGet]
+        public IHttpActionResult GetApplications(string filter, int page, int count)
+        {
+            filter = WebUtility.UrlDecode(filter);
+            var response = new GetCooperationApplicationsByPageAndCountResponse();
+            var applications = new List<CooperationApplication>();
+            if (filter == String.Empty)
+            {
+                response.Success = false;
+                response.Error = "The filter is empty";
+                response.Result = applications;
+                return Ok(response);
+            }
+            var list = Parser.GetFilterList(filter);
+            applications = applicationService.GetApplications(list, page, count);
+            response.Success = true;
+            response.Error = null;
+            response.Result = applications;
+            return Ok(response);
         }
     }
 }

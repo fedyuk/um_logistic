@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
+using UM_LOGISTIC_V1.ApiModels.Filter;
 using UM_LOGISTIC_V1.Models;
 using UM_LOGISTIC_V1.Models.TransportationApplication;
 
@@ -91,6 +92,7 @@ namespace UM_LOGISTIC_V1.Services
         public List<TransportationApplication> GetTransportationApplications(int page, int count)
         {
             var applications = from u in db.TransportationApplications
+                               where u.Filtered == true
                                orderby u.ModifiedOn descending
                                select u;
             if (applications == null)
@@ -99,6 +101,39 @@ namespace UM_LOGISTIC_V1.Services
             }
             var limitedApplications = applications.Skip(count * page).Take(count).ToList();
             return limitedApplications;
+        }
+
+        public List<TransportationApplication> GetNotFilteredTransportationApplications(int page, int count)
+        {
+            var applications = from u in db.TransportationApplications
+                               where u.Filtered == false
+                               orderby u.ModifiedOn descending
+                               select u;
+            if (applications == null)
+            {
+                return null;
+            }
+            var limitedApplications = applications.Skip(count * page).Take(count).ToList();
+            return limitedApplications;
+        }
+
+        public List<TransportationApplication> GetApplications(List<Filter> filters, int page, int count)
+        {
+            var columns = DBColumns.transportationAplicationcolumns;
+            var query = db.TransportationApplications.AsQueryable<TransportationApplication>();
+            if(filters.Count == 0)
+            {
+                return new List<TransportationApplication>();
+            }
+            foreach (var filter in filters)
+            {
+                object value = Convert.ChangeType(filter.value, columns.Where(s => s.column == filter.column).Select(x => x.type).FirstOrDefault());
+                var comparer = new OperatorComparer();
+                var isOperation = AvaibleOperations.operations.TryGetValue(filter.operation, out comparer);
+                var predicate = ExpressionBuilder.BuildPredicate<TransportationApplication>(value, comparer, filter.column);
+                query = query.Where(predicate);
+            }
+            return query.ToList().Skip(count * page).Take(count).ToList();
         }
     }
 }

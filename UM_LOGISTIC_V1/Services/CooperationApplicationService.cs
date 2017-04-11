@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using UM_LOGISTIC_V1.ApiModels.Filter;
 using UM_LOGISTIC_V1.Models;
 using UM_LOGISTIC_V1.Models.CooperationApplication;
 
@@ -96,8 +97,23 @@ namespace UM_LOGISTIC_V1.Services
         public List<CooperationApplication> GetCooperationApplications(int page, int count)
         {
             var applications = from u in db.CooperationApplications
+                               where u.Filtered == true
                         orderby u.ModifiedOn descending
                         select u;
+            if (applications == null)
+            {
+                return null;
+            }
+            var limitedApplications = applications.Skip(count * page).Take(count).ToList();
+            return limitedApplications;
+        }
+
+        public List<CooperationApplication> GetNotFilteredCooperationApplications(int page, int count)
+        {
+            var applications = from u in db.CooperationApplications
+                               where u.Filtered == false
+                               orderby u.ModifiedOn descending
+                               select u;
             if (applications == null)
             {
                 return null;
@@ -110,6 +126,25 @@ namespace UM_LOGISTIC_V1.Services
         {
             return db.ApplicationWorkTypes.ToList();
 
+        }
+
+        public List<CooperationApplication> GetApplications(List<Filter> filters, int page, int count)
+        {
+            var columns = DBColumns.transportationAplicationcolumns;
+            var query = db.CooperationApplications.AsQueryable<CooperationApplication>();
+            if (filters.Count == 0)
+            {
+                return new List<CooperationApplication>();
+            }
+            foreach (var filter in filters)
+            {
+                object value = Convert.ChangeType(filter.value, columns.Where(s => s.column == filter.column).Select(x => x.type).FirstOrDefault());
+                var comparer = new OperatorComparer();
+                var isOperation = AvaibleOperations.operations.TryGetValue(filter.operation, out comparer);
+                var predicate = ExpressionBuilder.BuildPredicate<CooperationApplication>(value, comparer, filter.column);
+                query = query.Where(predicate);
+            }
+            return query.ToList().Skip(count * page).Take(count).ToList();
         }
     }
 }

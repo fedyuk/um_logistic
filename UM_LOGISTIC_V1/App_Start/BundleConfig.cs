@@ -17,8 +17,9 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Client/Templates/TemplateController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Modules").Include(
+                "~/Client/Modules/LightBoxModule.js",
                 "~/Client/Modules/MainModule.js",
-				"~/Client/Constants/ModuleConstants.js"));
+                "~/Client/Constants/ModuleConstants.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Services").Include(
                 "~/Client/Services/Login/LoginService.js",
@@ -28,7 +29,12 @@ namespace UM_LOGISTIC_V1.App_Start
 				"~/Client/Services/Transportation/TransportationService.js",
                 "~/Client/Services/User/UserService.js",
 				"~/Client/Services/ApplicationPicture/ApplicationPictureService.js",
-				"~/Client/Services/Notification/NotificationService.js"));
+                "~/Client/Services/Notification/NotificationService.js",
+                "~/Client/Services/image-loader-service.js",
+                "~/Client/Services/lightbox-service.js",
+                "~/Client/Services/lightbox-src-directive.js",
+                "~/Client/Services/Form/FormHelper.js",
+                "~/Client/Services/Filter/FilterService.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Controllers").Include(
 				"~/Client/Controllers/Profile/ProfileController.js",
@@ -41,7 +47,8 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Client/Controllers/Transportation/TransportationApplicationController.js",
                 "~/Client/Controllers/Transportation/TransportationApplicationDetailController.js",
                 "~/Client/Controllers/Cooperation/CooperationApplicationDetailController.js",
-                "~/Client/Controllers/RegistrationAccount/RegisterAccountController.js"));
+                "~/Client/Controllers/RegistrationAccount/RegisterAccountController.js",
+                "~/Client/Controllers/NotFilteredApplications/NotFilteredApplicationsController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Libraries").Include(
                 "~/Scripts/angular.min.js",
@@ -50,11 +57,14 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Scripts/angular-route.min.js",
                 "~/Scripts/angular-messages.min.js",
                 "~/Scripts/jquery-1.10.2.min.js",
-				"~/Scripts/notify.min.js"));
+                "~/Scripts/notify.min.js",
+                "~/Scripts/angular-bootstrap-lightbox.min.js"));
 
             bundles.Add(new StyleBundle("~/bundles/Styles").Include(
                 "~/Style/bootswatch/bootstrap.css",
-                "~/Style/bootswatch/custom.min.css"));
+                "~/Style/bootswatch/bootstrap.css",
+                "~/Style/angular-bootstrap-lightbox.min.css",
+                "~/Style/font-awesome-4.7.0/css/font-awesome.min.css"));
         }
     }
 }

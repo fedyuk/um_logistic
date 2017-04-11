@@ -1,4 +1,4 @@
-﻿mainModule.controller('TransportationApplicationDetailController', function ($rootScope, $scope, $stateParams, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService) {
+﻿mainModule.controller('TransportationApplicationDetailController', function ($rootScope, $scope, $stateParams, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService/*,Lightbox*/) {
 
     if (!$stateParams.id) {
         $location.path("/404");
@@ -75,6 +75,10 @@
 		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
     }
+
+    /*$scope.openLightboxModal = function (index) {
+        Lightbox.openModal($scope.images, index);
+    };*/
 
     $scope.getTransportation();
     $scope.getPictures($stateParams.id);

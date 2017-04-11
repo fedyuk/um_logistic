@@ -1,4 +1,4 @@
-﻿mainModule.controller('CooperationController', function ($rootScope, $scope, $log, $location, CooperationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService) {
+﻿mainModule.controller('CooperationController', function ($rootScope, $scope, $log, $location, CooperationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService, FormHelper) {
 
     //variables 
     $scope.cooperations = [];
@@ -18,13 +18,13 @@
 		    if (response.Success) {
 		        for (var i = 0; i < response.Result.length; i++) {
 		            $scope.cooperations.push({
-		                id: response.Result[i].Id,
-		                title: response.Result[i].FullName,
-		                contactPhone: response.Result[i].ContactPhone,
-		                carModel: response.Result[i].CarModel,
-		                workCost: response.Result[i].WorkCost,
-		                residenceAddress: response.Result[i].ResidenceAddress,
-		                createdOn : response.Result[i].CreatedOn
+		                id: FormHelper.getFormValue(response.Result[i].Id),
+		                title: FormHelper.getFormValue(response.Result[i].FullName),
+		                contactPhone: FormHelper.getFormValue(response.Result[i].ContactPhone),
+		                carModel: FormHelper.getFormValue(response.Result[i].CarModel),
+		                workCost: FormHelper.getFormValue(response.Result[i].WorkCost),
+		                residenceAddress: FormHelper.getFormValue(response.Result[i].ResidenceAddress),
+		                createdOn: new Date(response.Result[i].CreatedOn).toLocaleString()
 		            });
 		            $scope.getPicture(response.Result[i].Id);
 		        }

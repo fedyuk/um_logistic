@@ -23,5 +23,6 @@ namespace UM_LOGISTIC_V1.Models.TransportationApplication
         public long ShipmentHeight { get; set; }
         public long ShipmentCapacity { get; set; }
         public long ShipmentWeight { get; set; }
+        public bool Filtered { get; set; }
     }
 }

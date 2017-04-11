@@ -1,4 +1,4 @@
-﻿var mainModule = angular.module("mainModule", ["ui.router", "ngRoute", "ngCookies", "ngMessages"]);
+﻿var mainModule = angular.module("mainModule", ["ui.router", "ngRoute", "ngCookies", "ngMessages", /*"bootstrapLightbox"*/]);
 
 mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$cookiesProvider', function ($stateProvider, $locationProvider, $urlRouterProvider, $cookiesProvider) {
 
@@ -52,6 +52,11 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
             url: '/register',
             templateUrl: '/views/register',
             controller: 'RegisterAccountController'
+        })
+        .state('not_filtered_applications', {
+            url: '/not_filtered_applications',
+            templateUrl: '/views/not-filtered-applications',
+            controller: 'NotFilteredApplicationsController'
         })
         .state('404', {
             url: '/404',

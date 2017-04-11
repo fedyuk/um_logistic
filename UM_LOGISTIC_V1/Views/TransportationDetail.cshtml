@@ -39,9 +39,10 @@
         <h5>Об'єм(м3): {{transportationToView.ShipmentWeight}}</h5>
     </div>
 </div>
-<div class="row" ng-show="!isLoading" align="center">
-    <div class="row" style="margin-top: 50px;">
-        <h4>Галерея:</h4>
-        <img ng-repeat="picture in pictures" class="media-object" style="width:200px;height:120px;" ng-src="{{picture.url || '/Resources/Picture/empty_application.jpg'}}" alt="...">
-    </div>
-</div>
+<ul class="gallery gallery1">
+    <li ng-repeat="picture in pictures" ng-show="!isLoading">
+        <a ng-click="openLightboxModal($index)">
+            <img ng-src="{{picture.url || '/Resources/Picture/empty_application.jpg'}}" class="img-thumbnail">
+        </a>
+    </li>
+</ul>
