@@ -64,6 +64,7 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Style/bootswatch/bootstrap.css",
                 "~/Style/bootswatch/bootstrap.css",
                 "~/Style/angular-bootstrap-lightbox.min.css",
+                "~/Style/my-style.css",
                 "~/Style/font-awesome-4.7.0/css/font-awesome.min.css"));
         }
     }

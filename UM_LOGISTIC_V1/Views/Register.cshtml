@@ -7,7 +7,7 @@
 <div class="row" style="margin-top: 100px;" ng-show="!isLoading">
     <form class="bs-component" name="registerForm">
         <div class="row">
-            <div class="form-group col-md-6 col-md-offset-3">
+            <div class="form-group required col-md-6 col-md-offset-3">
                 <label class="control-label">Логін:</label>
                 <input class="form-control input-sm" ng-model="userToRegister.Login" name="login" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]/" type="text" ng-minlength="5" ng-maxlength="20" required>
                 <div ng-messages="registerForm.login.$error" style="color:maroon" role="alert">
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-6  col-md-offset-3">
+            <div class="form-group required col-md-6  col-md-offset-3">
                 <label class="control-label">Пароль:</label>
                 <input class="form-control input-sm" name="password" ng-model="userToRegister.Password" type="password" ng-minlength="5" ng-maxlength="20" required>
                 <div ng-messages="registerForm.password.$error" style="color:maroon" role="alert">
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-6  col-md-offset-3">
+            <div class="form-group required col-md-6  col-md-offset-3">
                 <label class="control-label">Підтвердження пароля:</label>
                 <input class="form-control input-sm" name="confirmationPassword" ng-pattern="{{userToRegister.Password}}" ng-model="userToRegister.ConfirmationPassword" type="password" required>
                 <div ng-messages="registerForm.confirmationPassword.$error" style="color:maroon" role="alert">
@@ -37,12 +37,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-6  col-md-offset-3">
+            <div class="form-group required col-md-6  col-md-offset-3">
                 <label class="control-label">ПІБ:</label>
                 <input class="form-control input-sm" name="fullName" ng-model="userToRegister.FullName" type="text" required>
-                <!--<div ng-messages="registerForm.fullName.$error" style="color:maroon" role="alert">
-                    <div ng-message="required">Ви не ввели ПІБ</div>
-                </div>-->
             </div>
         </div>
         <div class="row">
