@@ -24,8 +24,8 @@
 	                    region: FormHelper.getFormValue(response.Result[i].Region),
 	                    city: FormHelper.getFormValue(response.Result[i].City),
 	                    street: FormHelper.getFormValue(response.Result[i].Street),
-	                    createdOn: FormHelper.getFormValue(response.Result[i].CreatedOn),
-	                    modifiedOn: FormHelper.getFormValue(response.Result[i].ModifiedOn),
+	                    createdOn: new Date(response.Result[i].CreatedOn).toLocaleString(),
+	                    modifiedOn: new Date(response.Result[i].ModifiedOn).toLocaleString()
 	                });
 	            }
 	        } else {
