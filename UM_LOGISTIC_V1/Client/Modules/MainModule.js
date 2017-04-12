@@ -58,6 +58,11 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
             templateUrl: '/views/not-filtered-applications',
             controller: 'NotFilteredApplicationsController'
         })
+        .state('accounts', {
+            url: '/accounts',
+            templateUrl: '/views/accounts',
+            controller: 'UserController'
+        })
         .state('404', {
             url: '/404',
             templateUrl: '/views/404'
