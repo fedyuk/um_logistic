@@ -9,7 +9,7 @@
         <div class="row">
         <div class="form-group col-md-6 col-md-offset-3">
             <label class="control-label">Водій(ПІБ):</label>
-            <input class="form-control" name="fullName" ng-model="cooperation.FullName" type="text" required>
+            <input class="form-control input-sm" name="fullName" ng-model="cooperation.FullName" type="text" required>
             <!--<div ng-messages="coopForm.fullName.$error" style="color:maroon" role="alert">
                 <div ng-message="required">Ви не ввели ПІБ</div>
             </div>-->
@@ -18,19 +18,19 @@
         <div class="row">
             <div class="form-group col-md-6  col-md-offset-3">
                 <label class="control-label">Місце проживання:</label>
-                <input class="form-control" ng-model="cooperation.ResidenceAddress" type="text">
+                <input class="form-control input-sm" ng-model="cooperation.ResidenceAddress" type="text">
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6  col-md-offset-3">
                 <label class="control-label">Місце стоянки автомобіля:</label>
-                <input class="form-control" ng-model="cooperation.ParkingPlace" type="text">
+                <input class="form-control input-sm" ng-model="cooperation.ParkingPlace" type="text">
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6  col-md-offset-3">
                 <label class="control-label">Контактний телефон:</label>
-                <input class="form-control" name="contactPhone" ng-model="cooperation.ContactPhone" type="text" required>
+                <input class="form-control input-sm" name="contactPhone" ng-model="cooperation.ContactPhone" type="text" required>
                 <!--<div ng-messages="coopForm.contactPhone.$error" style="color:maroon" role="alert">
                     <div ng-message="required">Ви не ввели контактний телефон</div>
                 </div>-->
@@ -49,47 +49,47 @@
         <div class="row">
             <div class="form-group col-md-6  col-md-offset-3">
                 <label class="control-label">Марка автомобіля:</label>
-                <input class="form-control" ng-model="cooperation.CarModel" type="text">
+                <input class="form-control input-sm" ng-model="cooperation.CarModel" type="text">
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-2  col-md-offset-3">
                 <label class="control-label">Довжина:</label>
-                <input class="form-control" ng-model="cooperation.TransportLength" type="number">
+                <input class="form-control input-sm" ng-model="cooperation.TransportLength" type="number">
             </div>
             <div class="form-group col-md-2">
                 <label class="control-label">Ширина:</label>
-                <input class="form-control" ng-model="cooperation.TransportWidth" type="number">
+                <input class="form-control input-sm" ng-model="cooperation.TransportWidth" type="number">
             </div>
             <div class="form-group col-md-2">
                 <label class="control-label">Висота:</label>
-                <input class="form-control" ng-model="cooperation.TransportHeight" type="number">
+                <input class="form-control input-sm" ng-model="cooperation.TransportHeight" type="number">
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-3  col-md-offset-3">
                 <label class="control-label">Вантажність(т):</label>
-                <input class="form-control" ng-model="cooperation.TransportWeight" type="number">
+                <input class="form-control input-sm" ng-model="cooperation.TransportWeight" type="number">
             </div>
             <div class="form-group col-md-3">
                 <label class="control-label">Об'єм(м3):</label>
-                <input class="form-control" ng-model="cooperation.TransportCapacity" type="number">
+                <input class="form-control input-sm" ng-model="cooperation.TransportCapacity" type="number">
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6  col-md-offset-3">
                 <label class="control-label">Вміст стріли(м):</label>
-                <input class="form-control" ng-model="cooperation.TransportArrow" type="number">
+                <input class="form-control input-sm" ng-model="cooperation.TransportArrow" type="number">
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-3  col-md-offset-3">
                 <label class="control-label">Вартість розвантажувальних робіт:</label>
-                <input class="form-control" ng-model="cooperation.WorkCost" type="number">
+                <input class="form-control input-sm" ng-model="cooperation.WorkCost" type="number">
             </div>
 			<div class="form-group col-md-3">
                 <label class="control-label">Тип:</label>
-                <select class="form-control" ng-model="workTypes.model.id">
+                <select class="form-control input-sm" ng-model="workTypes.model.id">
 					<option ng-repeat="option in workTypes.options" value="{{option.id}}">{{option.name}}</option>	
 				</select> 
             </div>

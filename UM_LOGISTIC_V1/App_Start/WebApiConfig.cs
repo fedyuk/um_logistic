@@ -19,6 +19,10 @@ namespace UM_LOGISTIC_V1
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );*/
+
+            config.InitializeCustomWebHooks();
+            config.InitializeCustomWebHooksApis();
+            config.InitializeReceiveGenericJsonWebHooks();
         }
     }
 }
