@@ -49,7 +49,9 @@
 
 	$scope.deleteUser = function (id) {
 	    $scope.isLoading = true;
-	    AccountService.removeAccount(id).success(function (response) {
+	    var user = SessionService.getSessionUser();
+	    var token = SessionService.getSessionToken();
+	    AccountService.removeAccount(user, token, id).success(function (response) {
 	        $scope.isLoading = false;
 	        if (response.Success == false) {
 	            NotificationService.error(JSON.stringify(response.Error));
