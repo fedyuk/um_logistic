@@ -1,4 +1,4 @@
-﻿mainModule.controller('TransportationApplicationDetailController', function ($rootScope, $scope, $stateParams, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService/*,Lightbox*/) {
+﻿mainModule.controller('TransportationApplicationDetailController', function ($rootScope, $scope, $stateParams, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService, FormHelper) {
 
     if (!$stateParams.id) {
         $location.path("/404");
@@ -21,6 +21,7 @@
     };
     $scope.isLoading = false;
     $scope.pictures = [];
+    $scope.logo = {};
     //variables
 
     //methods
@@ -34,18 +35,18 @@
 		    $scope.isLoading = false;
 		    if (response.Success) {
 		        if (response.Result != null) {
-		            $scope.transportationToView.Id = response.Result.Id;
-		            $scope.transportationToView.Name = response.Result.Name;
-		            $scope.transportationToView.ContactPhone = response.Result.ContactPhone;
-		            $scope.transportationToView.SendAddress = response.Result.SendAddress;
-		            $scope.transportationToView.DeliveryAddress = response.Result.DeliveryAddress;
-		            $scope.transportationToView.CompleteDate = response.Result.CompleteDate;
-		            $scope.transportationToView.ShipmentType = response.Result.ShipmentType;
-		            $scope.transportationToView.ShipmentLength = response.Result.ShipmentLength;
-		            $scope.transportationToView.ShipmentWidth = response.Result.ShipmentWidth;
-		            $scope.transportationToView.ShipmentHeight = response.Result.ShipmentHeight;
-		            $scope.transportationToView.ShipmentCapacity = response.Result.ShipmentCapacity;
-		            $scope.transportationToView.ShipmentWeight = response.Result.ShipmentWeight;
+		            $scope.transportationToView.Id = FormHelper.getFormValue(response.Result.Id);
+		            $scope.transportationToView.Name = FormHelper.getFormValue(response.Result.Name);
+		            $scope.transportationToView.ContactPhone = FormHelper.getFormValue(response.Result.ContactPhone);
+		            $scope.transportationToView.SendAddress = FormHelper.getFormValue(response.Result.SendAddress);
+		            $scope.transportationToView.DeliveryAddress = FormHelper.getFormValue(response.Result.DeliveryAddress);
+		            $scope.transportationToView.CompleteDate = FormHelper.getFormValue(response.Result.CompleteDate);
+		            $scope.transportationToView.ShipmentType = FormHelper.getFormValue(response.Result.ShipmentType);
+		            $scope.transportationToView.ShipmentLength = FormHelper.getFormValue(response.Result.ShipmentLength);
+		            $scope.transportationToView.ShipmentWidth = FormHelper.getFormValue(response.Result.ShipmentWidth);
+		            $scope.transportationToView.ShipmentHeight = FormHelper.getFormValue(response.Result.ShipmentHeight);
+		            $scope.transportationToView.ShipmentCapacity = FormHelper.getFormValue(response.Result.ShipmentCapacity);
+		            $scope.transportationToView.ShipmentWeight = FormHelper.getFormValue(response.Result.ShipmentWeight);
 		        }
 		        else {
 		            $location.path("/404");
@@ -69,16 +70,15 @@
 		            for(var i = 0; i < response.Result.length; i ++) {
 		                $scope.pictures.push({url: response.Result[i], number: i});
 		            }
+		            if ($scope.pictures.length > 0) {
+		                $scope.logo = $scope.pictures[0];
+		            }
 		        }
 		    }
 		}).error(function (error) {
 		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
     }
-
-    /*$scope.openLightboxModal = function (index) {
-        Lightbox.openModal($scope.images, index);
-    };*/
 
     $scope.getTransportation();
     $scope.getPictures($stateParams.id);
