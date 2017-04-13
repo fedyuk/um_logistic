@@ -63,6 +63,11 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
             templateUrl: '/views/accounts',
             controller: 'UserController'
         })
+        .state('accounts_c', {
+            url: '/accounts_c',
+            templateUrl: '/views/account-create',
+            controller: 'CreateUserController'
+        })
         .state('404', {
             url: '/404',
             templateUrl: '/views/404'

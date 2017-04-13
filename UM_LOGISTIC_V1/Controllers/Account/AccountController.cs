@@ -258,5 +258,56 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             response.Token = TokenService.GenerateToken(request.Login, response.Result != null ? response.Result.RoleId : 0);
             return Ok(response);
         }
+
+        [Route("api/account/add")]
+        [HttpPost]
+        public IHttpActionResult AddUserAccount([FromBody]AddAccountAndLoginRequest request)
+        {
+            var response = new RegisterAccountResponse();
+            var isValidToken = TokenService.ValidateToken(request.user, request.token);
+            if (!isValidToken)
+            {
+                response.Success = false;
+                response.Error = "Token is not valid";
+                response.Result = null;
+                return Ok(response);
+            }
+            var tokenRole = TokenService.GetRole(request.user, request.token);
+            var isAccessedToResource = RoleApiManager.CheckAccess(Operation.Create, tokenRole, Section.Accounts);
+            if (isAccessedToResource)
+            {
+                var user = accountService.AddAccountUser(request);
+                if (user != null)
+                {
+                    response.Success = true;
+                    response.Error = "";
+                    response.Result = user;
+                    return Ok(response);
+                }
+                else
+                {
+                    response.Success = false;
+                    response.Error = "";
+                    response.Result = null;
+                    return Ok(response);
+                }
+            }
+            else
+            {
+                response.Success = false;
+                response.Error = "Access is denied";
+                response.Result = null;
+                return Ok(response);
+            }
+        }
+
+        [Route("api/roles")]
+        [HttpGet]
+        public IHttpActionResult GetRoles()
+        {
+            var roles = accountService.GetRoles();
+            return Ok(roles);
+
+        }
     }
 }

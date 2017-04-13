@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using UM_LOGISTIC_V1.Models;
 using UM_LOGISTIC_V1.Models.Account;
+using UM_LOGISTIC_V1.Models.Role;
 using UM_LOGISTIC_V1.Models.User;
 using UM_LOGISTIC_V1.Request.Account;
 
@@ -124,6 +125,38 @@ namespace UM_LOGISTIC_V1.Services
             {
                 return null;
             }
+        }
+
+        public User AddAccountUser(AddAccountAndLoginRequest userToAdd)
+        {
+            var user = new User();
+            var account = new Account();
+            user.UserName = userToAdd.Login;
+            user.UserPassword = userToAdd.Password;
+            user.CreatedOn = DateTime.Now;
+            user.ModifiedOn = DateTime.Now;
+            account.FullName = userToAdd.FullName;
+            account.WorkPhone = userToAdd.WorkPhone;
+            account.City = userToAdd.City;
+            account.CreatedOn = DateTime.Now;
+            account.ModifiedOn = DateTime.Now;
+            user.Account = account;
+            user.Role = db.Roles.Find(userToAdd.RoleId);
+            db.Users.Add(user);
+            try
+            {
+                db.SaveChanges();
+                return user;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public List<Role> GetRoles()
+        {
+            return db.Roles.ToList();
         }
     }
 }

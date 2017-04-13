@@ -27,4 +27,12 @@
 	this.registerAccount = function (userToRegister) {
 	    return $http.post("/api/account/register/", userToRegister);
 	}
+
+	this.addAccount = function (userToAdd) {
+	    return $http.post("/api/account/add/", userToAdd);
+	}
+
+	this.getRoles = function () {
+	    return $http.get("/api/roles");
+	}
 });
