@@ -33,5 +33,43 @@ namespace UM_LOGISTIC_V1.Services
                 return false;
             }
         }
+
+        public List<ClientTask> GetClientTasks(int page, int count)
+        {
+            var tasks = from t in db.ClientTasks
+                        orderby t.Id ascending
+                        select t;
+            if (tasks == null)
+            {
+                return null;
+            }
+            var limitedTasks = tasks.Skip(count * page).Take(count).ToList();
+            return limitedTasks;
+        }
+
+        public long GetClientTasksCount()
+        {
+            var count = db.ClientTasks.Count();
+            return count;
+        }
+
+        public bool AcceptTask(long id)
+        {
+            var task = db.ClientTasks.Find(id);
+            if(task != null)
+            {
+                db.ClientTasks.Remove(task);
+                try
+                {
+                    db.SaveChanges();
+                    return true;
+                }
+                catch(Exception)
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
     }
 }

@@ -32,7 +32,6 @@
 		.success(function (response) {
 		    $scope.isLoading = false;
 		    if (response.Success) {
-		        NotificationService.success(moduleConstants.cooperationApplicationCreatingSuccess);
 		        $location.path(moduleConstants.homePath);
 		        $scope.loadPicture(response.Id, true);
 		    }

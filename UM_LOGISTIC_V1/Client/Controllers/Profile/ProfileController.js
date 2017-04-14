@@ -1,7 +1,8 @@
 ﻿mainModule.controller('ProfileController', function ($scope, $log, $location, UserService,
-	SessionService, moduleConstants, LoginService, AccountService, NotificationService, FilterService) {
+	SessionService, moduleConstants, LoginService, AccountService, NotificationService, FilterService, ClientTaskService) {
 	
     $scope.notFilteredApplicationsCount = 0;
+    $scope.clientTasksCount = 0;
 	//methods
 	
 	$scope.logoutUser = function() {
@@ -20,6 +21,19 @@
 	    FilterService.getNotFilteredApplicationsCount().success(function (response) {
 	        if (response.Success) {
 	            $scope.notFilteredApplicationsCount = response.Result;
+	        }
+	        else {
+	            NotificationService.error(JSON.stringify(response.Error));
+	        }
+	    }).error(function (error) {
+	        NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+	    });
+	}
+
+	$scope.getClientTasksCount = function () {
+	    ClientTaskService.getClientTasksCount().success(function (response) {
+	        if (response.Success) {
+	            $scope.clientTasksCount = response.Result;
 	        }
 	        else {
 	            NotificationService.error(JSON.stringify(response.Error));
@@ -81,5 +95,7 @@
 	$scope.initProfileMenu();
 
 	$scope.getNotFilteredApplicationsCount();
+
+	$scope.getClientTasksCount();
 	//init controller
 });

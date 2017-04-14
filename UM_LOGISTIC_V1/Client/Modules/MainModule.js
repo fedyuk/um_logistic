@@ -73,6 +73,11 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
             templateUrl: '/views/call-feedback',
             controller: 'CallFeedbackController'
         })
+        .state('tasks', {
+            url: '/tasks',
+            templateUrl: '/views/tasks',
+            controller: 'TasksController'
+        })
         .state('404', {
             url: '/404',
             templateUrl: '/views/404'
