@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using UM_LOGISTIC_V1.Models.ClientTask;
 
 namespace UM_LOGISTIC_V1.Models
 {
@@ -17,5 +18,7 @@ namespace UM_LOGISTIC_V1.Models
         public DbSet<TransportationApplication.ShipmentType> ShipmentTypes { get; set; }
         public DbSet<TransportationPicture.TransportationPicture> TransportationPictures { get; set; }
         public DbSet<CooperationPicture.CooperationPicture> CooperationPictures { get; set; }
+        public DbSet<ClientTaskType> ClientTaskTypes { get; set; }
+        public DbSet<ClientTask.ClientTask> ClientTasks { get; set; }
     }
 }

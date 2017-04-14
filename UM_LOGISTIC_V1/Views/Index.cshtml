@@ -25,7 +25,7 @@
                     <span class="icon-bar"></span>
                 </button>
             </div>
-            <div class="navbar-collapse collapse" id="navbar-main">
+            <div class="navbar-collapse collapse" id="navbar-main" ng-controller="ProfileController">
                 <ul class="nav navbar-nav">
                     <li>
                         <a href="/cooperations">Знайти машину</a>
@@ -43,8 +43,11 @@
                             <li><a href="/coop_application">Співробітництво</a></li>
                         </ul>
                     </li>
+                    <li ng-show="!isStaff">
+                        <a href="/call_feedback"><i class="fa fa-phone" aria-hidden="true"></i> Зворотній зв'язок</a>
+                    </li>
                 </ul>
-                <div ng-controller="ProfileController">
+                <div>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">{{profileName}}<span class="caret"></span></a>

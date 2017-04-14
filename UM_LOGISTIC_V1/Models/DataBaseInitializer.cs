@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using UM_LOGISTIC_V1.Models.ClientTask;
 
 namespace UM_LOGISTIC_V1.Models
 {
@@ -86,6 +87,18 @@ namespace UM_LOGISTIC_V1.Models
 
             foreach (CooperationApplication.ApplicationWorkType applicationWorkType in applicationWorkTypes)
                 context.ApplicationWorkTypes.Add(applicationWorkType);
+
+            IList<ClientTaskType> taskTypes = new List<ClientTaskType>();
+
+            taskTypes.Add(new ClientTaskType()
+            {
+                Id = 1,
+                Name = "Дзвінок",
+                CreatedOn = DateTime.Now,
+                ModifiedOn = DateTime.Now
+            });
+            foreach (var taskType in taskTypes)
+                context.ClientTaskTypes.Add(taskType);
 
             base.Seed(context);
         }

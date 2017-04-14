@@ -34,7 +34,8 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Client/Services/lightbox-service.js",
                 "~/Client/Services/lightbox-src-directive.js",
                 "~/Client/Services/Form/FormHelper.js",
-                "~/Client/Services/Filter/FilterService.js"));
+                "~/Client/Services/Filter/FilterService.js",
+                "~/Client/Services/ClientTask/ClientTaskService.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Controllers").Include(
 				"~/Client/Controllers/Profile/ProfileController.js",
@@ -49,7 +50,8 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Client/Controllers/Cooperation/CooperationApplicationDetailController.js",
                 "~/Client/Controllers/RegistrationAccount/RegisterAccountController.js",
                 "~/Client/Controllers/NotFilteredApplications/NotFilteredApplicationsController.js",
-                "~/Client/Controllers/User/CreateUserController.js"));
+                "~/Client/Controllers/User/CreateUserController.js",
+                "~/Client/Controllers/ClientTask/CallFeedbackController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Libraries").Include(
                 "~/Scripts/angular.min.js",
