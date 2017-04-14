@@ -8,6 +8,11 @@
     <a class="btn btn-default btn-sm" href="/accounts_c">
         <i class="fa fa-user-plus fa-sm" aria-hidden="true"></i> Додати
     </a>
+    <div class="row" ng-show="users.length == 0">
+        <div class="col-md-offset-6 btn-sm">
+            <p>Немає даних</p>
+        </div>
+    </div>
     <table class="table table-striped table-hover">
         <thead>
             <tr>

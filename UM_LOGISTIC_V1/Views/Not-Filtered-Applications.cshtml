@@ -7,8 +7,8 @@
 <div class="row" style="margin-top: 100px;" ng-show="!isLoading">
     <div class="row">   
        <div class="col-md-offset-6">
-        <div class="dropdown">
-            Тип заявки: 
+           Тип заявки:
+        <div class="dropdown"> 
             <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-toggle="dropdown">
                 {{currentTypeCaption}}
                 <span class="caret"></span>
@@ -18,6 +18,11 @@
             </ul>
         </div>
     </div>
+    </div>
+    <div class="row" ng-show="applications.length == 0">
+        <div class="col-md-offset-6 btn-sm">
+            <p>Немає даних</p>
+        </div>
     </div>
     <div class="row" ng-repeat="app in applications">
         <div class="col-md-10 col-md-offset-4" style="margin-top:20px;">

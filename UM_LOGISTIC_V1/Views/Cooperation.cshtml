@@ -5,6 +5,11 @@
     <h4></h4>
 </div>
 <div class="row" style="margin-top: 100px;" ng-show="!isLoading">
+    <div class="row" ng-show="cooperations.length == 0">
+        <div class="col-md-offset-6 btn-sm">
+            <p>Немає даних</p>
+        </div>
+    </div>
     <div class="row" ng-repeat="coop in cooperations">
         <div class="col-md-10 col-md-offset-4" style="margin-top:20px;">
             <div class="media">
