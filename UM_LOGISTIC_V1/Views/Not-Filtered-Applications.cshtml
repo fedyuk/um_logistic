@@ -24,7 +24,7 @@
             <div class="media">
                 <div class="media-left">
                     <a ng-href="{{app.url}}">
-                        <img class="media-object" style="width:200px;height:120px;" ng-src="{{pictures[app.id] || '/Resources/Picture/empty_application.jpg'}}" alt="...">
+                        <img class="media-object" style="width:200px;height:120px;" ng-src="{{pictures[app.id] || (currentApplicationType == true ? '/Resources/Picture/empty_transportation.png' : '/Resources/Picture/empty_cooperation.jpg')}}" alt="...">
                     </a>
                 </div>
                 <div class="media-body">
