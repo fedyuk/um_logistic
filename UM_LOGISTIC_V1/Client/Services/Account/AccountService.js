@@ -21,7 +21,7 @@
 	}
 	
 	this.getAccounts = function (user, token, page, count) {
-        return $http.get('/api/accounts?page=' + page + '&count=' + count + '&token=' + token + "&user=" + user);
+        return $http.get('/api/users?page=' + page + '&count=' + count + '&token=' + token + "&user=" + user);
 	}
 
 	this.registerAccount = function (userToRegister) {

@@ -17,6 +17,7 @@
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Логин</th>
                 <th>ФИО</th>
                 <th>Телефон</th>
                 <th>Робочий</th>
@@ -24,14 +25,14 @@
                 <th>Область</th>
                 <th>Місто</th>
                 <th>Вулиця</th>
-                <th>Дата створення</th>
-                <th>Дата редагування</th>
+                <th>Роль</th>
                 <th>Дії</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="user in users">
                 <td>{{user.id}}</td>
+                <td>{{user.login}}</td>
                 <td>{{user.fullName}}</td>
                 <td>{{user.homePhone}}</td>
                 <td>{{user.workPhone}}</td>
@@ -39,8 +40,7 @@
                 <td>{{user.region}}</td>
                 <td>{{user.city}}</td>
                 <td>{{user.street}}</td>
-                <td>{{user.createdOn}}</td>
-                <td>{{user.modifiedOn}}</td>
+                <td>{{user.role}}</td>
                 <td>
                     <a class="btn btn-default btn-sm" href="#" ng-click="deleteUser(user.id)">
                         <i class="fa fa-trash-o fa-sm"></i>

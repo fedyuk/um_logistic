@@ -17,15 +17,17 @@
 	            for (var i = 0; i < response.Result.length; i++) {
 	                $scope.users.push({
 	                    id: FormHelper.getFormValue(response.Result[i].Id),
-	                    fullName: FormHelper.getFormValue(response.Result[i].FullName),
-	                    homePhone: FormHelper.getFormValue(response.Result[i].HomePhone),
-	                    workPhone: FormHelper.getFormValue(response.Result[i].WorkPhone),
-	                    country: FormHelper.getFormValue(response.Result[i].Country),
-	                    region: FormHelper.getFormValue(response.Result[i].Region),
-	                    city: FormHelper.getFormValue(response.Result[i].City),
-	                    street: FormHelper.getFormValue(response.Result[i].Street),
+	                    login: FormHelper.getFormValue(response.Result[i].UserName),
+	                    fullName: FormHelper.getFormValue(response.Result[i].Account.FullName),
+	                    homePhone: FormHelper.getFormValue(response.Result[i].Account.HomePhone),
+	                    workPhone: FormHelper.getFormValue(response.Result[i].Account.WorkPhone),
+	                    country: FormHelper.getFormValue(response.Result[i].Account.Country),
+	                    region: FormHelper.getFormValue(response.Result[i].Account.Region),
+	                    city: FormHelper.getFormValue(response.Result[i].Account.City),
+	                    street: FormHelper.getFormValue(response.Result[i].Account.Street),
 	                    createdOn: new Date(response.Result[i].CreatedOn).toLocaleString(),
-	                    modifiedOn: new Date(response.Result[i].ModifiedOn).toLocaleString()
+	                    role: FormHelper.getFormValue(response.Result[i].Role.Name),
+                        modifiedOn: new Date(response.Result[i].ModifiedOn).toLocaleString()
 	                });
 	            }
 	        } else {
