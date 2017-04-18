@@ -1,4 +1,4 @@
-﻿mainModule.controller('TransportationController', function ($rootScope, $scope, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService, FormHelper) {
+﻿mainModule.controller('TransportationController', function ($rootScope, $scope, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService, ClientTaskService, FormHelper) {
 
     //variables 
     $scope.transportations = [];
@@ -61,6 +61,28 @@
 		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		    $scope.pictures[id] = "";
 		});
+    }
+
+    $scope.acceptApplication = function (id) {
+        $scope.isLoading = true;
+        var request = {};
+        request.UserId = SessionService.getSessionUserId();
+        request.ApplicationId = id;
+        request.TypeId = 2;
+        ClientTaskService.createApplicationTask(request)
+        .success(function (response) {
+            if (response.Success) {
+                NotificationService.success("Ваша заявка прийнята");
+                $scope.isLoading = false;
+            }
+            else {
+                $scope.isLoading = false;
+                NotificationService.error(response.Error);
+            }
+        }).error(function (error) {
+            $scope.isLoading = false;
+            NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+        });
     }
     //methods
 

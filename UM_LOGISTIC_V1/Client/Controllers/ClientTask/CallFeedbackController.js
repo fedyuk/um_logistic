@@ -17,9 +17,11 @@
         }
         $scope.isLoading = true;
         var request = $scope.feedback;
+        request.UserId = SessionService.getSessionUserId();
         ClientTaskService.createCallFeedback(request).success(function (response) {
             $scope.isLoading = false;
             if (response.Success == true) {
+                NotificationService.success("З вами зв'яжуться ближчим часом");
                 $location.path("/home");
             }
             else {

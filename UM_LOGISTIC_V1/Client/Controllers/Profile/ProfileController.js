@@ -31,7 +31,12 @@
 	}
 
 	$scope.getClientTasksCount = function () {
-	    ClientTaskService.getClientTasksCount().success(function (response) {
+	    var userId = SessionService.getSessionUserId();
+	    if (!userId) {
+	        $scope.clientTasksCount = 0;
+	        return;
+	    }
+	    ClientTaskService.getClientTasksCount('OwnerId==' + userId + ';').success(function (response) {
 	        if (response.Success) {
 	            $scope.clientTasksCount = response.Result;
 	        }

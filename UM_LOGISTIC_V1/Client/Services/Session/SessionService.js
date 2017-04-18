@@ -36,9 +36,17 @@
 	this.getSessionProfileName = function() {
 		return $cookieStore.get("profile-name");
 	}
+	
+	this.getSessionUserId = function() {
+		return $cookieStore.get("user-id");
+	}
 
 	this.isStaff = function () {
 	    return $cookieStore.get("profile-role") != undefined ? $cookieStore.get("profile-role") == "0" || $cookieStore.get("profile-role") == "1" : false;
+	}
+	
+	this.isAdmin = function() {
+		return $cookieStore.get("profile-role") != undefined ? $cookieStore.get("profile-role") == "0" : false;
 	}
 	
 	this.saveProfileData = function(accountData) {
@@ -46,11 +54,13 @@
 		expiresDate.setDate(expiresDate.getDate() + 1);
 		$cookieStore.put("profile-name", accountData.Account.FullName, { "expires": expiresDate });
 		$cookieStore.put("profile-role", accountData.Role.Number, { "expires": expiresDate });
+		$cookieStore.put("user-id", accountData.Id, { "expires": expiresDate });
 	}
 	
 	this.clearProfileData = function() {
 	    $cookieStore.remove("profile-name");
 	    $cookieStore.remove("profile-role");
+		$cookieStore.remove("user-id");
 	}
 	
 });

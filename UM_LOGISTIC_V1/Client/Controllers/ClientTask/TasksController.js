@@ -9,16 +9,20 @@
     //methods
 
     $scope.listTasks = function (page, count) {
-        ClientTaskService.getClientTasks(page, count).success(function (response) {
+		var userId = SessionService.getSessionUserId();
+        ClientTaskService.getClientTasks(page, count, 'OwnerId==' + userId + ';').success(function (response) {
             $scope.isLoading = false;
             if (response.Success) {
                 for (var i = 0; i < response.Result.length; i++) {
                     $scope.tasks.push({
                         id: FormHelper.getFormValue(response.Result[i].Id),
+                        typeId: FormHelper.getFormValue(response.Result[i].Type.Id),
                         type: FormHelper.getFormValue(response.Result[i].Type.Name),
                         title: FormHelper.getFormValue(response.Result[i].Title),
                         createdOn: new Date(response.Result[i].CreatedOn).toLocaleString(),
-                        modifiedOn: new Date(response.Result[i].ModifiedOn).toLocaleString()
+                        modifiedOn: new Date(response.Result[i].ModifiedOn).toLocaleString(),
+                        cooperationApplicationId: FormHelper.getFormValue(response.Result[i].CooperationApplicationId),
+                        transportationApplicationId: FormHelper.getFormValue(response.Result[i].TransportationApplicationId),
                     });
                 }
             } else {

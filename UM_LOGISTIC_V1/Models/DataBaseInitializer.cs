@@ -97,6 +97,23 @@ namespace UM_LOGISTIC_V1.Models
                 CreatedOn = DateTime.Now,
                 ModifiedOn = DateTime.Now
             });
+			
+			taskTypes.Add(new ClientTaskType()
+            {
+                Id = 2,
+                Name = "Заявка на перевезення",
+                CreatedOn = DateTime.Now,
+                ModifiedOn = DateTime.Now
+            });
+			
+			taskTypes.Add(new ClientTaskType()
+            {
+                Id = 3,
+                Name = "Заявка на співробітництво",
+                CreatedOn = DateTime.Now,
+                ModifiedOn = DateTime.Now
+            });
+			
             foreach (var taskType in taskTypes)
                 context.ClientTaskTypes.Add(taskType);
 

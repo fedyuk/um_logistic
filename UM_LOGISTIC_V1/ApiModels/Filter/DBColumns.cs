@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using UM_LOGISTIC_V1.Models.CooperationApplication;
 using UM_LOGISTIC_V1.Models.TransportationApplication;
+using UM_LOGISTIC_V1.Models.ClientTask;
 
 namespace UM_LOGISTIC_V1.ApiModels.Filter
 {
@@ -11,6 +12,7 @@ namespace UM_LOGISTIC_V1.ApiModels.Filter
     {
         public static List<DBTypeRelation> transportationAplicationcolumns = new List<DBTypeRelation>();
         public static List<DBTypeRelation> cooperationAplicationcolumns = new List<DBTypeRelation>();
+		public static List<DBTypeRelation> clientTaskcolumns = new List<DBTypeRelation>();
 
         static DBColumns()
         {
@@ -30,6 +32,16 @@ namespace UM_LOGISTIC_V1.ApiModels.Filter
             foreach (var property in properties)
             {
                 cooperationAplicationcolumns.Add(new DBTypeRelation()
+                {
+                    column = property.Name,
+                    type = property.PropertyType
+                });
+            }
+			var clientTask = new ClientTask();
+			properties = clientTask.GetType().GetProperties();
+			foreach (var property in properties)
+            {
+                clientTaskcolumns.Add(new DBTypeRelation()
                 {
                     column = property.Name,
                     type = property.PropertyType

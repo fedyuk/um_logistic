@@ -1,4 +1,4 @@
-﻿mainModule.controller('CooperationController', function ($rootScope, $scope, $log, $location, CooperationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService, FormHelper) {
+﻿mainModule.controller('CooperationController', function ($rootScope, $scope, $log, $location, CooperationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService, ClientTaskService, FormHelper) {
 
     //variables 
     $scope.cooperations = [];
@@ -62,6 +62,28 @@
 		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		    $scope.pictures[id] = "";
 		});
+    }
+
+    $scope.acceptApplication = function (id) {
+        $scope.isLoading = true;
+        var request = {};
+        request.UserId = SessionService.getSessionUserId();
+        request.ApplicationId = id;
+        request.TypeId = 3;
+        ClientTaskService.createApplicationTask(request)
+        .success(function (response) {
+            if (response.Success) {
+                NotificationService.success("Ваша заявка прийнята");
+                $scope.isLoading = false;
+            }
+            else {
+                $scope.isLoading = false;
+                NotificationService.error(response.Error);
+            }
+        }).error(function (error) {
+            $scope.isLoading = false;
+            NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+        });
     }
 
     //methods
