@@ -19,7 +19,8 @@ namespace UM_LOGISTIC_V1.App_Start
             bundles.Add(new ScriptBundle("~/bundles/Client/Modules").Include(
                 "~/Client/Modules/LightBoxModule.js",
                 "~/Client/Modules/MainModule.js",
-                "~/Client/Constants/ModuleConstants.js"));
+                "~/Client/Constants/ModuleConstants.js",
+                "~/Client/Directives/ConfirmClick.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Services").Include(
                 "~/Client/Services/Login/LoginService.js",
