@@ -20,9 +20,6 @@ namespace UM_LOGISTIC_V1
                 defaults: new { id = RouteParameter.Optional }
             );*/
 
-            config.InitializeCustomWebHooks();
-            config.InitializeCustomWebHooksApis();
-            config.InitializeReceiveGenericJsonWebHooks();
         }
     }
 }
