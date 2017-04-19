@@ -138,7 +138,6 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
         [HttpGet]
         public IHttpActionResult GetTransportationApplicationsByPageAndCount(int page, int count, string token, string user)
         {
-            this.NotifyAsync("changed_not_filtered_count", new { P1 = "p1" });
             var getTransportationApplicationsByPageAndCountResponse = new GetTransportationApplicationsByPageAndCountResponse();
             var applications = applicationService.GetTransportationApplications(page, count);
             if (applications != null)
