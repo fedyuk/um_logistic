@@ -18,6 +18,7 @@
         WorkCost : 0.0,
         WorkTypeId : 1,
         DeliveryCost: 0.0,
+        CreatedBy: null,
         user: "",
         token : ""
     };
@@ -41,6 +42,7 @@
         $scope.isLoading = true;
         $scope.cooperation.user = SessionService.getSessionUser();
         $scope.cooperation.token = SessionService.getSessionToken();
+        $scope.cooperation.CreatedBy = SessionService.getSessionUserId();
 		$scope.cooperation.WorkTypeId = $scope.workTypes.model != null ? $scope.workTypes.model.id : 1;
         CooperationService.createCooperation($scope.cooperation)
 		.success(function (response) {

@@ -12,7 +12,8 @@
         ShipmentWidth : 0,
         ShipmentHeight : 0,
         ShipmentCapacity : 0,
-        ShipmentWeight : 0,
+        ShipmentWeight: 0,
+        CreatedBy: null,
         user: "",
         token : ""
     };
@@ -28,6 +29,7 @@
         $scope.isLoading = true;
         $scope.transportation.user = SessionService.getSessionUser();
         $scope.transportation.token = SessionService.getSessionToken();
+        $scope.transportation.CreatedBy = SessionService.getSessionUserId();
         TransportationService.createTransportation($scope.transportation)
 		.success(function (response) {
 		    $scope.isLoading = false;

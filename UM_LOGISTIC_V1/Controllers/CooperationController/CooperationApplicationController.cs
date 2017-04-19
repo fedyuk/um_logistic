@@ -62,7 +62,8 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
                 TransportWidth = request.TransportWidth,
                 WorkCost = request.WorkCost,
                 WorkTypeId = request.WorkTypeId,
-                DeliveryCost = request.DeliveryCost
+                DeliveryCost = request.DeliveryCost,
+                CreatedBy = request.CreatedBy
             };
             var id = applicationService.CreateCooperationApplication(applicationToCreate);
             if (id != null)

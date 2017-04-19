@@ -63,6 +63,7 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Scripts/angular-messages.min.js",
                 "~/Scripts/jquery-1.10.2.min.js",
                 "~/Scripts/notify.min.js",
+                "~/Scripts/bootbox.min.js",
                 "~/Scripts/angular-bootstrap-lightbox.min.js"));
 
             bundles.Add(new StyleBundle("~/bundles/Styles").Include(

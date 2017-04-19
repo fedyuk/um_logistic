@@ -50,23 +50,27 @@
 	}
 
 	$scope.deleteUser = function (id) {
-	    $scope.isLoading = true;
-	    var user = SessionService.getSessionUser();
-	    var token = SessionService.getSessionToken();
-	    AccountService.removeAccount(user, token, id).success(function (response) {
-	        $scope.isLoading = false;
-	        if (response.Success == false) {
-	            NotificationService.error(JSON.stringify(response.Error));
-	        } else {
-	            for (var i = 0; i < $scope.users.length; i++)
-	                if ($scope.users[i].id === id) {
-	                    $scope.users.splice(i, 1);
-	                    break;
+	    bootbox.confirm("Ви дійсно хочете видалити користувача?", function (ok) {
+	        if (ok == true) {
+	            $scope.isLoading = true;
+	            var user = SessionService.getSessionUser();
+	            var token = SessionService.getSessionToken();
+	            AccountService.removeAccount(user, token, id).success(function (response) {
+	                $scope.isLoading = false;
+	                if (response.Success == false) {
+	                    NotificationService.error(JSON.stringify(response.Error));
+	                } else {
+	                    for (var i = 0; i < $scope.users.length; i++)
+	                        if ($scope.users[i].id === id) {
+	                            $scope.users.splice(i, 1);
+	                            break;
+	                        }
 	                }
+	            }).error(function (error) {
+	                $scope.isLoading = false;
+	                NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+	            });
 	        }
-	    }).error(function (error) {
-	        $scope.isLoading = false;
-	        NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 	    });
 	}
     //methods

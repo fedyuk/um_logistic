@@ -54,7 +54,8 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
                 ShipmentHeight = request.ShipmentHeight,
                 ShipmentLength = request.ShipmentLength,
                 ShipmentWeight = request.ShipmentWeight,
-                ShipmentWidth = request.ShipmentWidth
+                ShipmentWidth = request.ShipmentWidth,
+                CreatedBy = request.CreatedBy
             };
             var id = applicationService.CreateTransportationApplication(applicationToCreate);
             if (id != null)
