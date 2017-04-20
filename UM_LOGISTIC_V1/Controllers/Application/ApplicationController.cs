@@ -30,6 +30,23 @@ namespace UM_LOGISTIC_V1.Controllers.Application
             return Ok(response);
         }
 
+        [Route("api/application/decline")]
+        [HttpPost]
+        public IHttpActionResult DeclineApplication([FromBody]ApplicationAcceptRequest request)
+        {
+            var response = new CreateCooperationApplicationResponse();
+            var isDeclined = service.DeclineApplication(request.Type, request.Id);
+            if (!isDeclined)
+            {
+                response.Success = false;
+                response.Id = 0;
+                return Ok(response);
+            }
+            response.Success = true;
+            response.Id = 0;
+            return Ok(response);
+        }
+
         [Route("api/application/count")]
         [HttpGet]
         public IHttpActionResult GetApplicationsCount()

@@ -54,6 +54,46 @@ namespace UM_LOGISTIC_V1.Services
             return 0L;
         }
 
+        public bool DeclineApplication(bool type, long id)
+        {
+            switch (type)
+            {
+                case true:
+                    var transportationApplication = db.TransportationApplications.Find(id);
+                    if (transportationApplication != null)
+                    {
+                        db.TransportationApplications.Remove(transportationApplication);
+                        try
+                        {
+                            db.SaveChanges();
+                            return true;
+                        }
+                        catch (Exception)
+                        {
+                            return false;
+                        }
+                    }
+                    break;
+                case false:
+                    var cooperationApplication = db.CooperationApplications.Find(id);
+                    if (cooperationApplication != null)
+                    {
+                        db.CooperationApplications.Remove(cooperationApplication);
+                        try
+                        {
+                            db.SaveChanges();
+                            return true;
+                        }
+                        catch (Exception)
+                        {
+                            return false;
+                        }
+                    }
+                    break;
+            }
+            return false;
+        }
+
         public long GetNotFilteredApplicationsCount()
         {
             var transportationsCount = db.TransportationApplications.Count(t => t.Filtered == false);

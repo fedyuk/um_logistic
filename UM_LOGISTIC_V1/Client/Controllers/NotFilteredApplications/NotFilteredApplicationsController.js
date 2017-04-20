@@ -130,6 +130,33 @@
             }
         });
     }
+
+    $scope.declineApplication = function (id, type) {
+        bootbox.confirm("Ви дійсно хочете видалити заявку?", function (ok) {
+            if (ok == true) {
+                $scope.isLoading = true;
+                FilterService.declineApplication(type, id)
+                .success(function (response) {
+                    if (response.Success) {
+                        NotificationService.success("Заявка була видалена");
+                        for (var i = 0; i < $scope.applications.length; i++)
+                            if ($scope.applications[i].id === id) {
+                                $scope.applications.splice(i, 1);
+                                break;
+                            }
+                        $scope.isLoading = false;
+                    }
+                    else {
+                        $scope.isLoading = false;
+                        NotificationService.error(response.Error);
+                    }
+                }).error(function (error) {
+                    $scope.isLoading = false;
+                    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+                });
+            }
+        });
+    }
     //methods
 
     //init controller

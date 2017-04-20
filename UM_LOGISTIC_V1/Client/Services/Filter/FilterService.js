@@ -14,6 +14,14 @@
         return $http.post('/api/application/accept', request);
     }
 
+    this.declineApplication = function (type, id) {
+        var request = {
+            Id: id,
+            Type: type
+        };
+        return $http.post('/api/application/decline', request);
+    }
+
     this.getNotFilteredApplicationsCount = function () {
         return $http.get('/api/application/count');
     }
