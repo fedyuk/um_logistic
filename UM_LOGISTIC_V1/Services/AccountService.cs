@@ -127,6 +127,11 @@ namespace UM_LOGISTIC_V1.Services
             }
         }
 
+        public bool IsEmailExist(string email)
+        {
+            return db.Users.Any(u => u.UserName == email);
+        }
+
         public User AddAccountUser(AddAccountAndLoginRequest userToAdd)
         {
             var user = new User();

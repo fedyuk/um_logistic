@@ -42,7 +42,7 @@
                 <td>{{user.street}}</td>
                 <td>{{user.role}}</td>
                 <td>
-                    <a class="btn btn-default btn-sm" href="#" ng-confirm-click="Ви дійсно хочете видалити користувача?" confirmed-click="deleteUser(user.id)">
+                    <a class="btn btn-default btn-sm" href="#" ng-click="deleteUser(user.id)">
                         <i class="fa fa-trash-o fa-sm"></i>
                     </a>
                 </td>

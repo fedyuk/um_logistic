@@ -40,7 +40,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             {
                 authenticateUserResponse.Success = false;
                 authenticateUserResponse.Token = "";
-                authenticateUserResponse.Error = "User was not found";
+                authenticateUserResponse.Error = "Неправильний логін або(і) пароль";
                 authenticateUserResponse.Result = null;
                 return Ok(authenticateUserResponse);
             }

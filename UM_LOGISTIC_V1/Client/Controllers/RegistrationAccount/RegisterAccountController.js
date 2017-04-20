@@ -26,7 +26,7 @@
                 $location.path("/home");
             }
             else {
-                NotificationService.error(JSON.stringify(response.Error));
+                NotificationService.warning(JSON.stringify(response.Error));
             }
         }).error(function (error) {
             $scope.isLoading = false;

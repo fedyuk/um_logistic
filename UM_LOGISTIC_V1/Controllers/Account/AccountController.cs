@@ -253,6 +253,13 @@ namespace UM_LOGISTIC_V1.Controllers.Account
         public IHttpActionResult RegisterAccount([FromBody]RegisterAccountRequest request)
         {
             var response = new RegisterAccountResponse();
+            var isEmailExist = accountService.IsEmailExist(request.Login);
+            if(isEmailExist)
+            {
+                response.Success = false;
+                response.Error = "Такий логін вже існує в базі";
+                return Ok(response);
+            }
             response.Result = accountService.RegisterAccount(request);
             response.Success = response.Result != null ? true : false;
             response.Token = TokenService.GenerateToken(request.Login, response.Result != null ? response.Result.RoleId : 0);

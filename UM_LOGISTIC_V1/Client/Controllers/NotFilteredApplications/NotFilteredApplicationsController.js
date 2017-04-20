@@ -97,6 +97,7 @@
 
     $scope.changeApplicationType = function(type, caption)
     {
+        $scope.currentPage = 0;
         $scope.currentTypeCaption = caption;
         $scope.applications = [];
         $scope.currentApplicationType = type;
@@ -105,24 +106,28 @@
 
     $scope.acceptApplication = function(id, type)
     {
-        $scope.isLoading = true;
-        FilterService.acceptApplication(type, id)
-        .success(function (response) {
-            if (response.Success) {
-                for (var i = 0; i < $scope.applications.length; i++)
-                    if ($scope.applications[i].id === id) {
-                        $scope.applications.splice(i, 1);
-                        break;
+        bootbox.confirm("Ви дійсно хочете прийняти заявку?", function (ok) {
+            if (ok == true) {
+                $scope.isLoading = true;
+                FilterService.acceptApplication(type, id)
+                .success(function (response) {
+                    if (response.Success) {
+                        for (var i = 0; i < $scope.applications.length; i++)
+                            if ($scope.applications[i].id === id) {
+                                $scope.applications.splice(i, 1);
+                                break;
+                            }
+                        $scope.isLoading = false;
                     }
-                $scope.isLoading = false;
+                    else {
+                        $scope.isLoading = false;
+                        NotificationService.error(response.Error);
+                    }
+                }).error(function (error) {
+                    $scope.isLoading = false;
+                    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+                });
             }
-            else {
-                $scope.isLoading = false;
-                NotificationService.error(response.Error);
-            }
-        }).error(function (error) {
-            $scope.isLoading = false;
-            NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
         });
     }
     //methods

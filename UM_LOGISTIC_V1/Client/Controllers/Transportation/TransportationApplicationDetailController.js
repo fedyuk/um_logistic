@@ -40,7 +40,7 @@
 		            $scope.transportationToView.ContactPhone = FormHelper.getFormValue(response.Result.ContactPhone);
 		            $scope.transportationToView.SendAddress = FormHelper.getFormValue(response.Result.SendAddress);
 		            $scope.transportationToView.DeliveryAddress = FormHelper.getFormValue(response.Result.DeliveryAddress);
-		            $scope.transportationToView.CompleteDate = FormHelper.getFormValue(response.Result.CompleteDate);
+		            $scope.transportationToView.CompleteDate = new Date(response.Result.CompleteDate).toLocaleString()
 		            $scope.transportationToView.ShipmentType = FormHelper.getFormValue(response.Result.ShipmentType);
 		            $scope.transportationToView.ShipmentLength = FormHelper.getFormValue(response.Result.ShipmentLength);
 		            $scope.transportationToView.ShipmentWidth = FormHelper.getFormValue(response.Result.ShipmentWidth);
