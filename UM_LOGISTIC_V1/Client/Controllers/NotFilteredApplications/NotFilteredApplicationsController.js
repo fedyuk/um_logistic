@@ -106,54 +106,80 @@
 
     $scope.acceptApplication = function(id, type)
     {
-        bootbox.confirm("Ви дійсно хочете прийняти заявку?", function (ok) {
-            if (ok == true) {
-                $scope.isLoading = true;
-                FilterService.acceptApplication(type, id)
-                .success(function (response) {
-                    if (response.Success) {
-                        for (var i = 0; i < $scope.applications.length; i++)
-                            if ($scope.applications[i].id === id) {
-                                $scope.applications.splice(i, 1);
-                                break;
-                            }
+        bootbox.confirm({
+            message: "Ви дійсно хочете прийняти заявку?",
+            buttons: {
+                confirm: {
+                    label: 'Так',
+                    className: 'btn-default btn-sm'
+                },
+                cancel: {
+                    label: 'Ні',
+                    className: 'btn-default btn-sm'
+                }
+            },
+            callback: function (ok) {
+                if (ok == true) {
+                    $scope.isLoading = true;
+                    FilterService.acceptApplication(type, id)
+                    .success(function (response) {
+                        if (response.Success) {
+                            for (var i = 0; i < $scope.applications.length; i++)
+                                if ($scope.applications[i].id === id) {
+                                    $scope.applications.splice(i, 1);
+                                    break;
+                                }
+                            $scope.isLoading = false;
+                        }
+                        else {
+                            $scope.isLoading = false;
+                            NotificationService.error(response.Error);
+                        }
+                    }).error(function (error) {
                         $scope.isLoading = false;
-                    }
-                    else {
-                        $scope.isLoading = false;
-                        NotificationService.error(response.Error);
-                    }
-                }).error(function (error) {
-                    $scope.isLoading = false;
-                    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
-                });
+                        NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+                    });
+                }
             }
         });
     }
 
     $scope.declineApplication = function (id, type) {
-        bootbox.confirm("Ви дійсно хочете видалити заявку?", function (ok) {
-            if (ok == true) {
-                $scope.isLoading = true;
-                FilterService.declineApplication(type, id)
-                .success(function (response) {
-                    if (response.Success) {
-                        NotificationService.success("Заявка була видалена");
-                        for (var i = 0; i < $scope.applications.length; i++)
-                            if ($scope.applications[i].id === id) {
-                                $scope.applications.splice(i, 1);
-                                break;
-                            }
+        bootbox.confirm({
+            message: "Ви дійсно хочете видалити заявку?",
+            buttons: {
+                confirm: {
+                    label: 'Так',
+                    className: 'btn-default btn-sm'
+                },
+                cancel: {
+                    label: 'Ні',
+                    className: 'btn-default btn-sm'
+                }
+            },
+            callback: function (ok) {
+                if (ok == true) {
+                    $scope.isLoading = true;
+                    FilterService.declineApplication(type, id)
+                    .success(function (response) {
+                        if (response.Success) {
+                            NotificationService.success("Заявка була видалена");
+                            for (var i = 0; i < $scope.applications.length; i++)
+                                if ($scope.applications[i].id === id) {
+                                    $scope.applications.splice(i, 1);
+                                    break;
+                                }
+                            $scope.isLoading = false;
+                        }
+                        else {
+                            $scope.isLoading = false;
+                            NotificationService.error(response.Error);
+                        }
+                    }).error(function (error) {
                         $scope.isLoading = false;
-                    }
-                    else {
-                        $scope.isLoading = false;
-                        NotificationService.error(response.Error);
-                    }
-                }).error(function (error) {
-                    $scope.isLoading = false;
-                    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
-                });
+                        NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+                    });
+                }
             }
         });
     }

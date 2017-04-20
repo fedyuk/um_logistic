@@ -50,26 +50,40 @@
 	}
 
 	$scope.deleteUser = function (id) {
-	    bootbox.confirm("Ви дійсно хочете видалити користувача?", function (ok) {
-	        if (ok == true) {
-	            $scope.isLoading = true;
-	            var user = SessionService.getSessionUser();
-	            var token = SessionService.getSessionToken();
-	            AccountService.removeAccount(user, token, id).success(function (response) {
-	                $scope.isLoading = false;
-	                if (response.Success == false) {
-	                    NotificationService.error(JSON.stringify(response.Error));
-	                } else {
-	                    for (var i = 0; i < $scope.users.length; i++)
-	                        if ($scope.users[i].id === id) {
-	                            $scope.users.splice(i, 1);
-	                            break;
-	                        }
-	                }
-	            }).error(function (error) {
-	                $scope.isLoading = false;
-	                NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
-	            });
+	    bootbox.confirm({
+	        message: "Ви дійсно хочете видалити користувача?",
+	        buttons: {
+	            confirm: {
+	                label: 'Так',
+	                className: 'btn-default btn-sm'
+	            },
+	            cancel: {
+	                label: 'Ні',
+	                className: 'btn-default btn-sm'
+	            }
+	        },
+	        callback: function (ok) {
+	            if (ok == true) {
+
+	                $scope.isLoading = true;
+	                var user = SessionService.getSessionUser();
+	                var token = SessionService.getSessionToken();
+	                AccountService.removeAccount(user, token, id).success(function (response) {
+	                    $scope.isLoading = false;
+	                    if (response.Success == false) {
+	                        NotificationService.error(JSON.stringify(response.Error));
+	                    } else {
+	                        for (var i = 0; i < $scope.users.length; i++)
+	                            if ($scope.users[i].id === id) {
+	                                $scope.users.splice(i, 1);
+	                                break;
+	                            }
+	                    }
+	                }).error(function (error) {
+	                    $scope.isLoading = false;
+	                    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+	                });
+	            }
 	        }
 	    });
 	}
