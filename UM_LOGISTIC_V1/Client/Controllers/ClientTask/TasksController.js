@@ -23,6 +23,7 @@
                         modifiedOn: new Date(response.Result[i].ModifiedOn).toLocaleString(),
                         cooperationApplicationId: FormHelper.getFormValue(response.Result[i].CooperationApplicationId),
                         transportationApplicationId: FormHelper.getFormValue(response.Result[i].TransportationApplicationId),
+                        user: response.Result[i].User
                     });
                 }
             } else {
@@ -63,6 +64,20 @@
             NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
         });
     }
+
+    $scope.showUserInfo = function (user) {
+        var message = "<p>ID: " + FormHelper.getFormValue(user.Id) + "</p>";
+        message += "<p>Логін: " + FormHelper.getFormValue(user.UserName) + "</p>";
+        message += "<p>ФИО: " + FormHelper.getFormValue(user.Account.FullName) + "</p>";
+        message += "<p>Домашній телефон: " + FormHelper.getFormValue(user.Account.HomePhone) + "</p>";
+        message += "<p>Домашній телефон: " + FormHelper.getFormValue(user.Account.WorkPhone) + "</p>";
+        message += "<p>Роль: " + FormHelper.getFormValue(user.Role.Name) + "</p>";
+        var dialog = bootbox.dialog({
+            title: 'Інформація про користувача:',
+            message: message
+        });
+    }
+
 
     //methods
 

@@ -20,6 +20,7 @@
                 <th>Коли змінено</th>
                 <th>Співробітництво</th>
                 <th>Перевезення</th>
+                <th>Користувач</th>
                 <th>Дії</th>
             </tr>
         </thead>
@@ -33,6 +34,7 @@
                 <td>{{task.modifiedOn}}</td>
                 <td><a ng-show="task.cooperationApplicationId != 'не вказано'" href="/cooperation/{{task.cooperationApplicationId}}"><p class="text-center">{{task.cooperationApplicationId}}</p></a></td>
                 <td><a ng-show="task.transportationApplicationId != 'не вказано'" href="/transportation/{{task.transportationApplicationId}}"><p class="text-center">{{task.transportationApplicationId}}</pclass="text-center"></a></td>
+                <td><a href="#"><p ng-click="showUserInfo(task.user)" class="text-center">{{task.user.UserName}}</p></a></td>
                 <td>
                     <a style="text-decoration:none;" class="btn btn-success btn-sm" href="#" ng-click="acceptTask(task.id)">
                         <i class="fa fa-check fa-sm"></i>
