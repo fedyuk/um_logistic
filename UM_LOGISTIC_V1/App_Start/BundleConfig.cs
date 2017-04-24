@@ -64,13 +64,16 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Scripts/jquery-1.10.2.min.js",
                 "~/Scripts/notify.min.js",
                 "~/Scripts/bootbox.min.js",
+                "~/Scripts/bootstrap-slider.js",
                 "~/Scripts/angular-bootstrap-lightbox.min.js"));
 
             bundles.Add(new StyleBundle("~/bundles/Styles").Include(
                 "~/Style/bootswatch/bootstrap.css",
-                "~/Style/bootswatch/bootstrap.css",
                 "~/Style/angular-bootstrap-lightbox.min.css",
                 "~/Style/my-style.css",
+                "~/Style/slider/bootstrap-slider.css",
+                "~/Style/slider/rules.less",
+                "~/Style/slider/variables.less",
                 "~/Style/font-awesome-4.7.0/css/font-awesome.min.css"));
         }
     }

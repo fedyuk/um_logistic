@@ -5,14 +5,84 @@
     <h4></h4>
 </div>
 <div class="row" style="margin-top: 100px;" ng-show="!isLoading">
-    <div class="row" ng-show="transportations.length == 0">
-        <div class="col-md-offset-6 btn-sm">
-            <p>Немає даних</p>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-inline">
+                <label>Довжина вантажу(м):</label>
+            </div>
+            <div class="form-inline">
+                <div class="row">
+                    <div class="col-md-7">
+                        <input style="width:150px;" class="form-control input-sm span2" id="filter-shipment-length" type="text" />
+                    </div>
+                    <div class="col-md-5">
+                        <span><button ng-click="dropFilter(filter,'ShipmentLength')" type="submit" class="btn btn-danger btn-xs"><i class="fa fa-close" aria-hidden="true"></i></button></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-inline">
+                <label>Ширина вантажу(м):</label>
+            </div>
+            <div class="form-inline">
+                <div class="row">
+                    <div class="col-md-7">
+                        <input style="width:150px;" class="form-control input-sm span2" id="filter-shipment-width" type="text" />
+                    </div>
+                    <div class="col-md-5">
+                        <span><button ng-click="dropFilter(filter, 'ShipmentWidth')" type="submit" class="btn btn-danger btn-xs"><i class="fa fa-close" aria-hidden="true"></i></button></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-inline">
+                <label>Висота вантажу(м):</label>
+            </div>
+            <div class="form-inline">
+                <div class="row">
+                    <div class="col-md-7">
+                        <input style="width:150px;" class="form-control input-sm span2" id="filter-shipment-height" type="text" />
+                    </div>
+                    <div class="col-md-5">
+                        <span><button ng-click="dropFilter(filter, 'ShipmentHeight')" type="submit" class="btn btn-danger btn-xs"><i class="fa fa-close" aria-hidden="true"></i></button></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-inline">
+                <label>Вантажність(т):</label>
+            </div>
+            <div class="form-inline">
+                <div class="row">
+                    <div class="col-md-7">
+                        <input style="width:150px;" class="form-control input-sm span2" id="filter-shipment-weight" type="text" />
+                    </div>
+                    <div class="col-md-5">
+                        <span><button ng-click="dropFilter(filter, 'ShipmentWeight')" type="submit" class="btn btn-danger btn-xs"><i class="fa fa-close" aria-hidden="true"></i></button></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-inline">
+                <label>Об'єм(м3):</label>
+            </div>
+            <div class="form-inline">
+                <div class="row">
+                    <div class="col-md-7">
+                        <input style="width:150px;" class="form-control input-sm span2" id="filter-shipment-capacity" type="text" />
+                    </div>
+                    <div class="col-md-5">
+                        <span><button ng-click="dropFilter(filter, 'ShipmentCapacity')" type="submit" class="btn btn-danger btn-xs"><i class="fa fa-close" aria-hidden="true"></i></button></span>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:10px;">
+                <button ng-click="applyFilter()" type="submit" class="btn btn-success btn-xs"><i class="fa fa-filter" aria-hidden="true"></i>ок</button>
+            </div>
         </div>
-    </div>
-    <div class="row" ng-repeat="trans in transportations">
-        <div class="col-md-10 col-md-offset-4" style="margin-top:20px;">
-            <div class="media">
+        <div class="col-md-9" style="margin-top:20px;">
+            <div class="row" ng-show="transportations.length == 0">
+                <div class="col-md-offset-6 btn-sm">
+                    <p>Немає даних</p>
+                </div>
+            </div>
+            <div class="media" ng-repeat="trans in transportations">
                 <div class="media-left">
                     <a href="/transportation/{{trans.id}}">
                         <img class="media-object" style="width:200px;height:120px;" ng-src="{{pictures[trans.id] || '/Resources/Picture/empty_transportation.png'}}" alt="...">
@@ -29,5 +99,5 @@
         </div>
     </div>
 
-    <button style="margin-top:20px;" type="button" class="btn btn-primary col-md-offset-6 btn-sm" ng-click="loadMore()">Загрузити ще</button>
+    <button style="margin-top:20px;" type="button" class="btn btn-primary col-md-offset-4 btn-sm" ng-click="loadMore()">Загрузити ще</button>
 </div>

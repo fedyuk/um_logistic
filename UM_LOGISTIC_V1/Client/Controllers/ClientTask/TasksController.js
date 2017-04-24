@@ -70,7 +70,7 @@
         message += "<p>Логін: " + FormHelper.getFormValue(user.UserName) + "</p>";
         message += "<p>ФИО: " + FormHelper.getFormValue(user.Account.FullName) + "</p>";
         message += "<p>Домашній телефон: " + FormHelper.getFormValue(user.Account.HomePhone) + "</p>";
-        message += "<p>Домашній телефон: " + FormHelper.getFormValue(user.Account.WorkPhone) + "</p>";
+        message += "<p>Робочий телефон: " + FormHelper.getFormValue(user.Account.WorkPhone) + "</p>";
         message += "<p>Роль: " + FormHelper.getFormValue(user.Role.Name) + "</p>";
         var dialog = bootbox.dialog({
             title: 'Інформація про користувача:',

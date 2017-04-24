@@ -134,7 +134,7 @@ namespace UM_LOGISTIC_V1.Services
             var query = db.CooperationApplications.AsQueryable<CooperationApplication>();
             if (filters.Count == 0)
             {
-                return new List<CooperationApplication>();
+                return query.ToList().Skip(count * page).Take(count).ToList();
             }
             foreach (var filter in filters)
             {

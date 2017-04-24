@@ -10,6 +10,10 @@ namespace UM_LOGISTIC_V1.ApiModels.Filter
         public static List<Filter> GetFilterList(string filter)
         {
             var list = new List<Filter>();
+            if(filter == null)
+            {
+                return list;
+            }
             var filters = filter.Split(';');
             foreach (var f in filters)
             {

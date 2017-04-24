@@ -123,7 +123,7 @@ namespace UM_LOGISTIC_V1.Services
             var query = db.TransportationApplications.AsQueryable<TransportationApplication>();
             if(filters.Count == 0)
             {
-                return new List<TransportationApplication>();
+                return query.ToList().Skip(count * page).Take(count).ToList();
             }
             foreach (var filter in filters)
             {

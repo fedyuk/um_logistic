@@ -19,6 +19,7 @@
     };
     $scope.isLoading = false;
     $scope.pictureData = null;
+
     //variables
 
     //methods

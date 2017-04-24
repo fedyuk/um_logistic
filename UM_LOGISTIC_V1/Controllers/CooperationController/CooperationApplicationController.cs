@@ -207,13 +207,6 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
             filter = WebUtility.UrlDecode(filter);
             var response = new GetCooperationApplicationsByPageAndCountResponse();
             var applications = new List<CooperationApplication>();
-            if (filter == String.Empty)
-            {
-                response.Success = false;
-                response.Error = "The filter is empty";
-                response.Result = applications;
-                return Ok(response);
-            }
             var list = Parser.GetFilterList(filter);
             applications = applicationService.GetApplications(list, page, count);
             response.Success = true;
