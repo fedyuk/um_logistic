@@ -65,7 +65,9 @@
 		.success(function (response) {
 		    $scope.isLoading = false;
 		    if (response.Success) {
-		        $scope.transportations = [];
+		        if (page == 0) {
+		            $scope.transportations = [];
+		        }
 		        for (var i = 0; i < response.Result.length; i++) {
 		            $scope.transportations.push({
 		                id: FormHelper.getFormValue(response.Result[i].Id),

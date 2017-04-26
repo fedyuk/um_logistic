@@ -131,7 +131,7 @@ namespace UM_LOGISTIC_V1.Services
 
         public List<CooperationApplication> GetApplications(List<Filter> filters, int page, int count)
         {
-            var columns = DBColumns.transportationAplicationcolumns;
+            var columns = DBColumns.cooperationAplicationcolumns;
             var query = db.CooperationApplications.AsQueryable<CooperationApplication>();
             if (filters.Count == 0)
             {
