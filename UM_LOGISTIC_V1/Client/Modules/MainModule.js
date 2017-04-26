@@ -1,4 +1,4 @@
-﻿var mainModule = angular.module("mainModule", ["ui.router", "ngRoute", "ngCookies", "ngMessages"/*"bootstrapLightbox"*/]);
+﻿var mainModule = angular.module("mainModule", ["bootstrapLightbox","ui.router", "ngRoute", "ngCookies", "ngMessages"/*"bootstrapLightbox"*/]);
 
 mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$cookiesProvider', function ($stateProvider, $locationProvider, $urlRouterProvider, $cookiesProvider) {
 

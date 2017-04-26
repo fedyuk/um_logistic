@@ -6,6 +6,10 @@
     this.getApplicationPictures = function (applicationId, type) {
         return $http.get('/api/pictures?applicationId=' + applicationId + '&type=' + type);
     }
+
+    this.getApplicationPicturesHtml = function (applicationId, type) {
+        return $http.get('/api/get_list_pictures?id=' + applicationId + '&type=' + type);
+    }
 	
 	this.createApplicationPicture = function (applicationPicture) {
 		return $http.post("/api/picture/load/", applicationPicture);

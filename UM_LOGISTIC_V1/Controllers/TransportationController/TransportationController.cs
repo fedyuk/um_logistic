@@ -1,7 +1,11 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Web;
 using System.Web.Http;
 using UM_LOGISTIC_V1.ApiModels.Filter;
 using UM_LOGISTIC_V1.Models.TransportationApplication;
@@ -14,6 +18,7 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
     public class TransportationController : ApiController
     {
         private TransportationApplicationService applicationService = new TransportationApplicationService();
+        private ApplicationPictureService pictureService = new ApplicationPictureService();
 
         [Route("api/transportation")]
         [HttpGet]
@@ -191,6 +196,40 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
             response.Error = null;
             response.Result = applications;
             return Ok(response);
+        }
+
+        [Route("api/t_pictures")]
+        [HttpGet]
+        public HttpResponseMessage GetPicture(long id)
+        {
+            var image = applicationService.GetPicture(id);
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            if (image == null)
+            {
+                return response;
+            }
+            MemoryStream ms = new MemoryStream(image);
+            response.Content = new StreamContent(ms);
+            response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/png");
+            return response;
+        }
+
+        [Route("api/get_list_pictures")]
+        [HttpGet]
+        public IHttpActionResult GetListHtmlPictures(long id, bool type)
+        {
+            var executeUri = type == true ? "/api/t_pictures?id=" : "/api/c_pictures?id=";
+            var currentRequestUri = HttpContext.Current.Request;
+            var profileUri = currentRequestUri.Url.Scheme + System.Uri.SchemeDelimiter + currentRequestUri.Url.Host + (currentRequestUri.Url.IsDefaultPort ? "" : ":" + currentRequestUri.Url.Port);
+            var pictures = pictureService.GetPictures(id, type);
+            var url = String.Empty;
+            var htmlHrefs = new List<string>();
+            foreach(var picture in pictures)
+            {
+                url = profileUri + executeUri + picture;
+                htmlHrefs.Add("<img style='width: 250px; height: 200px;' class='jslghtbx-thmb' src='" + url + "' alt='' data-jslghtbx='" + url + "' data-jslghtbx-group='mygroup1'>");
+            }
+            return Ok(htmlHrefs);
         }
     }
 }

@@ -30,15 +30,15 @@ namespace UM_LOGISTIC_V1.Services
             }
         }
 
-        public List<string> GetPictures(long id, bool type)
+        public List<long> GetPictures(long id, bool type)
         {
             switch (type)
             {
                 case false:
-                    var pictures = db.CooperationPictures.Where(x => x.CooperationApplicationId == id).Select(u => u.Image).ToList<string>();
+                    var pictures = db.CooperationPictures.Where(x => x.CooperationApplicationId == id).Select(u => u.Id).ToList<long>();
                     return pictures;    
                 case true:
-                    var pictures2 = db.TransportationPictures.Where(x => x.TransportationApplicationId == id).Select(u => u.Image).ToList<string>();
+                    var pictures2 = db.TransportationPictures.Where(x => x.TransportationApplicationId == id).Select(u => u.Id).ToList<long>();
                     return pictures2;
                 default:
                     return null;

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Web;
 using UM_LOGISTIC_V1.ApiModels.Filter;
 using UM_LOGISTIC_V1.Models;
 using UM_LOGISTIC_V1.Models.TransportationApplication;
@@ -133,7 +135,16 @@ namespace UM_LOGISTIC_V1.Services
                 var predicate = ExpressionBuilder.BuildPredicate<TransportationApplication>(value, comparer, filter.column);
                 query = query.Where(predicate);
             }
+            query = query.OrderByDescending(i => i.ModifiedOn);
             return query.ToList().Skip(count * page).Take(count).ToList();
+        }
+
+        public byte[] GetPicture(long id)
+        {
+            var image = db.TransportationPictures.Find(id);
+            var base64Data = Regex.Match(image.Image, @"data:image/(?<type>.+?),(?<data>.+)").Groups["data"].Value;
+            var binData = Convert.FromBase64String(base64Data);
+            return binData;
         }
     }
 }

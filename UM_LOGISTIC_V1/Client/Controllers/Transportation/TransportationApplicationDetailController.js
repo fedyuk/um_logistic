@@ -1,4 +1,4 @@
-﻿mainModule.controller('TransportationApplicationDetailController', function ($rootScope, $scope, $stateParams, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService, FormHelper) {
+﻿mainModule.controller('TransportationApplicationDetailController', function ($rootScope, $location, $scope, $stateParams, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService, FormHelper) {
 
     if (!$stateParams.id) {
         $location.path("/404");
@@ -22,6 +22,7 @@
     $scope.isLoading = false;
     $scope.pictures = [];
     $scope.logo = {};
+    $scope.htmlPicuresContent = "";
     //variables
 
     //methods
@@ -68,11 +69,12 @@
 		    if (response.Success) {
 		        if(response.Result != null) {
 		            for(var i = 0; i < response.Result.length; i ++) {
-		                $scope.pictures.push({url: response.Result[i], number: i});
+		                $scope.pictures.push({ url: response.Result[i], number: i });
 		            }
 		            if ($scope.pictures.length > 0) {
 		                $scope.logo = $scope.pictures[0];
 		            }
+		            $scope.initLightboxNative();
 		        }
 		    }
 		}).error(function (error) {
@@ -80,6 +82,66 @@
 		});
     }
 
+    $scope.getPicturesHtml = function (id) {
+        var type = true;
+        ApplicationPictureService.getApplicationPicturesHtml(id, type)
+		.success(function (response) {
+		    if (response && response.length > 0) {
+		        for (var i = 0; i < response.length; i++) {
+		            $scope.htmlPicuresContent += response[i];
+		        }
+		        $('#gallery-transportation').append($scope.htmlPicuresContent);
+		        $scope.initLightboxNative();
+		    }
+		}).error(function (error) {
+		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+		});
+    }
+
+    $scope.initGalleryLightbox = function () {
+        $('#gallery-transportation').imageview();
+    }
+
+    $scope.initLightboxNative = function() 
+    {
+        var lightbox = new Lightbox();
+        lightbox.load({
+            boxId: false,
+            dimensions: true,
+            captions: true,
+            prevImg: false,
+            nextImg: false,
+            hideCloseBtn: false,
+            closeOnClick: true,
+            loadingAnimation: 200,
+            animElCount: 4,
+            preload: true,
+            carousel: true,
+            animation: 400,
+            nextOnClick: true,
+            responsive: true,
+            maxImgSize: 0.8,
+            // callbacks
+            onopen: function (image) {
+            },
+            onclose: function (image) {
+            },
+            onload: function (event) {
+            },
+            onresize: function (image) {
+            },
+            onloaderror: function (event) {
+                if (event._happenedWhile === 'prev')
+                    lightbox.prev()
+                else
+                    lightbox.next()
+            },
+            onimageclick: function (image) {
+            }
+        });
+    }
+
     $scope.getTransportation();
     $scope.getPictures($stateParams.id);
+    $scope.getPicturesHtml($stateParams.id);
 });

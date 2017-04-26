@@ -27,6 +27,7 @@
     $scope.isLoading = false;
     $scope.pictures = [];
     $scope.logo = {};
+    $scope.htmlPicuresContent = "";
     //variables
 
     //methods
@@ -83,6 +84,7 @@
 		            if ($scope.pictures.length > 0) {
 		                $scope.logo = $scope.pictures[0];
 		            }
+		            $scope.initLightboxNative();
 		        }
 		    }
 		}).error(function (error) {
@@ -90,6 +92,65 @@
 		});
     }
 
+    $scope.getPicturesHtml = function (id) {
+        var type = false;
+        ApplicationPictureService.getApplicationPicturesHtml(id, type)
+		.success(function (response) {
+		    if (response && response.length > 0) {
+		        for (var i = 0; i < response.length; i++) {
+		            $scope.htmlPicuresContent += response[i];
+		        }
+		        $('#gallery-cooperation').append($scope.htmlPicuresContent);
+		        $scope.initLightboxNative();
+		    }
+		}).error(function (error) {
+		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+		});
+    }
+
+    $scope.initGalleryLightbox = function () {
+        $('#gallery-cooperation').imageview();
+    }
+
+    $scope.initLightboxNative = function () {
+        var lightbox = new Lightbox();
+        lightbox.load({
+            boxId: false,
+            dimensions: true,
+            captions: true,
+            prevImg: false,
+            nextImg: false,
+            hideCloseBtn: false,
+            closeOnClick: true,
+            loadingAnimation: 200,
+            animElCount: 4,
+            preload: true,
+            carousel: true,
+            animation: 400,
+            nextOnClick: true,
+            responsive: true,
+            maxImgSize: 0.8,
+            // callbacks
+            onopen: function (image) {
+            },
+            onclose: function (image) {
+            },
+            onload: function (event) {
+            },
+            onresize: function (image) {
+            },
+            onloaderror: function (event) {
+                if (event._happenedWhile === 'prev')
+                    lightbox.prev()
+                else
+                    lightbox.next()
+            },
+            onimageclick: function (image) {
+            }
+        });
+    }
+
     $scope.getCooperation();
     $scope.getPictures($stateParams.id);
+    $scope.getPicturesHtml($stateParams.id);
 });

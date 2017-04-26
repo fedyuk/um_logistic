@@ -9,7 +9,7 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <img class="media-object" style="width:60%;height:60%;" align="right" ng-src="{{logo.url ||'/Resources/Picture/empty_transportation.png'}}" alt="...">
+            <img class="media-object" style="width:60%;height:60%;" align="right" ng-src="{{logo.url || '/Resources/Picture/empty_transportation.png'}}" alt="...">
         </div>
         <div class="col-md-6">
             <div>
@@ -40,10 +40,10 @@
                 <h5>Висота вантажу: {{transportationToView.ShipmentHeight}}</h5>
             </div>
             <div>
-                <h5>Вантажність(т): {{transportationToView.ShipmentCapacity}}</h5>
+                <h5>Вантажність(т): {{transportationToView.ShipmentWeight}}</h5>
             </div>
             <div>
-                <h5>Об'єм(м3): {{transportationToView.ShipmentWeight}}</h5>
+                <h5>Об'єм(м3): {{transportationToView.ShipmentCapacity}}</h5>
             </div>
         </div>
         </div>
@@ -51,11 +51,13 @@
 <div class="row" ng-show="!isLoading" align="center">
     <div class="row" style="margin-top: 50px;">
         <h4>Галерея:</h4>
-        <div class="row" ng-show="pictures.length == 0">
+        <div class="row" ng-show="htmlPicuresContent == ''">
             <div>
                 <p>Немає даних</p>
             </div>
         </div>
-        <img ng-repeat="picture in pictures" class="media-object" style="width:200px;height:120px;" ng-src="{{picture.url || '/Resources/Picture/empty_transportation.png'}}" alt="...">
+        
+        <div id="gallery-transportation">
+        </div>
     </div>
 </div>

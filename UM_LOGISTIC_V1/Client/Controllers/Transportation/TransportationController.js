@@ -159,6 +159,7 @@
                 }
             }
         }
+        stringFilter += "Filtered==true;";
         return stringFilter;
     }
 

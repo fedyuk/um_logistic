@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using UM_LOGISTIC_V1.ApiModels.Filter;
@@ -213,6 +215,22 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
             response.Error = null;
             response.Result = applications;
             return Ok(response);
+        }
+
+        [Route("api/c_pictures")]
+        [HttpGet]
+        public HttpResponseMessage GetPicture(long id)
+        {
+            var image = applicationService.GetPicture(id);
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+            if (image == null)
+            {
+                return response;
+            }
+            MemoryStream ms = new MemoryStream(image);
+            response.Content = new StreamContent(ms);
+            response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/png");
+            return response;
         }
     }
 }

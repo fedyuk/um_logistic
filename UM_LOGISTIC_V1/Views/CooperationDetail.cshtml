@@ -66,11 +66,13 @@
 <div class="row" ng-show="!isLoading" align="center">
     <div class="row" style="margin-top: 50px;">
         <h4>Галерея:</h4>
-        <div class="row" ng-show="pictures.length == 0">
+        <div class="row" ng-show="htmlPicuresContent == ''">
             <div>
                 <p>Немає даних</p>
             </div>
         </div>
-        <img ng-repeat="picture in pictures" class="media-object" style="width:200px;height:120px;" ng-src="{{picture.url || '/Resources/Picture/empty_application.jpg'}}" alt="...">
+
+        <div id="gallery-cooperation">
+        </div>
     </div>
 </div>

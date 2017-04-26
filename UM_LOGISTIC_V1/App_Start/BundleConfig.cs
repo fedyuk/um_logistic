@@ -17,7 +17,6 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Client/Templates/TemplateController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Modules").Include(
-                "~/Client/Modules/LightBoxModule.js",
                 "~/Client/Modules/MainModule.js",
                 "~/Client/Constants/ModuleConstants.js",
                 "~/Client/Directives/ConfirmClick.js"));
@@ -31,9 +30,6 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Client/Services/User/UserService.js",
 				"~/Client/Services/ApplicationPicture/ApplicationPictureService.js",
                 "~/Client/Services/Notification/NotificationService.js",
-                "~/Client/Services/image-loader-service.js",
-                "~/Client/Services/lightbox-service.js",
-                "~/Client/Services/lightbox-src-directive.js",
                 "~/Client/Services/Form/FormHelper.js",
                 "~/Client/Services/Filter/FilterService.js",
                 "~/Client/Services/ClientTask/ClientTaskService.js"));
@@ -65,7 +61,11 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Scripts/notify.min.js",
                 "~/Scripts/bootbox.min.js",
                 "~/Scripts/bootstrap-slider.js",
-                "~/Scripts/angular-bootstrap-lightbox.min.js"));
+                "~/Scripts/ui-bootstrap-2.5.0.min.js",
+                "~/Scripts/angular-bootstrap-lightbox.min.js",
+                "~/Scripts/bootstrap-datepicker.min.js",
+                "~/Scripts/jquery.imageview.js",
+                "~/Scripts/lightbox.min.js"));
 
             bundles.Add(new StyleBundle("~/bundles/Styles").Include(
                 "~/Style/bootswatch/bootstrap.css",
@@ -74,7 +74,10 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Style/slider/bootstrap-slider.css",
                 "~/Style/slider/rules.less",
                 "~/Style/slider/variables.less",
-                "~/Style/font-awesome-4.7.0/css/font-awesome.min.css"));
+                "~/Style/font-awesome-4.7.0/css/font-awesome.min.css",
+                "~/Style/date-picker/bootstrap-datepicker3.css",
+                "~/Style/lightbox/jquery.imageview.css",
+                "~/Style/lightbox/lightbox.min.css"));
         }
     }
 }
