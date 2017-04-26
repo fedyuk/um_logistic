@@ -9,7 +9,6 @@
 		SessionService.closeSession();
 		$scope.changeProfileData(false, null, false);
 		$scope.openLoginPage();
-		//NotificationService.success(moduleConstants.closedSessionMeesage);
 	}
 	
 	$scope.initProfileName = function() {

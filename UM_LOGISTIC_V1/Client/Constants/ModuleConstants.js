@@ -12,5 +12,18 @@
 	settingsPath: "/settings",
 	homePath: "/home",
 	cooperationApplicationCreatingSuccess: "Дякуємо за виділений вами час, ми вам перетелефонуємо!",
-    emptyFormValue: "не вказано"
+	emptyFormValue: "не вказано",
+	callFeedbackAccepted: "Ваша заявка прийнята",
+	deleteTaskConfirmation: "Ви дійсно хочете видалити задачу?",
+	userInfoCaption: "Інформація про користувача:",
+	invalidPictureFormat: "Картинки повинні бути у форматі jpg, jpeg, png",
+	pictureSizeLimitMb: 2,
+	pictureSizeInvalid: "Розмір картинки повинен бути не більше {0} МБ",
+	notFoundPath: "/404",
+	acceptTaskConfirmation: "Ви дійсно хочете прийняти заявку?",
+	deleteApplicationConfirmation: "Ви дійсно хочете видалити заявку?",
+	deletingInfoSuccess: "Заявка була видалена",
+	accountsPath: "/accounts",
+	deleteUserConfirmation: "Ви дійсно хочете видалити користувача?",
+    pageRowsCount: 5
 });

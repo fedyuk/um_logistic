@@ -3,7 +3,7 @@
     //variables 
     $scope.applications = [];
     $scope.currentPage = 0;
-    $scope.currentCount = 5;
+    $scope.currentCount = moduleConstants.pageRowsCount;
     $scope.isLoading = false;
     $scope.pictures = [];
     $scope.currentApplicationType = true;
@@ -107,7 +107,7 @@
     $scope.acceptApplication = function(id, type)
     {
         bootbox.confirm({
-            message: "Ви дійсно хочете прийняти заявку?",
+            message: moduleConstants.acceptTaskConfirmation,
             buttons: {
                 confirm: {
                     label: 'Так',
@@ -146,7 +146,7 @@
 
     $scope.declineApplication = function (id, type) {
         bootbox.confirm({
-            message: "Ви дійсно хочете видалити заявку?",
+            message: moduleConstants.deleteApplicationConfirmation,
             buttons: {
                 confirm: {
                     label: 'Так',
@@ -163,7 +163,7 @@
                     FilterService.declineApplication(type, id)
                     .success(function (response) {
                         if (response.Success) {
-                            NotificationService.success("Заявка була видалена");
+                            NotificationService.success(moduleConstants.deletingInfoSuccess);
                             for (var i = 0; i < $scope.applications.length; i++)
                                 if ($scope.applications[i].id === id) {
                                     $scope.applications.splice(i, 1);

@@ -3,7 +3,7 @@
     //variables 
     $scope.transportations = [];
     $scope.currentPage = 0;
-    $scope.currentCount = 5;
+    $scope.currentCount = moduleConstants.pageRowsCount;
     $scope.isLoading = false;
     $scope.pictures = {};
 
@@ -124,7 +124,7 @@
         ClientTaskService.createApplicationTask(request)
         .success(function (response) {
             if (response.Success) {
-                NotificationService.success("Ваша заявка прийнята");
+                NotificationService.success(moduleConstants.callFeedbackAccepted);
                 $scope.isLoading = false;
             }
             else {

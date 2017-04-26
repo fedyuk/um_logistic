@@ -1,7 +1,7 @@
 ﻿mainModule.controller('TransportationApplicationDetailController', function ($rootScope, $location, $scope, $stateParams, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService, FormHelper) {
 
     if (!$stateParams.id) {
-        $location.path("/404");
+        $location.path(moduleConstants.notFoundPath);
         return;
     }
     //variables 
@@ -50,7 +50,7 @@
 		            $scope.transportationToView.ShipmentWeight = FormHelper.getFormValue(response.Result.ShipmentWeight);
 		        }
 		        else {
-		            $location.path("/404");
+		            $location.path(moduleConstants.notFoundPath);
 		        }
 		    }
 		    else {
@@ -96,10 +96,6 @@
 		}).error(function (error) {
 		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
-    }
-
-    $scope.initGalleryLightbox = function () {
-        $('#gallery-transportation').imageview();
     }
 
     $scope.initLightboxNative = function() 

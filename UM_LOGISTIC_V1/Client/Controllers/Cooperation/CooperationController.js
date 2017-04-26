@@ -3,7 +3,7 @@
     //variables 
     $scope.cooperations = [];
     $scope.currentPage = 0;
-    $scope.currentCount = 5;
+    $scope.currentCount = moduleConstants.pageRowsCount;
     $scope.isLoading = false;
     $scope.pictures = {};
     $scope.filter = {
@@ -129,7 +129,7 @@
         ClientTaskService.createApplicationTask(request)
         .success(function (response) {
             if (response.Success) {
-                NotificationService.success("Ваша заявка прийнята");
+                NotificationService.success(moduleConstants.callFeedbackAccepted);
                 $scope.isLoading = false;
             }
             else {
@@ -182,7 +182,7 @@
         $scope.TransportWeightSlider = $("#filter-transport-weight").slider({ id: "filter-transport-weight", min: 0, max: 30, range: true, value: [0, 30] });
         $scope.TransportWeightSlider.on('slideStop', { value: $scope.filter.TransportWeight }, function (event) { event.data.value.isClear = false; });
         $scope.TransportArrowSlider = $("#filter-transport-arrow").slider({ id: "filter-transport-arrow", min: 0, max: 30, range: true, value: [0, 30] });
-        $scope.TransportArrowSlider.on('slideStop', { value: $scope.filter.TransportWeight }, function (event) { event.data.value.isClear = false; });
+        $scope.TransportArrowSlider.on('slideStop', { value: $scope.filter.TransportArrow }, function (event) { event.data.value.isClear = false; });
     }
 
     $scope.getValuesFromSliders = function () {

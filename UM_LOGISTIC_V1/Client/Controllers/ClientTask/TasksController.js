@@ -4,7 +4,7 @@
     $scope.tasks = [];
     $scope.isLoading = false;
     $scope.currentPage = 0;
-    $scope.currentCount = 5;
+    $scope.currentCount = moduleConstants.pageRowsCount;
     //variables
     //methods
 
@@ -45,23 +45,40 @@
         $scope.listTasks($scope.currentPage, $scope.currentCount);
     }
     $scope.acceptTask = function (id) {
-        $scope.isLoading = true;
-        ClientTaskService.acceptTask(id)
-        .success(function (response) {
-            $scope.isLoading = false;
-            if (response.Success == true) {
-                for (var i = 0; i < $scope.tasks.length; i++)
-                    if ($scope.tasks[i].id === id) {
-                        $scope.tasks.splice(i, 1);
-                        break;
-                    }
+        bootbox.confirm({
+            message: moduleConstants.deleteTaskConfirmation,
+            buttons: {
+                confirm: {
+                    label: 'Так',
+                    className: 'btn-default btn-sm'
+                },
+                cancel: {
+                    label: 'Ні',
+                    className: 'btn-default btn-sm'
+                }
+            },
+            callback: function (ok) {
+                if (ok == true) {
+                    $scope.isLoading = true;
+                    ClientTaskService.acceptTask(id)
+                    .success(function (response) {
+                        $scope.isLoading = false;
+                        if (response.Success == true) {
+                            for (var i = 0; i < $scope.tasks.length; i++)
+                                if ($scope.tasks[i].id === id) {
+                                    $scope.tasks.splice(i, 1);
+                                    break;
+                                }
+                        }
+                        if (response.Success == false) {
+                            NotificationService.error(response.Error);
+                        }
+                    }).error(function (error) {
+                        $scope.isLoading = false;
+                        NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+                    });
+                }
             }
-            if (response.Success == false) {
-                NotificationService.error(response.Error);
-            }
-        }).error(function (error) {
-            $scope.isLoading = false;
-            NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
         });
     }
 
@@ -73,7 +90,7 @@
         message += "<p>Робочий телефон: " + FormHelper.getFormValue(user.Account.WorkPhone) + "</p>";
         message += "<p>Роль: " + FormHelper.getFormValue(user.Role.Name) + "</p>";
         var dialog = bootbox.dialog({
-            title: 'Інформація про користувача:',
+            title: moduleConstants.userInfoCaption,
             message: message
         });
     }

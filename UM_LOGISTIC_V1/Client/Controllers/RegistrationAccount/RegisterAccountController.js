@@ -23,7 +23,7 @@
             $scope.isLoading = false;
             if (response.Success == true) {
                 $rootScope.$broadcast("userRegistrated", response);
-                $location.path("/home");
+                $location.path(moduleConstants.homePath);
             }
             else {
                 NotificationService.warning(JSON.stringify(response.Error));

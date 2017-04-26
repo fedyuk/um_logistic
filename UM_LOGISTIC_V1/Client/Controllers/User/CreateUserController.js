@@ -34,7 +34,7 @@
         AccountService.addAccount(request).success(function (response) {
             $scope.isLoading = false;
             if (response.Success == true) {
-                $location.path("/accounts");
+                $location.path(moduleConstants.accountsPath);
             }
             else {
                 NotificationService.error(JSON.stringify(response.Error));

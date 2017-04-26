@@ -21,8 +21,8 @@
         ClientTaskService.createCallFeedback(request).success(function (response) {
             $scope.isLoading = false;
             if (response.Success == true) {
-                NotificationService.success("З вами зв'яжуться ближчим часом");
-                $location.path("/home");
+                NotificationService.success(moduleConstants.callFeedbackAccepted);
+                $location.path(moduleConstants.homePath);
             }
             else {
                 NotificationService.error(JSON.stringify(response.Error));

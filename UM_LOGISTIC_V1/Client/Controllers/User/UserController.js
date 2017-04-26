@@ -4,7 +4,7 @@
     $scope.users = [];
     $scope.isLoading = false;
     $scope.currentPage = 0;
-    $scope.currentCount = 5;
+    $scope.currentCount = moduleConstants.pageRowsCount;
     //variables
 	//methods
 	
@@ -51,7 +51,7 @@
 
 	$scope.deleteUser = function (id) {
 	    bootbox.confirm({
-	        message: "Ви дійсно хочете видалити користувача?",
+	        message: moduleConstants.deleteUserConfirmation,
 	        buttons: {
 	            confirm: {
 	                label: 'Так',

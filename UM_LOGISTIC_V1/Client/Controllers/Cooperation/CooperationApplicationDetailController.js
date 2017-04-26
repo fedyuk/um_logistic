@@ -1,7 +1,7 @@
 ﻿mainModule.controller('CooperationApplicationDetailController', function ($rootScope, $scope, $stateParams, $log, $location, CooperationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService, FormHelper) {
 
     if (!$stateParams.id) {
-        $location.path("/404");
+        $location.path(moduleConstants.notFoundPath);
         return;
     }
     //variables 
@@ -60,7 +60,7 @@
 		            $scope.cooperationToView.DeliveryCost = FormHelper.getFormValue(response.Result.DeliveryCost);
 		        }
 		        else {
-		            $location.path("/404");
+		            $location.path(moduleConstants.notFoundPath);
 		        }
 		    }
 		    else {
@@ -106,10 +106,6 @@
 		}).error(function (error) {
 		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
-    }
-
-    $scope.initGalleryLightbox = function () {
-        $('#gallery-cooperation').imageview();
     }
 
     $scope.initLightboxNative = function () {

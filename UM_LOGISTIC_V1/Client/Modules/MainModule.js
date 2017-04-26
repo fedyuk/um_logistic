@@ -100,10 +100,6 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
   function ($rootScope, $state, $location, SessionService, moduleConstants) {
 	  $rootScope.$on('$locationChangeStart',
       function (event, next, current) {
-		  //var sessionToken = SessionService.getSessionToken();
-		  //if(!SessionService.isSessionValid()) {
-		  //    $location.path(moduleConstants.loginPath);
-		  //}
       }
     );
   }]);

@@ -106,16 +106,16 @@
 	            $scope.pictureData = reader.result;
 	        }
 	        else {
-	            NotificationService.error("Картинки повинні бути у форматі jpg, jpeg, png");
+	            NotificationService.warning(moduleConstants.invalidPictureFormat);
 	            document.getElementById("coop-picture").value = "";
 	        }
 	    }, false);
 
-	    if (file && file.size <= 2000000) {
+	    if (file && file.size <= (moduleConstants.pictureSizeLimitMb * 1000000)) {
 	        reader.readAsDataURL(file);
 	    }
-	    else if (file && file.size > 2000000) {
-	        NotificationService.error("Розмір картинки повинен бути не більше 2 МБ");
+	    else if (file && file.size > (moduleConstants.pictureSizeLimitMb * 1000000)) {
+	        NotificationService.warning(moduleConstants.pictureSizeInvalid.replace("{0}", moduleConstants.pictureSizeLimitMb));
 	        document.getElementById("coop-picture").value = "";
 	    }
 	}
