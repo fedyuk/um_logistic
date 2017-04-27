@@ -171,18 +171,78 @@
     }
 
     $scope.initFilterView = function () {
-        $scope.TransportLengthSlider = $("#filter-transport-length").slider({ id: "filter-transport-length", min: 0, max: 30, range: true, value: [0, 30] });
-        $scope.TransportLengthSlider.on('slideStop', { value: $scope.filter.TransportLength }, function (event) { event.data.value.isClear = false; });
-        $scope.TransportWidthSlider = $("#filter-transport-width").slider({ id: "filter-transport-width", min: 0, max: 30, range: true, value: [0, 30] });
-        $scope.TransportWidthSlider.on('slideStop', { value: $scope.filter.TransportWidth }, function (event) { event.data.value.isClear = false; });
-        $scope.TransportHeightSlider = $("#filter-transport-height").slider({ id: "filter-transport-height", min: 0, max: 30, range: true, value: [0, 30] });
-        $scope.TransportHeightSlider.on('slideStop', { value: $scope.filter.TransportHeight }, function (event) { event.data.value.isClear = false; });
-        $scope.TransportCapacitySlider = $("#filter-transport-capacity").slider({ id: "filter-transport-capacity", min: 0, max: 30, range: true, value: [0, 30] });
-        $scope.TransportCapacitySlider.on('slideStop', { value: $scope.filter.TransportCapacity }, function (event) { event.data.value.isClear = false; });
-        $scope.TransportWeightSlider = $("#filter-transport-weight").slider({ id: "filter-transport-weight", min: 0, max: 30, range: true, value: [0, 30] });
-        $scope.TransportWeightSlider.on('slideStop', { value: $scope.filter.TransportWeight }, function (event) { event.data.value.isClear = false; });
-        $scope.TransportArrowSlider = $("#filter-transport-arrow").slider({ id: "filter-transport-arrow", min: 0, max: 30, range: true, value: [0, 30] });
-        $scope.TransportArrowSlider.on('slideStop', { value: $scope.filter.TransportArrow }, function (event) { event.data.value.isClear = false; });
+        $scope.TransportLengthSlider = $("#filter-transport-length").slider({
+            id: "filter-transport-length",
+            min: moduleConstants.sliderMinRangeValue,
+            max: moduleConstants.sliderMaxRangeValue,
+            range: true,
+            value: [moduleConstants.sliderMinRangeValue, moduleConstants.sliderMaxRangeValue]
+        });
+        $scope.TransportLengthSlider.on('slideStop', {
+            value: $scope.filter.TransportLength
+        }, function (event) {
+            event.data.value.isClear = false;
+        });
+        $scope.TransportWidthSlider = $("#filter-transport-width").slider({
+            id: "filter-transport-width",
+            min: moduleConstants.sliderMinRangeValue,
+            max: moduleConstants.sliderMaxRangeValue,
+            range: true,
+            value: [moduleConstants.sliderMinRangeValue, moduleConstants.sliderMaxRangeValue]
+        });
+        $scope.TransportWidthSlider.on('slideStop', {
+            value: $scope.filter.TransportWidth
+        }, function (event) {
+            event.data.value.isClear = false;
+        });
+        $scope.TransportHeightSlider = $("#filter-transport-height").slider({
+            id: "filter-transport-height",
+            min: moduleConstants.sliderMinRangeValue,
+            max: moduleConstants.sliderMaxRangeValue,
+            range: true,
+            value: [moduleConstants.sliderMinRangeValue, moduleConstants.sliderMaxRangeValue]
+        });
+        $scope.TransportHeightSlider.on('slideStop', {
+            value: $scope.filter.TransportHeight
+        }, function (event) {
+            event.data.value.isClear = false;
+        });
+        $scope.TransportCapacitySlider = $("#filter-transport-capacity").slider({
+            id: "filter-transport-capacity",
+            min: moduleConstants.sliderMinRangeValue,
+            max: moduleConstants.sliderMaxRangeValue,
+            range: true,
+            value: [moduleConstants.sliderMinRangeValue, moduleConstants.sliderMaxRangeValue]
+        });
+        $scope.TransportCapacitySlider.on('slideStop', {
+            value: $scope.filter.TransportCapacity
+        }, function (event) {
+            event.data.value.isClear = false;
+        });
+        $scope.TransportWeightSlider = $("#filter-transport-weight").slider({
+            id: "filter-transport-weight",
+            min: moduleConstants.sliderMinRangeValue,
+            max: moduleConstants.sliderMaxRangeValue,
+            range: true,
+            value: [moduleConstants.sliderMinRangeValue, moduleConstants.sliderMaxRangeValue]
+        });
+        $scope.TransportWeightSlider.on('slideStop', {
+            value: $scope.filter.TransportWeight
+        }, function (event) {
+            event.data.value.isClear = false;
+        });
+        $scope.TransportArrowSlider = $("#filter-transport-arrow").slider({
+            id: "filter-transport-arrow",
+            min: moduleConstants.sliderMinRangeValue,
+            max: moduleConstants.sliderMaxRangeValue,
+            range: true,
+            value: [moduleConstants.sliderMinRangeValue, moduleConstants.sliderMaxRangeValue]
+        });
+        $scope.TransportArrowSlider.on('slideStop', {
+            value: $scope.filter.TransportArrow
+        }, function (event) {
+            event.data.value.isClear = false;
+        });
     }
 
     $scope.getValuesFromSliders = function () {
@@ -197,7 +257,7 @@
     $scope.dropFilter = function (filter, name) {
         if (filter[name]) {
             filter[name].isClear = true;
-            $scope[name + "Slider"].slider('setValue', [0, 30]);
+            $scope[name + "Slider"].slider('setValue', [moduleConstants.sliderMinRangeValue, moduleConstants.sliderMaxRangeValue]);
         }
     }
 

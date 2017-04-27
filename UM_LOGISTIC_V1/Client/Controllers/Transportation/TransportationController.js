@@ -166,16 +166,66 @@
     }
 
     $scope.initFilterView = function () {
-        $scope.ShipmentLengthSlider = $("#filter-shipment-length").slider({ id: "filter-shipment-length", min: 0, max: 30, range: true, value: [0, 30] });
-        $scope.ShipmentLengthSlider.on('slideStop', {value: $scope.filter.ShipmentLength}, function (event) { event.data.value.isClear = false; });
-        $scope.ShipmentWidthSlider = $("#filter-shipment-width").slider({ id: "filter-shipment-width", min: 0, max: 30, range: true, value: [0, 30] });
-        $scope.ShipmentWidthSlider.on('slideStop', { value: $scope.filter.ShipmentWidth }, function (event) { event.data.value.isClear = false; });
-        $scope.ShipmentHeightSlider = $("#filter-shipment-height").slider({ id: "filter-shipment-height", min: 0, max: 30, range: true, value: [0, 30] });
-        $scope.ShipmentHeightSlider.on('slideStop', { value: $scope.filter.ShipmentHeight }, function (event) { event.data.value.isClear = false; });
-        $scope.ShipmentCapacitySlider = $("#filter-shipment-capacity").slider({ id: "filter-shipment-capacity", min: 0, max: 30, range: true, value: [0, 30] });
-        $scope.ShipmentCapacitySlider.on('slideStop', { value: $scope.filter.ShipmentCapacity }, function (event) { event.data.value.isClear = false; });
-        $scope.ShipmentWeightSlider = $("#filter-shipment-weight").slider({ id: "filter-shipment-weight", min: 0, max: 30, range: true, value: [0, 30] });
-        $scope.ShipmentWeightSlider.on('slideStop', { value: $scope.filter.ShipmentWeight }, function (event) { event.data.value.isClear = false; });
+        $scope.ShipmentLengthSlider = $("#filter-shipment-length").slider({
+            id: "filter-shipment-length",
+            min: moduleConstants.sliderMinRangeValue,
+            max: moduleConstants.sliderMaxRangeValue,
+            range: true,
+            value: [moduleConstants.sliderMinRangeValue, moduleConstants.sliderMaxRangeValue]
+        });
+        $scope.ShipmentLengthSlider.on('slideStop', {
+            value: $scope.filter.ShipmentLength
+        }, function (event) {
+            event.data.value.isClear = false;
+        });
+        $scope.ShipmentWidthSlider = $("#filter-shipment-width").slider({
+            id: "filter-shipment-width",
+            min: moduleConstants.sliderMinRangeValue,
+            max: moduleConstants.sliderMaxRangeValue,
+            range: true,
+            value: [moduleConstants.sliderMinRangeValue, moduleConstants.sliderMaxRangeValue]
+        });
+        $scope.ShipmentWidthSlider.on('slideStop', {
+            value: $scope.filter.ShipmentWidth
+        }, function (event) {
+            event.data.value.isClear = false;
+        });
+        $scope.ShipmentHeightSlider = $("#filter-shipment-height").slider({
+            id: "filter-shipment-height",
+            min: moduleConstants.sliderMinRangeValue,
+            max: moduleConstants.sliderMaxRangeValue,
+            range: true,
+            value: [moduleConstants.sliderMinRangeValue, moduleConstants.sliderMaxRangeValue]
+        });
+        $scope.ShipmentHeightSlider.on('slideStop', {
+            value: $scope.filter.ShipmentHeight
+        }, function (event) {
+            event.data.value.isClear = false;
+        });
+        $scope.ShipmentCapacitySlider = $("#filter-shipment-capacity").slider({
+            id: "filter-shipment-capacity",
+            min: moduleConstants.sliderMinRangeValue,
+            max: moduleConstants.sliderMaxRangeValue,
+            range: true,
+            value: [moduleConstants.sliderMinRangeValue, moduleConstants.sliderMaxRangeValue]
+        });
+        $scope.ShipmentCapacitySlider.on('slideStop', {
+            value: $scope.filter.ShipmentCapacity
+        }, function (event) {
+            event.data.value.isClear = false;
+        });
+        $scope.ShipmentWeightSlider = $("#filter-shipment-weight").slider({
+            id: "filter-shipment-weight",
+            min: moduleConstants.sliderMinRangeValue,
+            max: moduleConstants.sliderMaxRangeValue,
+            range: true,
+            value: [moduleConstants.sliderMinRangeValue, moduleConstants.sliderMaxRangeValue]
+        });
+        $scope.ShipmentWeightSlider.on('slideStop', {
+            value: $scope.filter.ShipmentWeight
+        }, function (event) {
+            event.data.value.isClear = false;
+        });
     }
 
     $scope.getValuesFromSliders = function () {
@@ -189,7 +239,7 @@
     $scope.dropFilter = function (filter, name) {
         if (filter[name]) {
             filter[name].isClear = true;
-            $scope[name + "Slider"].slider('setValue', [0,30]);
+            $scope[name + "Slider"].slider('setValue', [moduleConstants.sliderMinRangeValue, moduleConstants.sliderMaxRangeValue]);
         }
     }
 

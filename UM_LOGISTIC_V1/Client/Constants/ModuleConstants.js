@@ -25,5 +25,7 @@
 	deletingInfoSuccess: "Заявка була видалена",
 	accountsPath: "/accounts",
 	deleteUserConfirmation: "Ви дійсно хочете видалити користувача?",
-    pageRowsCount: 5
+	pageRowsCount: 5,
+	sliderMinRangeValue: 0,
+    sliderMaxRangeValue: 30
 });
