@@ -11,7 +11,7 @@
 	loginPath: "/login",
 	settingsPath: "/settings",
 	homePath: "/home",
-	cooperationApplicationCreatingSuccess: "Дякуємо за виділений вами час, ми вам перетелефонуємо!",
+	cooperationApplicationCreatingSuccess: "Ваша заявка прийнята",
 	emptyFormValue: "не вказано",
 	callFeedbackAccepted: "Ваша заявка прийнята",
 	deleteTaskConfirmation: "Ви дійсно хочете видалити задачу?",
@@ -29,5 +29,7 @@
 	sliderMinRangeValue: 0,
 	sliderMaxRangeValue: 30,
 	sessionUserIdNotFound: "Потрібна авторизація",
-	emptyTextValue: "Не вказано"
+	emptyTextValue: "Не вказано",
+	updateDateApplicationConfirm: "Ви дійсно хочете обновити дату заявки?",
+    applicationDateUpdatedSuccess: "Дата заявка обновлена"
 });

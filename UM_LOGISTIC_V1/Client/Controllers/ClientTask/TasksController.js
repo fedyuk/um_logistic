@@ -3,6 +3,7 @@
     //variables
     $scope.tasks = [];
     $scope.isLoading = false;
+    $scope.isPartLoading = false;
     $scope.currentPage = 0;
     $scope.currentCount = moduleConstants.pageRowsCount;
     //variables
@@ -12,6 +13,7 @@
 		var userId = SessionService.getSessionUserId();
         ClientTaskService.getClientTasks(page, count, 'OwnerId==' + userId + ';').success(function (response) {
             $scope.isLoading = false;
+            $scope.isPartLoading = false;
             if (response.Success) {
                 for (var i = 0; i < response.Result.length; i++) {
                     $scope.tasks.push({
@@ -31,11 +33,13 @@
             }
         }).error(function (error) {
             $scope.isLoading = false;
+            $scope.isPartLoading = false;
             NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
         });
     }
 
     $scope.loadMore = function () {
+        $scope.isPartLoading = true;
         $scope.currentPage++;
         $scope.listTasks($scope.currentPage, $scope.currentCount);
     }

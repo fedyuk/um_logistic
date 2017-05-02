@@ -3,6 +3,7 @@
     //variables
     $scope.users = [];
     $scope.isLoading = false;
+    $scope.isPartLoading = false;
     $scope.currentPage = 0;
     $scope.currentCount = moduleConstants.pageRowsCount;
     //variables
@@ -13,6 +14,7 @@
 		var token = SessionService.getSessionToken();
 	    AccountService.getAccounts(user, token, page, count).success(function (response) {
 	        $scope.isLoading = false;
+	        $scope.isPartLoading = false;
 	        if (response.Success) {
 	            for (var i = 0; i < response.Result.length; i++) {
 	                $scope.users.push({
@@ -35,11 +37,13 @@
 	        }
 		}).error(function (error) {
 		    $scope.isLoading = false;
+		    $scope.isPartLoading = false;
 		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
 	}
 
 	$scope.loadMore = function () {
+	    $scope.isPartLoading = true;
 	    $scope.currentPage++;
 	    $scope.listUsers($scope.currentPage, $scope.currentCount);
 	}

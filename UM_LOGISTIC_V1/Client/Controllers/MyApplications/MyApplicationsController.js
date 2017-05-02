@@ -6,6 +6,7 @@
     $scope.currentPage = 0;
     $scope.currentCount = moduleConstants.pageRowsCount;
     $scope.isLoading = false;
+    $scope.isPartLoading = false;
     $scope.pictures = [];
     $scope.currentApplicationType = true;
     $scope.applicationTypes = {
@@ -27,14 +28,16 @@
         if(!userId) {
             NotificationService.warning(moduleConstants.sessionUserIdNotFound);
             $scope.isLoading = false;
+            $scope.isPartLoading = false;
             return;
         }
         switch ($scope.currentApplicationType) {
             case true:
                 invoke = $scope.isOrderedByMe == false ? FilterService.getTransportationApplications("Filtered==true;CreatedBy=" + userId,
-            $scope.currentPage, $scope.currentCount) : FilterService.getOrderedByMeApplications(true, userId);
+            $scope.currentPage, $scope.currentCount) : FilterService.getOrderedByMeApplications(true, userId, $scope.currentPage, $scope.currentCount);
                 invoke.success(function (response) {
-		    $scope.isLoading = false;
+                    $scope.isLoading = false;
+                    $scope.isPartLoading = false;
 		    if (response.Success) {
 		        if (isClear == true) {
 		            $scope.t_applications = [];
@@ -62,14 +65,16 @@
 		    }
 		}).error(function (error) {
 		    $scope.isLoading = false;
+		    $scope.isPartLoading = false;
 		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
                 break;
             case false:
                 invoke = $scope.isOrderedByMe == false ? FilterService.getTransportationApplications("Filtered==true;CreatedBy=" + userId,
-                $scope.currentPage, $scope.currentCount) : FilterService.getOrderedByMeApplications(false, userId);
+                $scope.currentPage, $scope.currentCount) : FilterService.getOrderedByMeApplications(false, userId, $scope.currentPage, $scope.currentCount);
        invoke.success(function (response) {
            $scope.isLoading = false;
+           $scope.isPartLoading = false;
            if (response.Success) {
                if (isClear == true) {
                    $scope.c_applications = [];
@@ -90,7 +95,7 @@
                        transportCapacity: FormHelper.getFormValue(response.Result[i].TransportCapacity),
                        transportArrow: FormHelper.getFormValue(response.Result[i].TransportArrow),
                    });
-                   $scope.getPicture(response.Result[i].Id, $scope.currentApplicationType);
+                   //$scope.getPicture(response.Result[i].Id, $scope.currentApplicationType);
                }
            }
            else {
@@ -98,12 +103,14 @@
            }
        }).error(function (error) {
            $scope.isLoading = false;
+           $scope.isPartLoading = false;
            NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
        });
         }
     }
 
     $scope.loadMore = function () {
+        $scope.isPartLoading = true;
         $scope.currentPage++;
         $scope.listApplications($scope.currentPage, $scope.currentCount);
     }
@@ -140,6 +147,75 @@
     $scope.onChangeMyOrderedFilter = function () {
         $scope.listApplications($scope.currentPage, $scope.currentCount, true);
     }
+
+    $scope.refreshApplicationDate = function (type, id) {
+        bootbox.confirm({
+            message: moduleConstants.updateDateApplicationConfirm,
+            buttons: {
+                confirm: {
+                    label: 'Так',
+                    className: 'btn-default btn-sm'
+                },
+                cancel: {
+                    label: 'Ні',
+                    className: 'btn-default btn-sm'
+                }
+            },
+            callback: function (ok) {
+                if (ok == true) {
+                    $scope.isLoading = true;
+                    FilterService.upToDateApplication(type, id)
+                    .success(function (response) {
+                        $scope.isLoading = false;
+                        if (response.Success == true) {
+                            NotificationService.success(moduleConstants.applicationDateUpdatedSuccess);
+                        }
+                        if (response.Success == false) {
+                            NotificationService.error(response.Error);
+                        }
+                    }).error(function (error) {
+                        $scope.isLoading = false;
+                        NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+                    });
+                }
+            }
+        });
+    }
+
+    $scope.removeApplication = function (type, id) {
+        bootbox.confirm({
+            message: moduleConstants.deleteApplicationConfirmation,
+            buttons: {
+                confirm: {
+                    label: 'Так',
+                    className: 'btn-default btn-sm'
+                },
+                cancel: {
+                    label: 'Ні',
+                    className: 'btn-default btn-sm'
+                }
+            },
+            callback: function (ok) {
+                if (ok == true) {
+                    $scope.isLoading = true;
+                    FilterService.removeApplication(type, id)
+                    .success(function (response) {
+                        $scope.isLoading = false;
+                        if (response.Success == true) {
+                            NotificationService.success(moduleConstants.deletingInfoSuccess);
+                        }
+                        if (response.Success == false) {
+                            NotificationService.error(response.Error);
+                        }
+                    }).error(function (error) {
+                        $scope.isLoading = false;
+                        NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+                    });
+                }
+            }
+        });
+    }
+
 
     //methods
 

@@ -5,6 +5,7 @@
     $scope.currentPage = 0;
     $scope.currentCount = moduleConstants.pageRowsCount;
     $scope.isLoading = false;
+    $scope.isPartLoading = false;
     $scope.pictures = [];
     $scope.currentApplicationType = true;
     $scope.applicationTypes = {
@@ -27,6 +28,7 @@
             $scope.currentPage, $scope.currentCount)
 		.success(function (response) {
 		    $scope.isLoading = false;
+		    $scope.isPartLoading = false;
 		    if (response.Success) {
 		        for (var i = 0; i < response.Result.length; i++) {
 		            $scope.applications.push({
@@ -42,6 +44,7 @@
 		    }
 		}).error(function (error) {
 		    $scope.isLoading = false;
+		    $scope.isPartLoading = false;
 		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
                 break;
@@ -50,6 +53,7 @@
            $scope.currentPage, $scope.currentCount)
        .success(function (response) {
            $scope.isLoading = false;
+           $scope.isPartLoading = false;
            if (response.Success) {
                for (var i = 0; i < response.Result.length; i++) {
                    $scope.applications.push({
@@ -65,12 +69,14 @@
            }
        }).error(function (error) {
            $scope.isLoading = false;
+           $scope.isPartLoading = false;
            NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
        });
         }
     }
 
     $scope.loadMore = function () {
+        $scope.isPartLoading = true;
         $scope.currentPage++;
         $scope.listApplications($scope.currentPage, $scope.currentCount);
     }

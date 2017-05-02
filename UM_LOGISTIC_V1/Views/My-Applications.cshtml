@@ -45,6 +45,7 @@
                     <th>Висота вантажу</th>
                     <th>Вантажність(т)</th>
                     <th>Об'єм(м3)</th>
+                    <th>Дії</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,6 +62,17 @@
                     <td>{{transportation.shipmentHeight}}</td>
                     <td>{{transportation.shipmentCapacity}}</td>
                     <td>{{transportation.shipmentWeight}}</td>
+                    <td>
+                        <div class="btn-group" ng-show="isOrderedByMe == false">
+                            <a class="btn btn-success dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+                                <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" ng-click="refreshApplicationDate(true, transportation.id)"><i class="fa fa-refresh fa-sm"></i> Обновити дату</a></li>
+                                <li><a href="#" ng-click="removeApplication(true, transportation.id)"><i class="fa fa-trash fa-sm"></i> Видалити</a></li>
+                            </ul>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -87,6 +99,7 @@
                     <th>Вантажність(т)</th>
                     <th>Об'єм(м3)</th>
                     <th>Вміст стріли(м)</th>
+                    <th>Дії</th>
                 </tr>
             </thead>
             <tbody>
@@ -104,9 +117,21 @@
                     <td>{{cooperation.transportWeight}}</td>
                     <td>{{cooperation.transportCapacity}}</td>
                     <td>{{cooperation.transportArrow}}</td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn btn-success dropdown-toggle btn-sm" data-toggle="dropdown" href="#">
+                                <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" ng-click="refreshApplicationDate(true, cooperation.id)" ng-show="isOrderedByMe == false"><i class="fa fa-refresh fa-sm"></i> Обновити дату</a></li>
+                                <li><a href="#" ng-click="removeApplication(true, cooperation.id)" ng-show="isOrderedByMe == false"><i class="fa fa-trash fa-sm"></i> Видалити</a></li>
+                            </ul>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
+    <i ng-show="isPartLoading" class="fa fa-refresh fa-spin fa-2x fa-fw col-md-offset-6"></i>
     <button style="margin-top:20px;" type="button" class="btn btn-primary col-md-offset-6 btn-sm" ng-click="loadMore()">Загрузити ще</button>
 </div>

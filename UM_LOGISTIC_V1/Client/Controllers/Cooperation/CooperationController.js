@@ -5,6 +5,7 @@
     $scope.currentPage = 0;
     $scope.currentCount = moduleConstants.pageRowsCount;
     $scope.isLoading = false;
+    $scope.isPartLoading = false;
     $scope.pictures = {};
     $scope.filter = {
         TransportLength: {
@@ -40,6 +41,7 @@
         CooperationService.getCooperations(SessionService.getSessionUser(), SessionService.getSessionToken(),
             $scope.currentPage, $scope.currentCount)
 		.success(function (response) {
+		    $scope.isPartLoading = false;
 		    $scope.isLoading = false;
 		    if (response.Success) {
 		        for (var i = 0; i < response.Result.length; i++) {
@@ -59,6 +61,7 @@
 		        NotificationService.error(JSON.stringify(response.Error));
 		    }
 		}).error(function (error) {
+		    $scope.isPartLoading = false;
 		    $scope.isLoading = false;
 		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
@@ -95,6 +98,7 @@
     }
 
     $scope.loadMore = function () {
+        $scope.isPartLoading = true;
         $scope.currentPage++;
         $scope.listCooperations($scope.currentPage, $scope.currentCount);
     }

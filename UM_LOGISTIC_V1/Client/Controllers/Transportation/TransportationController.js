@@ -5,6 +5,7 @@
     $scope.currentPage = 0;
     $scope.currentCount = moduleConstants.pageRowsCount;
     $scope.isLoading = false;
+    $scope.isPartLoading = false;
     $scope.pictures = {};
 
     $scope.filter = {
@@ -38,6 +39,7 @@
             $scope.currentPage, $scope.currentCount)
 		.success(function (response) {
 		    $scope.isLoading = false;
+		    $scope.isPartLoading = false;
 		    if (response.Success) {
 		        for (var i = 0; i < response.Result.length; i++) {
 		            $scope.transportations.push({
@@ -56,6 +58,7 @@
 		    }
 		}).error(function (error) {
 		    $scope.isLoading = false;
+		    $scope.isPartLoading = false;
 		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
     }
@@ -63,6 +66,7 @@
     $scope.listFilteredTransportations = function (filter, page, count) {
         FilterService.getTransportationApplications(filter, page, count)
 		.success(function (response) {
+		    $scope.isPartLoading = false;
 		    $scope.isLoading = false;
 		    if (response.Success) {
 		        if (page == 0) {
@@ -84,6 +88,7 @@
 		        NotificationService.error(JSON.stringify(response.Error));
 		    }
 		}).error(function (error) {
+		    $scope.isPartLoading = false;
 		    $scope.isLoading = false;
 		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
@@ -91,6 +96,7 @@
 
     $scope.loadMore = function () {
         $scope.currentPage++;
+        $scope.isPartLoading = true;
         $scope.listTransportations($scope.currentPage, $scope.currentCount);
     }
 
