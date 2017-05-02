@@ -6,6 +6,7 @@ using System.Web.Http;
 using UM_LOGISTIC_V1.Request.Application;
 using UM_LOGISTIC_V1.Response.Application;
 using UM_LOGISTIC_V1.Response.CooperationApplication;
+using UM_LOGISTIC_V1.Response.TransportationApplication;
 using UM_LOGISTIC_V1.Services;
 
 namespace UM_LOGISTIC_V1.Controllers.Application
@@ -54,6 +55,17 @@ namespace UM_LOGISTIC_V1.Controllers.Application
             var response = new AppllicationCountResponse();
             var count = service.GetNotFilteredApplicationsCount();
             response.Result = count;
+            response.Success = true;
+            return Ok(response);
+        }
+
+        [Route("api/my_orderd_applications")]
+        [HttpGet]
+        public IHttpActionResult GetOrderedByMyApplications(bool type, long userId)
+        {
+            var response = new GetOrderedByMeApplicationsResponse();
+            var result = service.GetOrderedByMeApplications(type, userId);
+            response.Result = result;
             response.Success = true;
             return Ok(response);
         }

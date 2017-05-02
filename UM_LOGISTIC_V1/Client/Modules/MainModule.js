@@ -78,6 +78,11 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
             templateUrl: '/views/tasks',
             controller: 'TasksController'
         })
+        .state('my_applications', {
+            url: '/my_applications',
+            templateUrl: '/views/my-applications',
+            controller: 'MyApplicationsController'
+        })
         .state('404', {
             url: '/404',
             templateUrl: '/views/404'

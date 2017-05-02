@@ -49,7 +49,8 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Client/Controllers/NotFilteredApplications/NotFilteredApplicationsController.js",
                 "~/Client/Controllers/User/CreateUserController.js",
                 "~/Client/Controllers/ClientTask/CallFeedbackController.js",
-                "~/Client/Controllers/ClientTask/TasksController.js"));
+                "~/Client/Controllers/ClientTask/TasksController.js",
+                "~/Client/Controllers/MyApplications/MyApplicationsController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Libraries").Include(
                 "~/Scripts/angular.min.js",
@@ -65,10 +66,11 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Scripts/angular-bootstrap-lightbox.min.js",
                 "~/Scripts/bootstrap-datepicker.min.js",
                 "~/Scripts/jquery.imageview.js",
-                "~/Scripts/lightbox.min.js"));
+                "~/Scripts/lightbox.min.js",
+                "~/Scripts/bootstrap-formhelpers-phone.js",
+                "~/Scripts/bootstrap-formhelpers-number.js"));
 
             bundles.Add(new StyleBundle("~/bundles/Styles").Include(
-                "~/Style/bootswatch/bootstrap.css",
                 "~/Style/angular-bootstrap-lightbox.min.css",
                 "~/Style/my-style.css",
                 "~/Style/slider/bootstrap-slider.css",
@@ -77,7 +79,9 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Style/font-awesome-4.7.0/css/font-awesome.min.css",
                 "~/Style/date-picker/bootstrap-datepicker3.css",
                 "~/Style/lightbox/jquery.imageview.css",
-                "~/Style/lightbox/lightbox.min.css"));
+                "~/Style/lightbox/lightbox.min.css",
+                "~/Style/input-mask/bootstrap-form-helper.css",
+                 "~/Style/bootswatch/bootstrap.css"));
         }
     }
 }

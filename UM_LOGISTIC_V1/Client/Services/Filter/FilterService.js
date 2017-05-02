@@ -6,6 +6,10 @@
         return $http.get('/api/c_applications?filter=' + filter + '&page=' + page + '&count=' + count);
     }
 
+    this.getOrderedByMeApplications = function (type, userId) {
+        return $http.get('/api/my_orderd_applications?type=' + type + '&userId=' + userId);
+    }
+
     this.acceptApplication = function (type, id) {
         var request = {
             Id: id,

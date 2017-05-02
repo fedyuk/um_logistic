@@ -27,5 +27,7 @@
 	deleteUserConfirmation: "Ви дійсно хочете видалити користувача?",
 	pageRowsCount: 5,
 	sliderMinRangeValue: 0,
-    sliderMaxRangeValue: 30
+	sliderMaxRangeValue: 30,
+	sessionUserIdNotFound: "Потрібна авторизація",
+	emptyTextValue: "Не вказано"
 });

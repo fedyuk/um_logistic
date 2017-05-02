@@ -17,7 +17,7 @@
                 boolText = "Так";
                 break;
             default:
-                boolText = "Не вказано";
+                boolText = moduleConstants.emptyTextValue;
                 break;
         }
         return boolText;
