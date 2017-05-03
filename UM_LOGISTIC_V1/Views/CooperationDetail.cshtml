@@ -60,6 +60,9 @@
         <div>
             <h5>Вартість доставки(грн/км): {{cooperationToView.DeliveryCost}}</h5>
         </div>
+        <div class="inline">
+            <button type="button" class="btn btn-success btn-xs" ng-click="acceptApplication(cooperationToView.id)"><i class="fa fa-check" style="margin-right: 8px;" aria-hidden="true"></i>Оформити</button>
+        </div>
     </div>
     </div>
 </div>
@@ -68,7 +71,7 @@
         <h4>Галерея:</h4>
         <div class="row" ng-show="htmlPicuresContent == ''">
             <div>
-                <p>Немає даних</p>
+                <h4>Немає даних</h4>
             </div>
         </div>
 

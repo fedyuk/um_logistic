@@ -1,4 +1,4 @@
-﻿mainModule.controller('TransportationApplicationDetailController', function ($rootScope, $location, $scope, $stateParams, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService, FormHelper) {
+﻿mainModule.controller('TransportationApplicationDetailController', function ($rootScope, $location, $scope, $stateParams, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService, FormHelper, ClientTaskService) {
 
     if (!$stateParams.id) {
         $location.path(moduleConstants.notFoundPath);
@@ -134,6 +134,27 @@
             },
             onimageclick: function (image) {
             }
+        });
+    }
+    $scope.acceptApplication = function (id) {
+        $scope.isLoading = true;
+        var request = {};
+        request.UserId = SessionService.getSessionUserId();
+        request.ApplicationId = id;
+        request.TypeId = 2;
+        ClientTaskService.createApplicationTask(request)
+        .success(function (response) {
+            if (response.Success) {
+                NotificationService.success(moduleConstants.callFeedbackAccepted);
+                $scope.isLoading = false;
+            }
+            else {
+                $scope.isLoading = false;
+                NotificationService.error(response.Error);
+            }
+        }).error(function (error) {
+            $scope.isLoading = false;
+            NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
         });
     }
 
