@@ -20,5 +20,18 @@ namespace UM_LOGISTIC_V1.Models
         public DbSet<CooperationPicture.CooperationPicture> CooperationPictures { get; set; }
         public DbSet<ClientTaskType> ClientTaskTypes { get; set; }
         public DbSet<ClientTask.ClientTask> ClientTasks { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ClientTask.ClientTask>()
+                .HasOptional(a => a.TransportationApplication)
+                .WithOptionalDependent()
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<ClientTask.ClientTask>()
+               .HasOptional(a => a.CooperationApplication)
+               .WithOptionalDependent()
+               .WillCascadeOnDelete(true);
+        }
     }
 }

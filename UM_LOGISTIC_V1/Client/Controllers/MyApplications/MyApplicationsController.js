@@ -33,7 +33,7 @@
         }
         switch ($scope.currentApplicationType) {
             case true:
-                invoke = $scope.isOrderedByMe == false ? FilterService.getTransportationApplications("Filtered==true;CreatedBy=" + userId,
+                invoke = $scope.isOrderedByMe == false ? FilterService.getTransportationApplications("CreatedBy=" + userId,
             $scope.currentPage, $scope.currentCount) : FilterService.getOrderedByMeApplications(true, userId, $scope.currentPage, $scope.currentCount);
                 invoke.success(function (response) {
                     $scope.isLoading = false;
@@ -71,7 +71,7 @@
 		});
                 break;
             case false:
-                invoke = $scope.isOrderedByMe == false ? FilterService.getCooperationApplications("Filtered==true;CreatedBy=" + userId,
+                invoke = $scope.isOrderedByMe == false ? FilterService.getCooperationApplications("CreatedBy=" + userId,
                 $scope.currentPage, $scope.currentCount) : FilterService.getOrderedByMeApplications(false, userId, $scope.currentPage, $scope.currentCount);
        invoke.success(function (response) {
            $scope.isLoading = false;
@@ -204,6 +204,20 @@
                     .success(function (response) {
                         $scope.isLoading = false;
                         if (response.Success == true) {
+                            if (type == true) {
+                                for (var i = 0; i < $scope.t_applications.length; i++)
+                                    if ($scope.t_applications[i].id === id) {
+                                        $scope.t_applications.splice(i, 1);
+                                        break;
+                                    }
+                            }
+                            if (type == false) {
+                                for (var i = 0; i < $scope.c_applications.length; i++)
+                                    if ($scope.c_applications[i].id === id) {
+                                        $scope.c_applications.splice(i, 1);
+                                        break;
+                                    }
+                            }
                             NotificationService.success(moduleConstants.deletingInfoSuccess);
                         }
                         if (response.Success == false) {
