@@ -69,6 +69,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="#" ng-click="refreshApplicationDate(true, transportation.id)"><i class="fa fa-refresh fa-sm"></i> Обновити дату</a></li>
+                                <li><a href="#" ng-click="editApplication(true, transportation.obj)"><i class="fa fa-edit fa-sm"></i> Редагувати</a></li>
                                 <li><a href="#" ng-click="removeApplication(true, transportation.id)"><i class="fa fa-trash fa-sm"></i> Видалити</a></li>
                             </ul>
                         </div>
@@ -123,8 +124,9 @@
                                 <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#" ng-click="refreshApplicationDate(true, cooperation.id)" ng-show="isOrderedByMe == false"><i class="fa fa-refresh fa-sm"></i> Обновити дату</a></li>
-                                <li><a href="#" ng-click="removeApplication(true, cooperation.id)" ng-show="isOrderedByMe == false"><i class="fa fa-trash fa-sm"></i> Видалити</a></li>
+                                <li><a href="#" ng-click="refreshApplicationDate(false, cooperation.id)" ng-show="isOrderedByMe == false"><i class="fa fa-refresh fa-sm"></i> Обновити дату</a></li>
+                                <li><a href="#" ng-click="editApplication(false, cooperation.obj)"><i class="fa fa-edit fa-sm"></i> Редагувати</a></li>
+                                <li><a href="#" ng-click="removeApplication(false, cooperation.id)" ng-show="isOrderedByMe == false"><i class="fa fa-trash fa-sm"></i> Видалити</a></li>
                             </ul>
                         </div>
                     </td>

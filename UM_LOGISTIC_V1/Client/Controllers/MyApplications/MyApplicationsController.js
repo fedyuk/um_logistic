@@ -56,6 +56,7 @@
 		                shipmentHeight: FormHelper.getFormValue(response.Result[i].ShipmentHeight),
 		                shipmentCapacity: FormHelper.getFormValue(response.Result[i].ShipmentCapacity),
 		                shipmentWeight: FormHelper.getFormValue(response.Result[i].ShipmentWeight),
+		                obj: response.Result[i]
 		            });
 		            $scope.getPicture(response.Result[i].Id, $scope.currentApplicationType);
 		        }
@@ -70,7 +71,7 @@
 		});
                 break;
             case false:
-                invoke = $scope.isOrderedByMe == false ? FilterService.getTransportationApplications("Filtered==true;CreatedBy=" + userId,
+                invoke = $scope.isOrderedByMe == false ? FilterService.getCooperationApplications("Filtered==true;CreatedBy=" + userId,
                 $scope.currentPage, $scope.currentCount) : FilterService.getOrderedByMeApplications(false, userId, $scope.currentPage, $scope.currentCount);
        invoke.success(function (response) {
            $scope.isLoading = false;
@@ -94,6 +95,7 @@
                        transportWeight: FormHelper.getFormValue(response.Result[i].TransportWeight),
                        transportCapacity: FormHelper.getFormValue(response.Result[i].TransportCapacity),
                        transportArrow: FormHelper.getFormValue(response.Result[i].TransportArrow),
+                       obj: response.Result[i]
                    });
                    //$scope.getPicture(response.Result[i].Id, $scope.currentApplicationType);
                }
@@ -215,6 +217,19 @@
             }
         });
     }
+    $scope.editApplication = function (type, application) {
+        var message = "";
+        for (var property in application) {
+            if (typeof application[property] != "object") {
+                message += "<p contenteditable>" + FormHelper.getFormValue(application[property]) + "</p>";
+            }
+        }
+        var dialog = bootbox.dialog({
+            title: moduleConstants.editApplicationCaption,
+            message: message
+        });
+    }
+
 
 
     //methods

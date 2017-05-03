@@ -31,5 +31,6 @@
 	sessionUserIdNotFound: "Потрібна авторизація",
 	emptyTextValue: "Не вказано",
 	updateDateApplicationConfirm: "Ви дійсно хочете обновити дату заявки?",
-    applicationDateUpdatedSuccess: "Дата заявка обновлена"
+	applicationDateUpdatedSuccess: "Дата заявка обновлена",
+    editApplicationCaption: "Редагування заявки"
 });
