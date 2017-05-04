@@ -5,7 +5,7 @@
     <h4></h4>
 </div>
 <div class="row" style="margin-top: 100px;" ng-show="!isLoading">
-    <a class="btn btn-default btn-sm" href="/accounts_c">
+    <a class="btn btn-success btn-sm" href="/accounts_c">
         <i class="fa fa-user-plus fa-sm" aria-hidden="true"></i> Додати
     </a>
     <div class="row" ng-show="users.length == 0">
@@ -42,7 +42,7 @@
                 <td>{{user.street}}</td>
                 <td>{{user.role}}</td>
                 <td>
-                    <a class="btn btn-default btn-sm" href="#" ng-click="deleteUser(user.id)">
+                    <a class="btn btn-warning btn-sm" href="#" ng-click="deleteUser(user.id)">
                         <i class="fa fa-trash-o fa-sm"></i>
                     </a>
                 </td>
