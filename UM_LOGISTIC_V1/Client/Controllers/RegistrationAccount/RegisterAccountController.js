@@ -33,5 +33,14 @@
             NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
         });
     }
+    $scope.phoneMask = function () {
+        jQuery(function ($) {
+            $("#contactPhone").mask("(999) 999-9999");
+        });
+    }
+    //
+
+    //init
+    $scope.phoneMask();
     //
 });
