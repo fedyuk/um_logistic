@@ -113,6 +113,7 @@ namespace UM_LOGISTIC_V1.Services
             account.City = userToRegister.City;
             account.CreatedOn = DateTime.Now;
             account.ModifiedOn = DateTime.Now;
+            account.Image = userToRegister.Image;
             user.Account = account;
             user.Role = db.Roles.Find(3);
             db.Users.Add(user);

@@ -13,5 +13,6 @@ namespace UM_LOGISTIC_V1.Request.Account
         public string FullName { get; set; }
         public string WorkPhone { get; set; }
         public string City { get; set; }
+        public string Image { get; set; }
     }
 }

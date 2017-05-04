@@ -4,6 +4,7 @@
     $scope.notFilteredApplicationsCount = 0;
     $scope.clientTasksCount = 0;
     $scope.applicationsInTrash = 0;
+    $scope.userImage = "";
 	//methods
 	
 	$scope.logoutUser = function() {
@@ -94,8 +95,15 @@
 		SessionService.saveSessionToken(response.Token, response.Result.UserName);
 		SessionService.saveProfileData(response.Result);
 		$scope.changeProfileData(true, response.Result.Account.FullName, SessionService.isStaff());
+		if (response.Result) {
+		    $scope.saveProfileImage(response.Result.Account.Image)
+		}
 	}
 	
+	$scope.saveProfileImage = function (profileImage) {
+	    $scope.userImage = profileImage;
+	}
+
 	$scope.$on("userAuthorized", function(event, args) {
 		$scope.saveProfile(args);
 	});

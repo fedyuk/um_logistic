@@ -9,8 +9,10 @@
         ConfirmationPassword: "",
         FullName: "",
         WorkPhone: "",
-        City: ""
+        City: "",
+        Image: ""
     };
+
     //
 
     // methods
@@ -33,6 +35,31 @@
             NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
         });
     }
+
+    $scope.fileChanged = function () {
+        file = document.getElementById("user-picture").files[0];
+        var reader = new FileReader();
+
+        reader.addEventListener("load", function () {
+            if (reader.result.indexOf("jpg") != -1 || reader.result.indexOf("jpeg") != -1 || reader.result.indexOf("png") != -1) {
+                $scope.userToRegister.Image = reader.result;
+            }
+            else {
+                NotificationService.warning(moduleConstants.invalidPictureFormat);
+                document.getElementById("user-picture").value = "";
+            }
+        }, false);
+
+        if (file && file.size <= (moduleConstants.pictureSizeLimitMb * 1000000)) {
+            reader.readAsDataURL(file);
+        }
+        else if (file && file.size > (moduleConstants.pictureSizeLimitMb * 1000000)) {
+            NotificationService.warning(moduleConstants.pictureSizeInvalid.replace("{0}", moduleConstants.pictureSizeLimitMb));
+            document.getElementById("user-picture").value = "";
+        }
+    }
+
+
     $scope.phoneMask = function () {
         jQuery(function ($) {
             $("#contactPhone").mask("(999) 999-9999");
