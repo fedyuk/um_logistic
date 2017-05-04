@@ -38,5 +38,10 @@ namespace UM_LOGISTIC_V1.Services
                 return false;
             }
         }
+
+        public long GetApplicationTrashCountByCreatedBy(long id)
+        {
+            return db.ApplicationsTrash.Count(i => i.CreatedBy == id);
+        }
     }
 }

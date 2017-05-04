@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http;
 using UM_LOGISTIC_V1.Request.ApplicationTrash;
 using UM_LOGISTIC_V1.Response;
+using UM_LOGISTIC_V1.Response.Application;
 using UM_LOGISTIC_V1.Services;
 
 namespace UM_LOGISTIC_V1.Controllers.ApplicationTrash
@@ -19,6 +20,16 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationTrash
         {
             var response = new BaseResponse();
             response.Success = service.InsertTrashApplication(request.UserId, request.ApplicationId, request.Type);
+            return Ok(response);
+        }
+
+        [Route("api/trash/count")]
+        [HttpGet]
+        public IHttpActionResult GetApplicationTrashCount(long id)
+        {
+            var response = new AppllicationCountResponse();
+            response.Result = service.GetApplicationTrashCountByCreatedBy(id);
+            response.Success = true;
             return Ok(response);
         }
 

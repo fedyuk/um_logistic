@@ -1,4 +1,4 @@
-﻿mainModule.controller('TransportationController', function ($rootScope, $scope, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService, ClientTaskService, FormHelper, FilterService) {
+﻿mainModule.controller('TransportationController', function ($rootScope, $scope, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService, ClientTaskService, FormHelper, FilterService, ApplicationTrashService) {
 
     //variables 
     $scope.transportations = [];
@@ -247,6 +247,26 @@
             filter[name].isClear = true;
             $scope[name + "Slider"].slider('setValue', [moduleConstants.sliderMinRangeValue, moduleConstants.sliderMaxRangeValue]);
         }
+    }
+
+    $scope.moveIntoTrash = function (id) {
+        var userId = SessionService.getSessionUserId();
+        var request = {
+            ApplicationId: id,
+            Type: true,
+            UserId: userId
+        };
+        ApplicationTrashService.createApplicationTrash(request).success(function (response) {
+            if (response.Success == false) {
+                NotificationService.error(JSON.stringify(response.Error));
+            }
+            if (response.Success == true) {
+                NotificationService.success(moduleConstants.applicationTrashAddedInfo);
+            }
+        }).error(function (error) {
+            NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+        });
+
     }
 
     //methods

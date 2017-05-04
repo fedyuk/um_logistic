@@ -1,8 +1,9 @@
 ﻿mainModule.controller('ProfileController', function ($scope, $log, $location, UserService,
-	SessionService, moduleConstants, LoginService, AccountService, NotificationService, FilterService, ClientTaskService) {
+	SessionService, moduleConstants, LoginService, AccountService, NotificationService, FilterService, ClientTaskService, ApplicationTrashService) {
 	
     $scope.notFilteredApplicationsCount = 0;
     $scope.clientTasksCount = 0;
+    $scope.applicationsInTrash = 0;
 	//methods
 	
 	$scope.logoutUser = function() {
@@ -38,6 +39,20 @@
 	    ClientTaskService.getClientTasksCount('OwnerId==' + userId + ';').success(function (response) {
 	        if (response.Success) {
 	            $scope.clientTasksCount = response.Result;
+	        }
+	        else {
+	            NotificationService.error(JSON.stringify(response.Error));
+	        }
+	    }).error(function (error) {
+	        NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+	    });
+	}
+
+	$scope.getApplicationsInTrashCount = function () {
+	    var userId = SessionService.getSessionUserId();
+	    ApplicationTrashService.getApplicationTrashCountByCreatedBy(userId).success(function (response) {
+	        if (response.Success) {
+	            $scope.applicationsInTrash = response.Result;
 	        }
 	        else {
 	            NotificationService.error(JSON.stringify(response.Error));
@@ -101,5 +116,7 @@
 	$scope.getNotFilteredApplicationsCount();
 
 	$scope.getClientTasksCount();
+
+	$scope.getApplicationsInTrashCount();
 	//init controller
 });

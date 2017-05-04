@@ -32,5 +32,6 @@
 	emptyTextValue: "Не вказано",
 	updateDateApplicationConfirm: "Ви дійсно хочете обновити дату заявки?",
 	applicationDateUpdatedSuccess: "Дата заявка обновлена",
-    editApplicationCaption: "Редагування заявки"
+	editApplicationCaption: "Редагування заявки",
+    applicationTrashAddedInfo: "Заявка додана в корзину"
 });
