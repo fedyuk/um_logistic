@@ -32,7 +32,8 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Client/Services/Notification/NotificationService.js",
                 "~/Client/Services/Form/FormHelper.js",
                 "~/Client/Services/Filter/FilterService.js",
-                "~/Client/Services/ClientTask/ClientTaskService.js"));
+                "~/Client/Services/ClientTask/ClientTaskService.js",
+                "~/Client/Services/ApplicationTrash/ApplicationTrashService.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Controllers").Include(
 				"~/Client/Controllers/Profile/ProfileController.js",

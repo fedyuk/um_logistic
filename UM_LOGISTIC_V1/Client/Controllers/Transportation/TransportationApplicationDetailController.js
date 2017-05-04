@@ -1,4 +1,4 @@
-﻿mainModule.controller('TransportationApplicationDetailController', function ($rootScope, $location, $scope, $stateParams, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService, FormHelper, ClientTaskService) {
+﻿mainModule.controller('TransportationApplicationDetailController', function ($rootScope, $location, $scope, $stateParams, $log, $location, TransportationService, SessionService, moduleConstants, NotificationService, ApplicationPictureService, FormHelper, ClientTaskService, ApplicationTrashService) {
 
     if (!$stateParams.id) {
         $location.path(moduleConstants.notFoundPath);
@@ -156,6 +156,26 @@
             $scope.isLoading = false;
             NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
         });
+    }
+
+    $scope.moveIntoTrash = function (id) {
+        var userId = SessionService.getSessionUserId();
+        var request = {
+            ApplicationId: id,
+            Type: true,
+            UserId: userId
+        };
+        ApplicationTrashService.createApplicationTrash(request).success(function (response) {
+            if (response.Success == false) {
+                NotificationService.error(JSON.stringify(response.Error));
+            }
+            if (response.Success == true) {
+                NotificationService.success(moduleConstants.applicationTrashAddedInfo);
+            }
+        }).error(function (error) {
+            NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+        });
+
     }
 
     $scope.getTransportation();

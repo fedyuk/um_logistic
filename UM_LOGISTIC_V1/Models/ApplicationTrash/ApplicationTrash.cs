@@ -10,7 +10,7 @@ namespace UM_LOGISTIC_V1.Models.ApplicationTrash
     public class ApplicationTrash : Entity
     {
         [ForeignKey("User")]
-        public long UserId { get; set; }
+        public long UserId { get; set; } 
         public virtual User.User User { get; set; }
 
         [ForeignKey("CooperationApplication")]
