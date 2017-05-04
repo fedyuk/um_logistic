@@ -68,6 +68,7 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Scripts/jquery.imageview.js",
                 "~/Scripts/lightbox.min.js",
                 "~/Scripts/bootstrap-formhelpers-phone.js",
+                "~/Scripts/jquery.maskedinput.min.js",
                 "~/Scripts/bootstrap-formhelpers-number.js"));
 
             bundles.Add(new StyleBundle("~/bundles/Styles").Include(

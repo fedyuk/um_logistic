@@ -120,7 +120,14 @@
 	    }
 	}
 	
+	$scope.phoneMask = function () {
+	    jQuery(function ($) {
+	        $("#contactPhone").mask("(999) 999-9999");
+	    });
+	}
+
 	// init
 	$scope.loadWorkTypes();
+	$scope.phoneMask();
 	// init
 });
