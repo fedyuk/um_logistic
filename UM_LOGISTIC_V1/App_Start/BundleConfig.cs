@@ -81,6 +81,7 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Style/lightbox/jquery.imageview.css",
                 "~/Style/lightbox/lightbox.min.css",
                 "~/Style/input-mask/bootstrap-form-helper.css",
+                "~/Style/my-style.css",
                  "~/Style/bootswatch/bootstrap.css"));
         }
     }
