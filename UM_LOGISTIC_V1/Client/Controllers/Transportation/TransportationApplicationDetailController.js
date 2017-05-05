@@ -137,7 +137,6 @@
         });
     }
     $scope.acceptApplication = function (id) {
-        $scope.isLoading = true;
         var request = {};
         request.UserId = SessionService.getSessionUserId();
         request.ApplicationId = id;
