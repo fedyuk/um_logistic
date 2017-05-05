@@ -63,7 +63,6 @@
             },
             callback: function (ok) {
                 if (ok == true) {
-                    $scope.isLoading = true;
                     ClientTaskService.acceptTask(id)
                     .success(function (response) {
                         $scope.isLoading = false;
