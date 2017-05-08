@@ -5,6 +5,7 @@
     $scope.clientTasksCount = 0;
     $scope.applicationsInTrash = 0;
     $scope.userImage = "";
+    $scope.appTrashElements = [];
 	//methods
 	
 	$scope.logoutUser = function() {
@@ -100,6 +101,25 @@
 		}
 	}
 	
+	$scope.getApplicationsInTrashElements = function () {
+	    var userId = SessionService.getSessionUserId();
+	    ApplicationTrashService.getApplicationTrashElements(userId).success(function (response) {
+	        if (response.Success) {
+	            $scope.appTrashElements = response.Result;
+	            angular.forEach($scope.appTrashElements, function (value, key) {
+	                if (value.Title == '') {
+	                    value.Title = moduleConstants.emptyFormValue;
+	                }
+	            })
+	        }
+	        else {
+	            NotificationService.error(JSON.stringify(response.Error));
+	        }
+	    }).error(function (error) {
+	        NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+	    });
+	}
+
 	$scope.saveProfileImage = function (profileImage) {
 	    $scope.userImage = profileImage;
 	}
@@ -126,5 +146,7 @@
 	$scope.getClientTasksCount();
 
 	$scope.getApplicationsInTrashCount();
+
+	$scope.getApplicationsInTrashElements();
 	//init controller
 });

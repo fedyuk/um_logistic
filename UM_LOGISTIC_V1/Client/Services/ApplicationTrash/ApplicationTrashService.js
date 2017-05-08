@@ -10,4 +10,10 @@
 	    return $http.get("/api/trash/count?id=" + id);
 	}
 	
+	this.getApplicationTrashElements = function (id) {
+	    if (!id) {
+	        id = 0;
+	    }
+	    return $http.get("/api/trash/userApplications?id=" + id);
+	}
 });

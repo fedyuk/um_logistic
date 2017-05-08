@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using UM_LOGISTIC_V1.Models;
 using UM_LOGISTIC_V1.Models.ApplicationTrash;
+using UM_LOGISTIC_V1.Response.ApplicationTrash;
 
 namespace UM_LOGISTIC_V1.Services
 {
@@ -42,6 +43,30 @@ namespace UM_LOGISTIC_V1.Services
         public long GetApplicationTrashCountByCreatedBy(long id)
         {
             return db.ApplicationsTrash.Count(i => i.CreatedBy == id);
+        }
+
+        public List<ApplicationTrashElement> GetApplicationTrashesList(long userId)
+        {
+            var applicationsTrash = new List<ApplicationTrashElement>();
+
+            var applications = db.ApplicationsTrash.Select(a => new
+            {
+                CooperationId = a.CooperationApplicationId,
+                TransportationId = a.TransportationApplicationId,
+                CooperationTitle = a.CooperationApplication.FullName,
+                TransportationTitle = a.TransportationApplication.Name,
+                UserId = a.CreatedBy,
+            }).Where(a => a.UserId == userId);
+
+            foreach (var app in applications)
+            {
+                applicationsTrash.Add(new ApplicationTrashElement() {
+                    Id = app.CooperationId != null ? app.CooperationId : app.TransportationId,
+                    Type = app.CooperationId != null ? false : true,
+                    Title = app.CooperationId != null ? app.CooperationTitle : app.TransportationTitle
+                });
+            }
+            return applicationsTrash;
         }
     }
 }
