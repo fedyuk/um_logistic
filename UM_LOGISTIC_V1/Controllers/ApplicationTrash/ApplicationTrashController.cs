@@ -6,6 +6,7 @@ using System.Web.Http;
 using UM_LOGISTIC_V1.Request.ApplicationTrash;
 using UM_LOGISTIC_V1.Response;
 using UM_LOGISTIC_V1.Response.Application;
+using UM_LOGISTIC_V1.Response.ApplicationTrash;
 using UM_LOGISTIC_V1.Services;
 
 namespace UM_LOGISTIC_V1.Controllers.ApplicationTrash
@@ -33,5 +34,14 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationTrash
             return Ok(response);
         }
 
+        [Route("api/trash/userApplications")]
+        [HttpGet]
+        public IHttpActionResult GetApplicationTrashList(long id)
+        {
+            var response = new GetApplicationTrashListResponse();
+            response.Result = service.GetApplicationTrashesList(id);
+            response.Success = true;
+            return Ok(response);
+        }
     }
 }
