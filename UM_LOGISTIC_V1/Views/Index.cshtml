@@ -43,12 +43,12 @@
                             <li><a href="/coop_application">Співробітництво</a></li>
                         </ul>
                     </li>
-                    <li ng-show="!isStaff">
+                    <li style="display:none;" id="feed-callback-button" ng-show="!isStaff">
                         <a href="/call_feedback"><i class="fa fa-phone" aria-hidden="true"></i> Зворотній зв'язок</a>
                     </li>
                 </ul>
                 <div>
-                <ul class="nav navbar-nav navbar-right">
+                <ul style="display:none;" id="profile-menu-button" class="nav navbar-nav navbar-right">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">
                             <div ng-show="!isAuthorized">Авторизуйтесь</div>
@@ -61,7 +61,7 @@
                         </ul>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right" ng-show="isStaff">
+                <ul style="display:none;" id="profile-work-button" class="nav navbar-nav navbar-right" ng-show="isStaff">
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download"><i class="fa fa-list" aria-hidden="true"></i></a>
                         <ul class="dropdown-menu" aria-labelledby="download">
@@ -71,7 +71,7 @@
                         </ul>
                     </li>
                 </ul>
-                    <ul class="nav navbar-nav navbar-right" ng-show="isStaff">
+                    <ul style="display:none;" class="nav navbar-nav navbar-right" id="profile-shop-button" ng-show="isStaff">
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
                             <ul class="dropdown-menu" aria-labelledby="download">

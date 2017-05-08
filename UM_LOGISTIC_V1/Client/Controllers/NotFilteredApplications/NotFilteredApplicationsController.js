@@ -126,7 +126,6 @@
             },
             callback: function (ok) {
                 if (ok == true) {
-                    $scope.isLoading = true;
                     FilterService.acceptApplication(type, id)
                     .success(function (response) {
                         if (response.Success) {
@@ -165,7 +164,6 @@
             },
             callback: function (ok) {
                 if (ok == true) {
-                    $scope.isLoading = true;
                     FilterService.declineApplication(type, id)
                     .success(function (response) {
                         if (response.Success) {

@@ -131,6 +131,13 @@
 	$scope.$on("userRegistrated", function (event, args) {
 	    $scope.saveProfile(args);
 	});
+
+	$scope.showProfileButtons = function () {
+	    $("#feed-callback-button").css("display", "");
+	    $("#profile-menu-button").css("display", "");
+	    $("#profile-work-button").css("display", "");
+	    $("#profile-shop-button").css("display", "");
+	}
 	
 	//methods
 	
@@ -147,6 +154,11 @@
 
 	$scope.getApplicationsInTrashCount();
 
+
 	$scope.getApplicationsInTrashElements();
+
+	$scope.showProfileButtons();
+
+
 	//init controller
 });
