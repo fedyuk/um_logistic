@@ -6,6 +6,8 @@ using UM_LOGISTIC_V1.Models;
 using UM_LOGISTIC_V1.Models.ClientTask;
 using UM_LOGISTIC_V1.Request.ClientTask;
 using UM_LOGISTIC_V1.ApiModels.Filter;
+using Microsoft.AspNet.SignalR;
+using UM_LOGISTIC_V1.WebHooks;
 
 namespace UM_LOGISTIC_V1.Services
 {
@@ -55,6 +57,8 @@ namespace UM_LOGISTIC_V1.Services
             try
             {
                 db.SaveChanges();
+                var eventsHub = GlobalHost.ConnectionManager.GetHubContext<EventsHub>();
+                eventsHub.Clients.All.onTaskGot(owner, title, 1);
                 return true;
             }
             catch(Exception)
@@ -163,8 +167,7 @@ namespace UM_LOGISTIC_V1.Services
             {
                 owner = minOwner.OwnerId;
             }
-            var title = "Оформлено заявку";
-            applicationTask.Title = title;
+            var title = String.Empty;
             applicationTask.TypeId = request.TypeId;
             applicationTask.CreatedOn = DateTime.Now;
             applicationTask.ModifiedOn = DateTime.Now;
@@ -174,15 +177,20 @@ namespace UM_LOGISTIC_V1.Services
             {
                 case 2:
                     applicationTask.TransportationApplicationId = request.ApplicationId;
+                    title = "Оформлено заявку на перевезення";
                     break;
                 case 3:
                     applicationTask.CooperationApplicationId = request.ApplicationId;
+                    title = "Оформлено заявку на співробітництво";
                     break;
             }
+            applicationTask.Title = title;
             db.ClientTasks.Add(applicationTask);
             try
             {
                 db.SaveChanges();
+                var eventsHub = GlobalHost.ConnectionManager.GetHubContext<EventsHub>();
+                eventsHub.Clients.All.onTaskGot(owner, title, request.TypeId);
                 return true;
             }
             catch (Exception)
