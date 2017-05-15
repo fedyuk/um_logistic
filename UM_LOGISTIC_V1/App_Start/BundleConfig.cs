@@ -33,7 +33,8 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Client/Services/Form/FormHelper.js",
                 "~/Client/Services/Filter/FilterService.js",
                 "~/Client/Services/ClientTask/ClientTaskService.js",
-                "~/Client/Services/ApplicationTrash/ApplicationTrashService.js"));
+                "~/Client/Services/ApplicationTrash/ApplicationTrashService.js",
+                "~/Client/Services/Event/EventService.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Controllers").Include(
 				"~/Client/Controllers/Profile/ProfileController.js",
@@ -70,7 +71,8 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Scripts/lightbox.min.js",
                 "~/Scripts/bootstrap-formhelpers-phone.js",
                 "~/Scripts/jquery.maskedinput.min.js",
-                "~/Scripts/bootstrap-formhelpers-number.js"));
+                "~/Scripts/bootstrap-formhelpers-number.js",
+                "~/Scripts/jquery.signalR-2.2.2.min.js"));
 
             bundles.Add(new StyleBundle("~/bundles/Styles").Include(
                 "~/Style/angular-bootstrap-lightbox.min.css",

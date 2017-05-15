@@ -101,8 +101,11 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
 
 }]);
  
- mainModule.run(['$rootScope', '$state', '$location', 'SessionService', 'moduleConstants',
-  function ($rootScope, $state, $location, SessionService, moduleConstants) {
+mainModule.run(['$rootScope', '$state', '$location', 'SessionService', 'moduleConstants', 'EventService',
+  function ($rootScope, $state, $location, SessionService, moduleConstants, EventService) {
+      EventService.initializeEventsHub();
+      EventService.subscribeToNotifications();
+      EventService.startHubConnection();
 	  $rootScope.$on('$locationChangeStart',
       function (event, next, current) {
       }
