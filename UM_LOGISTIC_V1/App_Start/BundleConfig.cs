@@ -52,7 +52,8 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Client/Controllers/User/CreateUserController.js",
                 "~/Client/Controllers/ClientTask/CallFeedbackController.js",
                 "~/Client/Controllers/ClientTask/TasksController.js",
-                "~/Client/Controllers/MyApplications/MyApplicationsController.js"));
+                "~/Client/Controllers/MyApplications/MyApplicationsController.js",
+                "~/Client/Controllers/Transportation/TransportationEditController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Libraries").Include(
                 "~/Scripts/angular.min.js",

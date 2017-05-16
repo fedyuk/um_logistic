@@ -10,6 +10,7 @@
 	closedSessionMeesage: "Session has been closed",
 	loginPath: "/login",
 	settingsPath: "/settings",
+	myApplicationsPath: "/my_applications",
 	homePath: "/home",
 	cooperationApplicationCreatingSuccess: "Ваша заявка прийнята",
 	emptyFormValue: "не вказано",

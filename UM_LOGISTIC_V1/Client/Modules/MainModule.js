@@ -83,6 +83,11 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
             templateUrl: '/views/my-applications',
             controller: 'MyApplicationsController'
         })
+        .state('transportationEdit', {
+            url: '/transportation/edit/:id',
+            templateUrl: '/views/trans_edit_application',
+            controller: 'TransportationEditController'
+        })
         .state('404', {
             url: '/404',
             templateUrl: '/views/404'
