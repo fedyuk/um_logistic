@@ -125,7 +125,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="#" ng-click="refreshApplicationDate(false, cooperation.id)" ng-show="isOrderedByMe == false"><i class="fa fa-refresh fa-sm"></i> Обновити дату</a></li>
-                                <li><a href="#" ng-click="editApplication(false, cooperation.obj)"><i class="fa fa-edit fa-sm"></i> Редагувати</a></li>
+                                <li><a ng-href="/cooperation/edit/{{cooperation.id}}"><i class="fa fa-edit fa-sm"></i> Редагувати</a></li>
                                 <li><a href="#" ng-click="removeApplication(false, cooperation.id)" ng-show="isOrderedByMe == false"><i class="fa fa-trash fa-sm"></i> Видалити</a></li>
                             </ul>
                         </div>

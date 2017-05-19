@@ -20,12 +20,22 @@ namespace UM_LOGISTIC_V1.Services
             return application;
         }
 
-        public long? CreateCooperationApplication(CooperationApplication application)
+        public long? CreateCooperationApplication(CooperationApplication application, string image)
         {
             if (application != null)
             {
                 application.CreatedOn = DateTime.Now;
                 application.ModifiedOn = application.CreatedOn;
+                if (!String.IsNullOrEmpty(image))
+                {
+                    application.Pictures.Add(new UM_LOGISTIC_V1.Models.CooperationPicture.CooperationPicture()
+                    {
+                        Image = image,
+                        CreatedOn = DateTime.Now,
+                        ModifiedOn = DateTime.Now,
+                        CreatedBy = application.CreatedBy
+                    });
+                }
                 db.CooperationApplications.Add(application);
                 try
                 {
@@ -152,6 +162,10 @@ namespace UM_LOGISTIC_V1.Services
         public byte[] GetPicture(long id)
         {
             var image = db.CooperationPictures.Find(id);
+            if (image == null)
+            {
+                return null;
+            }
             var base64Data = Regex.Match(image.Image, @"data:image/(?<type>.+?),(?<data>.+)").Groups["data"].Value;
             var binData = Convert.FromBase64String(base64Data);
             return binData;

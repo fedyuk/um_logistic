@@ -19,6 +19,7 @@
         WorkTypeId : 1,
         DeliveryCost: 0.0,
         CreatedBy: null,
+        Image: null,
         user: "",
         token : ""
     };
@@ -49,7 +50,6 @@
 		    $scope.isLoading = false;
 		    if (response.Success) {
 		        $location.path(moduleConstants.homePath);
-				$scope.loadPicture(response.Id, false);
 		    }
 		    else {
 		        NotificationService.error(JSON.stringify(response.Error));
@@ -104,6 +104,7 @@
 	    reader.addEventListener("load", function () {
 	        if (reader.result.indexOf("jpg") != -1 || reader.result.indexOf("jpeg") != -1 || reader.result.indexOf("png") != -1) {
 	            $scope.pictureData = reader.result;
+	            $scope.cooperation.Image = reader.result;
 	        }
 	        else {
 	            NotificationService.warning(moduleConstants.invalidPictureFormat);

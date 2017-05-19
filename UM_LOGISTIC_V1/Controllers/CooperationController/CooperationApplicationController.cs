@@ -67,7 +67,7 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
                 DeliveryCost = request.DeliveryCost,
                 CreatedBy = request.CreatedBy
             };
-            var id = applicationService.CreateCooperationApplication(applicationToCreate);
+            var id = applicationService.CreateCooperationApplication(applicationToCreate, request.Image);
             if (id != null)
             {
                 createCooperationApplicationResponse.Success = true;

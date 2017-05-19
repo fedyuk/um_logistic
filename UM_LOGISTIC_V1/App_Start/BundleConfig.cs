@@ -53,7 +53,9 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Client/Controllers/ClientTask/CallFeedbackController.js",
                 "~/Client/Controllers/ClientTask/TasksController.js",
                 "~/Client/Controllers/MyApplications/MyApplicationsController.js",
-                "~/Client/Controllers/Transportation/TransportationEditController.js"));
+                "~/Client/Controllers/Transportation/TransportationEditController.js",
+                "~/Client/Controllers/TransportMap/TransportMapController.js",
+                "~/Client/Controllers/Cooperation/CooperationEditController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Libraries").Include(
                 "~/Scripts/angular.min.js",
@@ -73,7 +75,10 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Scripts/bootstrap-formhelpers-phone.js",
                 "~/Scripts/jquery.maskedinput.min.js",
                 "~/Scripts/bootstrap-formhelpers-number.js",
-                "~/Scripts/jquery.signalR-2.2.2.min.js"));
+                "~/Scripts/jquery.signalR-2.2.2.min.js",
+                "~/Scripts/ekko-lightbox.min.js"/*,
+                "~/Scripts/google-maps.js",
+                "~/Scripts/angular-google-maps.min.js"*/));
 
             bundles.Add(new StyleBundle("~/bundles/Styles").Include(
                 "~/Style/angular-bootstrap-lightbox.min.css",
@@ -86,6 +91,7 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Style/lightbox/jquery.imageview.css",
                 "~/Style/lightbox/lightbox.min.css",
                 "~/Style/input-mask/bootstrap-form-helper.css",
+                "~/Style/input-mask/ekko-lightbox.min.css",
                  "~/Style/bootswatch/bootstrap.css"));
         }
     }

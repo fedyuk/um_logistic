@@ -18,6 +18,7 @@ namespace UM_LOGISTIC_V1
     {
         void Application_Start(object sender, EventArgs e)
         {
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             // Code that runs on application startup
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AreaRegistration.RegisterAllAreas();

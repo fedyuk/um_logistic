@@ -10,7 +10,13 @@
     //methods
 
     $scope.listTasks = function (page, count) {
-		var userId = SessionService.getSessionUserId();
+        var userId = SessionService.getSessionUserId();
+        if (!userId) {
+            NotificationService.warning(moduleConstants.sessionUserIdNotFound);
+            $scope.isLoading = false;
+            $scope.isPartLoading = false;
+            return;
+        }
         ClientTaskService.getClientTasks(page, count, 'OwnerId==' + userId + ';').success(function (response) {
             $scope.isLoading = false;
             $scope.isPartLoading = false;

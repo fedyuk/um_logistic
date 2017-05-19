@@ -62,7 +62,7 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
                 ShipmentWidth = request.ShipmentWidth,
                 CreatedBy = request.CreatedBy
             };
-            var id = applicationService.CreateTransportationApplication(applicationToCreate);
+            var id = applicationService.CreateTransportationApplication(applicationToCreate, request.Image);
             if (id != null)
             {
                 createTransportationApplicationResponse.Success = true;
@@ -216,7 +216,7 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
 
         [Route("api/get_list_pictures")]
         [HttpGet]
-        public IHttpActionResult GetListHtmlPictures(long id, bool type)
+        public IHttpActionResult GetListHtmlPictures(long id, bool type, bool isEdit = false)
         {
             var executeUri = type == true ? "/api/t_pictures?id=" : "/api/c_pictures?id=";
             var currentRequestUri = HttpContext.Current.Request;
@@ -224,10 +224,12 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
             var pictures = pictureService.GetPictures(id, type);
             var url = String.Empty;
             var htmlHrefs = new List<string>();
+            var index = 1;
             foreach(var picture in pictures)
             {
                 url = profileUri + executeUri + picture;
-                htmlHrefs.Add("<img style='width: 250px; height: 200px;' class='jslghtbx-thmb' src='" + url + "' alt='' data-jslghtbx='" + url + "' data-jslghtbx-group='mygroup1'>");
+                htmlHrefs.Add("<img style='width: 250px; height: 200px;' class='jslghtbx-thmb' src='" + url + "' alt='' data-jslghtbx='" + url + "' data-jslghtbx-group='mygroup1'>" + (isEdit == true ? "<button id='EditPicture" + index + "' class='btn btn-warning btn-sm'>Видалити</button>" : ""));
+                index++;
             }
             return Ok(htmlHrefs);
         }

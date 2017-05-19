@@ -21,18 +21,28 @@ namespace UM_LOGISTIC_V1.Services
             return application;
         }
 
-        public long? CreateTransportationApplication(TransportationApplication application)
+        public long? CreateTransportationApplication(TransportationApplication application, string image)
         {
             if (application != null)
             {
                 application.CreatedOn = DateTime.Now;
                 application.ModifiedOn = application.CreatedOn;
+                if(!String.IsNullOrEmpty(image))
+                {
+                    application.Pictures.Add(new UM_LOGISTIC_V1.Models.TransportationPicture.TransportationPicture()
+                    {
+                        Image = image,
+                        CreatedOn = DateTime.Now,
+                        ModifiedOn = DateTime.Now,
+                        CreatedBy = application.CreatedBy
+                    });
+                }
                 db.TransportationApplications.Add(application);
                 try
                 {
                     db.SaveChanges();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     return null;
                 }
@@ -142,6 +152,10 @@ namespace UM_LOGISTIC_V1.Services
         public byte[] GetPicture(long id)
         {
             var image = db.TransportationPictures.Find(id);
+            if(image == null)
+            {
+                return null;
+            }
             var base64Data = Regex.Match(image.Image, @"data:image/(?<type>.+?),(?<data>.+)").Groups["data"].Value;
             var binData = Convert.FromBase64String(base64Data);
             return binData;
