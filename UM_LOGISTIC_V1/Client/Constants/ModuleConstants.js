@@ -34,5 +34,7 @@
 	updateDateApplicationConfirm: "Ви дійсно хочете обновити дату заявки?",
 	applicationDateUpdatedSuccess: "Дата заявка обновлена",
 	editApplicationCaption: "Редагування заявки",
-    applicationTrashAddedInfo: "Заявка додана в корзину"
+	applicationTrashAddedInfo: "Заявка додана в корзину",
+	googleMapsKey: "AIzaSyB51SUDbv8WOYS9yNLniL1DjWNH174A2cU",
+    uploadPictureSuccess: "Картинка завантажена"
 });

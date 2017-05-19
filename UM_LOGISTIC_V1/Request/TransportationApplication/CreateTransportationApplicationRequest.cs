@@ -19,5 +19,6 @@ namespace UM_LOGISTIC_V1.Request.TransportationApplication
         public long ShipmentCapacity { get; set; }
         public long ShipmentWeight { get; set; }
         public long CreatedBy { get; set; }
+        public string Image { get; set; }
     }
 }

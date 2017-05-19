@@ -1,4 +1,4 @@
-﻿var mainModule = angular.module("mainModule", ["bootstrapLightbox","ui.router", "ngRoute", "ngCookies", "ngMessages"/*"bootstrapLightbox"*/]);
+﻿var mainModule = angular.module("mainModule", ["bootstrapLightbox", "ui.router", "ngRoute", "ngCookies", "ngMessages", /*"ngMap"*//*"bootstrapLightbox"*/]);
 
 mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$cookiesProvider', function ($stateProvider, $locationProvider, $urlRouterProvider, $cookiesProvider) {
 
@@ -88,6 +88,16 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
             templateUrl: '/views/trans_edit_application',
             controller: 'TransportationEditController'
         })
+        .state('cooperationEdit', {
+            url: '/cooperation/edit/:id',
+            templateUrl: '/views/coop_edit_application',
+            controller: 'CooperationEditController'
+        })
+        .state('maps', {
+            url: '/maps',
+            templateUrl: '/views/transport-map',
+            controller: 'TransportMapController'
+        })
         .state('404', {
             url: '/404',
             templateUrl: '/views/404'
@@ -103,7 +113,6 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
     var expiresDate = new Date();
     expiresDate.setDate(expiresDate.getDate() + 1);
     $cookiesProvider.defaults.expires = expiresDate;
-
 }]);
  
 mainModule.run(['$rootScope', '$state', '$location', 'SessionService', 'moduleConstants', 'EventService',
