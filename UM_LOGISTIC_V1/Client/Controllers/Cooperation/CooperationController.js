@@ -63,6 +63,10 @@
 		}).error(function (error) {
 		    $scope.isPartLoading = false;
 		    $scope.isLoading = false;
+		    if (!error) {
+		        NotificationService.error(moduleConstants.internalErrorCaption);
+		        return;
+		    }
 		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
     }
@@ -93,6 +97,10 @@
 		    }
 		}).error(function (error) {
 		    $scope.isLoading = false;
+		    if (!error) {
+		        NotificationService.error(moduleConstants.internalErrorCaption);
+		        return;
+		    }
 		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
     }
@@ -119,6 +127,11 @@
 		        $scope.pictures[id] = "";
 		    }
 		}).error(function (error) {
+		    if (!error) {
+		        NotificationService.error(moduleConstants.internalErrorCaption);
+		        $scope.pictures[id] = "";
+		        return;
+		    }
 		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		    $scope.pictures[id] = "";
 		});
@@ -141,6 +154,11 @@
             }
         }).error(function (error) {
             $scope.isLoading = false;
+            $scope.pictures[id] = "";
+            if (!error) {
+                NotificationService.error(moduleConstants.internalErrorCaption);
+                return;
+            }
             NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
         });
     }
@@ -279,6 +297,10 @@
                 NotificationService.success(moduleConstants.applicationTrashAddedInfo);
             }
         }).error(function (error) {
+            if (!error) {
+                NotificationService.error(moduleConstants.internalErrorCaption);
+                return;
+            }
             NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
         });
 

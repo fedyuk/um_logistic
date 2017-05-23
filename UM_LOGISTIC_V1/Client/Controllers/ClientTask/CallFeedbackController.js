@@ -29,6 +29,10 @@
             }
         }).error(function (error) {
             $scope.isLoading = false;
+            if (!error) {
+                NotificationService.error(moduleConstants.internalErrorCaption);
+                return;
+            }
             NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
         });
     }

@@ -56,6 +56,10 @@
 		    }
 		}).error(function (error) {
 		    $scope.isLoading = false;
+		    if (!error) {
+		        NotificationService.error(moduleConstants.internalErrorCaption);
+		        return;
+		    }
 		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
     }
@@ -71,6 +75,10 @@
 			}
 			$scope.workTypes.model = $scope.workTypes.options[0];
 		}).error(function (error) {
+		    if (!error) {
+		        NotificationService.error(moduleConstants.internalErrorCaption);
+		        return;
+		    }
 		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
 	}
@@ -93,6 +101,10 @@
 		        NotificationService.error(JSON.stringify(response.Error));
 		    }
 		}).error(function (error) {
+		    if (!error) {
+		        NotificationService.error(moduleConstants.internalErrorCaption);
+		        return;
+		    }
 		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
 		});
 	}
