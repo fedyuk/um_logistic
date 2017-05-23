@@ -36,5 +36,6 @@
 	editApplicationCaption: "Редагування заявки",
 	applicationTrashAddedInfo: "Заявка додана в корзину",
 	googleMapsKey: "AIzaSyB51SUDbv8WOYS9yNLniL1DjWNH174A2cU",
-    uploadPictureSuccess: "Картинка завантажена"
+	uploadPictureSuccess: "Картинка завантажена",
+    internalErrorCaption: "Внутрішня помилка"
 });

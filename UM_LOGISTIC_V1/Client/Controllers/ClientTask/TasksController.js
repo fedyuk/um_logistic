@@ -40,6 +40,10 @@
         }).error(function (error) {
             $scope.isLoading = false;
             $scope.isPartLoading = false;
+            if (!error) {
+                NotificationService.error(moduleConstants.internalErrorCaption);
+                return;
+            }
             NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
         });
     }
