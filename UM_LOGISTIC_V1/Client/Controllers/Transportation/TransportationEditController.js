@@ -179,8 +179,10 @@
             maxImgSize: 0.8,
             // callbacks
             onopen: function (image) {
+                $(".navbar").removeClass("navbar-fixed-top");
             },
             onclose: function (image) {
+                $(".navbar").addClass("navbar-fixed-top");
             },
             onload: function (event) {
             },
