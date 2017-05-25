@@ -1,5 +1,5 @@
 ﻿mainModule.controller('ProfileController', function ($scope, $log, $location, UserService,
-	SessionService, moduleConstants, LoginService, AccountService, NotificationService, FilterService, ClientTaskService, ApplicationTrashService) {
+	SessionService, moduleConstants, LoginService, AccountService, NotificationService, FilterService, ClientTaskService, ApplicationTrashService, EventService) {
 	
     $scope.notFilteredApplicationsCount = 0;
     $scope.clientTasksCount = 0;
@@ -141,11 +141,23 @@
 	}
 
 	$scope.$on("userAuthorized", function(event, args) {
-		$scope.saveProfile(args);
+	    $scope.saveProfile(args);
+	    $scope.initializeManagerNotifications();
 	});
+
+	$scope.initializeManagerNotifications = function () {
+	    var isStaff = SessionService.isStaff();
+	    if (isStaff != true) {
+	        return;
+	    }
+	    EventService.initializeEventsHub();
+	    EventService.subscribeToNotifications();
+	    EventService.startHubConnection();
+	}
 
 	$scope.$on("userRegistrated", function (event, args) {
 	    $scope.saveProfile(args);
+	    $scope.initializeManagerNotifications();
 	});
 
 	$scope.showProfileButtons = function () {

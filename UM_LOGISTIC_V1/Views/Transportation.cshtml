@@ -73,7 +73,7 @@
                 </div>
             </div>
             <div style="margin-top:10px;">
-                <button ng-click="applyFilter()" type="submit" class="btn btn-success btn-xs"><i class="fa fa-filter" aria-hidden="true"></i>Застосувати</button>
+                <button ng-click="applyFilter()" type="submit" class="btn btn-success btn-xs"><i ng-show="filterLoading == true" class="fa fa-circle-o-notch fa-spin fa-fw"></i><i ng-show="!filterLoading" class="fa fa-filter" aria-hidden="true"></i>Застосувати</button>
             </div>
             </div>
         <div class="col-md-9" style="margin-top:20px;">

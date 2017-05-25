@@ -6,6 +6,7 @@
     $scope.currentCount = moduleConstants.pageRowsCount;
     $scope.isLoading = false;
     $scope.isPartLoading = false;
+    $scope.filterLoading = false;
     $scope.pictures = {};
     $scope.filter = {
         TransportLength: {
@@ -75,6 +76,7 @@
         FilterService.getCooperationApplications(filter, page, count)
 		.success(function (response) {
 		    $scope.isLoading = false;
+		    $scope.filterLoading = false;
 		    if (response.Success) {
 		        if (page == 0) {
 		            $scope.cooperations = [];
@@ -168,7 +170,8 @@
         var filter = $scope.filter;
         var stringFilter = $scope.generateFilterString(filter);
         $scope.currentPage = 0;
-        $scope.isLoading = true;
+        //$scope.isLoading = true;
+        $scope.filterLoading = true;
         $scope.listFilteredCooperations(stringFilter, $scope.currentPage, $scope.currentCount);
     }
 

@@ -6,6 +6,7 @@
     $scope.currentCount = moduleConstants.pageRowsCount;
     $scope.isLoading = false;
     $scope.isPartLoading = false;
+    $scope.filterLoading = false;
     $scope.pictures = {};
 
     $scope.filter = {
@@ -72,6 +73,7 @@
 		.success(function (response) {
 		    $scope.isPartLoading = false;
 		    $scope.isLoading = false;
+		    $scope.filterLoading = false;
 		    if (response.Success) {
 		        if (page == 0) {
 		            $scope.transportations = [];
@@ -164,7 +166,8 @@
         var filter = $scope.filter;
         var stringFilter = $scope.generateFilterString(filter);
         $scope.currentPage = 0;
-        $scope.isLoading = true;
+        //$scope.isLoading = true;
+        $scope.filterLoading = true;
         $scope.listFilteredTransportations(stringFilter, $scope.currentPage, $scope.currentCount);
     }
 

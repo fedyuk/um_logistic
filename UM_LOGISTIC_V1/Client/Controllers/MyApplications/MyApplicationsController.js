@@ -33,7 +33,7 @@
         }
         switch ($scope.currentApplicationType) {
             case true:
-                invoke = $scope.isOrderedByMe == false ? FilterService.getTransportationApplications("CreatedBy=" + userId,
+                invoke = $scope.isOrderedByMe == false ? FilterService.getTransportationApplications("CreatedBy==" + userId,
             $scope.currentPage, $scope.currentCount) : FilterService.getOrderedByMeApplications(true, userId, $scope.currentPage, $scope.currentCount);
                 invoke.success(function (response) {
                     $scope.isLoading = false;
@@ -75,7 +75,7 @@
 		});
                 break;
             case false:
-                invoke = $scope.isOrderedByMe == false ? FilterService.getCooperationApplications("CreatedBy=" + userId,
+                invoke = $scope.isOrderedByMe == false ? FilterService.getCooperationApplications("CreatedBy==" + userId,
                 $scope.currentPage, $scope.currentCount) : FilterService.getOrderedByMeApplications(false, userId, $scope.currentPage, $scope.currentCount);
        invoke.success(function (response) {
            $scope.isLoading = false;
