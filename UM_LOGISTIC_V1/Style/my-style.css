@@ -316,3 +316,6 @@ input[type="radio"] .styled:checked + label::after {
     z-index:1032;
 }
 
+.btn {
+    border-radius: 0!important;
+}
