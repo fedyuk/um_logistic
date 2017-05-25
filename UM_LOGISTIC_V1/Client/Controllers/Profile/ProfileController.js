@@ -187,6 +187,7 @@
 
 	$scope.showProfileButtons();
 
+	$scope.initializeManagerNotifications();
 
 	//init controller
 });
