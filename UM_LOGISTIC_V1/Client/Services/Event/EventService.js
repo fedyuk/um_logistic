@@ -41,4 +41,9 @@
         con.start(function () {
         });
     }
+
+    this.stopHubConnection = function () {
+        con.stop(function () {
+        });
+    }
 });

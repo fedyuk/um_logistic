@@ -12,6 +12,7 @@
 		SessionService.closeSession();
 		$scope.changeProfileData(false, null, false);
 		$scope.openLoginPage();
+		EventService.stopHubConnection();
 	}
 	
 	$scope.initProfileName = function() {
