@@ -1,10 +1,11 @@
-﻿mainModule.service('NotificationService', function () {
+﻿mainModule.service('NotificationService', function (moduleConstants) {
     this.success = function (message) {
         if (message) {
             $.notify({
                 message: message
             }, {
-                type: 'success'
+                type: 'success',
+                delay: moduleConstants.notifyWindowDelay
             });
         }
 	}
@@ -13,6 +14,8 @@
         if (message) {
             $.notify({
                 message: message
+            }, {
+                delay: moduleConstants.notifyWindowDelay
             });
         }
 	}
@@ -22,7 +25,8 @@
             $.notify({
                 message: message
             }, {
-                type: 'warning'
+                type: 'warning',
+                delay: moduleConstants.notifyWindowDelay
             });
         }
 	}
@@ -32,7 +36,8 @@
             $.notify({
                 message: message
             }, {
-                type: 'danger'
+                type: 'danger',
+                delay: moduleConstants.notifyWindowDelay
             });
         }
 	}

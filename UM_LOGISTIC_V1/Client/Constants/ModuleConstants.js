@@ -37,5 +37,6 @@
 	applicationTrashAddedInfo: "Заявка додана в корзину",
 	googleMapsKey: "AIzaSyB51SUDbv8WOYS9yNLniL1DjWNH174A2cU",
 	uploadPictureSuccess: "Картинка завантажена",
-    internalErrorCaption: "Внутрішня помилка"
+	internalErrorCaption: "Внутрішня помилка",
+    notifyWindowDelay: 1000
 });
