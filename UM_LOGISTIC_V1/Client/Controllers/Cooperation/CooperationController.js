@@ -141,7 +141,14 @@
 
     $scope.acceptApplication = function (id) {
         var request = {};
-        request.UserId = SessionService.getSessionUserId();
+        var userId = SessionService.getSessionUserId();
+        if (!userId) {
+            NotificationService.warning(moduleConstants.sessionUserIdNotFound);
+            $scope.isLoading = false;
+            $scope.isPartLoading = false;
+            return;
+        }
+        request.UserId = userId;
         request.ApplicationId = id;
         request.TypeId = 3;
         ClientTaskService.createApplicationTask(request)
@@ -287,6 +294,12 @@
 
     $scope.moveIntoTrash = function (id) {
         var userId = SessionService.getSessionUserId();
+        if (!userId) {
+            NotificationService.warning(moduleConstants.sessionUserIdNotFound);
+            $scope.isLoading = false;
+            $scope.isPartLoading = false;
+            return;
+        }
         var request = {
             ApplicationId: id,
             Type: false,
