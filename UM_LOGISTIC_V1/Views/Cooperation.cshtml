@@ -109,7 +109,7 @@
                     <h5 class="media-heading">Дата створення: {{coop.createdOn}}</h5>
                     <div class="inline">
                         <button type="button" class="btn btn-success btn-xs" ng-click="acceptApplication(coop.id)"><i class="fa fa-check" style="margin-right: 8px;" aria-hidden="true"></i>Оформити</button>
-                        <button type="button" class="btn btn-warning btn-xs" ng-click="moveIntoTrash(coop.id)"><i class="fa fa-shopping-cart" style="margin-right: 8px;" aria-hidden="true"></i>В корзину</button>
+                        <button type="button" class="btn btn-warning btn-xs" ng-click="moveIntoTrash(coop.id, coop.title)"><i class="fa fa-shopping-cart" style="margin-right: 8px;" aria-hidden="true"></i>В корзину</button>
                     </div>
                 </div>
             </div>

@@ -33,6 +33,16 @@ namespace UM_LOGISTIC_V1.Models
                .HasOptional(a => a.CooperationApplication)
                .WithOptionalDependent()
                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<ApplicationTrash.ApplicationTrash>()
+                .HasOptional(a => a.CooperationApplication)
+                .WithOptionalDependent()
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<ApplicationTrash.ApplicationTrash>()
+                .HasOptional(a => a.TransportationApplication)
+                .WithOptionalDependent()
+                .WillCascadeOnDelete(true);
         }
     }
 }

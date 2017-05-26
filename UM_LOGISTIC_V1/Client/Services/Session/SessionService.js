@@ -1,4 +1,6 @@
-﻿mainModule.service('SessionService', function ($cookieStore) {
+﻿mainModule.service('SessionService', function ($cookieStore, ApplicationTrashService, moduleConstants) {
+    var expiresDate = null;
+
     this.saveSessionToken = function (token, user) {
 		var expiresDate = new Date();
 		expiresDate.setDate(expiresDate.getDate() + 1);
@@ -50,17 +52,83 @@
 	}
 	
 	this.saveProfileData = function(accountData) {
-		var expiresDate = new Date();
-		expiresDate.setDate(expiresDate.getDate() + 1);
-		$cookieStore.put("profile-name", accountData.Account.FullName, { "expires": expiresDate });
-		$cookieStore.put("profile-role", accountData.Role.Number, { "expires": expiresDate });
-		$cookieStore.put("user-id", accountData.Id, { "expires": expiresDate });
+	    this.expiresDate = new Date();
+	    this.expiresDate.setDate(this.expiresDate.getDate() + 1);
+		$cookieStore.put("profile-name", accountData.Account.FullName, { "expires": this.expiresDate });
+		$cookieStore.put("profile-role", accountData.Role.Number, { "expires": this.expiresDate });
+		$cookieStore.put("user-id", accountData.Id, { "expires": this.expiresDate });
+		this.saveShopTrash(this.expiresDate, accountData.Id);
+	}
+
+	this.saveShopTrash = function (expiresDate, userId) {
+	    var shopTrash = [];
+	    $cookieStore.put("shop-trash", shopTrash, { "expires": expiresDate });
+	    ApplicationTrashService.getApplicationTrashElements(userId).success(function (response) {
+	        if (response.Success) {
+	            shopTrash = response.Result;
+	            angular.forEach(shopTrash, function (value, key) {
+	                if (value.Title == '') {
+	                    value.Title = moduleConstants.emptyFormValue;
+	                }
+	            });
+	            $cookieStore.put("shop-trash", shopTrash, { "expires": expiresDate });
+	        }
+	        else {
+	            NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
+	        }
+	    }).error(function (error) {
+	        if (!error) {
+	            NotificationService.error(moduleConstants.internalErrorCaption);
+	            return;
+	        }
+	        NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+	    });
+	}
+
+	this.addTrashElement = function (applicationId, type, title) {
+	    var shopTrash = $cookieStore.get("shop-trash");
+	    if (shopTrash == undefined) {
+	        shopTrash = [];
+	    }
+	    shopTrash.push({
+	        Id: applicationId,
+	        Title: title,
+            Type: type
+	    });
+	    $cookieStore.put("shop-trash", shopTrash, { "expires": this.expiresDate });
+	}
+
+	this.isExistsTrashElement = function (id, type) {
+	    var shopTrash = $cookieStore.get("shop-trash");
+	    if (shopTrash == undefined) {
+	        return false;
+	    }
+	    var result = $.grep(shopTrash, function (e) { return e.Id == id && e.Type == type; });
+	    return result.length > 0;
+	}
+
+	this.getShopTrashCount = function () {
+	    var shopTrash = $cookieStore.get("shop-trash");
+	    if (shopTrash == undefined) {
+	        return 0;
+	    }
+	    return shopTrash.length;
+	}
+
+	this.getShopTrashElements = function () {
+	    var shopTrash = $cookieStore.get("shop-trash");
+	    if (shopTrash == undefined) {
+	        return [];
+	    }
+	    return shopTrash;
 	}
 	
 	this.clearProfileData = function() {
 	    $cookieStore.remove("profile-name");
 	    $cookieStore.remove("profile-role");
-		$cookieStore.remove("user-id");
+	    $cookieStore.remove("user-id");
+	    $cookieStore.remove("shop-trash");
+	    this.expiresDate = null;
 	}
 	
 });

@@ -76,7 +76,7 @@
                     </li>
                 </ul>
                     <ul style="display:none;" class="nav navbar-nav navbar-right" id="profile-shop-button" ng-show="isStaff">
-                        <li class="dropdown">
+                        <li class="dropdown" ng-click="getApplicationsInTrashElements()">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download"><i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="badge">{{applicationsInTrash}}</span></a>
                             <ul class="dropdown-menu" aria-labelledby="download">
                                 <li ng-repeat="app in appTrashElements"><a href="{{app.Type != false ? '/transportation/' + app.Id : '/cooperation/' + app.Id}}">{{app.Title}}</a></li>

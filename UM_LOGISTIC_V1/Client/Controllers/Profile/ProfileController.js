@@ -61,20 +61,7 @@
 
 	$scope.getApplicationsInTrashCount = function () {
 	    var userId = SessionService.getSessionUserId();
-	    ApplicationTrashService.getApplicationTrashCountByCreatedBy(userId).success(function (response) {
-	        if (response.Success) {
-	            $scope.applicationsInTrash = response.Result;
-	        }
-	        else {
-	            NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
-	        }
-	    }).error(function (error) {
-	        if (!error) {
-	            NotificationService.error(moduleConstants.internalErrorCaption);
-	            return;
-	        }
-	        NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
-	    });
+	    $scope.applicationsInTrash = SessionService.getShopTrashCount();
 	}
 	
 	$scope.initProfileLoginActions = function() {
@@ -116,25 +103,7 @@
 	
 	$scope.getApplicationsInTrashElements = function () {
 	    var userId = SessionService.getSessionUserId();
-	    ApplicationTrashService.getApplicationTrashElements(userId).success(function (response) {
-	        if (response.Success) {
-	            $scope.appTrashElements = response.Result;
-	            angular.forEach($scope.appTrashElements, function (value, key) {
-	                if (value.Title == '') {
-	                    value.Title = moduleConstants.emptyFormValue;
-	                }
-	            })
-	        }
-	        else {
-	            NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
-	        }
-	    }).error(function (error) {
-	        if (!error) {
-	            NotificationService.error(moduleConstants.internalErrorCaption);
-	            return;
-	        }
-	        NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
-	    });
+	    $scope.appTrashElements = SessionService.getShopTrashElements();
 	}
 
 	$scope.saveProfileImage = function (profileImage) {
@@ -144,6 +113,11 @@
 	$scope.$on("userAuthorized", function(event, args) {
 	    $scope.saveProfile(args);
 	    $scope.initializeManagerNotifications();
+	    $scope.getApplicationsInTrashCount();
+	});
+
+	$scope.$on("trashElementAdded", function (event, args) {
+	    $scope.getApplicationsInTrashCount();
 	});
 
 	$scope.initializeManagerNotifications = function () {
@@ -183,12 +157,10 @@
 
 	$scope.getApplicationsInTrashCount();
 
-
-	$scope.getApplicationsInTrashElements();
-
 	$scope.showProfileButtons();
 
 	$scope.initializeManagerNotifications();
 
+	$scope.getApplicationsInTrashElements();
 	//init controller
 });

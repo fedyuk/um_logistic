@@ -292,7 +292,7 @@
         }
     }
 
-    $scope.moveIntoTrash = function (id) {
+    $scope.moveIntoTrash = function (id, title) {
         var userId = SessionService.getSessionUserId();
         if (!userId) {
             NotificationService.warning(moduleConstants.sessionUserIdNotFound);
@@ -310,6 +310,8 @@
                 NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
             if (response.Success == true) {
+                SessionService.addTrashElement(id, false, title);
+                $rootScope.$broadcast("trashElementAdded", null);
                 NotificationService.success(moduleConstants.applicationTrashAddedInfo);
             }
         }).error(function (error) {
