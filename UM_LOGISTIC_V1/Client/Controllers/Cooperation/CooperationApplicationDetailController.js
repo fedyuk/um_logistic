@@ -64,7 +64,7 @@
 		        }
 		    }
 		    else {
-		        NotificationService.error(JSON.stringify(response.Error));
+		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
 		}).error(function (error) {
 		    $scope.isLoading = false;
@@ -173,7 +173,7 @@
             }
             else {
                 $scope.isLoading = false;
-                NotificationService.error(response.Error);
+                NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
         }).error(function (error) {
             $scope.isLoading = false;
@@ -194,7 +194,7 @@
         };
         ApplicationTrashService.createApplicationTrash(request).success(function (response) {
             if (response.Success == false) {
-                NotificationService.error(JSON.stringify(response.Error));
+                NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
             if (response.Success == true) {
                 NotificationService.success(moduleConstants.applicationTrashAddedInfo);

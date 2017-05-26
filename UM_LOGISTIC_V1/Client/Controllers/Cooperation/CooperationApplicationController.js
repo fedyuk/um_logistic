@@ -52,7 +52,7 @@
 		        $location.path(moduleConstants.homePath);
 		    }
 		    else {
-		        NotificationService.error(JSON.stringify(response.Error));
+		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
 		}).error(function (error) {
 		    $scope.isLoading = false;
@@ -98,7 +98,7 @@
 		    if (response.Success) {
 		    }
 		    else {
-		        NotificationService.error(JSON.stringify(response.Error));
+		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
 		}).error(function (error) {
 		    if (!error) {

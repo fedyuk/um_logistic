@@ -37,7 +37,7 @@
                 $location.path(moduleConstants.accountsPath);
             }
             else {
-                NotificationService.error(JSON.stringify(response.Error));
+                NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
         }).error(function (error) {
             $scope.isLoading = false;

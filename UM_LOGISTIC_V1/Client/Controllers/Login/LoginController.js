@@ -20,7 +20,7 @@
 				$location.path(moduleConstants.homePath);
 			}
 			else {
-				NotificationService.warning(JSON.stringify(response.Error));
+			    NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 			}
 		}).error(function (error) {
 		    $scope.isLoading = false;

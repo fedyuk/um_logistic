@@ -64,7 +64,7 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Scripts/angular-route.min.js",
                 "~/Scripts/angular-messages.min.js",
                 "~/Scripts/jquery-1.10.2.min.js",
-                "~/Scripts/notify.min.js",
+                //"~/Scripts/notify.min.js",
                 "~/Scripts/bootbox.min.js",
                 "~/Scripts/bootstrap-slider.js",
                 "~/Scripts/ui-bootstrap-2.5.0.min.js",
@@ -76,6 +76,7 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Scripts/jquery.maskedinput.min.js",
                 "~/Scripts/bootstrap-formhelpers-number.js",
                 "~/Scripts/jquery.signalR-2.2.2.min.js",
+                "~/Scripts/bootstrap-notify.min.js",
                 "~/Scripts/ekko-lightbox.min.js"/*,
                 "~/Scripts/google-maps.js",
                 "~/Scripts/angular-google-maps.min.js"*/));

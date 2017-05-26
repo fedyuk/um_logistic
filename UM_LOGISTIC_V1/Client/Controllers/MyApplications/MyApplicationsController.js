@@ -62,7 +62,7 @@
 		        }
 		    }
 		    else {
-		        NotificationService.error(JSON.stringify(response.Error));
+		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
 		}).error(function (error) {
 		    $scope.isLoading = false;
@@ -105,7 +105,7 @@
                }
            }
            else {
-               NotificationService.error(JSON.stringify(response.Error));
+               NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
            }
        }).error(function (error) {
            $scope.isLoading = false;
@@ -186,7 +186,7 @@
                             NotificationService.success(moduleConstants.applicationDateUpdatedSuccess);
                         }
                         if (response.Success == false) {
-                            NotificationService.error(response.Error);
+                            NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
                         }
                     }).error(function (error) {
                         $scope.isLoading = false;
@@ -238,7 +238,7 @@
                             NotificationService.success(moduleConstants.deletingInfoSuccess);
                         }
                         if (response.Success == false) {
-                            NotificationService.error(response.Error);
+                            NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
                         }
                     }).error(function (error) {
                         $scope.isLoading = false;

@@ -25,7 +25,7 @@
 	            $scope.notFilteredApplicationsCount = response.Result;
 	        }
 	        else {
-	            NotificationService.error(JSON.stringify(response.Error));
+	            NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 	        }
 	    }).error(function (error) {
 	        if (!error) {
@@ -47,7 +47,7 @@
 	            $scope.clientTasksCount = response.Result;
 	        }
 	        else {
-	            NotificationService.error(JSON.stringify(response.Error));
+	            NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 	        }
 	    }).error(function (error) {
 	        if (!error) {
@@ -65,7 +65,7 @@
 	            $scope.applicationsInTrash = response.Result;
 	        }
 	        else {
-	            NotificationService.error(JSON.stringify(response.Error));
+	            NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 	        }
 	    }).error(function (error) {
 	        if (!error) {
@@ -125,7 +125,7 @@
 	            })
 	        }
 	        else {
-	            NotificationService.error(JSON.stringify(response.Error));
+	            NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 	        }
 	    }).error(function (error) {
 	        if (!error) {

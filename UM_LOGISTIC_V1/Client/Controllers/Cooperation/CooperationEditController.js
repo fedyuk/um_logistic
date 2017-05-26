@@ -33,7 +33,7 @@
 		        $location.path(moduleConstants.myApplicationsPath);
 		    }
 		    else {
-		        NotificationService.error(JSON.stringify(response.Error));
+		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
 		}).error(function (error) {
 		    $scope.isLoading = false;
@@ -61,7 +61,7 @@
 		        NotificationService.success(moduleConstants.uploadPictureSuccess);
 		    }
 		    else {
-		        NotificationService.error(JSON.stringify(response.Error));
+		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
 		}).error(function (error) {
 		    if (!error) {
@@ -162,7 +162,7 @@
 		        }
 		    }
 		    else {
-		        NotificationService.error(JSON.stringify(response.Error));
+		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
 		}).error(function (error) {
 		    $scope.isLoading = false;

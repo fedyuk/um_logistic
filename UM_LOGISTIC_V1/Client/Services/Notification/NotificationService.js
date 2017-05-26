@@ -1,25 +1,39 @@
 ﻿mainModule.service('NotificationService', function () {
     this.success = function (message) {
         if (message) {
-            $.notify(message, "success");
+            $.notify({
+                message: message
+            }, {
+                type: 'success'
+            });
         }
 	}
 	
     this.info = function (message) {
         if (message) {
-            $.notify(message, "info");
+            $.notify({
+                message: message
+            });
         }
 	}
 	
     this.warning = function (message) {
         if (message) {
-            $.notify(message, "warn");
+            $.notify({
+                message: message
+            }, {
+                type: 'warning'
+            });
         }
 	}
 	
     this.error = function (message) {
         if (message) {
-            $.notify(message, "error");
+            $.notify({
+                message: message
+            }, {
+                type: 'danger'
+            });
         }
 	}
 });

@@ -33,7 +33,7 @@
 	                });
 	            }
 	        } else {
-	            NotificationService.error(JSON.stringify(response.Error));
+	            NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 	        }
 		}).error(function (error) {
 		    $scope.isLoading = false;
@@ -75,7 +75,7 @@
 	                AccountService.removeAccount(user, token, id).success(function (response) {
 	                    $scope.isLoading = false;
 	                    if (response.Success == false) {
-	                        NotificationService.error(JSON.stringify(response.Error));
+	                        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 	                    } else {
 	                        for (var i = 0; i < $scope.users.length; i++)
 	                            if ($scope.users[i].id === id) {
