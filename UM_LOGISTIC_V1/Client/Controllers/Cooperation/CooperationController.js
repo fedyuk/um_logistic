@@ -324,6 +324,10 @@
 
     }
 
+    $scope.isExistElementInTrash = function (id, type) {
+        return SessionService.isExistsTrashElement(id, type);
+    }
+
     //methods
 
     //init controller

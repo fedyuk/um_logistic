@@ -113,7 +113,10 @@
 	$scope.$on("userAuthorized", function(event, args) {
 	    $scope.saveProfile(args);
 	    $scope.initializeManagerNotifications();
-	    $scope.getApplicationsInTrashCount();
+	    SessionService.getShopTrash(SessionService.getSessionUserId(), function (trash) {
+	        $scope.appTrashElements = trash;
+	        $scope.getApplicationsInTrashCount();
+	    });
 	});
 
 	$scope.$on("trashElementAdded", function (event, args) {
@@ -133,6 +136,10 @@
 	$scope.$on("userRegistrated", function (event, args) {
 	    $scope.saveProfile(args);
 	    $scope.initializeManagerNotifications();
+	    SessionService.getShopTrash(SessionService.getSessionUserId(), function (trash) {
+	        $scope.appTrashElements = trash;
+	        $scope.getApplicationsInTrashCount();
+	    });
 	});
 
 	$scope.showProfileButtons = function () {
@@ -161,6 +168,10 @@
 
 	$scope.initializeManagerNotifications();
 
-	$scope.getApplicationsInTrashElements();
+    //$scope.getApplicationsInTrashElements();
+	SessionService.getShopTrash(SessionService.getSessionUserId(), function (trash) {
+	    $scope.appTrashElements = trash;
+	    $scope.getApplicationsInTrashCount();
+	});
 	//init controller
 });

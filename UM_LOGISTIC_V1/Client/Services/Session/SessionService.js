@@ -67,7 +67,7 @@
 	        if (response.Success) {
 	            shopTrash = response.Result;
 	            angular.forEach(shopTrash, function (value, key) {
-	                if (value.Title == '') {
+	                if (value.Title == '' || value.Title == null) {
 	                    value.Title = moduleConstants.emptyFormValue;
 	                }
 	            });
@@ -121,6 +121,34 @@
 	        return [];
 	    }
 	    return shopTrash;
+	}
+
+	this.getShopTrash = function (userId, cb) {
+	    var shopTrash = [];
+	    $cookieStore.put("shop-trash", shopTrash, { "expires": expiresDate });
+	    ApplicationTrashService.getApplicationTrashElements(userId).success(function (response) {
+	        if (response.Success) {
+	            shopTrash = response.Result;
+	            angular.forEach(shopTrash, function (value, key) {
+	                if (value.Title == '' || value.Title == null) {
+	                    value.Title = moduleConstants.emptyFormValue;
+	                }
+	            });
+	            $cookieStore.put("shop-trash", shopTrash, { "expires": this.expiresDate });
+	            return cb.call(this, shopTrash);
+	        }
+	        else {
+	            NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
+	            return cb.call(this, null);
+	        }
+	    }).error(function (error) {
+	        if (!error) {
+	            NotificationService.error(moduleConstants.internalErrorCaption);
+	            return cb.call(this, error);
+	        }
+	        NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+	        return cb.call(this, error);
+	    });
 	}
 	
 	this.clearProfileData = function() {

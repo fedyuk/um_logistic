@@ -95,7 +95,8 @@
                     <h5 class="media-heading">Дата створення: {{trans.createdOn}}</h5>
                     <div class="inline">
                         <button type="button" class="btn btn-success btn-xs" ng-click="acceptApplication(trans.id)"><i class="fa fa-check" style="margin-right: 8px;" aria-hidden="true"></i>Оформити</button>
-                        <button type="button" class="btn btn-warning btn-xs" ng-click="moveIntoTrash(trans.id, trans.title)"><i class="fa fa-shopping-cart" style="margin-right: 8px;" aria-hidden="true"></i>В корзину</button>
+                        <button ng-show="!isExistElementInTrash(trans.id, true)" type="button" class="btn btn-warning btn-xs" ng-click="moveIntoTrash(trans.id, trans.title)"><i class="fa fa-shopping-cart" style="margin-right: 8px;" aria-hidden="true"></i>В корзину</button>
+                        <button ng-show="isExistElementInTrash(trans.id, true)" type="button" class="btn btn-warning btn-xs" ng-click="removeFromTrash(trans.id, trans.title)"><i class="fa fa-trash" style="margin-right: 8px;" aria-hidden="true"></i>Видалити з корзини</button>
                     </div>
                     </div>
                 </div>
