@@ -123,6 +123,19 @@
 	    return shopTrash;
 	}
 
+	this.removeShopTrashElement = function (id, type) {
+	    var shopTrash = $cookieStore.get("shop-trash");
+	    if (shopTrash != undefined) {
+	        for (var i = 0; i < shopTrash.length; i++) {
+	            if (shopTrash[i].Id == id && shopTrash[i].Type == type) {
+	                shopTrash.splice(i, 1);
+	                break;
+	            }
+	        }
+	        $cookieStore.put("shop-trash", shopTrash, { "expires": this.expiresDate });
+	    }
+	}
+
 	this.getShopTrash = function (userId, cb) {
 	    var shopTrash = [];
 	    $cookieStore.put("shop-trash", shopTrash, { "expires": expiresDate });

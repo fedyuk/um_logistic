@@ -323,6 +323,8 @@
         .success(function (response) {
             if (response.Success) {
                 $scope.isLoading = false;
+                SessionService.removeShopTrashElement(id, true);
+                $rootScope.$broadcast("trashElementRemoved", null);
             }
             else {
                 $scope.isLoading = false;

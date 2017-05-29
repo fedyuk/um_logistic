@@ -123,6 +123,10 @@
 	    $scope.getApplicationsInTrashCount();
 	});
 
+	$scope.$on("trashElementRemoved", function (event, args) {
+	    $scope.getApplicationsInTrashCount();
+	});
+
 	$scope.initializeManagerNotifications = function () {
 	    var isStaff = SessionService.isStaff();
 	    if (isStaff != true) {
