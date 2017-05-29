@@ -62,8 +62,8 @@
         </div>
         <div class="inline">
             <button type="button" class="btn btn-success btn-xs" ng-click="acceptApplication(cooperationToView.Id)"><i class="fa fa-check" style="margin-right: 8px;" aria-hidden="true"></i>Оформити</button>
-            <button type="button" class="btn btn-warning btn-xs" ng-click="moveIntoTrash(cooperationToView.Id)"><i class="fa fa-shopping-cart" style="margin-right: 8px;" aria-hidden="true"></i>В корзину</button>
-        </div>
+            <button ng-show="!isExistElementInTrash(cooperationToView.Id, false)" type="button" class="btn btn-warning btn-xs" ng-click="moveIntoTrash(cooperationToView.Id, cooperationToView.FullName)"><i class="fa fa-shopping-cart" style="margin-right: 8px;" aria-hidden="true"></i>В корзину</button>
+            <button ng-show="isExistElementInTrash(cooperationToView.Id, false)" type="button" class="btn btn-warning btn-xs" ng-click="removeFromTrash(cooperationToView.Id)"><i class="fa fa-trash" style="margin-right: 8px;" aria-hidden="true"></i>Видалити з корзини</button>
     </div>
     </div>
 </div>

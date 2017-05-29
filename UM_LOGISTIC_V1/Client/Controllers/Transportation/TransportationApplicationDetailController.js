@@ -175,8 +175,14 @@
         });
     }
 
-    $scope.moveIntoTrash = function (id) {
+    $scope.moveIntoTrash = function (id, title) {
         var userId = SessionService.getSessionUserId();
+        if (!userId) {
+            NotificationService.warning(moduleConstants.sessionUserIdNotFound);
+            $scope.isLoading = false;
+            $scope.isPartLoading = false;
+            return;
+        }
         var request = {
             ApplicationId: id,
             Type: true,
@@ -187,6 +193,8 @@
                 NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
             if (response.Success == true) {
+                SessionService.addTrashElement(id, true, title);
+                $rootScope.$broadcast("trashElementAdded", null);
                 NotificationService.success(moduleConstants.applicationTrashAddedInfo);
             }
         }).error(function (error) {
@@ -197,6 +205,37 @@
             NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
         });
 
+    }
+
+    $scope.isExistElementInTrash = function (id, type) {
+        return SessionService.isExistsTrashElement(id, type);
+    }
+
+    $scope.removeFromTrash = function (id) {
+        var userId = SessionService.getSessionUserId();
+        if (!userId) {
+            NotificationService.warning(moduleConstants.sessionUserIdNotFound);
+            $scope.isLoading = false;
+            $scope.isPartLoading = false;
+            return;
+        }
+        ApplicationTrashService.removeTrashElement(id, true)
+        .success(function (response) {
+            if (response.Success) {
+                $scope.isLoading = false;
+            }
+            else {
+                $scope.isLoading = false;
+                NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
+            }
+        }).error(function (error) {
+            $scope.isLoading = false;
+            if (!error) {
+                NotificationService.error(moduleConstants.internalErrorCaption);
+                return;
+            }
+            NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+        });
     }
 
     $scope.getTransportation();

@@ -40,6 +40,36 @@ namespace UM_LOGISTIC_V1.Services
             }
         }
 
+        public bool RemoveTrashElement(long id, bool type)
+        {
+            switch (type)
+            {
+                case true:
+                    var trashTransportation = db.ApplicationsTrash.Where(x => x.TransportationApplicationId == id).FirstOrDefault();
+                    if(trashTransportation != null)
+                    {
+                        db.ApplicationsTrash.Remove(trashTransportation);
+                    }
+                    break;
+                case false:
+                    var trashCooperation = db.ApplicationsTrash.Where(x => x.CooperationApplicationId == id).FirstOrDefault();
+                    if (trashCooperation != null)
+                    {
+                        db.ApplicationsTrash.Remove(trashCooperation);
+                    }
+                    break;
+            }
+            try
+            {
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         public long GetApplicationTrashCountByCreatedBy(long id)
         {
             return db.ApplicationsTrash.Count(i => i.CreatedBy == id);

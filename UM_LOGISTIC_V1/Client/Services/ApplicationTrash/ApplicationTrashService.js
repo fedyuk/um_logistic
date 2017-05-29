@@ -16,4 +16,11 @@
 	    }
 	    return $http.get("/api/trash/userApplications?id=" + id);
 	}
+
+	this.removeTrashElement = function (id, type) {
+	    if (!id) {
+	        id = 0;
+	    }
+	    return $http.get("/api/trash/remove?id=" + id + "&type=" + type);
+	}
 });

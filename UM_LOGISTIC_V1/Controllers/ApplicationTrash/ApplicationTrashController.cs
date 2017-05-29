@@ -43,5 +43,14 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationTrash
             response.Success = true;
             return Ok(response);
         }
+
+        [Route("api/trash/remove")]
+        [HttpGet]
+        public IHttpActionResult RemoveTrashElement(long id, bool type)
+        {
+            var response = new BaseResponse();
+            response.Success = service.RemoveTrashElement(id, type);
+            return Ok(response);
+        }
     }
 }
