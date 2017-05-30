@@ -1,4 +1,4 @@
-﻿mainModule.service('SessionService', function ($cookieStore, ApplicationTrashService, moduleConstants) {
+﻿mainModule.service('SessionService', function ($cookieStore, ApplicationTrashService, moduleConstants, NotificationService) {
     var expiresDate = null;
 
     this.saveSessionToken = function (token, user) {
