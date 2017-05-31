@@ -26,6 +26,7 @@
                 <th>Місто</th>
                 <th>Вулиця</th>
                 <th>Роль</th>
+                <th>Online</th>
                 <th>Дії</th>
             </tr>
         </thead>
@@ -41,6 +42,7 @@
                 <td>{{user.city}}</td>
                 <td>{{user.street}}</td>
                 <td>{{user.role}}</td>
+                <td><p class="text-success" ng-show="user.status == true && user.role == 'admin'">Так</p><p class="text-warning" ng-show="user.status == false && user.role == 'admin'">Ні</p></td>
                 <td>
                     <a class="btn btn-warning btn-sm" href="#" ng-click="deleteUser(user.id)">
                         <i class="fa fa-trash-o fa-sm"></i>

@@ -18,5 +18,7 @@ namespace UM_LOGISTIC_V1.Models.User
         public virtual Role.Role Role { get; set; }
         [ForeignKey("Role")]
         public long RoleId { get; set; }
+        public bool Connected { get; set; }
+        public string ConnectionId { get; set; }
     }
 }

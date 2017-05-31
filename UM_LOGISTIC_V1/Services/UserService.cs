@@ -100,5 +100,53 @@ namespace UM_LOGISTIC_V1.Services
             var limitedUsers = users.Skip(count * page).Take(count).ToList();
             return limitedUsers;
         }
+
+        public bool ConnectUser(string nick, string connectionId)
+        {
+            var user = db.Users.Where(u => u.UserName == nick).FirstOrDefault();
+            if(user != null)
+            {
+                user.Connected = true;
+                user.ConnectionId = connectionId;
+                db.Entry(user).State = EntityState.Modified;
+                try
+                {
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        public bool DisconnectUser(string nick)
+        {
+            var user = db.Users.Where(u => u.UserName == nick).FirstOrDefault();
+            if (user != null)
+            {
+                user.Connected = false;
+                user.ConnectionId = String.Empty;
+                db.Entry(user).State = EntityState.Modified;
+                try
+                {
+                    db.SaveChanges();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        public List<string> GetAdminConnectionIds()
+        {
+            var admins = db.Users.Where(u => u.RoleId == 1).Select(u => u.ConnectionId).ToList<string>();
+            return admins;
+        }
     }
 }

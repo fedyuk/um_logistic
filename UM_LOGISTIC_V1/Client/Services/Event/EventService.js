@@ -1,8 +1,10 @@
-﻿mainModule.service("EventService", function (SessionService) {
+﻿mainModule.service("EventService", function ($rootScope, SessionService) {
     var con = undefined;
     var hub = undefined;
     this.initializeEventsHub = function () {
+        var nickName = SessionService.getSessionUser();
         con = $.hubConnection();
+        con.qs = { "userName": nickName };
         hub = con.createHubProxy("eventsHub");
     }
 
@@ -36,6 +38,17 @@
             }
         });
     }
+
+    this.subscribeToOnlineStateChangedNotifications = function () {
+        hub.on('onlineStateChanged', function (isOnline, nick) {
+            var args = {
+                isOnline: isOnline,
+                nick: nick
+            };
+            $rootScope.$broadcast("onlineStateChanged", args);
+        });
+    }
+        
 
     this.startHubConnection = function () {
         con.start(function () {

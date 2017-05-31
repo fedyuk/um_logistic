@@ -113,6 +113,7 @@
 	$scope.$on("userAuthorized", function(event, args) {
 	    $scope.saveProfile(args);
 	    $scope.initializeManagerNotifications();
+	    $scope.subscribeToOnlineStateNotifications();
 	    SessionService.getShopTrash(SessionService.getSessionUserId(), function (trash) {
 	        $scope.appTrashElements = trash;
 	        $scope.getApplicationsInTrashCount();
@@ -137,9 +138,17 @@
 	    EventService.startHubConnection();
 	}
 
+	$scope.subscribeToOnlineStateNotifications = function () {
+	    var isAdmin = SessionService.isAdmin();
+	    if (isAdmin == true) {
+	        EventService.subscribeToOnlineStateChangedNotifications();
+	    }
+	}
+
 	$scope.$on("userRegistrated", function (event, args) {
 	    $scope.saveProfile(args);
 	    $scope.initializeManagerNotifications();
+	    $scope.subscribeToOnlineStateNotifications();
 	    SessionService.getShopTrash(SessionService.getSessionUserId(), function (trash) {
 	        $scope.appTrashElements = trash;
 	        $scope.getApplicationsInTrashCount();
@@ -171,6 +180,8 @@
 	$scope.showProfileButtons();
 
 	$scope.initializeManagerNotifications();
+
+	$scope.subscribeToOnlineStateNotifications();
 
     //$scope.getApplicationsInTrashElements();
 	SessionService.getShopTrash(SessionService.getSessionUserId(), function (trash) {

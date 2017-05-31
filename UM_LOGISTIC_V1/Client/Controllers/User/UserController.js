@@ -29,7 +29,9 @@
 	                    street: FormHelper.getFormValue(response.Result[i].Account.Street),
 	                    createdOn: new Date(response.Result[i].CreatedOn).toLocaleString(),
 	                    role: FormHelper.getFormValue(response.Result[i].Role.Name),
-                        modifiedOn: new Date(response.Result[i].ModifiedOn).toLocaleString()
+	                    modifiedOn: new Date(response.Result[i].ModifiedOn).toLocaleString(),
+	                    status: response.Result[i].Connected,
+                        connectionId: response.Result[i].ConnectionId
 	                });
 	            }
 	        } else {
@@ -91,6 +93,18 @@
 	        }
 	    });
 	}
+
+	$scope.$on("onlineStateChanged", function (event, args) {
+	    if (args && args.nick == "") {
+	        return;
+	    }
+	    for (var i = 0; i < $scope.users.length; i++) {
+	        if ($scope.users[i].login == args.nick) {
+	            $scope.users[i].status = args.isOnline;
+	            break;
+	        }
+	    }
+	});
     //methods
 
 	$scope.initUsersList();
