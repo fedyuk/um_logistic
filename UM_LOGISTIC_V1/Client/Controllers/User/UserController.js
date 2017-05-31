@@ -100,7 +100,9 @@
 	    }
 	    for (var i = 0; i < $scope.users.length; i++) {
 	        if ($scope.users[i].login == args.nick) {
-	            $scope.users[i].status = args.isOnline;
+	            $scope.$apply(function () {
+	                $scope.users[i].status = args.isOnline;
+	            });
 	            break;
 	        }
 	    }
