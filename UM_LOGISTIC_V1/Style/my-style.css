@@ -319,3 +319,9 @@ input[type="radio"] .styled:checked + label::after {
 .btn {
     border-radius: 0!important;
 }
+
+
+div.scroll-menu-picture {
+    overflow: auto;
+    white-space: nowrap;
+}
