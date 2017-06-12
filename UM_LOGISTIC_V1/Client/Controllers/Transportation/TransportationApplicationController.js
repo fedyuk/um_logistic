@@ -36,6 +36,7 @@
 		.success(function (response) {
 		    $scope.isLoading = false;
 		    if (response.Success) {
+		        $scope.loadPicture(response.Id, true);
 		        $location.path(moduleConstants.homePath);
 		    }
 		    else {
