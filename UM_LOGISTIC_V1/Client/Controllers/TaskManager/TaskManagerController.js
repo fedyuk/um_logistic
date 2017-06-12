@@ -5,7 +5,7 @@
     $scope.isLoading = false;
     $scope.isPartLoading = false;
     $scope.currentPage = 0;
-    $scope.currentCount = 50;//moduleConstants.pageRowsCount;
+    $scope.currentCount = moduleConstants.taskManagerLimitRows;
     //variables
     //methods
 
@@ -86,8 +86,14 @@
             NotificationService.warning("Нова задача");
         }
         $scope.tasks = [];
-        $scope.listTasks(0, 50);
+        $scope.listTasks(0, $scope.currentCount);
     });
+
+    $scope.unFocusLimitRows = function () {
+        $scope.tasks = [];
+        $scope.isLoading = true;
+        $scope.listTasks(0, $scope.currentCount);
+    }
 
     //methods
 
