@@ -21,22 +21,12 @@ namespace UM_LOGISTIC_V1.Services
             return application;
         }
 
-        public long? CreateTransportationApplication(TransportationApplication application, string image)
+        public long? CreateTransportationApplication(TransportationApplication application)
         {
             if (application != null)
             {
                 application.CreatedOn = DateTime.Now;
                 application.ModifiedOn = application.CreatedOn;
-                if(!String.IsNullOrEmpty(image))
-                {
-                    application.Pictures.Add(new UM_LOGISTIC_V1.Models.TransportationPicture.TransportationPicture()
-                    {
-                        Image = image,
-                        CreatedOn = DateTime.Now,
-                        ModifiedOn = DateTime.Now,
-                        CreatedBy = application.CreatedBy
-                    });
-                }
                 db.TransportationApplications.Add(application);
                 try
                 {

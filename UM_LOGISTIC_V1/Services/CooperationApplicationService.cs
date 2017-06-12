@@ -20,22 +20,12 @@ namespace UM_LOGISTIC_V1.Services
             return application;
         }
 
-        public long? CreateCooperationApplication(CooperationApplication application, string image)
+        public long? CreateCooperationApplication(CooperationApplication application)
         {
             if (application != null)
             {
                 application.CreatedOn = DateTime.Now;
                 application.ModifiedOn = application.CreatedOn;
-                if (!String.IsNullOrEmpty(image))
-                {
-                    application.Pictures.Add(new UM_LOGISTIC_V1.Models.CooperationPicture.CooperationPicture()
-                    {
-                        Image = image,
-                        CreatedOn = DateTime.Now,
-                        ModifiedOn = DateTime.Now,
-                        CreatedBy = application.CreatedBy
-                    });
-                }
                 db.CooperationApplications.Add(application);
                 try
                 {
