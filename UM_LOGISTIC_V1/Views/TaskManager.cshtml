@@ -5,6 +5,16 @@
     <h4></h4>
 </div>
 <div class="row" style="margin-top: 100px;" ng-show="!isLoading">
+    <div class="row">
+        <div>
+            <div class="pull-right">
+                <label for="checkbox2">
+                    Кількість записів
+                </label>
+                <input style="width: 100px;" type="number" ng-blur="unFocusLimitRows()" ng-model="currentCount">
+            </div>
+        </div>
+    </div>
     <div class="row" ng-show="tasks.length == 0">
         <div class="col-md-offset-6 btn-sm">
             <h4>Немає даних</h4>

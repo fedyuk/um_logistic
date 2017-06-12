@@ -38,5 +38,6 @@
 	googleMapsKey: "AIzaSyB51SUDbv8WOYS9yNLniL1DjWNH174A2cU",
 	uploadPictureSuccess: "Картинка завантажена",
 	internalErrorCaption: "Внутрішня помилка",
-    notifyWindowDelay: 1000
+	notifyWindowDelay: 1000,
+	taskManagerLimitRows: 50
 });
