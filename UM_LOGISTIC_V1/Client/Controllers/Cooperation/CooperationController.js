@@ -310,9 +310,10 @@
                 NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
             if (response.Success == true) {
-                SessionService.addTrashElement(id, false, title);
-                $rootScope.$broadcast("trashElementAdded", null);
-                NotificationService.success(moduleConstants.applicationTrashAddedInfo);
+                var isTrashAdded = SessionService.addTrashElement(id, false, title);
+                if (isTrashAdded == true) {
+                    $rootScope.$broadcast("trashElementAdded", null);
+                }
             }
         }).error(function (error) {
             if (!error) {

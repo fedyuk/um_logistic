@@ -90,12 +90,25 @@
 	    if (shopTrash == undefined) {
 	        shopTrash = [];
 	    }
+	    var isLimited = this.checkLimitTrash(shopTrash);
+	    if (!isLimited) {
+	        NotificationService.warning(moduleConstants.limitTrashCountMessage);
+	        return false;
+	    }
 	    shopTrash.push({
 	        Id: applicationId,
 	        Title: title,
             Type: type
 	    });
 	    $cookieStore.put("shop-trash", shopTrash, { "expires": this.expiresDate });
+	    return true;
+	}
+
+	this.checkLimitTrash = function (shopTrash) {
+	    if (shopTrash && shopTrash.length >= moduleConstants.limitTrashCount) {
+	        return false;
+	    }
+	    return true;
 	}
 
 	this.isExistsTrashElement = function (id, type) {
