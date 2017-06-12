@@ -120,10 +120,10 @@
 
     $scope.getPicture = function (id) {
         var type = false;
-        ApplicationPictureService.getApplicationPicture(id, type)
+        ApplicationPictureService.getApplicationPictures(id, type)
 		.success(function (response) {
-		    if (response.Success) {
-		        $scope.pictures[id] = response.Result;
+		    if (response.Success && response.Result && response.Result.length > 0) {
+		        $scope.pictures[id] = response.Result[0];
 		    }
 		    else {
 		        $scope.pictures[id] = "";
