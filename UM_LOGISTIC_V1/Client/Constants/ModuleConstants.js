@@ -39,5 +39,7 @@
 	uploadPictureSuccess: "Картинка завантажена",
 	internalErrorCaption: "Внутрішня помилка",
 	notifyWindowDelay: 1000,
-	taskManagerLimitRows: 50
+	taskManagerLimitRows: 50,
+	limitTrashCount: 20,
+	limitTrashCountMessage: "Перевищено ліміт елементів в корзині"
 });
