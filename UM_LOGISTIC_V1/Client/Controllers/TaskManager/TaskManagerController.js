@@ -86,6 +86,7 @@
             NotificationService.warning("Нова задача");
         }
         $scope.tasks = [];
+        $scope.isLoading = true;
         $scope.listTasks(0, $scope.currentCount);
     });
 
