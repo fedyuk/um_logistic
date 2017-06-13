@@ -88,6 +88,8 @@ namespace UM_LOGISTIC_V1.Services
                 UserId = a.CreatedBy,
             }).Where(a => a.UserId == userId);
 
+
+
             foreach (var app in applications)
             {
                 applicationsTrash.Add(new ApplicationTrashElement() {
