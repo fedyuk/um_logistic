@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using UM_LOGISTIC_V1.Models;
 using UM_LOGISTIC_V1.Models.User;
@@ -47,7 +48,7 @@ namespace UM_LOGISTIC_V1.Services
 
         public bool UpdateUser(User user)
         {
-            var userToUpdate = db.Users.Find(user.Id);
+            var userToUpdate = db.Users.Find(user.Id); 
             if (userToUpdate != null)
             {
                 userToUpdate.UserName = user.UserName;
@@ -147,6 +148,51 @@ namespace UM_LOGISTIC_V1.Services
         {
             var admins = db.Users.Where(u => u.RoleId == 1).Select(u => u.ConnectionId).ToList<string>();
             return admins;
+        }
+
+        public User GetUserInfo(long id)
+        {
+            var user = db.Users.Find(id);
+            return user;
+        }
+
+        public string GetPicture(long id)
+        {
+            var image = db.UserPictures.Where(x => x.UserId == id).Select(x => x.Image).FirstOrDefault();
+            if (String.IsNullOrEmpty(image))
+            {
+                return null;
+            }
+            var base64Data = Regex.Match(image, @"data:image/(?<type>.+?),(?<data>.+)").Groups["data"].Value;
+            return base64Data;
+        }
+
+        public bool UpdateUserInfo(User user)
+        {
+            var userToUpdate = db.Users.Find(user.Id);
+            if (userToUpdate != null)
+            {
+                userToUpdate.UserName = user.UserName;
+                userToUpdate.UserPassword = user.UserPassword;
+                userToUpdate.Account.FullName = user.Account.FullName;
+                userToUpdate.Account.HomePhone = user.Account.HomePhone;
+                userToUpdate.Account.WorkPhone = user.Account.WorkPhone;
+                userToUpdate.Account.Country = user.Account.Country;
+                userToUpdate.Account.Region = user.Account.Region;
+                userToUpdate.Account.City = user.Account.City;
+                userToUpdate.Account.Street = user.Account.Street;
+                db.Entry(userToUpdate).State = EntityState.Modified;
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+                return true;
+            }
+            return false;
         }
     }
 }

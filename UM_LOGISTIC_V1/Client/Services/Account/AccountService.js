@@ -35,4 +35,8 @@
 	this.getRoles = function () {
 	    return $http.get("/api/roles");
 	}
+
+	this.getUserInfo = function (id) {
+	    return $http.get("/api/user/info?id=" + id);
+	}
 });

@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using UM_LOGISTIC_V1.Models;
 using UM_LOGISTIC_V1.Models.Account;
 using UM_LOGISTIC_V1.Models.Role;
 using UM_LOGISTIC_V1.Models.User;
+using UM_LOGISTIC_V1.Models.UserPicture;
 using UM_LOGISTIC_V1.Request.Account;
+using UM_LOGISTIC_V1.Response.ApplicationPicture;
 
 namespace UM_LOGISTIC_V1.Services
 {
@@ -113,18 +116,37 @@ namespace UM_LOGISTIC_V1.Services
             account.City = userToRegister.City;
             account.CreatedOn = DateTime.Now;
             account.ModifiedOn = DateTime.Now;
-            account.Image = userToRegister.Image;
             user.Account = account;
             user.Role = db.Roles.Find(3);
             db.Users.Add(user);
             try
             {
                 db.SaveChanges();
+                var success = SaveUserPicture(user.Id, userToRegister.Image);
                 return user;
             }
             catch(Exception)
             {
                 return null;
+            }
+        }
+
+        public bool SaveUserPicture(long userId, string image)
+        {
+            var userPicture = new UserPicture();
+            userPicture.UserId = userId;
+            userPicture.CreatedOn = DateTime.Now;
+            userPicture.ModifiedOn = DateTime.Now;
+            userPicture.Image = image;
+            db.UserPictures.Add(userPicture);
+            try
+            {
+                db.SaveChanges();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
             }
         }
 

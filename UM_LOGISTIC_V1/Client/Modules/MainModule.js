@@ -98,6 +98,11 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
             templateUrl: '/views/transport-map',
             controller: 'TransportMapController'
         })
+        .state('profile_settings', {
+            url: '/profile_settings',
+            templateUrl: '/views/profilesettings',
+            controller: 'ProfileSettingsController'
+        })
         .state('404', {
             url: '/404',
             templateUrl: '/views/404'

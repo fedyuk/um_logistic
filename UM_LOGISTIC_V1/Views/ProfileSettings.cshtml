@@ -1,0 +1,120 @@
+﻿<div align="center" ng-show="isLoading">
+    <img src="~/Resources/Picture/loading.gif" align="center" />
+</div>
+<div class="row" ng-show="!isLoading">
+    <h4></h4>
+</div>
+<div class="row" style="margin-top: 50px;" ng-show="!isLoading">
+    <header class="page-header-my col-md-offset-3" >
+        <button type="button" class="btn btn-success pull-right btn-sm" ng-click="saveUserData()">Зберегти</button>
+        <h3>Настройка<small> користувача</small></h3>       
+    </header>
+    
+    <div class="col-md-3 col-md-offset-3">
+        <div class="row">
+            <img ng-src="{{getImageUrl()}}" alt="empty_customer" class="img-circle profile-photo-my" width="200" height="200" id="userImage">   @*~/Resources/Picture/empty_customer.png*@   @*{{getImageUrl()}}*@
+        </div>
+        <div class="col-md-offset-2">
+            <label class="btn btn-primary btn-edit-my">
+                Изменить <input type="file" style="display: none;">
+            </label>
+        </div>     
+    </div>   
+    <div class="col-md-4">
+        <form class="bs-component" name="coopForm">
+            <div class="row">
+                <div class="form-group required">
+                    <label class="control-label">Логін:</label>
+                    <input class="form-control input-sm" name="login" ng-model="User.UserName" type="text" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group required">
+                    <label class="control-label">Пароль:</label>
+                    <input class="form-control input-sm" name="password" ng-model="User.UserPassword" type="text" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group required">
+                    <label class="control-label">Підтвердити пароль:</label>
+                    <input class="form-control input-sm" name="confirmPassword" ng-model="User.UserPassword" type="text" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group required">
+                    <label class="control-label">ПІП:</label>
+                    <input class="form-control input-sm" name="fullName" ng-model="User.Account.FullName" type="text" required>
+                </div>
+            </div>
+        </form>
+
+    </div>    
+</div>
+<div class="row" ng-show="!isLoading">
+    <header class="page-header-my col-md-offset-3" style="margin-top: 10px;">
+        <h3>Aдрес</h3>
+    </header>
+    <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-5">
+            <form class="bs-component" name="coopForm">
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label">Країна:</label>
+                        <input class="form-control input-sm" name="country" ng-model="User.Account.Country" type="text" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label">Регіон:</label>
+                        <input class="form-control input-sm" name="region" ng-model="User.Account.Region" type="text" required>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-5 col-md-offset-1">
+           <form class="bs-component" name="coopForm">
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label">Місто:</label>
+                        <input class="form-control input-sm" name="city" ng-model="User.Account.City" type="text" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label">Вулиця:</label>
+                        <input class="form-control input-sm" name="street" ng-model="User.Account.Street" type="text" required>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row" ng-show="!isLoading">
+    <header class="page-header-my col-md-offset-3" style="margin-top: 10px;">
+        <h3>Комунікація</h3>
+    </header>
+    <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-5">
+            <form class="bs-component" name="coopForm">
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label">Домашній телефон:</label>
+                        <input class="form-control input-sm" name="homePhone" ng-model="User.Account.HomePhone" type="text" required>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-5 col-md-offset-1">
+            <form class="bs-component" name="coopForm">
+                <div class="row">
+                    <div class="form-group required">
+                        <label class="control-label">Робочий телефон:</label>
+                        <input class="form-control input-sm" name="workPhone" ng-model="User.Account.WorkPhone" type="text" required>
+                    </div>
+                </div>
+            </form>
+        </div>
+       
+    </div>
+</div>
