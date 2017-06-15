@@ -22,5 +22,9 @@
 	
 	this.getUsers = function (user, token, page, count) {
         return $http.get('/api/users?page=' + page + '&count=' + count + '&token=' + token + "&user=" + user);
-    }
+	}
+
+	this.updateUserData = function (user) {
+	    return $http.put('/api/update_user', user);
+	}
 });

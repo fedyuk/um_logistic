@@ -98,6 +98,11 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
             templateUrl: '/views/transport-map',
             controller: 'TransportMapController'
         })
+        .state('profile_settings', {
+            url: '/profile_settings',
+            templateUrl: '/views/profilesettings',
+            controller: 'ProfileSettingsController'
+        })
         .state('task_manager', {
             url: '/task_manager',
             templateUrl: '/views/taskmanager',

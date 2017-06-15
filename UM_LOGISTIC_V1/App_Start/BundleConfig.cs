@@ -56,6 +56,7 @@ namespace UM_LOGISTIC_V1.App_Start
                 "~/Client/Controllers/Transportation/TransportationEditController.js",
                 "~/Client/Controllers/TransportMap/TransportMapController.js",
                 "~/Client/Controllers/Cooperation/CooperationEditController.js",
+                "~/Client/Controllers/Profile/ProfileSettingsController.js"));
                 "~/Client/Controllers/TaskManager/TaskManagerController.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/Client/Libraries").Include(

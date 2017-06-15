@@ -320,6 +320,25 @@ input[type="radio"] .styled:checked + label::after {
     border-radius: 0!important;
 }
 
+.jumbotron {    
+    width: 400px;
+    margin: auto;      
+}
+
+.page-header-my {
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.btn-edit-my {
+    margin-top: 20px;
+}
+
+.profile-photo-my {
+    margin-left: 10px;
+}
+=======
 
 div.scroll-menu-picture {
     overflow: auto;

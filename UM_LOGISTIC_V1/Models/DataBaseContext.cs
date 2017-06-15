@@ -21,7 +21,8 @@ namespace UM_LOGISTIC_V1.Models
         public DbSet<ClientTaskType> ClientTaskTypes { get; set; }
         public DbSet<ClientTask.ClientTask> ClientTasks { get; set; }
         public DbSet<ApplicationTrash.ApplicationTrash> ApplicationsTrash { get; set; }
-
+        public DbSet<UserPicture.UserPicture> UserPictures { get; set; }
+        public DbSet<Image.Image> Images { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ClientTask.ClientTask>()

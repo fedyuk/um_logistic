@@ -15,6 +15,6 @@ namespace UM_LOGISTIC_V1.Models.Account
         public string Region { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
-        public string Image { get; set; }
+        public string PictureUrl { get; set; }
     }
 }

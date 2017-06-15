@@ -9,12 +9,18 @@ using UM_LOGISTIC_V1.Response.Account;
 using UM_LOGISTIC_V1.Security;
 using UM_LOGISTIC_V1.Services;
 using UM_LOGISTIC_V1.Models.Account;
+using UM_LOGISTIC_V1.Models.User;
+using UM_LOGISTIC_V1.Response.User;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace UM_LOGISTIC_V1.Controllers.Account
 {
     public class AccountController : ApiController
     {
         private AccountService accountService = new AccountService();
+        private UserService userService = new UserService();
 
         [Route("api/account")]
         [HttpGet]
@@ -315,6 +321,65 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             var roles = accountService.GetRoles();
             return Ok(roles);
 
+        }
+
+        [Route("api/user/info")]
+        [HttpGet]
+        public IHttpActionResult GetUserInformation(long id)
+        {
+            var response = new GetUserResponse();
+            var user = userService.GetUserInfo(id);
+            if (user != null)
+            {
+                response.Success = true;
+                response.Error = "";
+                response.Result = user;
+                return Ok(response);
+            }
+            return NotFound();
+        }
+
+        [Route("api/u_pictures")]
+        [HttpGet]
+        public HttpResponseMessage GetPictureidlong(long id)
+        {
+            var image = String.Empty;
+            var defaultImage = String.Empty;
+            var tasks = new List<Task>();
+
+            tasks.Add(Task.Factory.StartNew(() => image = userService.GetPicture(id)));
+            tasks.Add(Task.Factory.StartNew(() => defaultImage = Images.GetDefaultImage("empty_customer")));
+            Task.WaitAll(tasks.ToArray());
+
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
+
+            if (image == String.Empty || defaultImage == String.Empty)
+            {
+                return response;
+            }
+            var images = image == null ? defaultImage : image;
+            var byteImage = Convert.FromBase64String(images);
+                    
+            MemoryStream ms = new MemoryStream(byteImage);
+            response.Content = new StreamContent(ms);
+            response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("image/png");
+            return response;
+        }
+
+        [Route("api/update_user")]
+        [HttpPut]
+        public IHttpActionResult UpdateUserData([FromBody]User user)
+        {
+            var response = new UpdateUserResponse();
+            if (user != null)
+            {
+                var updateUser = userService.UpdateUserInfo(user);
+                if (updateUser)
+                {
+                    return Ok(response);
+                }
+            }
+            return NotFound();
         }
     }
 }
