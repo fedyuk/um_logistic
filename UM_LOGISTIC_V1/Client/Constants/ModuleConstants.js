@@ -39,5 +39,9 @@
 	uploadPictureSuccess: "Картинка завантажена",
 	internalErrorCaption: "Внутрішня помилка",
 	profileSettings: "/profilesettings",
-    notifyWindowDelay: 1000
+  notifyWindowDelay: 1000,
+	notifyWindowDelay: 1000,
+	taskManagerLimitRows: 50,
+	limitTrashCount: 20,
+	limitTrashCountMessage: "Перевищено ліміт елементів в корзині"
 });

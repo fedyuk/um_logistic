@@ -103,6 +103,11 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
             templateUrl: '/views/profilesettings',
             controller: 'ProfileSettingsController'
         })
+        .state('task_manager', {
+            url: '/task_manager',
+            templateUrl: '/views/taskmanager',
+            controller: 'TaskManagerController'
+        })
         .state('404', {
             url: '/404',
             templateUrl: '/views/404'

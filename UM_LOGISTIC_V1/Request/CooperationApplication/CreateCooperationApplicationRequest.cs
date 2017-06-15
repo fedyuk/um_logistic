@@ -25,6 +25,5 @@ namespace UM_LOGISTIC_V1.Request.CooperationApplication
         public long WorkTypeId { get; set; }
         public decimal DeliveryCost { get; set; }
         public long CreatedBy { get; set; }
-        public string Image { get; set; }
     }
 }

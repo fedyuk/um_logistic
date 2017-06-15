@@ -1,6 +1,8 @@
 ﻿mainModule.service("EventService", function ($rootScope, SessionService) {
     var con = undefined;
     var hub = undefined;
+    var taskManagerConnection = undefined;
+    var taskManagerHub = undefined;
     this.initializeEventsHub = function () {
         var nickName = SessionService.getSessionUser();
         con = $.hubConnection();
@@ -8,8 +10,17 @@
         hub = con.createHubProxy("eventsHub");
     }
 
+    this.initializeTaskManagerHub = function () {
+        taskManagerConnection = $.hubConnection();
+        taskManagerHub = taskManagerConnection.createHubProxy("taskManagerHub");
+    }
+
     this.getEventsHub = function () {
         return hub;
+    }
+
+    this.getTaskManagerHub = function () {
+        return taskManagerHub;
     }
 
     this.subscribeToNotifications = function () {
@@ -48,15 +59,42 @@
             $rootScope.$broadcast("onlineStateChanged", args);
         });
     }
+
+    this.subscribeToTaskMangerNotifications = function () {
+        taskManagerHub.on('taskManagerChanged', function (taskId) {
+            var args = {
+                taskId: taskId
+            };
+            $rootScope.$broadcast("taskManagerChanged", args);
+        });
+    }
         
 
     this.startHubConnection = function () {
-        con.start(function () {
-        });
+        if (con) {
+            con.start(function () {
+            });
+        }
     }
 
     this.stopHubConnection = function () {
-        con.stop(function () {
-        });
+        if (con) {
+            con.stop(function () {
+            });
+        }
+    }
+
+    this.startTaskManagerHubConnection = function () {
+        if (taskManagerConnection) {
+            taskManagerConnection.start(function () {
+            });
+        }
+    }
+
+    this.stopTaskManagerHubConnection = function () {
+        if (taskManagerConnection) {
+            taskManagerConnection.stop(function () {
+            });
+        }
     }
 });

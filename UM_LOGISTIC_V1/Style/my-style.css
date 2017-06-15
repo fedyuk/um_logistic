@@ -338,3 +338,9 @@ input[type="radio"] .styled:checked + label::after {
 .profile-photo-my {
     margin-left: 10px;
 }
+=======
+
+div.scroll-menu-picture {
+    overflow: auto;
+    white-space: nowrap;
+}

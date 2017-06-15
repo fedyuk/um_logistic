@@ -120,10 +120,10 @@
 
     $scope.getPicture = function (id) {
         var type = false;
-        ApplicationPictureService.getApplicationPicture(id, type)
+        ApplicationPictureService.getApplicationPictures(id, type)
 		.success(function (response) {
-		    if (response.Success) {
-		        $scope.pictures[id] = response.Result;
+		    if (response.Success && response.Result && response.Result.length > 0) {
+		        $scope.pictures[id] = response.Result[0];
 		    }
 		    else {
 		        $scope.pictures[id] = "";
@@ -310,9 +310,10 @@
                 NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
             if (response.Success == true) {
-                SessionService.addTrashElement(id, false, title);
-                $rootScope.$broadcast("trashElementAdded", null);
-                NotificationService.success(moduleConstants.applicationTrashAddedInfo);
+                var isTrashAdded = SessionService.addTrashElement(id, false, title);
+                if (isTrashAdded == true) {
+                    $rootScope.$broadcast("trashElementAdded", null);
+                }
             }
         }).error(function (error) {
             if (!error) {

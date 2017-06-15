@@ -62,7 +62,7 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
                 ShipmentWidth = request.ShipmentWidth,
                 CreatedBy = request.CreatedBy
             };
-            var id = applicationService.CreateTransportationApplication(applicationToCreate, request.Image);
+            var id = applicationService.CreateTransportationApplication(applicationToCreate);
             if (id != null)
             {
                 createTransportationApplicationResponse.Success = true;

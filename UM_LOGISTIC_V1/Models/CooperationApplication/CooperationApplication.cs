@@ -11,7 +11,6 @@ namespace UM_LOGISTIC_V1.Models.CooperationApplication
     {
         public CooperationApplication()
         {
-            Pictures = new List<CooperationPicture.CooperationPicture>();
         }
         public string FullName { get; set; }
         public string ResidenceAddress { get; set; }
@@ -32,7 +31,5 @@ namespace UM_LOGISTIC_V1.Models.CooperationApplication
         public virtual ApplicationWorkType WorkType { get; set; }
         public decimal DeliveryCost { get; set; }
         public bool Filtered { get; set; }
-
-        public virtual List<CooperationPicture.CooperationPicture> Pictures { get; set; }
     }
 }

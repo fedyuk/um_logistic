@@ -14,6 +14,7 @@ namespace UM_LOGISTIC_V1.Services
     public class ClientTaskService
     {
         private DataBaseContext db = new DataBaseContext();
+        private UserService userService = new UserService();
 
         public bool CreateCallFeedback(CallFeedbackRequest request)
         {
@@ -59,6 +60,9 @@ namespace UM_LOGISTIC_V1.Services
                 db.SaveChanges();
                 var eventsHub = GlobalHost.ConnectionManager.GetHubContext<EventsHub>();
                 eventsHub.Clients.All.onTaskGot(owner, title, 1);
+                var taskManagerHub = GlobalHost.ConnectionManager.GetHubContext<TaskManagerHub>();
+                //taskManagerHub.Clients.Clients(userService.GetAdminConnectionIds()).taskManagerChanged(feedBack.Id);
+                taskManagerHub.Clients.All.taskManagerChanged(feedBack.Id);
                 return true;
             }
             catch(Exception)
@@ -109,6 +113,9 @@ namespace UM_LOGISTIC_V1.Services
                 try
                 {
                     db.SaveChanges();
+                    var taskManagerHub = GlobalHost.ConnectionManager.GetHubContext<TaskManagerHub>();
+                    //taskManagerHub.Clients.Clients(userService.GetAdminConnectionIds()).taskManagerChanged(0);
+                    taskManagerHub.Clients.All.taskManagerChanged(0);
                     return true;
                 }
                 catch(Exception)
@@ -123,10 +130,10 @@ namespace UM_LOGISTIC_V1.Services
         {
             var columns = DBColumns.clientTaskcolumns;
             var query = db.ClientTasks.AsQueryable<ClientTask>();
-            if (filters.Count == 0)
+            /*if (filters.Count == 0)
             {
                 return new List<ClientTask>();
-            }
+            }*/
             foreach (var filter in filters)
             {
                 object value = Convert.ChangeType(filter.value, columns.Where(s => s.column == filter.column).Select(x => x.type).FirstOrDefault());
@@ -191,6 +198,9 @@ namespace UM_LOGISTIC_V1.Services
                 db.SaveChanges();
                 var eventsHub = GlobalHost.ConnectionManager.GetHubContext<EventsHub>();
                 eventsHub.Clients.All.onTaskGot(owner, title, request.TypeId);
+                var taskManagerHub = GlobalHost.ConnectionManager.GetHubContext<TaskManagerHub>();
+                //taskManagerHub.Clients.Clients(userService.GetAdminConnectionIds()).taskManagerChanged(applicationTask.Id);
+                taskManagerHub.Clients.All.taskManagerChanged(applicationTask.Id);
                 return true;
             }
             catch (Exception)
