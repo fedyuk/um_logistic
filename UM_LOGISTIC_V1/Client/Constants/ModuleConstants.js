@@ -43,5 +43,6 @@
 	notifyWindowDelay: 1000,
 	taskManagerLimitRows: 50,
 	limitTrashCount: 20,
-	limitTrashCountMessage: "Перевищено ліміт елементів в корзині"
+	limitTrashCountMessage: "Перевищено ліміт елементів в корзині",
+    defaultPageTitle: "Головна"
 });
