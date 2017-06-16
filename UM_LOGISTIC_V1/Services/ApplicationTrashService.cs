@@ -34,7 +34,7 @@ namespace UM_LOGISTIC_V1.Services
                 db.SaveChanges();
                 return true;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 return false;
             }
@@ -64,7 +64,7 @@ namespace UM_LOGISTIC_V1.Services
                 db.SaveChanges();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

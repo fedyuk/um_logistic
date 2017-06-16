@@ -32,7 +32,7 @@ namespace UM_LOGISTIC_V1.Services
                 {
                     db.SaveChanges();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return null;
                 }
