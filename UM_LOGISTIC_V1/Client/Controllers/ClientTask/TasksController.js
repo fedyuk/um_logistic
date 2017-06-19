@@ -9,8 +9,8 @@
     //variables
     //methods
 
-    $scope.listTasks = function (page, count) {
-        var userId = SessionService.getSessionUserId();
+    $scope.listTasks = (page, count) => {
+        let userId = SessionService.getSessionUserId();
         if (!userId) {
             NotificationService.warning(moduleConstants.sessionUserIdNotFound);
             $scope.isLoading = false;
@@ -21,7 +21,7 @@
             $scope.isLoading = false;
             $scope.isPartLoading = false;
             if (response.Success) {
-                for (var i = 0; i < response.Result.length; i++) {
+                for (let i = 0; i < response.Result.length; i++) {
                     $scope.tasks.push({
                         id: FormHelper.getFormValue(response.Result[i].Id),
                         typeId: FormHelper.getFormValue(response.Result[i].Type.Id),
@@ -44,17 +44,17 @@
         });
     }
 
-    $scope.loadMore = function () {
+    $scope.loadMore = () => {
         $scope.isPartLoading = true;
         $scope.currentPage++;
         $scope.listTasks($scope.currentPage, $scope.currentCount);
     }
 
-    $scope.initTasksList = function () {
+    $scope.initTasksList = () => {
         $scope.isLoading = true;
         $scope.listTasks($scope.currentPage, $scope.currentCount);
     }
-    $scope.acceptTask = function (id) {
+    $scope.acceptTask = (id) => {
         bootbox.confirm({
             message: moduleConstants.deleteTaskConfirmation,
             buttons: {
@@ -67,13 +67,13 @@
                     className: 'btn-default btn-sm'
                 }
             },
-            callback: function (ok) {
+            callback: (ok) => {
                 if (ok == true) {
                     ClientTaskService.acceptTask(id)
                     .success(response => {
                         $scope.isLoading = false;
                         if (response.Success == true) {
-                            for (var i = 0; i < $scope.tasks.length; i++)
+                            for (let i = 0; i < $scope.tasks.length; i++)
                                 if ($scope.tasks[i].id === id) {
                                     $scope.tasks.splice(i, 1);
                                     break;
@@ -91,14 +91,14 @@
         });
     }
 
-    $scope.showUserInfo = function (user) {
-        var message = "<p>ID: " + FormHelper.getFormValue(user.Id) + "</p>";
+    $scope.showUserInfo = (user) => {
+        let message = "<p>ID: " + FormHelper.getFormValue(user.Id) + "</p>";
         message += "<p>Логін: " + FormHelper.getFormValue(user.UserName) + "</p>";
         message += "<p>ФИО: " + FormHelper.getFormValue(user.Account.FullName) + "</p>";
         message += "<p>Домашній телефон: " + FormHelper.getFormValue(user.Account.HomePhone) + "</p>";
         message += "<p>Робочий телефон: " + FormHelper.getFormValue(user.Account.WorkPhone) + "</p>";
         message += "<p>Роль: " + FormHelper.getFormValue(user.Role.Name) + "</p>";
-        var dialog = bootbox.dialog({
+        let dialog = bootbox.dialog({
             title: moduleConstants.userInfoCaption,
             message: message
         });

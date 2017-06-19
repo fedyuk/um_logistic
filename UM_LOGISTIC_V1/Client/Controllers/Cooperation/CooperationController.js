@@ -38,14 +38,14 @@
 
     //methods
 
-    $scope.listCooperations = function (page, count) {
+    $scope.listCooperations = (page, count) => {
         CooperationService.getCooperations(SessionService.getSessionUser(), SessionService.getSessionToken(),
             $scope.currentPage, $scope.currentCount)
 		.success(response => {
 		    $scope.isPartLoading = false;
 		    $scope.isLoading = false;
 		    if (response.Success) {
-		        for (var i = 0; i < response.Result.length; i++) {
+		        for (let i = 0; i < response.Result.length; i++) {
 		            $scope.cooperations.push({
 		                id: FormHelper.getFormValue(response.Result[i].Id),
 		                title: FormHelper.getFormValue(response.Result[i].FullName),
@@ -68,7 +68,7 @@
 		});
     }
 
-    $scope.listFilteredCooperations = function (filter, page, count) {
+    $scope.listFilteredCooperations = (filter, page, count) => {
         FilterService.getCooperationApplications(filter, page, count)
 		.success(response => {
 		    $scope.isLoading = false;
@@ -77,7 +77,7 @@
 		        if (page == 0) {
 		            $scope.cooperations = [];
 		        }
-		        for (var i = 0; i < response.Result.length; i++) {
+		        for (let i = 0; i < response.Result.length; i++) {
 		            $scope.cooperations.push({
 		                id: FormHelper.getFormValue(response.Result[i].Id),
 		                title: FormHelper.getFormValue(response.Result[i].FullName),
@@ -99,19 +99,19 @@
 		});
     }
 
-    $scope.loadMore = function () {
+    $scope.loadMore = () => {
         $scope.isPartLoading = true;
         $scope.currentPage++;
         $scope.listCooperations($scope.currentPage, $scope.currentCount);
     }
 
-    $scope.initCooperationsList = function () {
+    $scope.initCooperationsList = () => {
 		$scope.isLoading = true;
         $scope.listCooperations($scope.currentPage, $scope.currentCount);
     }
 
-    $scope.getPicture = function (id) {
-        var type = false;
+    $scope.getPicture = (id) => {
+        let type = false;
         ApplicationPictureService.getApplicationPictures(id, type)
 		.success(response => {
 		    if (response.Success && response.Result && response.Result.length > 0) {
@@ -126,9 +126,9 @@
 		});
     }
 
-    $scope.acceptApplication = function (id) {
-        var request = {};
-        var userId = SessionService.getSessionUserId();
+    $scope.acceptApplication = (id) => {
+        let request = {};
+        let userId = SessionService.getSessionUserId();
         if (!userId) {
             NotificationService.warning(moduleConstants.sessionUserIdNotFound);
             $scope.isLoading = false;
@@ -155,20 +155,20 @@
         });
     }
 
-    $scope.applyFilter = function () {
+    $scope.applyFilter = () => {
         $scope.getValuesFromSliders();
-        var filter = $scope.filter;
-        var stringFilter = $scope.generateFilterString(filter);
+        let filter = $scope.filter;
+        let stringFilter = $scope.generateFilterString(filter);
         $scope.currentPage = 0;
         //$scope.isLoading = true;
         $scope.filterLoading = true;
         $scope.listFilteredCooperations(stringFilter, $scope.currentPage, $scope.currentCount);
     }
 
-    $scope.generateFilterString = function (filter) {
-        var stringFilter = "";
-        var values = null;
-        for (var name in filter) {
+    $scope.generateFilterString = (filter) => {
+        let stringFilter = "";
+        let values = null;
+        for (let name in filter) {
             if (filter[name] != null && filter[name].isClear == false) {
                 values = filter[name].value.split(',');
                 if (values.length == 2) {
@@ -184,7 +184,7 @@
         return stringFilter;
     }
 
-    $scope.initFilterView = function () {
+    $scope.initFilterView = () => {
         $scope.TransportLengthSlider = $("#filter-transport-length").slider({
             id: "filter-transport-length",
             min: moduleConstants.sliderMinRangeValue,
@@ -259,7 +259,7 @@
         });
     }
 
-    $scope.getValuesFromSliders = function () {
+    $scope.getValuesFromSliders = () => {
         $scope.filter.TransportLength.value = $scope.TransportLengthSlider[0].value;
         $scope.filter.TransportWidth.value = $scope.TransportWidthSlider[0].value;
         $scope.filter.TransportHeight.value = $scope.TransportHeightSlider[0].value;
@@ -268,22 +268,22 @@
         $scope.filter.TransportArrow.value = $scope.TransportArrowSlider[0].value;
     }
 
-    $scope.dropFilter = function (filter, name) {
+    $scope.dropFilter = (filter, name) => {
         if (filter[name]) {
             filter[name].isClear = true;
             $scope[name + "Slider"].slider('setValue', [moduleConstants.sliderMinRangeValue, moduleConstants.sliderMaxRangeValue]);
         }
     }
 
-    $scope.moveIntoTrash = function (id, title) {
-        var userId = SessionService.getSessionUserId();
+    $scope.moveIntoTrash = (id, title) => {
+        let userId = SessionService.getSessionUserId();
         if (!userId) {
             NotificationService.warning(moduleConstants.sessionUserIdNotFound);
             $scope.isLoading = false;
             $scope.isPartLoading = false;
             return;
         }
-        var request = {
+        let request = {
             ApplicationId: id,
             Type: false,
             UserId: userId
@@ -293,7 +293,7 @@
                 NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
             if (response.Success == true) {
-                var isTrashAdded = SessionService.addTrashElement(id, false, title);
+                let isTrashAdded = SessionService.addTrashElement(id, false, title);
                 if (isTrashAdded == true) {
                     $rootScope.$broadcast("trashElementAdded", null);
                 }
@@ -304,12 +304,12 @@
 
     }
 
-    $scope.isExistElementInTrash = function (id, type) {
+    $scope.isExistElementInTrash = (id, type) => {
         return SessionService.isExistsTrashElement(id, type);
     }
 
-    $scope.removeFromTrash = function (id) {
-        var userId = SessionService.getSessionUserId();
+    $scope.removeFromTrash = (id) => {
+        let userId = SessionService.getSessionUserId();
         if (!userId) {
             NotificationService.warning(moduleConstants.sessionUserIdNotFound);
             $scope.isLoading = false;

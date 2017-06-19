@@ -36,7 +36,7 @@
     //variables
 
     //methods
-    $scope.createCooperation = function () {
+    $scope.createCooperation = () => {
         if (!$scope.coopForm.$valid) {
             return;
         }
@@ -61,10 +61,10 @@
 		});
     }
 	
-	$scope.loadWorkTypes = function() {
+	$scope.loadWorkTypes = () => {
 		CooperationService.getWorkTypes()
 		.success(response => {
-			for(var i = 0; i < response.length; i++) {
+			for(let i = 0; i < response.length; i++) {
 				$scope.workTypes.options.push({
 					id: response[i].Id,
 					name: response[i].Name
@@ -77,11 +77,11 @@
 	}
 	
 	$scope.loadPicture = function(applicationId, type) {
-	    var data = $scope.pictureData;
+	    let data = $scope.pictureData;
 	    if (data == null) {
 	        return;
 	    }
-		var request = {
+		let request = {
 			ApplicationId: applicationId,
 			Image: data,
 			Type: type
@@ -100,7 +100,7 @@
 	
 	$scope.fileChanged = function () {
 	    file = document.getElementById("coop-picture").files[0];
-	    var reader = new FileReader();
+	    let reader = new FileReader();
 
 	    reader.addEventListener("load", function () {
 	        if (reader.result.indexOf("jpg") != -1 || reader.result.indexOf("jpeg") != -1 || reader.result.indexOf("png") != -1) {

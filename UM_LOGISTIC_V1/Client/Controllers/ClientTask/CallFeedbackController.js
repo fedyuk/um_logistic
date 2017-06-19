@@ -1,4 +1,4 @@
-﻿mainModule.controller('CallFeedbackController', function ($rootScope, $scope, $log, $location, ClientTaskService,
+﻿mainModule.controller('CallFeedbackController', function($rootScope, $scope, $log, $location, ClientTaskService,
 	SessionService, moduleConstants, NotificationService) {
 
     // variables
@@ -11,12 +11,12 @@
     //
 
     // methods
-    $scope.createCallFeedback = function () {
+    $scope.createCallFeedback = () => {
         if (!$scope.createForm.$valid) {
             return;
         }
         $scope.isLoading = true;
-        var request = $scope.feedback;
+        let request = $scope.feedback;
         request.UserId = SessionService.getSessionUserId();
         ClientTaskService.createCallFeedback(request).success(response => {
             $scope.isLoading = false;
@@ -33,7 +33,7 @@
         });
     }
 
-    $scope.phoneMask = function () {
+    $scope.phoneMask = () => {
         jQuery(function ($) {
             $("#contactPhone").mask("(999) 999-9999");
         });

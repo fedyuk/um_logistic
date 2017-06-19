@@ -31,11 +31,11 @@
     //variables
 
     //methods
-    $scope.getCooperation = function () {
+    $scope.getCooperation = () => {
         $scope.isLoading = true;
-        var user = SessionService.getSessionUser();
-        var token = SessionService.getSessionToken();
-        var id = $stateParams.id;
+        let user = SessionService.getSessionUser();
+        let token = SessionService.getSessionToken();
+        let id = $stateParams.id;
         CooperationService.getCooperation(user, token, id)
 		.success(response => {
 		    $scope.isLoading = false;
@@ -72,13 +72,13 @@
 		});
     }
 
-    $scope.getPictures = function (id) {
-        var type = false;
+    $scope.getPictures = (id) => {
+        let type = false;
         ApplicationPictureService.getApplicationPictures(id, type)
 		.success(response => {
 		    if (response.Success) {
 		        if (response.Result != null) {
-		            for (var i = 0; i < response.Result.length; i++) {
+		            for (let i = 0; i < response.Result.length; i++) {
 		                $scope.pictures.push({ url: response.Result[i], number: i });
 		            }
 		            if ($scope.pictures.length > 0) {
@@ -92,12 +92,12 @@
 		});
     }
 
-    $scope.getPicturesHtml = function (id) {
-        var type = false;
+    $scope.getPicturesHtml = (id) => {
+        let type = false;
         ApplicationPictureService.getApplicationPicturesHtml(id, type)
 		.success(response => {
 		    if (response && response.length > 0) {
-		        for (var i = 0; i < response.length; i++) {
+		        for (let i = 0; i < response.length; i++) {
 		            $scope.htmlPicuresContent += response[i];
 		        }
 		        $('#gallery-cooperation').append($scope.htmlPicuresContent);
@@ -108,8 +108,8 @@
 		});
     }
 
-    $scope.initLightboxNative = function () {
-        var lightbox = new Lightbox();
+    $scope.initLightboxNative = () => {
+        let lightbox = new Lightbox();
         lightbox.load({
             boxId: false,
             dimensions: true,
@@ -148,8 +148,8 @@
         });
     }
 
-    $scope.acceptApplication = function (id) {
-        var request = {};
+    $scope.acceptApplication = (id) => {
+        let request = {};
         request.UserId = SessionService.getSessionUserId();
         request.ApplicationId = id;
         request.TypeId = 3;
@@ -169,15 +169,15 @@
         });
     }
 
-    $scope.moveIntoTrash = function (id, title) {
-        var userId = SessionService.getSessionUserId();
+    $scope.moveIntoTrash = (id, title) => {
+        let userId = SessionService.getSessionUserId();
         if (!userId) {
             NotificationService.warning(moduleConstants.sessionUserIdNotFound);
             $scope.isLoading = false;
             $scope.isPartLoading = false;
             return;
         }
-        var request = {
+        let request = {
             ApplicationId: id,
             Type: false,
             UserId: userId
@@ -187,7 +187,7 @@
                 NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
             if (response.Success == true) {
-                var isTrashAdded = SessionService.addTrashElement(id, false, title);
+                let isTrashAdded = SessionService.addTrashElement(id, false, title);
                 if (isTrashAdded == true) {
                     $rootScope.$broadcast("trashElementAdded", null);
                 }
@@ -198,12 +198,12 @@
 
     }
 
-    $scope.isExistElementInTrash = function (id, type) {
+    $scope.isExistElementInTrash = (id, type) => {
         return SessionService.isExistsTrashElement(id, type);
     }
 
-    $scope.removeFromTrash = function (id) {
-        var userId = SessionService.getSessionUserId();
+    $scope.removeFromTrash = (id) => {
+        let userId = SessionService.getSessionUserId();
         if (!userId) {
             NotificationService.warning(moduleConstants.sessionUserIdNotFound);
             $scope.isLoading = false;
