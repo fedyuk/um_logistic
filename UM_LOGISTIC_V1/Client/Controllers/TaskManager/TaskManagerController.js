@@ -17,7 +17,7 @@
             $scope.isPartLoading = false;
             return;
         }
-        ClientTaskService.getClientTasks(page, count, '').success(function (response) {
+        ClientTaskService.getClientTasks(page, count, '').success(response => {
             $scope.isLoading = false;
             $scope.isPartLoading = false;
             if (response.Success) {
@@ -37,7 +37,7 @@
             } else {
                 NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
-        }).error(function (error) {
+        }).error(error => {
             $scope.isLoading = false;
             $scope.isPartLoading = false;
             NotificationService.errorFromResponse(error);

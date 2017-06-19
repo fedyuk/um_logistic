@@ -21,14 +21,14 @@
 	}
 
 	$scope.getNotFilteredApplicationsCount = function () {
-	    FilterService.getNotFilteredApplicationsCount().success(function (response) {
+	    FilterService.getNotFilteredApplicationsCount().success(response => {
 	        if (response.Success) {
 	            $scope.notFilteredApplicationsCount = response.Result;
 	        }
 	        else {
 	            NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 	        }
-	    }).error(function (error) {
+	    }).error(error => {
 	        NotificationService.errorFromResponse(error);
 	    });
 	}
@@ -39,14 +39,14 @@
 	        $scope.clientTasksCount = 0;
 	        return;
 	    }
-	    ClientTaskService.getClientTasksCount('OwnerId==' + userId + ';').success(function (response) {
+	    ClientTaskService.getClientTasksCount('OwnerId==' + userId + ';').success(response => {
 	        if (response.Success) {
 	            $scope.clientTasksCount = response.Result;
 	        }
 	        else {
 	            NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 	        }
-	    }).error(function (error) {
+	    }).error(error => {
 	        NotificationService.errorFromResponse(error);
 	    });
 	}

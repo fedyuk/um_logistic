@@ -46,7 +46,7 @@
         $scope.cooperation.CreatedBy = SessionService.getSessionUserId();
 		$scope.cooperation.WorkTypeId = $scope.workTypes.model != null ? $scope.workTypes.model.id : 1;
         CooperationService.createCooperation($scope.cooperation)
-		.success(function (response) {
+		.success(response => {
 		    $scope.isLoading = false;
 		    if (response.Success) {
 		        $scope.loadPicture(response.Id, false);
@@ -55,7 +55,7 @@
 		    else {
 		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    $scope.isLoading = false;
 		    NotificationService.errorFromResponse(error);
 		});
@@ -63,7 +63,7 @@
 	
 	$scope.loadWorkTypes = function() {
 		CooperationService.getWorkTypes()
-		.success(function (response) {
+		.success(response => {
 			for(var i = 0; i < response.length; i++) {
 				$scope.workTypes.options.push({
 					id: response[i].Id,
@@ -71,7 +71,7 @@
 				});
 			}
 			$scope.workTypes.model = $scope.workTypes.options[0];
-		}).error(function (error) {
+		}).error(error => {
 		    NotificationService.errorFromResponse(error);
 		});
 	}
@@ -87,13 +87,13 @@
 			Type: type
 		};
 		ApplicationPictureService.createApplicationPicture(request)
-		.success(function (response) {
+		.success(response => {
 		    if (response.Success) {
 		    }
 		    else {
 		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    NotificationService.errorFromResponse(error);
 		});
 	}

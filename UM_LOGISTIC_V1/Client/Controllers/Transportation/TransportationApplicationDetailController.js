@@ -32,7 +32,7 @@
         var token = SessionService.getSessionToken();
         var id = $stateParams.id;
         TransportationService.getTransportation(user, token, id)
-		.success(function (response) {
+		.success(response => {
 		    $scope.isLoading = false;
 		    if (response.Success) {
 		        if (response.Result != null) {
@@ -56,7 +56,7 @@
 		    else {
 		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    $scope.isLoading = false;
 		    NotificationService.errorFromResponse(error);
 		});
@@ -65,7 +65,7 @@
     $scope.getPictures = function (id) {
         var type = true;
         ApplicationPictureService.getApplicationPictures(id, type)
-		.success(function (response) {
+		.success(response => {
 		    if (response.Success) {
 		        if(response.Result != null) {
 		            for(var i = 0; i < response.Result.length; i ++) {
@@ -77,7 +77,7 @@
 		            $scope.initLightboxNative();
 		        }
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    NotificationService.errorFromResponse(error);
 		});
     }
@@ -85,7 +85,7 @@
     $scope.getPicturesHtml = function (id) {
         var type = true;
         ApplicationPictureService.getApplicationPicturesHtml(id, type)
-		.success(function (response) {
+		.success(response => {
 		    if (response && response.length > 0) {
 		        for (var i = 0; i < response.length; i++) {
 		            $scope.htmlPicuresContent += response[i];
@@ -93,7 +93,7 @@
 		        $('#gallery-transportation').append($scope.htmlPicuresContent);
 		        $scope.initLightboxNative();
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    NotificationService.errorFromResponse(error);
 		});
     }
@@ -144,7 +144,7 @@
         request.ApplicationId = id;
         request.TypeId = 2;
         ClientTaskService.createApplicationTask(request)
-        .success(function (response) {
+        .success(response => {
             if (response.Success) {
                 NotificationService.success(moduleConstants.callFeedbackAccepted);
                 $scope.isLoading = false;
@@ -153,7 +153,7 @@
                 $scope.isLoading = false;
                 NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
-        }).error(function (error) {
+        }).error(error => {
             $scope.isLoading = false;
             NotificationService.errorFromResponse(error);
         });
@@ -172,7 +172,7 @@
             Type: true,
             UserId: userId
         };
-        ApplicationTrashService.createApplicationTrash(request).success(function (response) {
+        ApplicationTrashService.createApplicationTrash(request).success(response => {
             if (response.Success == false) {
                 NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
@@ -182,7 +182,7 @@
                     $rootScope.$broadcast("trashElementAdded", null);
                 }
             }
-        }).error(function (error) {
+        }).error(error => {
             NotificationService.errorFromResponse(error);
         });
 
@@ -201,7 +201,7 @@
             return;
         }
         ApplicationTrashService.removeTrashElement(id, true)
-        .success(function (response) {
+        .success(response => {
             if (response.Success) {
                 $scope.isLoading = false;
                 SessionService.removeShopTrashElement(id, true);
@@ -211,7 +211,7 @@
                 $scope.isLoading = false;
                 NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
-        }).error(function (error) {
+        }).error(error => {
             $scope.isLoading = false;
             NotificationService.errorFromResponse(error);
         });

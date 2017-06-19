@@ -28,7 +28,7 @@
     }
 
     $scope.getUserInformation = function () {
-        AccountService.getUserInfo(userId).success(function (response) {
+        AccountService.getUserInfo(userId).success(response => {
             $scope.isLoading = false;
             if (response.Success == true) {
                 $scope.User.UserName = response.Result.UserName,
@@ -41,7 +41,7 @@
                 $scope.User.Account.City = response.Result.Account.City,
                 $scope.User.Account.Street = response.Result.Account.Street
             }
-        }).error(function (error) {
+        }).error(error => {
             NotificationService.errorFromResponse(error);
         });;
     }
@@ -61,9 +61,9 @@
                 Street: $scope.User.Account.Street
             }
         }
-        UserService.updateUserData(User).success(function (response) {
+        UserService.updateUserData(User).success(response => {
            
-        }).error(function (error) {
+        }).error(error => {
             NotificationService.errorFromResponse(error);
         });;
     }

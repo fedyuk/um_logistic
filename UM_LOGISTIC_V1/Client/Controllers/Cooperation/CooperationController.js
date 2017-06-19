@@ -41,7 +41,7 @@
     $scope.listCooperations = function (page, count) {
         CooperationService.getCooperations(SessionService.getSessionUser(), SessionService.getSessionToken(),
             $scope.currentPage, $scope.currentCount)
-		.success(function (response) {
+		.success(response => {
 		    $scope.isPartLoading = false;
 		    $scope.isLoading = false;
 		    if (response.Success) {
@@ -61,7 +61,7 @@
 		    else {
 		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    $scope.isPartLoading = false;
 		    $scope.isLoading = false;
 		    NotificationService.errorFromResponse(error);
@@ -70,7 +70,7 @@
 
     $scope.listFilteredCooperations = function (filter, page, count) {
         FilterService.getCooperationApplications(filter, page, count)
-		.success(function (response) {
+		.success(response => {
 		    $scope.isLoading = false;
 		    $scope.filterLoading = false;
 		    if (response.Success) {
@@ -93,7 +93,7 @@
 		    else {
 		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    $scope.isLoading = false;
 		    NotificationService.errorFromResponse(error);
 		});
@@ -113,14 +113,14 @@
     $scope.getPicture = function (id) {
         var type = false;
         ApplicationPictureService.getApplicationPictures(id, type)
-		.success(function (response) {
+		.success(response => {
 		    if (response.Success && response.Result && response.Result.length > 0) {
 		        $scope.pictures[id] = response.Result[0];
 		    }
 		    else {
 		        $scope.pictures[id] = "";
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    NotificationService.errorFromResponse(error);
 		    $scope.pictures[id] = "";
 		});
@@ -139,7 +139,7 @@
         request.ApplicationId = id;
         request.TypeId = 3;
         ClientTaskService.createApplicationTask(request)
-        .success(function (response) {
+        .success(response => {
             if (response.Success) {
                 NotificationService.success(moduleConstants.callFeedbackAccepted);
                 $scope.isLoading = false;
@@ -148,7 +148,7 @@
                 $scope.isLoading = false;
                 NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
-        }).error(function (error) {
+        }).error(error => {
             $scope.isLoading = false;
             $scope.pictures[id] = "";
             NotificationService.errorFromResponse(error);
@@ -288,7 +288,7 @@
             Type: false,
             UserId: userId
         };
-        ApplicationTrashService.createApplicationTrash(request).success(function (response) {
+        ApplicationTrashService.createApplicationTrash(request).success(response => {
             if (response.Success == false) {
                 NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
@@ -298,7 +298,7 @@
                     $rootScope.$broadcast("trashElementAdded", null);
                 }
             }
-        }).error(function (error) {
+        }).error(error => {
             NotificationService.errorFromResponse(error);
         });
 
@@ -317,7 +317,7 @@
             return;
         }
         ApplicationTrashService.removeTrashElement(id, false)
-        .success(function (response) {
+        .success(response => {
             if (response.Success) {
                 $scope.isLoading = false;
                 SessionService.removeShopTrashElement(id, false);
@@ -327,7 +327,7 @@
                 $scope.isLoading = false;
                 NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
-        }).error(function (error) {
+        }).error(error => {
             $scope.isLoading = false;
             NotificationService.errorFromResponse(error);
         });

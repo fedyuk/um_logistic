@@ -35,7 +35,7 @@
             case true:
                 invoke = $scope.isOrderedByMe == false ? FilterService.getTransportationApplications("CreatedBy==" + userId,
             $scope.currentPage, $scope.currentCount) : FilterService.getOrderedByMeApplications(true, userId, $scope.currentPage, $scope.currentCount);
-                invoke.success(function (response) {
+                invoke.success(response => {
                     $scope.isLoading = false;
                     $scope.isPartLoading = false;
 		    if (response.Success) {
@@ -64,7 +64,7 @@
 		    else {
 		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    $scope.isLoading = false;
 		    $scope.isPartLoading = false;
 		    NotificationService.errorFromResponse(error);
@@ -73,7 +73,7 @@
             case false:
                 invoke = $scope.isOrderedByMe == false ? FilterService.getCooperationApplications("CreatedBy==" + userId,
                 $scope.currentPage, $scope.currentCount) : FilterService.getOrderedByMeApplications(false, userId, $scope.currentPage, $scope.currentCount);
-       invoke.success(function (response) {
+       invoke.success(response => {
            $scope.isLoading = false;
            $scope.isPartLoading = false;
            if (response.Success) {
@@ -103,7 +103,7 @@
            else {
                NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
            }
-       }).error(function (error) {
+       }).error(error => {
            $scope.isLoading = false;
            $scope.isPartLoading = false;
            NotificationService.errorFromResponse(error);
@@ -124,14 +124,14 @@
 
     $scope.getPicture = function (id, type) {
         ApplicationPictureService.getApplicationPicture(id, type)
-		.success(function (response) {
+		.success(response => {
 		    if (response.Success) {
 		        $scope.pictures[id] = response.Result;
 		    }
 		    else {
 		        $scope.pictures[id] = "";
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    NotificationService.errorFromResponse(error);
 		    $scope.pictures[id] = "";
 		});
@@ -167,7 +167,7 @@
                 if (ok == true) {
                     $scope.isLoading = true;
                     FilterService.upToDateApplication(type, id)
-                    .success(function (response) {
+                    .success(response => {
                         $scope.isLoading = false;
                         if (response.Success == true) {
                             NotificationService.success(moduleConstants.applicationDateUpdatedSuccess);
@@ -175,7 +175,7 @@
                         if (response.Success == false) {
                             NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
                         }
-                    }).error(function (error) {
+                    }).error(error => {
                         $scope.isLoading = false;
                         NotificationService.errorFromResponse(error);
                     });
@@ -201,7 +201,7 @@
                 if (ok == true) {
                     $scope.isLoading = true;
                     FilterService.removeApplication(type, id)
-                    .success(function (response) {
+                    .success(response => {
                         $scope.isLoading = false;
                         if (response.Success == true) {
                             if (type == true) {
@@ -223,7 +223,7 @@
                         if (response.Success == false) {
                             NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
                         }
-                    }).error(function (error) {
+                    }).error(error => {
                         $scope.isLoading = false;
                         NotificationService.errorFromResponse(error);
                     });

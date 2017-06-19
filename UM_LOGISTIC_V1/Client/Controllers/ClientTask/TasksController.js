@@ -17,7 +17,7 @@
             $scope.isPartLoading = false;
             return;
         }
-        ClientTaskService.getClientTasks(page, count, 'OwnerId==' + userId + ';').success(function (response) {
+        ClientTaskService.getClientTasks(page, count, 'OwnerId==' + userId + ';').success(response => {
             $scope.isLoading = false;
             $scope.isPartLoading = false;
             if (response.Success) {
@@ -37,7 +37,7 @@
             } else {
                 NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
-        }).error(function (error) {
+        }).error(error => {
             $scope.isLoading = false;
             $scope.isPartLoading = false;
             NotificationService.errorFromResponse(error);
@@ -70,7 +70,7 @@
             callback: function (ok) {
                 if (ok == true) {
                     ClientTaskService.acceptTask(id)
-                    .success(function (response) {
+                    .success(response => {
                         $scope.isLoading = false;
                         if (response.Success == true) {
                             for (var i = 0; i < $scope.tasks.length; i++)
@@ -82,7 +82,7 @@
                         if (response.Success == false) {
                             NotificationService.error(response.Error);
                         }
-                    }).error(function (error) {
+                    }).error(error => {
                         $scope.isLoading = false;
                         NotificationService.errorFromResponse(error);
                     });

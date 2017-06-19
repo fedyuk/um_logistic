@@ -26,7 +26,7 @@
             case true:
                 FilterService.getTransportationApplications("Filtered==false",
             $scope.currentPage, $scope.currentCount)
-		.success(function (response) {
+		.success(response => {
 		    $scope.isLoading = false;
 		    $scope.isPartLoading = false;
 		    if (response.Success) {
@@ -42,7 +42,7 @@
 		    else {
 		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    $scope.isLoading = false;
 		    $scope.isPartLoading = false;
 		    NotificationService.errorFromResponse(error);
@@ -51,7 +51,7 @@
             case false:
                 FilterService.getCooperationApplications("Filtered==false",
            $scope.currentPage, $scope.currentCount)
-       .success(function (response) {
+       .success(response => {
            $scope.isLoading = false;
            $scope.isPartLoading = false;
            if (response.Success) {
@@ -67,7 +67,7 @@
            else {
                NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
            }
-       }).error(function (error) {
+       }).error(error => {
            $scope.isLoading = false;
            $scope.isPartLoading = false;
            NotificationService.errorFromResponse(error);
@@ -88,14 +88,14 @@
 
     $scope.getPicture = function (id, type) {
         ApplicationPictureService.getApplicationPicture(id, type)
-		.success(function (response) {
+		.success(response => {
 		    if (response.Success) {
 		        $scope.pictures[id] = response.Result;
 		    }
 		    else {
 		        $scope.pictures[id] = "";
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    NotificationService.errorFromResponse(error);
 		    $scope.pictures[id] = "";
 		});
@@ -127,7 +127,7 @@
             callback: function (ok) {
                 if (ok == true) {
                     FilterService.acceptApplication(type, id)
-                    .success(function (response) {
+                    .success(response => {
                         if (response.Success) {
                             for (var i = 0; i < $scope.applications.length; i++)
                                 if ($scope.applications[i].id === id) {
@@ -140,7 +140,7 @@
                             $scope.isLoading = false;
                             NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
                         }
-                    }).error(function (error) {
+                    }).error(error => {
                         $scope.isLoading = false;
                         NotificationService.errorFromResponse(error);
                     });
@@ -165,7 +165,7 @@
             callback: function (ok) {
                 if (ok == true) {
                     FilterService.declineApplication(type, id)
-                    .success(function (response) {
+                    .success(response => {
                         if (response.Success) {
                             NotificationService.success(moduleConstants.deletingInfoSuccess);
                             for (var i = 0; i < $scope.applications.length; i++)
@@ -179,7 +179,7 @@
                             $scope.isLoading = false;
                             NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
                         }
-                    }).error(function (error) {
+                    }).error(error => {
                         $scope.isLoading = false;
                         NotificationService.errorFromResponse(error);
                     });

@@ -27,7 +27,7 @@
         $scope.cooperationToEdit.CreatedBy = SessionService.getSessionUserId();
         $scope.cooperationToEdit.WorkTypeId = $scope.workTypes.model.id;
         CooperationService.updateCooperation($scope.cooperationToEdit)
-		.success(function (response) {
+		.success(response => {
 		    $scope.isLoading = false;
 		    if (response.Success) {
 		        $location.path(moduleConstants.myApplicationsPath);
@@ -35,7 +35,7 @@
 		    else {
 		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    $scope.isLoading = false;
 		    NotificationService.errorFromResponse(error);
 		});
@@ -52,14 +52,14 @@
             Type: type
         };
         ApplicationPictureService.createApplicationPicture(request)
-		.success(function (response) {
+		.success(response => {
 		    if (response.Success) {
 		        NotificationService.success(moduleConstants.uploadPictureSuccess);
 		    }
 		    else {
 		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    NotificationService.errorFromResponse(error);
 		});
     }
@@ -97,7 +97,7 @@
 
     $scope.loadWorkTypes = function (currentId) {
         CooperationService.getWorkTypes()
-		.success(function (response) {
+		.success(response => {
 		    for (var i = 0; i < response.length; i++) {
 		        $scope.workTypes.options.push({
 		            id: response[i].Id,
@@ -110,7 +110,7 @@
 		            break;
 		        }
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    NotificationService.errorFromResponse(error);
 		});
     }
@@ -121,7 +121,7 @@
         var token = SessionService.getSessionToken();
         var id = $stateParams.id;
         CooperationService.getCooperation(user, token, id)
-		.success(function (response) {
+		.success(response => {
 		    $scope.isLoading = false;
 		    if (response.Success) {
 		        if (response.Result != null) {
@@ -151,7 +151,7 @@
 		    else {
 		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    $scope.isLoading = false;
 		    NotificationService.errorFromResponse(error);
 		});
@@ -160,7 +160,7 @@
     $scope.getPicturesHtml = function (id) {
         var type = false;
         ApplicationPictureService.getApplicationPicturesHtml(id, type)
-		.success(function (response) {
+		.success(response => {
 		    if (response && response.length > 0) {
 		        for (var i = 0; i < response.length; i++) {
 		            $scope.htmlPicuresContent += response[i];
@@ -168,7 +168,7 @@
 		        $('#gallery-cooperation').append($scope.htmlPicuresContent);
 		        $scope.initLightboxNative();
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    NotificationService.errorFromResponse(error);
 		});
     }

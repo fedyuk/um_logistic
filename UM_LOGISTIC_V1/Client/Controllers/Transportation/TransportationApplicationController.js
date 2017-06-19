@@ -33,7 +33,7 @@
         $scope.transportation.token = SessionService.getSessionToken();
         $scope.transportation.CreatedBy = SessionService.getSessionUserId();
         TransportationService.createTransportation($scope.transportation)
-		.success(function (response) {
+		.success(response => {
 		    $scope.isLoading = false;
 		    if (response.Success) {
 		        $scope.loadPicture(response.Id, true);
@@ -42,7 +42,7 @@
 		    else {
 		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    $scope.isLoading = false;
 		    NotificationService.errorFromResponse(error);
 		});
@@ -59,13 +59,13 @@
             Type: type
         };
         ApplicationPictureService.createApplicationPicture(request)
-		.success(function (response) {
+		.success(response => {
 		    if (response.Success) {
 		    }
 		    else {
 		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    NotificationService.errorFromResponse(error);
 		});
     }

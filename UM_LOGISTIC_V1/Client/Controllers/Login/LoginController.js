@@ -13,7 +13,7 @@
 	    }
 	    $scope.isLoading = true;
 		LoginService.loginUser($scope.loginUserName, $scope.loginUserPassword)
-		.success(function (response) {
+		.success(response => {
 		    $scope.isLoading = false;
 			if(response.Success) {
 				$rootScope.$broadcast("userAuthorized", response);
@@ -22,7 +22,7 @@
 			else {
 			    NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 			}
-		}).error(function (error) {
+		}).error(error => {
 		    $scope.isLoading = false;
 		    NotificationService.errorFromResponse(error);
 		});

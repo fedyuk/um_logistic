@@ -21,7 +21,7 @@
             return;
         }
         $scope.isLoading = true;
-        AccountService.registerAccount($scope.userToRegister).success(function (response) {
+        AccountService.registerAccount($scope.userToRegister).success(response => {
             $scope.isLoading = false;
             if (response.Success == true) {
                 $rootScope.$broadcast("userRegistrated", response);
@@ -30,7 +30,7 @@
             else {
                 NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
-        }).error(function (error) {
+        }).error(error => {
             $scope.isLoading = false;
             NotificationService.errorFromResponse(error);
         });

@@ -23,7 +23,7 @@
         $scope.isLoading = true;
         $scope.transportationToEdit.CreatedBy = SessionService.getSessionUserId();
         TransportationService.updateTransportation($scope.transportationToEdit)
-		.success(function (response) {
+		.success(response => {
 		    $scope.isLoading = false;
 		    if (response.Success) {
 		        $location.path(moduleConstants.myApplicationsPath);
@@ -31,7 +31,7 @@
 		    else {
 		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    $scope.isLoading = false;
 		    NotificationService.errorFromResponse(error);
 		});
@@ -48,14 +48,14 @@
             Type: type
         };
         ApplicationPictureService.createApplicationPicture(request)
-		.success(function (response) {
+		.success(response => {
 		    if (response.Success) {
 		        NotificationService.success(moduleConstants.uploadPictureSuccess);
 		    }
 		    else {
 		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    NotificationService.errorFromResponse(error);
 		});
     }
@@ -97,7 +97,7 @@
         var token = SessionService.getSessionToken();
         var id = $stateParams.id;
         TransportationService.getTransportation(user, token, id)
-		.success(function (response) {
+		.success(response => {
 		    $scope.isLoading = false;
 		    if (response.Success) {
 		        if (response.Result != null) {
@@ -121,7 +121,7 @@
 		    else {
 		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    $scope.isLoading = false;
 		    NotificationService.errorFromResponse(error);
 		});
@@ -130,7 +130,7 @@
     $scope.getPicturesHtml = function (id) {
         var type = true;
         ApplicationPictureService.getApplicationPicturesHtml(id, type)
-		.success(function (response) {
+		.success(response => {
 		    if (response && response.length > 0) {
 		        for (var i = 0; i < response.length; i++) {
 		            $scope.htmlPicuresContent += response[i];
@@ -138,7 +138,7 @@
 		        $('#gallery-transportation').append($scope.htmlPicuresContent);
 		        $scope.initLightboxNative();
 		    }
-		}).error(function (error) {
+		}).error(error => {
 		    NotificationService.errorFromResponse(error);
 		});
     }
