@@ -18,7 +18,7 @@
         $scope.isLoading = true;
         var request = $scope.feedback;
         request.UserId = SessionService.getSessionUserId();
-        ClientTaskService.createCallFeedback(request).success(function (response) {
+        ClientTaskService.createCallFeedback(request).success(response => {
             $scope.isLoading = false;
             if (response.Success == true) {
                 NotificationService.success(moduleConstants.callFeedbackAccepted);
@@ -27,7 +27,7 @@
             else {
                 NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
-        }).error(function (error) {
+        }).error(error => {
             $scope.isLoading = false;
             NotificationService.errorFromResponse(error);
         });
