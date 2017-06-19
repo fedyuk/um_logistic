@@ -29,11 +29,7 @@
 	            NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 	        }
 	    }).error(function (error) {
-	        if (!error) {
-	            NotificationService.error(moduleConstants.internalErrorCaption);
-	            return;
-	        }
-	        NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+	        NotificationService.errorFromResponse(error);
 	    });
 	}
 
@@ -51,11 +47,7 @@
 	            NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 	        }
 	    }).error(function (error) {
-	        if (!error) {
-	            NotificationService.error(moduleConstants.internalErrorCaption);
-	            return;
-	        }
-	        NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+	        NotificationService.errorFromResponse(error);
 	    });
 	}
 
@@ -154,13 +146,6 @@
 	        $scope.getApplicationsInTrashCount();
 	    });
 	});
-
-	$scope.showProfileButtons = function () {
-	    $("#feed-callback-button").css("display", "");
-	    $("#profile-menu-button").css("display", "");
-	    $("#profile-work-button").css("display", "");
-	    $("#profile-shop-button").css("display", "");
-	}
 	
 	//methods
 	
@@ -177,7 +162,6 @@
 
 	$scope.getApplicationsInTrashCount();
 
-	$scope.showProfileButtons();
 
 	$scope.initializeManagerNotifications();
 

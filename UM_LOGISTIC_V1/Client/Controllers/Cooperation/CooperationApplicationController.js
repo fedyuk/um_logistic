@@ -57,11 +57,7 @@
 		    }
 		}).error(function (error) {
 		    $scope.isLoading = false;
-		    if (!error) {
-		        NotificationService.error(moduleConstants.internalErrorCaption);
-		        return;
-		    }
-		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+		    NotificationService.errorFromResponse(error);
 		});
     }
 	
@@ -76,11 +72,7 @@
 			}
 			$scope.workTypes.model = $scope.workTypes.options[0];
 		}).error(function (error) {
-		    if (!error) {
-		        NotificationService.error(moduleConstants.internalErrorCaption);
-		        return;
-		    }
-		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+		    NotificationService.errorFromResponse(error);
 		});
 	}
 	
@@ -102,11 +94,7 @@
 		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
 		}).error(function (error) {
-		    if (!error) {
-		        NotificationService.error(moduleConstants.internalErrorCaption);
-		        return;
-		    }
-		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+		    NotificationService.errorFromResponse(error);
 		});
 	}
 	

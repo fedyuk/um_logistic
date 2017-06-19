@@ -42,7 +42,7 @@
                 $scope.User.Account.Street = response.Result.Account.Street
             }
         }).error(function (error) {
-            NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
+            NotificationService.errorFromResponse(error);
         });;
     }
 
@@ -64,7 +64,7 @@
         UserService.updateUserData(User).success(function (response) {
            
         }).error(function (error) {
-            NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
+            NotificationService.errorFromResponse(error);
         });;
     }
 
