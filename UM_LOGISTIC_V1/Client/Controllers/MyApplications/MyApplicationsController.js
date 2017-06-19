@@ -67,11 +67,7 @@
 		}).error(function (error) {
 		    $scope.isLoading = false;
 		    $scope.isPartLoading = false;
-		    if (!error) {
-		        NotificationService.error(moduleConstants.internalErrorCaption);
-		        return;
-		    }
-		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+		    NotificationService.errorFromResponse(error);
 		});
                 break;
             case false:
@@ -110,11 +106,7 @@
        }).error(function (error) {
            $scope.isLoading = false;
            $scope.isPartLoading = false;
-           if (!error) {
-               NotificationService.error(moduleConstants.internalErrorCaption);
-               return;
-           }
-           NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+           NotificationService.errorFromResponse(error);
        });
         }
     }
@@ -140,12 +132,7 @@
 		        $scope.pictures[id] = "";
 		    }
 		}).error(function (error) {
-		    if (!error) {
-		        NotificationService.error(moduleConstants.internalErrorCaption);
-		        $scope.pictures[id] = "";
-		        return;
-		    }
-		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+		    NotificationService.errorFromResponse(error);
 		    $scope.pictures[id] = "";
 		});
     }
@@ -190,11 +177,7 @@
                         }
                     }).error(function (error) {
                         $scope.isLoading = false;
-                        if (!error) {
-                            NotificationService.error(moduleConstants.internalErrorCaption);
-                            return;
-                        }
-                        NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+                        NotificationService.errorFromResponse(error);
                     });
                 }
             }
@@ -242,11 +225,7 @@
                         }
                     }).error(function (error) {
                         $scope.isLoading = false;
-                        if (!error) {
-                            NotificationService.error(moduleConstants.internalErrorCaption);
-                            return;
-                        }
-                        NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+                        NotificationService.errorFromResponse(error);
                     });
                 }
             }

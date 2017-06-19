@@ -40,7 +40,7 @@
 		}).error(function (error) {
 		    $scope.isLoading = false;
 		    $scope.isPartLoading = false;
-		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+		    NotificationService.errorFromResponse(error);
 		});
 	}
 
@@ -87,7 +87,7 @@
 	                    }
 	                }).error(function (error) {
 	                    $scope.isLoading = false;
-	                    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+	                    NotificationService.errorFromResponse(error);
 	                });
 	            }
 	        }

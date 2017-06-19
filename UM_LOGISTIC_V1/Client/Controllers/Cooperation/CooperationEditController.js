@@ -37,11 +37,7 @@
 		    }
 		}).error(function (error) {
 		    $scope.isLoading = false;
-		    if (!error) {
-		        NotificationService.error(moduleConstants.internalErrorCaption);
-		        return;
-		    }
-		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+		    NotificationService.errorFromResponse(error);
 		});
     }
 
@@ -64,11 +60,7 @@
 		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 		    }
 		}).error(function (error) {
-		    if (!error) {
-		        NotificationService.error(moduleConstants.internalErrorCaption);
-		        return;
-		    }
-		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+		    NotificationService.errorFromResponse(error);
 		});
     }
 
@@ -119,11 +111,7 @@
 		        }
 		    }
 		}).error(function (error) {
-		    if (!error) {
-		        NotificationService.error(moduleConstants.internalErrorCaption);
-		        return;
-		    }
-		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+		    NotificationService.errorFromResponse(error);
 		});
     }
 
@@ -153,7 +141,6 @@
 		            $scope.cooperationToEdit.TransportCapacity = response.Result.TransportCapacity;
 		            $scope.cooperationToEdit.TransportArrow = response.Result.TransportArrow;
 		            $scope.cooperationToEdit.WorkCost = response.Result.WorkCost;
-		            //$scope.cooperationToEdit.WorkTypeId = response.Result.WorkType.Id;
 		            $scope.workTypes.model = { id: response.Result.WorkType.Id, name: response.Result.WorkType.Id, name };
 		            $scope.cooperationToEdit.DeliveryCost = response.Result.DeliveryCost;
 		        }
@@ -166,11 +153,7 @@
 		    }
 		}).error(function (error) {
 		    $scope.isLoading = false;
-		    if (!error) {
-		        NotificationService.error(moduleConstants.internalErrorCaption);
-		        return;
-		    }
-		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+		    NotificationService.errorFromResponse(error);
 		});
     }
 
@@ -186,11 +169,7 @@
 		        $scope.initLightboxNative();
 		    }
 		}).error(function (error) {
-		    if (!error) {
-		        NotificationService.error(moduleConstants.internalErrorCaption);
-		        return;
-		    }
-		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+		    NotificationService.errorFromResponse(error);
 		});
     }
 

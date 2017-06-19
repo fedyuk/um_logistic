@@ -41,7 +41,7 @@
             }
         }).error(function (error) {
             $scope.isLoading = false;
-            NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+            NotificationService.errorFromResponse(error);
         });
     }
 
@@ -55,7 +55,7 @@
 		        });
 		    }
 		}).error(function (error) {
-		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+		    NotificationService.errorFromResponse(error);
 		});
     }
     //

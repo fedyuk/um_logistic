@@ -68,11 +68,7 @@
 		    }
 		}).error(function (error) {
 		    $scope.isLoading = false;
-		    if (!error) {
-		        NotificationService.error(moduleConstants.internalErrorCaption);
-		        return;
-		    }
-		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+		    NotificationService.errorFromResponse(error);
 		});
     }
 
@@ -92,11 +88,7 @@
 		        }
 		    }
 		}).error(function (error) {
-		    if (!error) {
-		        NotificationService.error(moduleConstants.internalErrorCaption);
-		        return;
-		    }
-		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+		    NotificationService.errorFromResponse(error);
 		});
     }
 
@@ -112,11 +104,7 @@
 		        $scope.initLightboxNative();
 		    }
 		}).error(function (error) {
-		    if (!error) {
-		        NotificationService.error(moduleConstants.internalErrorCaption);
-		        return;
-		    }
-		    NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+		    NotificationService.errorFromResponse(error);
 		});
     }
 
@@ -177,11 +165,7 @@
             }
         }).error(function (error) {
             $scope.isLoading = false;
-            if (!error) {
-                NotificationService.error(moduleConstants.internalErrorCaption);
-                return;
-            }
-            NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+            NotificationService.errorFromResponse(error);
         });
     }
 
@@ -209,11 +193,7 @@
                 }
             }
         }).error(function (error) {
-            if (!error) {
-                NotificationService.error(moduleConstants.internalErrorCaption);
-                return;
-            }
-            NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+            NotificationService.errorFromResponse(error);
         });
 
     }
@@ -243,11 +223,7 @@
             }
         }).error(function (error) {
             $scope.isLoading = false;
-            if (!error) {
-                NotificationService.error(moduleConstants.internalErrorCaption);
-                return;
-            }
-            NotificationService.error(JSON.stringify(error && error.ExceptionMessage));
+            NotificationService.errorFromResponse(error);
         });
     }
 
