@@ -9,14 +9,14 @@
     //variables
 	//methods
 	
-	$scope.listUsers = function(page, count) {
-		var user = SessionService.getSessionUser();
-		var token = SessionService.getSessionToken();
+	$scope.listUsers =(page, count) => {
+	    let user = SessionService.getSessionUser();
+	    let token = SessionService.getSessionToken();
 	    AccountService.getAccounts(user, token, page, count).success(response => {
 	        $scope.isLoading = false;
 	        $scope.isPartLoading = false;
 	        if (response.Success) {
-	            for (var i = 0; i < response.Result.length; i++) {
+	            for (let i = 0; i < response.Result.length; i++) {
 	                $scope.users.push({
 	                    id: FormHelper.getFormValue(response.Result[i].Id),
 	                    login: FormHelper.getFormValue(response.Result[i].UserName),
@@ -44,18 +44,18 @@
 		});
 	}
 
-	$scope.loadMore = function () {
+	$scope.loadMore = () => {
 	    $scope.isPartLoading = true;
 	    $scope.currentPage++;
 	    $scope.listUsers($scope.currentPage, $scope.currentCount);
 	}
 
-	$scope.initUsersList = function () {
+	$scope.initUsersList = () => {
 	    $scope.isLoading = true;
 	    $scope.listUsers($scope.currentPage, $scope.currentCount);
 	}
 
-	$scope.deleteUser = function (id) {
+	$scope.deleteUser = (id) => {
 	    bootbox.confirm({
 	        message: moduleConstants.deleteUserConfirmation,
 	        buttons: {
@@ -68,18 +68,18 @@
 	                className: 'btn-default btn-sm'
 	            }
 	        },
-	        callback: function (ok) {
+	        callback: (ok) => {
 	            if (ok == true) {
 
 	                $scope.isLoading = true;
-	                var user = SessionService.getSessionUser();
-	                var token = SessionService.getSessionToken();
+	                let user = SessionService.getSessionUser();
+	                let token = SessionService.getSessionToken();
 	                AccountService.removeAccount(user, token, id).success(response => {
 	                    $scope.isLoading = false;
 	                    if (response.Success == false) {
 	                        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 	                    } else {
-	                        for (var i = 0; i < $scope.users.length; i++)
+	                        for (let i = 0; i < $scope.users.length; i++)
 	                            if ($scope.users[i].id === id) {
 	                                $scope.users.splice(i, 1);
 	                                break;
@@ -94,13 +94,13 @@
 	    });
 	}
 
-	$scope.$on("onlineStateChanged", function (event, args) {
+	$scope.$on("onlineStateChanged", (event, args) => {
 	    if (args && args.nick == "") {
 	        return;
 	    }
-	    for (var i = 0; i < $scope.users.length; i++) {
+	    for (let i = 0; i < $scope.users.length; i++) {
 	        if ($scope.users[i].login == args.nick) {
-	            $scope.$apply(function () {
+	            $scope.$apply( () => {
 	                $scope.users[i].status = args.isOnline;
 	            });
 	            break;

@@ -5,11 +5,11 @@
     //variables
 
     //methods
-    $scope.initMap = function () {
+    $scope.initMap = () => {
 
     }
 
-    $scope.initialize = function () {
+    $scope.initialize = () => {
 
         /*var map = new google.maps.Map(document.getElementById('mapsContainer'), {
             center: { lat: -34.397, lng: 150.644 },

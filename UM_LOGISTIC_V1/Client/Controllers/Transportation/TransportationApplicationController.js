@@ -24,7 +24,7 @@
     //variables
 
     //methods
-    $scope.createTransportation = function () {
+    $scope.createTransportation = () => {
         if (!$scope.transForm.$valid) {
             return;
         }
@@ -48,12 +48,12 @@
 		});
     }
 
-    $scope.loadPicture = function (applicationId, type) {
-        var data = $scope.pictureData;
+    $scope.loadPicture = (applicationId, type) => {
+        let data = $scope.pictureData;
         if (data == null) {
             return;
         }
-        var request = {
+        let request = {
             ApplicationId: applicationId,
             Image: data,
             Type: type
@@ -70,11 +70,11 @@
 		});
     }
 
-    $scope.fileChanged = function () {
+    $scope.fileChanged = () => {
         file = document.getElementById("trans-picture").files[0];
-        var reader = new FileReader();
+        let reader = new FileReader();
 
-        reader.addEventListener("load", function () {
+        reader.addEventListener("load", () => {
             if (reader.result.indexOf("jpg") != -1 || reader.result.indexOf("jpeg") != -1 || reader.result.indexOf("png") != -1) {
                 $scope.pictureData = reader.result;
                 $scope.transportation.Image = reader.result;
@@ -94,8 +94,8 @@
         }
     }
 
-    $scope.phoneMask = function () {
-        jQuery(function ($) {
+    $scope.phoneMask = () => {
+        jQuery( ($) => {
             $("#contactPhone").mask("(999) 999-9999");
         });
     }

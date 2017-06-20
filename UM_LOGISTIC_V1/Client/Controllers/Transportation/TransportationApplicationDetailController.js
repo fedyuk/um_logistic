@@ -26,11 +26,11 @@
     //variables
 
     //methods
-    $scope.getTransportation = function () {
+    $scope.getTransportation = () => {
         $scope.isLoading = true;
-        var user = SessionService.getSessionUser();
-        var token = SessionService.getSessionToken();
-        var id = $stateParams.id;
+        let user = SessionService.getSessionUser();
+        let token = SessionService.getSessionToken();
+        let id = $stateParams.id;
         TransportationService.getTransportation(user, token, id)
 		.success(response => {
 		    $scope.isLoading = false;
@@ -62,13 +62,13 @@
 		});
     }
 
-    $scope.getPictures = function (id) {
-        var type = true;
+    $scope.getPictures = (id) => {
+        let type = true;
         ApplicationPictureService.getApplicationPictures(id, type)
 		.success(response => {
 		    if (response.Success) {
 		        if(response.Result != null) {
-		            for(var i = 0; i < response.Result.length; i ++) {
+		            for(let i = 0; i < response.Result.length; i ++) {
 		                $scope.pictures.push({ url: response.Result[i], number: i });
 		            }
 		            if ($scope.pictures.length > 0) {
@@ -82,12 +82,12 @@
 		});
     }
 
-    $scope.getPicturesHtml = function (id) {
-        var type = true;
+    $scope.getPicturesHtml = (id) => {
+        let type = true;
         ApplicationPictureService.getApplicationPicturesHtml(id, type)
 		.success(response => {
 		    if (response && response.length > 0) {
-		        for (var i = 0; i < response.length; i++) {
+		        for (let i = 0; i < response.length; i++) {
 		            $scope.htmlPicuresContent += response[i];
 		        }
 		        $('#gallery-transportation').append($scope.htmlPicuresContent);
@@ -98,9 +98,9 @@
 		});
     }
 
-    $scope.initLightboxNative = function() 
+    $scope.initLightboxNative = () => 
     {
-        var lightbox = new Lightbox();
+        let lightbox = new Lightbox();
         lightbox.load({
             boxId: false,
             dimensions: true,
@@ -118,28 +118,28 @@
             responsive: true,
             maxImgSize: 0.8,
             // callbacks
-            onopen: function (image) {
+            onopen: (image) => {
                 $(".navbar").removeClass("navbar-fixed-top");
             },
-            onclose: function (image) {
+            onclose: (image) => {
                 $(".navbar").addClass("navbar-fixed-top");
             },
-            onload: function (event) {
+            onload: (event) => {
             },
-            onresize: function (image) {
+            onresize: (image) => {
             },
-            onloaderror: function (event) {
+            onloaderror: (event) => {
                 if (event._happenedWhile === 'prev')
                     lightbox.prev()
                 else
                     lightbox.next()
             },
-            onimageclick: function (image) {
+            onimageclick: (image) => {
             }
         });
     }
-    $scope.acceptApplication = function (id) {
-        var request = {};
+    $scope.acceptApplication = (id) => {
+        let request = {};
         request.UserId = SessionService.getSessionUserId();
         request.ApplicationId = id;
         request.TypeId = 2;
@@ -159,15 +159,15 @@
         });
     }
 
-    $scope.moveIntoTrash = function (id, title) {
-        var userId = SessionService.getSessionUserId();
+    $scope.moveIntoTrash = (id, title) => {
+        let userId = SessionService.getSessionUserId();
         if (!userId) {
             NotificationService.warning(moduleConstants.sessionUserIdNotFound);
             $scope.isLoading = false;
             $scope.isPartLoading = false;
             return;
         }
-        var request = {
+        let request = {
             ApplicationId: id,
             Type: true,
             UserId: userId
@@ -177,7 +177,7 @@
                 NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
             if (response.Success == true) {
-                var isTrashAdded = SessionService.addTrashElement(id, true, title);
+                let isTrashAdded = SessionService.addTrashElement(id, true, title);
                 if (isTrashAdded == true) {
                     $rootScope.$broadcast("trashElementAdded", null);
                 }
@@ -188,12 +188,12 @@
 
     }
 
-    $scope.isExistElementInTrash = function (id, type) {
+    $scope.isExistElementInTrash = (id, type) => {
         return SessionService.isExistsTrashElement(id, type);
     }
 
-    $scope.removeFromTrash = function (id) {
-        var userId = SessionService.getSessionUserId();
+    $scope.removeFromTrash = (id) => {
+        let userId = SessionService.getSessionUserId();
         if (!userId) {
             NotificationService.warning(moduleConstants.sessionUserIdNotFound);
             $scope.isLoading = false;

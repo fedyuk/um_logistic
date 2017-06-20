@@ -8,19 +8,19 @@
     $scope.appTrashElements = [];
 	//methods
 	
-	$scope.logoutUser = function() {
+	$scope.logoutUser =() => {
 		SessionService.closeSession();
 		$scope.changeProfileData(false, null, false);
 		$scope.openLoginPage();
 		EventService.stopHubConnection();
 	}
 	
-	$scope.initProfileName = function() {
-		var sessionProfileName = SessionService.getSessionProfileName();
+	$scope.initProfileName = () => {
+		let sessionProfileName = SessionService.getSessionProfileName();
 		$scope.profileName = sessionProfileName != undefined ? sessionProfileName : moduleConstants.anonymousUserCaption;
 	}
 
-	$scope.getNotFilteredApplicationsCount = function () {
+	$scope.getNotFilteredApplicationsCount = () => {
 	    FilterService.getNotFilteredApplicationsCount().success(response => {
 	        if (response.Success) {
 	            $scope.notFilteredApplicationsCount = response.Result;
@@ -33,8 +33,8 @@
 	    });
 	}
 
-	$scope.getClientTasksCount = function () {
-	    var userId = SessionService.getSessionUserId();
+	$scope.getClientTasksCount = () => {
+	    let userId = SessionService.getSessionUserId();
 	    if (!userId) {
 	        $scope.clientTasksCount = 0;
 	        return;
@@ -51,40 +51,40 @@
 	    });
 	}
 
-	$scope.getApplicationsInTrashCount = function () {
-	    var userId = SessionService.getSessionUserId();
+	$scope.getApplicationsInTrashCount = () => {
+	    let userId = SessionService.getSessionUserId();
 	    $scope.applicationsInTrash = SessionService.getShopTrashCount();
 	}
 	
-	$scope.initProfileLoginActions = function() {
-		var sessionProfileName = SessionService.getSessionProfileName();
+	$scope.initProfileLoginActions = () => {
+		let sessionProfileName = SessionService.getSessionProfileName();
 		$scope.isAuthorized = sessionProfileName != undefined ? true : false; 
 	}
 
-	$scope.initProfileMenu = function () {
-	    var isStaff = SessionService.isStaff();
+	$scope.initProfileMenu = () => {
+	    let isStaff = SessionService.isStaff();
 	    $scope.isStaff = isStaff;
 	}
 	
-	$scope.openLoginPage = function() {
+	$scope.openLoginPage = () => {
 		$location.path(moduleConstants.loginPath);
 	}
 	
-	$scope.openSettingsPage = function() {
+	$scope.openSettingsPage = () => {
 		$location.path(moduleConstants.settingsPath);
 	}
 	
-	$scope.openHomePage = function() {
+	$scope.openHomePage = () => {
 		$location.path(moduleConstants.homePath);
 	}
 	
-	$scope.changeProfileData = function(isAuthorized, profileName, isStaff) {
+	$scope.changeProfileData = (isAuthorized, profileName, isStaff) => {
 		$scope.profileName = isAuthorized == true ? profileName : moduleConstants.anonymousUserCaption;
 		$scope.isAuthorized = isAuthorized;
 		$scope.isStaff = isStaff;
 	}
 	
-	$scope.saveProfile = function(response) {
+	$scope.saveProfile = (response) => {
 		SessionService.saveSessionToken(response.Token, response.Result.UserName);
 		SessionService.saveProfileData(response.Result);
 		$scope.changeProfileData(true, response.Result.Account.FullName, SessionService.isStaff());
@@ -93,35 +93,35 @@
 		}
 	}
 	
-	$scope.getApplicationsInTrashElements = function () {
-	    var userId = SessionService.getSessionUserId();
+	$scope.getApplicationsInTrashElements = () => {
+	    let userId = SessionService.getSessionUserId();
 	    $scope.appTrashElements = SessionService.getShopTrashElements();
 	}
 
-	$scope.saveProfileImage = function (profileImage) {
+	$scope.saveProfileImage = (profileImage) => {
 	    $scope.userImage = profileImage;
 	}
 
-	$scope.$on("userAuthorized", function(event, args) {
+	$scope.$on("userAuthorized", (event, args) => {
 	    $scope.saveProfile(args);
 	    $scope.initializeManagerNotifications();
 	    $scope.subscribeToOnlineStateNotifications();
-	    SessionService.getShopTrash(SessionService.getSessionUserId(), function (trash) {
+	    SessionService.getShopTrash(SessionService.getSessionUserId(), (trash) => {
 	        $scope.appTrashElements = trash;
 	        $scope.getApplicationsInTrashCount();
 	    });
 	});
 
-	$scope.$on("trashElementAdded", function (event, args) {
+	$scope.$on("trashElementAdded", (event, args) => {
 	    $scope.getApplicationsInTrashCount();
 	});
 
-	$scope.$on("trashElementRemoved", function (event, args) {
+	$scope.$on("trashElementRemoved", (event, args) => {
 	    $scope.getApplicationsInTrashCount();
 	});
 
-	$scope.initializeManagerNotifications = function () {
-	    var isStaff = SessionService.isStaff();
+	$scope.initializeManagerNotifications = () => {
+	    let isStaff = SessionService.isStaff();
 	    if (isStaff != true) {
 	        return;
 	    }
@@ -130,18 +130,18 @@
 	    EventService.startHubConnection();
 	}
 
-	$scope.subscribeToOnlineStateNotifications = function () {
-	    var isAdmin = SessionService.isAdmin();
+	$scope.subscribeToOnlineStateNotifications = () => {
+	    let isAdmin = SessionService.isAdmin();
 	    if (isAdmin == true) {
 	        EventService.subscribeToOnlineStateChangedNotifications();
 	    }
 	}
 
-	$scope.$on("userRegistrated", function (event, args) {
+	$scope.$on("userRegistrated", (event, args) => {
 	    $scope.saveProfile(args);
 	    $scope.initializeManagerNotifications();
 	    $scope.subscribeToOnlineStateNotifications();
-	    SessionService.getShopTrash(SessionService.getSessionUserId(), function (trash) {
+	    SessionService.getShopTrash(SessionService.getSessionUserId(), (trash) => {
 	        $scope.appTrashElements = trash;
 	        $scope.getApplicationsInTrashCount();
 	    });
@@ -168,7 +168,7 @@
 	$scope.subscribeToOnlineStateNotifications();
 
     //$scope.getApplicationsInTrashElements();
-	SessionService.getShopTrash(SessionService.getSessionUserId(), function (trash) {
+	SessionService.getShopTrash(SessionService.getSessionUserId(), (trash) => {
 	    $scope.appTrashElements = trash;
 	    $scope.getApplicationsInTrashCount();
 	});

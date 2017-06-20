@@ -142,7 +142,7 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
         requireBase: false
     });
 
-    var expiresDate = new Date();
+    let expiresDate = new Date();
     expiresDate.setDate(expiresDate.getDate() + 1);
     $cookiesProvider.defaults.expires = expiresDate;
 }]);
@@ -150,8 +150,8 @@ mainModule.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', 
 mainModule.run(['$rootScope', '$state', '$location', 'SessionService', 'moduleConstants',
   function ($rootScope, $state, $location, SessionService, moduleConstants) {
 	  $rootScope.$on('$locationChangeStart',
-      function (event, next, current) {
-          var title = next;
+       (event, next, current) => {
+          let title = next;
           $rootScope.$broadcast("pageTitleChanged", title);
       }
     );

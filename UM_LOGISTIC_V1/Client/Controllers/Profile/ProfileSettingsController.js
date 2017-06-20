@@ -1,12 +1,12 @@
 ﻿mainModule.controller('ProfileSettingsController', function ($scope, $log, $location, UserService,
 	SessionService, moduleConstants, AccountService, NotificationService) {
 
-    var protocol = $location.protocol();
-    var host = $location.host();
-    var port = $location.port();
-    var path = $location.path();
-    var userId = SessionService.getSessionUserId();
-    var url = '';
+    let protocol = $location.protocol();
+    let host = $location.host();
+    let port = $location.port();
+    let path = $location.path();
+    let userId = SessionService.getSessionUserId();
+    let url = '';
     
     $scope.isLoading = false;
     $scope.User = {
@@ -23,11 +23,11 @@
             Street: ""
         }
     }
-    $scope.getImageUrl = function () {
+    $scope.getImageUrl = () => {
         return url = protocol + '://' + host + ':' + port + '/api/u_pictures?id=' + userId;
     }
 
-    $scope.getUserInformation = function () {
+    $scope.getUserInformation = () => {
         AccountService.getUserInfo(userId).success(response => {
             $scope.isLoading = false;
             if (response.Success == true) {
@@ -46,7 +46,7 @@
         });;
     }
 
-    $scope.saveUserData = function () {
+    $scope.saveUserData = () => {
         User = {
             Id: userId,
             UserName: $scope.User.UserName,

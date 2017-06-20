@@ -22,12 +22,12 @@
     //
 
     // methods
-    $scope.createUser = function () {
+    $scope.createUser = () => {
         if (!$scope.createForm.$valid) {
             return;
         }
         $scope.isLoading = true;
-        var request = $scope.userToAdd;
+        let request = $scope.userToAdd;
         request.user = SessionService.getSessionUser();
         request.token = SessionService.getSessionToken();
         $scope.userToAdd.RoleId = $scope.roles.model != null ? $scope.roles.model.id : 1;
@@ -45,10 +45,10 @@
         });
     }
 
-    $scope.loadRoles = function () {
+    $scope.loadRoles = () => {
         AccountService.getRoles()
 		.success(response => {
-		    for (var i = 0; i < response.length; i++) {
+		    for (let i = 0; i < response.length; i++) {
 		        $scope.roles.options.push({
 		            id: response[i].Id,
 		            name: response[i].Name

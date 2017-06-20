@@ -16,7 +16,7 @@
     //variables
 
     //methods
-    $scope.updateTransportation = function () {
+    $scope.updateTransportation = () => {
         if (!$scope.transForm.$valid) {
             return;
         }
@@ -37,12 +37,12 @@
 		});
     }
 
-    $scope.loadPicture = function (applicationId, type) {
-        var data = $scope.pictureData;
+    $scope.loadPicture = (applicationId, type) => {
+        let data = $scope.pictureData;
         if (data == null) {
             return;
         }
-        var request = {
+        let request = {
             ApplicationId: applicationId,
             Image: data,
             Type: type
@@ -60,11 +60,11 @@
 		});
     }
 
-    $scope.fileChanged = function () {
+    $scope.fileChanged = () => {
         file = document.getElementById("trans-picture").files[0];
-        var reader = new FileReader();
+        let reader = new FileReader();
 
-        reader.addEventListener("load", function () {
+        reader.addEventListener("load", () => {
             if (reader.result.indexOf("jpg") != -1 || reader.result.indexOf("jpeg") != -1 || reader.result.indexOf("png") != -1) {
                 $scope.pictureData = reader.result;
                 $scope.loadPicture($stateParams.id, true);
@@ -85,17 +85,17 @@
         }
     }
 
-    $scope.phoneMask = function () {
-        jQuery(function ($) {
+    $scope.phoneMask = () => {
+        jQuery( ($) => {
             $("#contactPhone").mask("(999) 999-9999");
         });
     }
 
-    $scope.getTransportation = function () {
+    $scope.getTransportation = () => {
         $scope.isLoading = true;
-        var user = SessionService.getSessionUser();
-        var token = SessionService.getSessionToken();
-        var id = $stateParams.id;
+        let user = SessionService.getSessionUser();
+        let token = SessionService.getSessionToken();
+        let id = $stateParams.id;
         TransportationService.getTransportation(user, token, id)
 		.success(response => {
 		    $scope.isLoading = false;
@@ -127,12 +127,12 @@
 		});
     }
 
-    $scope.getPicturesHtml = function (id) {
-        var type = true;
+    $scope.getPicturesHtml = (id) => {
+        let type = true;
         ApplicationPictureService.getApplicationPicturesHtml(id, type)
 		.success(response => {
 		    if (response && response.length > 0) {
-		        for (var i = 0; i < response.length; i++) {
+		        for (let i = 0; i < response.length; i++) {
 		            $scope.htmlPicuresContent += response[i];
 		        }
 		        $('#gallery-transportation').append($scope.htmlPicuresContent);
@@ -143,8 +143,8 @@
 		});
     }
 
-    $scope.initLightboxNative = function () {
-        var lightbox = new Lightbox();
+    $scope.initLightboxNative = () => {
+        let lightbox = new Lightbox();
         lightbox.load({
             boxId: false,
             dimensions: true,
@@ -162,23 +162,23 @@
             responsive: true,
             maxImgSize: 0.8,
             // callbacks
-            onopen: function (image) {
+            onopen: (image) => {
                 $(".navbar").removeClass("navbar-fixed-top");
             },
-            onclose: function (image) {
+            onclose: (image) => {
                 $(".navbar").addClass("navbar-fixed-top");
             },
-            onload: function (event) {
+            onload: (event) => {
             },
-            onresize: function (image) {
+            onresize: (image) => {
             },
-            onloaderror: function (event) {
+            onloaderror: (event) => {
                 if (event._happenedWhile === 'prev')
                     lightbox.prev()
                 else
                     lightbox.next()
             },
-            onimageclick: function (image) {
+            onimageclick: (image) => {
             }
         });
     }

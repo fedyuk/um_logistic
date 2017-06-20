@@ -16,7 +16,7 @@
     //
 
     // methods
-    $scope.registerUser = function () {
+    $scope.registerUser = () => {
         if (!$scope.registerForm.$valid) {
             return;
         }
@@ -36,11 +36,11 @@
         });
     }
 
-    $scope.fileChanged = function () {
+    $scope.fileChanged = () => {
         file = document.getElementById("user-picture").files[0];
-        var reader = new FileReader();
+        let reader = new FileReader();
 
-        reader.addEventListener("load", function () {
+        reader.addEventListener("load", () => {
             if (reader.result.indexOf("jpg") != -1 || reader.result.indexOf("jpeg") != -1 || reader.result.indexOf("png") != -1) {
                 $scope.userToRegister.Image = reader.result;
             }
@@ -60,8 +60,8 @@
     }
 
 
-    $scope.phoneMask = function () {
-        jQuery(function ($) {
+    $scope.phoneMask = () => {
+        jQuery(($) => {
             $("#contactPhone").mask("(999) 999-9999");
         });
     }

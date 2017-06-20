@@ -35,14 +35,14 @@
 
     //methods
 
-    $scope.listTransportations = function (page, count) {
+    $scope.listTransportations = (page, count) => {
         TransportationService.getTransportations(SessionService.getSessionUser(), SessionService.getSessionToken(),
             $scope.currentPage, $scope.currentCount)
 		.success(response => {
 		    $scope.isLoading = false;
 		    $scope.isPartLoading = false;
 		    if (response.Success) {
-		        for (var i = 0; i < response.Result.length; i++) {
+		        for (let i = 0; i < response.Result.length; i++) {
 		            $scope.transportations.push({
 		                id: FormHelper.getFormValue(response.Result[i].Id),
 		                title: FormHelper.getFormValue(response.Result[i].Name),
@@ -64,7 +64,7 @@
 		});
     }
 
-    $scope.listFilteredTransportations = function (filter, page, count) {
+    $scope.listFilteredTransportations = (filter, page, count) => {
         FilterService.getTransportationApplications(filter, page, count)
 		.success(response => {
 		    $scope.isPartLoading = false;
@@ -74,7 +74,7 @@
 		        if (page == 0) {
 		            $scope.transportations = [];
 		        }
-		        for (var i = 0; i < response.Result.length; i++) {
+		        for (let i = 0; i < response.Result.length; i++) {
 		            $scope.transportations.push({
 		                id: FormHelper.getFormValue(response.Result[i].Id),
 		                title: FormHelper.getFormValue(response.Result[i].Name),
@@ -96,19 +96,19 @@
 		});
     }
 
-    $scope.loadMore = function () {
+    $scope.loadMore = () => {
         $scope.currentPage++;
         $scope.isPartLoading = true;
         $scope.listTransportations($scope.currentPage, $scope.currentCount);
     }
 
-    $scope.initTransportationsList = function () {
+    $scope.initTransportationsList = () => {
 		$scope.isLoading = true;
         $scope.listTransportations($scope.currentPage, $scope.currentCount);
     }
 
-    $scope.getPicture = function (id) {
-        var type = true;
+    $scope.getPicture = (id) => {
+        let type = true;
         ApplicationPictureService.getApplicationPictures(id, type)
 		.success(response => {
 		    if (response.Success && response.Result && response.Result.length > 0) {
@@ -123,9 +123,9 @@
 		});
     }
 
-    $scope.acceptApplication = function (id) {
-        var request = {};
-        var userId = SessionService.getSessionUserId();
+    $scope.acceptApplication = (id) => {
+        let request = {};
+        let userId = SessionService.getSessionUserId();
         if (!userId) {
             NotificationService.warning(moduleConstants.sessionUserIdNotFound);
             $scope.isLoading = false;
@@ -151,20 +151,20 @@
         });
     }
 
-    $scope.applyFilter = function () {
+    $scope.applyFilter = () => {
         $scope.getValuesFromSliders();
-        var filter = $scope.filter;
-        var stringFilter = $scope.generateFilterString(filter);
+        let filter = $scope.filter;
+        let stringFilter = $scope.generateFilterString(filter);
         $scope.currentPage = 0;
         //$scope.isLoading = true;
         $scope.filterLoading = true;
         $scope.listFilteredTransportations(stringFilter, $scope.currentPage, $scope.currentCount);
     }
 
-    $scope.generateFilterString = function (filter) {
-        var stringFilter = "";
-        var values = null;
-        for (var name in filter) {
+    $scope.generateFilterString = (filter) => {
+        let stringFilter = "";
+        let values = null;
+        for (let name in filter) {
             if (filter[name] != null && filter[name].isClear == false) {
                 values = filter[name].value.split(',');
                 if (values.length == 2) {
@@ -180,7 +180,7 @@
         return stringFilter;
     }
 
-    $scope.initFilterView = function () {
+    $scope.initFilterView = () => {
         $scope.ShipmentLengthSlider = $("#filter-shipment-length").slider({
             id: "filter-shipment-length",
             min: moduleConstants.sliderMinRangeValue,
@@ -190,7 +190,7 @@
         });
         $scope.ShipmentLengthSlider.on('slideStop', {
             value: $scope.filter.ShipmentLength
-        }, function (event) {
+        }, (event) => {
             event.data.value.isClear = false;
         });
         $scope.ShipmentWidthSlider = $("#filter-shipment-width").slider({
@@ -202,7 +202,7 @@
         });
         $scope.ShipmentWidthSlider.on('slideStop', {
             value: $scope.filter.ShipmentWidth
-        }, function (event) {
+        }, (event) => {
             event.data.value.isClear = false;
         });
         $scope.ShipmentHeightSlider = $("#filter-shipment-height").slider({
@@ -214,7 +214,7 @@
         });
         $scope.ShipmentHeightSlider.on('slideStop', {
             value: $scope.filter.ShipmentHeight
-        }, function (event) {
+        }, (event) => {
             event.data.value.isClear = false;
         });
         $scope.ShipmentCapacitySlider = $("#filter-shipment-capacity").slider({
@@ -226,7 +226,7 @@
         });
         $scope.ShipmentCapacitySlider.on('slideStop', {
             value: $scope.filter.ShipmentCapacity
-        }, function (event) {
+        }, (event) => {
             event.data.value.isClear = false;
         });
         $scope.ShipmentWeightSlider = $("#filter-shipment-weight").slider({
@@ -238,12 +238,12 @@
         });
         $scope.ShipmentWeightSlider.on('slideStop', {
             value: $scope.filter.ShipmentWeight
-        }, function (event) {
+        }, (event) => {
             event.data.value.isClear = false;
         });
     }
 
-    $scope.getValuesFromSliders = function () {
+    $scope.getValuesFromSliders = () => {
         $scope.filter.ShipmentLength.value = $scope.ShipmentLengthSlider[0].value;
         $scope.filter.ShipmentWidth.value = $scope.ShipmentWidthSlider[0].value;
         $scope.filter.ShipmentHeight.value = $scope.ShipmentHeightSlider[0].value;
@@ -251,22 +251,22 @@
         $scope.filter.ShipmentWeight.value = $scope.ShipmentWeightSlider[0].value;
     }
 
-    $scope.dropFilter = function (filter, name) {
+    $scope.dropFilter = (filter, name) => {
         if (filter[name]) {
             filter[name].isClear = true;
             $scope[name + "Slider"].slider('setValue', [moduleConstants.sliderMinRangeValue, moduleConstants.sliderMaxRangeValue]);
         }
     }
 
-    $scope.moveIntoTrash = function (id, title) {
-        var userId = SessionService.getSessionUserId();
+    $scope.moveIntoTrash = (id, title) => {
+        let userId = SessionService.getSessionUserId();
         if (!userId) {
             NotificationService.warning(moduleConstants.sessionUserIdNotFound);
             $scope.isLoading = false;
             $scope.isPartLoading = false;
             return;
         }
-        var request = {
+        let request = {
             ApplicationId: id,
             Type: true,
             UserId: userId
@@ -276,7 +276,7 @@
                 NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
             if (response.Success == true) {
-                var isTrashAdded = SessionService.addTrashElement(id, true, title);
+                let isTrashAdded = SessionService.addTrashElement(id, true, title);
                 if (isTrashAdded == true) {
                     $rootScope.$broadcast("trashElementAdded", null);
                 }
@@ -287,12 +287,12 @@
 
     }
 
-    $scope.isExistElementInTrash = function (id, type) {
+    $scope.isExistElementInTrash = (id, type) => {
         return SessionService.isExistsTrashElement(id, type);
     }
 
-    $scope.removeFromTrash = function (id) {
-        var userId = SessionService.getSessionUserId();
+    $scope.removeFromTrash = (id) => {
+        let userId = SessionService.getSessionUserId();
         if (!userId) {
             NotificationService.warning(moduleConstants.sessionUserIdNotFound);
             $scope.isLoading = false;
