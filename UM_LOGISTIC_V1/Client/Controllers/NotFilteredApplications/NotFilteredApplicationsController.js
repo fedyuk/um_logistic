@@ -20,7 +20,7 @@
 
     //methods
 
-    $scope.listApplications = function (page, count) {
+    $scope.listApplications = (page, count) => {
         switch($scope.currentApplicationType)
         {
             case true:
@@ -30,7 +30,7 @@
 		    $scope.isLoading = false;
 		    $scope.isPartLoading = false;
 		    if (response.Success) {
-		        for (var i = 0; i < response.Result.length; i++) {
+		        for (let i = 0; i < response.Result.length; i++) {
 		            $scope.applications.push({
 		                id: FormHelper.getFormValue(response.Result[i].Id),
 		                title: FormHelper.getFormValue(response.Result[i].Name),
@@ -55,7 +55,7 @@
            $scope.isLoading = false;
            $scope.isPartLoading = false;
            if (response.Success) {
-               for (var i = 0; i < response.Result.length; i++) {
+               for (let i = 0; i < response.Result.length; i++) {
                    $scope.applications.push({
                        id: FormHelper.getFormValue(response.Result[i].Id),
                        title: FormHelper.getFormValue(response.Result[i].Name),
@@ -75,18 +75,18 @@
         }
     }
 
-    $scope.loadMore = function () {
+    $scope.loadMore = () => {
         $scope.isPartLoading = true;
         $scope.currentPage++;
         $scope.listApplications($scope.currentPage, $scope.currentCount);
     }
 
-    $scope.initApplicationsList = function () {
+    $scope.initApplicationsList = () => {
         $scope.isLoading = true;
         $scope.listApplications($scope.currentPage, $scope.currentCount);
     }
 
-    $scope.getPicture = function (id, type) {
+    $scope.getPicture = (id, type) => {
         ApplicationPictureService.getApplicationPicture(id, type)
 		.success(response => {
 		    if (response.Success) {
@@ -101,7 +101,7 @@
 		});
     }
 
-    $scope.changeApplicationType = function(type, caption)
+    $scope.changeApplicationType = (type, caption) =>
     {
         $scope.currentPage = 0;
         $scope.currentTypeCaption = caption;
@@ -110,7 +110,7 @@
         $scope.listApplications($scope.currentPage, $scope.currentCount);
     }
 
-    $scope.acceptApplication = function(id, type)
+    $scope.acceptApplication = (id, type) => 
     {
         bootbox.confirm({
             message: moduleConstants.acceptTaskConfirmation,
@@ -124,12 +124,12 @@
                     className: 'btn-default btn-sm'
                 }
             },
-            callback: function (ok) {
+            callback: (ok) => {
                 if (ok == true) {
                     FilterService.acceptApplication(type, id)
                     .success(response => {
                         if (response.Success) {
-                            for (var i = 0; i < $scope.applications.length; i++)
+                            for (let i = 0; i < $scope.applications.length; i++)
                                 if ($scope.applications[i].id === id) {
                                     $scope.applications.splice(i, 1);
                                     break;
@@ -149,7 +149,7 @@
         });
     }
 
-    $scope.declineApplication = function (id, type) {
+    $scope.declineApplication = (id, type) => {
         bootbox.confirm({
             message: moduleConstants.deleteApplicationConfirmation,
             buttons: {
@@ -162,13 +162,13 @@
                     className: 'btn-default btn-sm'
                 }
             },
-            callback: function (ok) {
+            callback: (ok) => {
                 if (ok == true) {
                     FilterService.declineApplication(type, id)
                     .success(response => {
                         if (response.Success) {
                             NotificationService.success(moduleConstants.deletingInfoSuccess);
-                            for (var i = 0; i < $scope.applications.length; i++)
+                            for (let i = 0; i < $scope.applications.length; i++)
                                 if ($scope.applications[i].id === id) {
                                     $scope.applications.splice(i, 1);
                                     break;

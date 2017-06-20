@@ -194,7 +194,7 @@
         });
         $scope.TransportLengthSlider.on('slideStop', {
             value: $scope.filter.TransportLength
-        }, function (event) {
+        }, event => {
             event.data.value.isClear = false;
         });
         $scope.TransportWidthSlider = $("#filter-transport-width").slider({
@@ -206,7 +206,7 @@
         });
         $scope.TransportWidthSlider.on('slideStop', {
             value: $scope.filter.TransportWidth
-        }, function (event) {
+        }, event => {
             event.data.value.isClear = false;
         });
         $scope.TransportHeightSlider = $("#filter-transport-height").slider({
@@ -218,7 +218,7 @@
         });
         $scope.TransportHeightSlider.on('slideStop', {
             value: $scope.filter.TransportHeight
-        }, function (event) {
+        }, event => {
             event.data.value.isClear = false;
         });
         $scope.TransportCapacitySlider = $("#filter-transport-capacity").slider({
@@ -230,7 +230,7 @@
         });
         $scope.TransportCapacitySlider.on('slideStop', {
             value: $scope.filter.TransportCapacity
-        }, function (event) {
+        }, event => {
             event.data.value.isClear = false;
         });
         $scope.TransportWeightSlider = $("#filter-transport-weight").slider({
@@ -242,7 +242,7 @@
         });
         $scope.TransportWeightSlider.on('slideStop', {
             value: $scope.filter.TransportWeight
-        }, function (event) {
+        }, event => {
             event.data.value.isClear = false;
         });
         $scope.TransportArrowSlider = $("#filter-transport-arrow").slider({
@@ -254,7 +254,7 @@
         });
         $scope.TransportArrowSlider.on('slideStop', {
             value: $scope.filter.TransportArrow
-        }, function (event) {
+        }, event => {
             event.data.value.isClear = false;
         });
     }

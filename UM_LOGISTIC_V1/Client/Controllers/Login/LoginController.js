@@ -7,7 +7,7 @@
 	//variables
 	
     //methods
-	$scope.loginUser = function () {
+	$scope.loginUser = () => {
 	    if (!$scope.loginForm.$valid) {
 	        return;
 	    }

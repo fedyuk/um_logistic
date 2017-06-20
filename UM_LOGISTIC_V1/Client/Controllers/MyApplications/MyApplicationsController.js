@@ -22,9 +22,9 @@
 
     //methods
 
-    $scope.listApplications = function (page, count, isClear) {
-        var invoke = null;
-        var userId = SessionService.getSessionUserId();
+    $scope.listApplications = (page, count, isClear) => {
+        let invoke = null;
+        let userId = SessionService.getSessionUserId();
         if(!userId) {
             NotificationService.warning(moduleConstants.sessionUserIdNotFound);
             $scope.isLoading = false;
@@ -42,7 +42,7 @@
 		        if (isClear == true) {
 		            $scope.t_applications = [];
 		        }
-		        for (var i = 0; i < response.Result.length; i++) {
+		        for (let i = 0; i < response.Result.length; i++) {
 		            $scope.t_applications.push({
 		                id: FormHelper.getFormValue(response.Result[i].Id),
 		                name: FormHelper.getFormValue(response.Result[i].Name),
@@ -80,7 +80,7 @@
                if (isClear == true) {
                    $scope.c_applications = [];
                }
-               for (var i = 0; i < response.Result.length; i++) {
+               for (let i = 0; i < response.Result.length; i++) {
                    $scope.c_applications.push({
                        id: FormHelper.getFormValue(response.Result[i].Id),
                        fullName: FormHelper.getFormValue(response.Result[i].FullName),
@@ -111,18 +111,18 @@
         }
     }
 
-    $scope.loadMore = function () {
+    $scope.loadMore = () => {
         $scope.isPartLoading = true;
         $scope.currentPage++;
         $scope.listApplications($scope.currentPage, $scope.currentCount);
     }
 
-    $scope.initApplicationsList = function () {
+    $scope.initApplicationsList = () => {
         $scope.isLoading = true;
         $scope.listApplications($scope.currentPage, $scope.currentCount);
     }
 
-    $scope.getPicture = function (id, type) {
+    $scope.getPicture = (id, type) => {
         ApplicationPictureService.getApplicationPicture(id, type)
 		.success(response => {
 		    if (response.Success) {
@@ -137,7 +137,7 @@
 		});
     }
 
-    $scope.changeApplicationType = function (type, caption) {
+    $scope.changeApplicationType = (type, caption) => {
         $scope.currentPage = 0;
         $scope.currentTypeCaption = caption;
         $scope.t_applications = [];
@@ -146,11 +146,11 @@
         $scope.listApplications($scope.currentPage, $scope.currentCount, true);
     }
 
-    $scope.onChangeMyOrderedFilter = function () {
+    $scope.onChangeMyOrderedFilter = () => {
         $scope.listApplications($scope.currentPage, $scope.currentCount, true);
     }
 
-    $scope.refreshApplicationDate = function (type, id) {
+    $scope.refreshApplicationDate = (type, id) => {
         bootbox.confirm({
             message: moduleConstants.updateDateApplicationConfirm,
             buttons: {
@@ -163,7 +163,7 @@
                     className: 'btn-default btn-sm'
                 }
             },
-            callback: function (ok) {
+            callback: (ok) => {
                 if (ok == true) {
                     $scope.isLoading = true;
                     FilterService.upToDateApplication(type, id)
@@ -184,7 +184,7 @@
         });
     }
 
-    $scope.removeApplication = function (type, id) {
+    $scope.removeApplication = (type, id) => {
         bootbox.confirm({
             message: moduleConstants.deleteApplicationConfirmation,
             buttons: {
@@ -197,7 +197,7 @@
                     className: 'btn-default btn-sm'
                 }
             },
-            callback: function (ok) {
+            callback: (ok) => {
                 if (ok == true) {
                     $scope.isLoading = true;
                     FilterService.removeApplication(type, id)
@@ -205,14 +205,14 @@
                         $scope.isLoading = false;
                         if (response.Success == true) {
                             if (type == true) {
-                                for (var i = 0; i < $scope.t_applications.length; i++)
+                                for (let i = 0; i < $scope.t_applications.length; i++)
                                     if ($scope.t_applications[i].id === id) {
                                         $scope.t_applications.splice(i, 1);
                                         break;
                                     }
                             }
                             if (type == false) {
-                                for (var i = 0; i < $scope.c_applications.length; i++)
+                                for (let i = 0; i < $scope.c_applications.length; i++)
                                     if ($scope.c_applications[i].id === id) {
                                         $scope.c_applications.splice(i, 1);
                                         break;
@@ -231,14 +231,14 @@
             }
         });
     }
-    $scope.editApplication = function (type, application) {
-        var message = "";
-        for (var property in application) {
+    $scope.editApplication = (type, application) =>{
+        let message = "";
+        for (let property in application) {
             if (typeof application[property] != "object") {
                 message += "<p contenteditable>" + FormHelper.getFormValue(application[property]) + "</p>";
             }
         }
-        var dialog = bootbox.dialog({
+        let dialog = bootbox.dialog({
             title: moduleConstants.editApplicationCaption,
             message: message
         });
