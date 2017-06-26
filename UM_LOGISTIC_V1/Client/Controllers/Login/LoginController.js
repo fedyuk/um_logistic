@@ -15,7 +15,7 @@
 		LoginService.loginUser($scope.loginUserName, $scope.loginUserPassword)
 		.success(response => {
 		    $scope.isLoading = false;
-			if(response.Success) {
+		    if (response && response.Success == true) {
 				$rootScope.$broadcast("userAuthorized", response);
 				$location.path(moduleConstants.homePath);
 			}

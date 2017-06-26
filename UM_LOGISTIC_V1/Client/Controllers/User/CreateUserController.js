@@ -33,7 +33,7 @@
         $scope.userToAdd.RoleId = $scope.roles.model != null ? $scope.roles.model.id : 1;
         AccountService.addAccount(request).success(response => {
             $scope.isLoading = false;
-            if (response.Success == true) {
+            if (response && response.Success == true) {
                 $location.path(moduleConstants.accountsPath);
             }
             else {

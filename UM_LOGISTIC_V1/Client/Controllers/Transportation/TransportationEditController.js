@@ -25,7 +25,7 @@
         TransportationService.updateTransportation($scope.transportationToEdit)
 		.success(response => {
 		    $scope.isLoading = false;
-		    if (response.Success) {
+		    if (response && response.Success == true) {
 		        $location.path(moduleConstants.myApplicationsPath);
 		    }
 		    else {
@@ -49,7 +49,7 @@
         };
         ApplicationPictureService.createApplicationPicture(request)
 		.success(response => {
-		    if (response.Success) {
+		    if (response && response.Success == true) {
 		        NotificationService.success(moduleConstants.uploadPictureSuccess);
 		    }
 		    else {
@@ -99,7 +99,7 @@
         TransportationService.getTransportation(user, token, id)
 		.success(response => {
 		    $scope.isLoading = false;
-		    if (response.Success) {
+		    if (response && response.Success == true) {
 		        if (response.Result != null) {
 		            $scope.transportationToEdit.Id = response.Result.Id;
 		            $scope.transportationToEdit.Name = response.Result.Name;

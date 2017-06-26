@@ -23,7 +23,7 @@
         $scope.isLoading = true;
         AccountService.registerAccount($scope.userToRegister).success(response => {
             $scope.isLoading = false;
-            if (response.Success == true) {
+            if (response && response.Success == true) {
                 $rootScope.$broadcast("userRegistrated", response);
                 $location.path(moduleConstants.homePath);
             }
@@ -62,7 +62,7 @@
 
     $scope.phoneMask = () => {
         jQuery(($) => {
-            $("#contactPhone").mask("(999) 999-9999");
+            $("#contactPhone").mask(moduleConstants.phoneMask);
         });
     }
     //

@@ -40,7 +40,7 @@
 	        return;
 	    }
 	    ClientTaskService.getClientTasksCount('OwnerId==' + userId + ';').success(response => {
-	        if (response.Success) {
+	        if (response && response.Success == true) {
 	            $scope.clientTasksCount = response.Result;
 	        }
 	        else {

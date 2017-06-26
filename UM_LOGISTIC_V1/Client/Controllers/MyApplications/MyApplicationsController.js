@@ -38,7 +38,7 @@
                 invoke.success(response => {
                     $scope.isLoading = false;
                     $scope.isPartLoading = false;
-		    if (response.Success) {
+                if (response && response.Success == true) {
 		        if (isClear == true) {
 		            $scope.t_applications = [];
 		        }
@@ -76,7 +76,7 @@
        invoke.success(response => {
            $scope.isLoading = false;
            $scope.isPartLoading = false;
-           if (response.Success) {
+           if (response && response.Success == true) {
                if (isClear == true) {
                    $scope.c_applications = [];
                }
@@ -97,7 +97,6 @@
                        transportArrow: FormHelper.getFormValue(response.Result[i].TransportArrow),
                        obj: response.Result[i]
                    });
-                   //$scope.getPicture(response.Result[i].Id, $scope.currentApplicationType);
                }
            }
            else {
@@ -125,7 +124,7 @@
     $scope.getPicture = (id, type) => {
         ApplicationPictureService.getApplicationPicture(id, type)
 		.success(response => {
-		    if (response.Success) {
+		    if (response && response.Success == true) {
 		        $scope.pictures[id] = response.Result;
 		    }
 		    else {
@@ -203,7 +202,7 @@
                     FilterService.removeApplication(type, id)
                     .success(response => {
                         $scope.isLoading = false;
-                        if (response.Success == true) {
+                        if (response && response.Success == true) {
                             if (type == true) {
                                 for (let i = 0; i < $scope.t_applications.length; i++)
                                     if ($scope.t_applications[i].id === id) {
