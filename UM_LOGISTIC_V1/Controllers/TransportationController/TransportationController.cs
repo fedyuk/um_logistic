@@ -29,14 +29,12 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
             if (user != null)
             {
                 getTransportationApplicationResponse.Success = true;
-                getTransportationApplicationResponse.Error = "";
                 getTransportationApplicationResponse.Result = applicationInfo;
                 return Ok(getTransportationApplicationResponse);
             }
             else
             {
                 getTransportationApplicationResponse.Success = false;
-                getTransportationApplicationResponse.Error = "";
                 getTransportationApplicationResponse.Result = null;
                 return Ok(getTransportationApplicationResponse);
             }
@@ -66,14 +64,12 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
             if (id != null)
             {
                 createTransportationApplicationResponse.Success = true;
-                createTransportationApplicationResponse.Error = "";
                 createTransportationApplicationResponse.Id = id;
                 return Ok(createTransportationApplicationResponse);
             }
             else
             {
                 createTransportationApplicationResponse.Success = false;
-                createTransportationApplicationResponse.Error = "";
                 createTransportationApplicationResponse.Id = null;
                 return Ok(createTransportationApplicationResponse);
             }
@@ -103,14 +99,12 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
             if (isUpdate)
             {
                 updateTransportationApplicationResponse.Success = true;
-                updateTransportationApplicationResponse.Error = "";
                 updateTransportationApplicationResponse.Result = null;
                 return Ok(updateTransportationApplicationResponse);
             }
             else
             {
                 updateTransportationApplicationResponse.Success = false;
-                updateTransportationApplicationResponse.Error = "";
                 updateTransportationApplicationResponse.Result = null;
                 return Ok(updateTransportationApplicationResponse);
             }
@@ -126,14 +120,12 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
             if (isDeleted)
             {
                 deleteTransportationApplicationResponse.Success = true;
-                deleteTransportationApplicationResponse.Error = "";
                 deleteTransportationApplicationResponse.Result = null;
                 return Ok(deleteTransportationApplicationResponse);
             }
             else
             {
                 deleteTransportationApplicationResponse.Success = false;
-                deleteTransportationApplicationResponse.Error = "";
                 deleteTransportationApplicationResponse.Result = null;
                 return Ok(deleteTransportationApplicationResponse);
             }
@@ -148,14 +140,12 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
             if (applications != null)
             {
                 getTransportationApplicationsByPageAndCountResponse.Success = true;
-                getTransportationApplicationsByPageAndCountResponse.Error = "";
                 getTransportationApplicationsByPageAndCountResponse.Result = applications;
                 return Ok(getTransportationApplicationsByPageAndCountResponse);
             }
             else
             {
                 getTransportationApplicationsByPageAndCountResponse.Success = false;
-                getTransportationApplicationsByPageAndCountResponse.Error = "";
                 getTransportationApplicationsByPageAndCountResponse.Result = null;
                 return Ok(getTransportationApplicationsByPageAndCountResponse);
             }
@@ -170,14 +160,12 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
             if (applications != null)
             {
                 getTransportationApplicationsByPageAndCountResponse.Success = true;
-                getTransportationApplicationsByPageAndCountResponse.Error = "";
                 getTransportationApplicationsByPageAndCountResponse.Result = applications;
                 return Ok(getTransportationApplicationsByPageAndCountResponse);
             }
             else
             {
                 getTransportationApplicationsByPageAndCountResponse.Success = false;
-                getTransportationApplicationsByPageAndCountResponse.Error = "";
                 getTransportationApplicationsByPageAndCountResponse.Result = null;
                 return Ok(getTransportationApplicationsByPageAndCountResponse);
             }
@@ -218,7 +206,7 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
         [HttpGet]
         public IHttpActionResult GetListHtmlPictures(long id, bool type, bool isEdit = false)
         {
-            var executeUri = type == true ? "/api/t_pictures?id=" : "/api/c_pictures?id=";
+            var executeUri = type == true ? TextConstants.TrasnportationGetPicturesUrl : TextConstants.CooperationGetPicturesUrl;
             var currentRequestUri = HttpContext.Current.Request;
             var profileUri = currentRequestUri.Url.Scheme + System.Uri.SchemeDelimiter + currentRequestUri.Url.Host + (currentRequestUri.Url.IsDefaultPort ? "" : ":" + currentRequestUri.Url.Port);
             var pictures = pictureService.GetPictures(id, type);
@@ -228,7 +216,11 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
             foreach(var picture in pictures)
             {
                 url = profileUri + executeUri + picture;
-                htmlHrefs.Add("<img style='width: 250px; height: 200px;' class='jslghtbx-thmb' src='" + url + "' alt='' data-jslghtbx='" + url + "' data-jslghtbx-group='mygroup1'>" + (isEdit == true ? "<button id='EditPicture" + index + "' class='btn btn-warning btn-sm'>Видалити</button>" : ""));
+                htmlHrefs.Add("<img style='width: 250px; height: 200px;' class='jslghtbx-thmb' src='" +
+                    url + "' alt='' data-jslghtbx='" + 
+                    url + "' data-jslghtbx-group='mygroup1'>" + 
+                    (isEdit == true ? "<button id='EditPicture" + 
+                    index + "' class='btn btn-warning btn-sm'>Видалити</button>" : ""));
                 index++;
             }
             return Ok(htmlHrefs);

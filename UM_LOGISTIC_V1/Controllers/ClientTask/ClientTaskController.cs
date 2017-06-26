@@ -38,14 +38,13 @@ namespace UM_LOGISTIC_V1.Controllers.ClientTask
             if (filter == String.Empty)
             {
                 response.Success = false;
-                response.Error = "The filter is empty";
+                response.Error = TextConstants.ApiEmptyFilter;
                 response.Result = tasks;
                 return Ok(response);
             }
             var list = Parser.GetFilterList(filter);
             tasks = service.GetClientTasks(list, page, count);
             response.Success = true;
-            response.Error = null;
             response.Result = tasks;
             return Ok(response);
         }
@@ -59,7 +58,7 @@ namespace UM_LOGISTIC_V1.Controllers.ClientTask
             if (filter == String.Empty)
             {
                 response.Success = false;
-                response.Error = "The filter is empty";
+                response.Error = TextConstants.ApiEmptyFilter;
                 response.Result = 0;
                 return Ok(response);
             }

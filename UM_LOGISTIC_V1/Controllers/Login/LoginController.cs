@@ -32,15 +32,13 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             {
                 authenticateUserResponse.Success = true;
                 authenticateUserResponse.Token = TokenService.GenerateToken(request.UserName, user.RoleId);
-                authenticateUserResponse.Error = "";
                 authenticateUserResponse.Result = user;
                 return Ok(authenticateUserResponse);
             }
             else
             {
                 authenticateUserResponse.Success = false;
-                authenticateUserResponse.Token = "";
-                authenticateUserResponse.Error = "Неправильний логін або(і) пароль";
+                authenticateUserResponse.Error = TextConstants.InvalidLoginOrPassword;
                 authenticateUserResponse.Result = null;
                 return Ok(authenticateUserResponse);
             }
@@ -55,7 +53,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             if(!IsValidToken)
             {
                 getUserResponse.Success = false;
-                getUserResponse.Error = "Token is not valid";
+                getUserResponse.Error = TextConstants.TokenNotValid;
                 getUserResponse.Result = null;
                 return Ok(getUserResponse);
             }
@@ -67,14 +65,12 @@ namespace UM_LOGISTIC_V1.Controllers.Login
                 if (user != null)
                 {
                     getUserResponse.Success = true;
-                    getUserResponse.Error = "";
                     getUserResponse.Result = userInfo;
                     return Ok(getUserResponse);
                 }
                 else
                 {
                     getUserResponse.Success = false;
-                    getUserResponse.Error = "";
                     getUserResponse.Result = null;
                     return Ok(getUserResponse);
                 }
@@ -82,7 +78,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             else
             {
                 getUserResponse.Success = false;
-                getUserResponse.Error = "Access is denied";
+                getUserResponse.Error = TextConstants.AccessDenied;
                 getUserResponse.Result = null;
                 return Ok(getUserResponse);
             }
@@ -97,7 +93,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             if(!isValidToken)
             {
                 createUserResponse.Success = false;
-                createUserResponse.Error = "Token is not valid";
+                createUserResponse.Error = TextConstants.TokenNotValid;
                 createUserResponse.Result = null;
                 return Ok(createUserResponse);
             }
@@ -116,14 +112,12 @@ namespace UM_LOGISTIC_V1.Controllers.Login
                 if (isCreate)
                 {
                     createUserResponse.Success = true;
-                    createUserResponse.Error = "";
                     createUserResponse.Result = null;
                     return Ok(createUserResponse);
                 }
                 else
                 {
                     createUserResponse.Success = false;
-                    createUserResponse.Error = "";
                     createUserResponse.Result = null;
                     return Ok(createUserResponse);
                 }
@@ -131,7 +125,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             else
             {
                 createUserResponse.Success = false;
-                createUserResponse.Error = "Access is denied";
+                createUserResponse.Error = TextConstants.AccessDenied;
                 createUserResponse.Result = null;
                 return Ok(createUserResponse);
             }
@@ -146,7 +140,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             if (!isValidToken)
             {
                 updateUserResponse.Success = false;
-                updateUserResponse.Error = "Token is not valid";
+                updateUserResponse.Error = TextConstants.TokenNotValid;
                 updateUserResponse.Result = null;
                 return Ok(updateUserResponse);
             }
@@ -166,14 +160,12 @@ namespace UM_LOGISTIC_V1.Controllers.Login
                 if (isUpdated)
                 {
                     updateUserResponse.Success = true;
-                    updateUserResponse.Error = "";
                     updateUserResponse.Result = null;
                     return Ok(updateUserResponse);
                 }
                 else
                 {
                     updateUserResponse.Success = false;
-                    updateUserResponse.Error = "";
                     updateUserResponse.Result = null;
                     return Ok(updateUserResponse);
                 }
@@ -181,7 +173,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             else
             {
                 updateUserResponse.Success = false;
-                updateUserResponse.Error = "Access is denied";
+                updateUserResponse.Error = TextConstants.AccessDenied;
                 updateUserResponse.Result = null;
                 return Ok(updateUserResponse);
             }
@@ -196,7 +188,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             if (!isValidToken)
             {
                 deleteUserResponse.Success = false;
-                deleteUserResponse.Error = "Token is not valid";
+                deleteUserResponse.Error = TextConstants.TokenNotValid;
                 deleteUserResponse.Result = null;
                 return Ok(deleteUserResponse);
             }
@@ -209,14 +201,12 @@ namespace UM_LOGISTIC_V1.Controllers.Login
                 if (isDeleted)
                 {
                     deleteUserResponse.Success = true;
-                    deleteUserResponse.Error = "";
                     deleteUserResponse.Result = null;
                     return Ok(deleteUserResponse);
                 }
                 else
                 {
                     deleteUserResponse.Success = false;
-                    deleteUserResponse.Error = "";
                     deleteUserResponse.Result = null;
                     return Ok(deleteUserResponse);
                 }
@@ -224,7 +214,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             else
             {
                 deleteUserResponse.Success = false;
-                deleteUserResponse.Error = "Access is denied";
+                deleteUserResponse.Error = TextConstants.AccessDenied;
                 deleteUserResponse.Result = null;
                 return Ok(deleteUserResponse);
             }
@@ -239,7 +229,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             if (!isValidToken)
             {
                 getUsersByPageAndCountResponse.Success = false;
-                getUsersByPageAndCountResponse.Error = "Token is not valid";
+                getUsersByPageAndCountResponse.Error = TextConstants.TokenNotValid;
                 getUsersByPageAndCountResponse.Result = null;
                 return Ok(getUsersByPageAndCountResponse);
             }
@@ -251,14 +241,12 @@ namespace UM_LOGISTIC_V1.Controllers.Login
                 if (users != null)
                 {
                     getUsersByPageAndCountResponse.Success = true;
-                    getUsersByPageAndCountResponse.Error = "";
                     getUsersByPageAndCountResponse.Result = users;
                     return Ok(getUsersByPageAndCountResponse);
                 }
                 else
                 {
                     getUsersByPageAndCountResponse.Success = false;
-                    getUsersByPageAndCountResponse.Error = "";
                     getUsersByPageAndCountResponse.Result = null;
                     return Ok(getUsersByPageAndCountResponse);
                 }
@@ -266,7 +254,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             else
             {
                 getUsersByPageAndCountResponse.Success = false;
-                getUsersByPageAndCountResponse.Error = "Access is denied";
+                getUsersByPageAndCountResponse.Error = TextConstants.AccessDenied;
                 getUsersByPageAndCountResponse.Result = null;
                 return Ok(getUsersByPageAndCountResponse);
             }

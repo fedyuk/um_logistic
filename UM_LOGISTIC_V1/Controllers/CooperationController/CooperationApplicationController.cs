@@ -29,14 +29,12 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
             if (user != null)
             {
                 getCooperationApplicationResponse.Success = true;
-                getCooperationApplicationResponse.Error = "";
                 getCooperationApplicationResponse.Result = applicationInfo;
                 return Ok(getCooperationApplicationResponse);
             }
             else
             {
                 getCooperationApplicationResponse.Success = false;
-                getCooperationApplicationResponse.Error = "";
                 getCooperationApplicationResponse.Result = null;
                 return Ok(getCooperationApplicationResponse);
             }
@@ -71,14 +69,12 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
             if (id != null)
             {
                 createCooperationApplicationResponse.Success = true;
-                createCooperationApplicationResponse.Error = "";
                 createCooperationApplicationResponse.Id = id;
                 return Ok(createCooperationApplicationResponse);
             }
             else
             {
                 createCooperationApplicationResponse.Success = false;
-                createCooperationApplicationResponse.Error = "";
                 createCooperationApplicationResponse.Id = null;
                 return Ok(createCooperationApplicationResponse);
             }
@@ -113,14 +109,12 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
             if (isUpdate)
             {
                 updateCooperationApplicationResponse.Success = true;
-                updateCooperationApplicationResponse.Error = "";
                 updateCooperationApplicationResponse.Result = null;
                 return Ok(updateCooperationApplicationResponse);
             }
             else
             {
                 updateCooperationApplicationResponse.Success = false;
-                updateCooperationApplicationResponse.Error = "";
                 updateCooperationApplicationResponse.Result = null;
                 return Ok(updateCooperationApplicationResponse);
             }
@@ -136,14 +130,12 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
             if (isDeleted)
             {
                 deleteCooperationApplicationResponse.Success = true;
-                deleteCooperationApplicationResponse.Error = "";
                 deleteCooperationApplicationResponse.Result = null;
                 return Ok(deleteCooperationApplicationResponse);
             }
             else
             {
                 deleteCooperationApplicationResponse.Success = false;
-                deleteCooperationApplicationResponse.Error = "";
                 deleteCooperationApplicationResponse.Result = null;
                 return Ok(deleteCooperationApplicationResponse);
             }
@@ -158,14 +150,12 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
             if (applications != null)
             {
                 getCooperationApplicationsByPageAndCountResponse.Success = true;
-                getCooperationApplicationsByPageAndCountResponse.Error = "";
                 getCooperationApplicationsByPageAndCountResponse.Result = applications;
                 return Ok(getCooperationApplicationsByPageAndCountResponse);
             }
             else
             {
                 getCooperationApplicationsByPageAndCountResponse.Success = false;
-                getCooperationApplicationsByPageAndCountResponse.Error = "";
                 getCooperationApplicationsByPageAndCountResponse.Result = null;
                 return Ok(getCooperationApplicationsByPageAndCountResponse);
             }
@@ -180,14 +170,12 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
             if (applications != null)
             {
                 getCooperationApplicationsByPageAndCountResponse.Success = true;
-                getCooperationApplicationsByPageAndCountResponse.Error = "";
                 getCooperationApplicationsByPageAndCountResponse.Result = applications;
                 return Ok(getCooperationApplicationsByPageAndCountResponse);
             }
             else
             {
                 getCooperationApplicationsByPageAndCountResponse.Success = false;
-                getCooperationApplicationsByPageAndCountResponse.Error = "";
                 getCooperationApplicationsByPageAndCountResponse.Result = null;
                 return Ok(getCooperationApplicationsByPageAndCountResponse);
             }

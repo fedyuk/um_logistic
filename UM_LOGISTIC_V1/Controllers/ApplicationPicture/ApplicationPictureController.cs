@@ -34,7 +34,7 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationPicture
         {
             var response = new GetApplicationPicturesResponse();
             response.Success = true;
-            var executeUri = type == true ? "/api/t_pictures?id=" : "/api/c_pictures?id=";
+            var executeUri = type == true ? TextConstants.TrasnportationGetPicturesUrl : TextConstants.CooperationGetPicturesUrl;
             var currentRequestUri = HttpContext.Current.Request;
             var profileUri = currentRequestUri.Url.Scheme + System.Uri.SchemeDelimiter + currentRequestUri.Url.Host + (currentRequestUri.Url.IsDefaultPort ? "" : ":" + currentRequestUri.Url.Port);
             var pictures = service.GetPictures(applicationId, type);

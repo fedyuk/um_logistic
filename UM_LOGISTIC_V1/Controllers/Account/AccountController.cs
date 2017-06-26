@@ -31,7 +31,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             if (!IsValidToken)
             {
                 getAccountResponse.Success = false;
-                getAccountResponse.Error = "Token is not valid";
+                getAccountResponse.Error = TextConstants.TokenNotValid;
                 getAccountResponse.Result = null;
                 return Ok(getAccountResponse);
             }
@@ -43,14 +43,12 @@ namespace UM_LOGISTIC_V1.Controllers.Account
                 if (user != null)
                 {
                     getAccountResponse.Success = true;
-                    getAccountResponse.Error = "";
                     getAccountResponse.Result = accountInfo;
                     return Ok(getAccountResponse);
                 }
                 else
                 {
                     getAccountResponse.Success = false;
-                    getAccountResponse.Error = "";
                     getAccountResponse.Result = null;
                     return Ok(getAccountResponse);
                 }
@@ -58,7 +56,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             else
             {
                 getAccountResponse.Success = false;
-                getAccountResponse.Error = "Access is denied";
+                getAccountResponse.Error = TextConstants.AccessDenied;
                 getAccountResponse.Result = null;
                 return Ok(getAccountResponse);
             }
@@ -73,7 +71,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             if (!isValidToken)
             {
                 createAccountResponse.Success = false;
-                createAccountResponse.Error = "Token is not valid";
+                createAccountResponse.Error = TextConstants.TokenNotValid;
                 createAccountResponse.Result = null;
                 return Ok(createAccountResponse);
             }
@@ -95,14 +93,12 @@ namespace UM_LOGISTIC_V1.Controllers.Account
                 if (isCreate)
                 {
                     createAccountResponse.Success = true;
-                    createAccountResponse.Error = "";
                     createAccountResponse.Result = null;
                     return Ok(createAccountResponse);
                 }
                 else
                 {
                     createAccountResponse.Success = false;
-                    createAccountResponse.Error = "";
                     createAccountResponse.Result = null;
                     return Ok(createAccountResponse);
                 }
@@ -110,7 +106,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             else
             {
                 createAccountResponse.Success = false;
-                createAccountResponse.Error = "Access is denied";
+                createAccountResponse.Error = TextConstants.AccessDenied;
                 createAccountResponse.Result = null;
                 return Ok(createAccountResponse);
             }
@@ -125,7 +121,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             if (!isValidToken)
             {
                 updateAccountResponse.Success = false;
-                updateAccountResponse.Error = "Token is not valid";
+                updateAccountResponse.Error = TextConstants.TokenNotValid;
                 updateAccountResponse.Result = null;
                 return Ok(updateAccountResponse);
             }
@@ -148,14 +144,12 @@ namespace UM_LOGISTIC_V1.Controllers.Account
                 if (isUpdate)
                 {
                     updateAccountResponse.Success = true;
-                    updateAccountResponse.Error = "";
                     updateAccountResponse.Result = null;
                     return Ok(updateAccountResponse);
                 }
                 else
                 {
                     updateAccountResponse.Success = false;
-                    updateAccountResponse.Error = "";
                     updateAccountResponse.Result = null;
                     return Ok(updateAccountResponse);
                 }
@@ -163,7 +157,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             else
             {
                 updateAccountResponse.Success = false;
-                updateAccountResponse.Error = "Access is denied";
+                updateAccountResponse.Error = TextConstants.AccessDenied;
                 updateAccountResponse.Result = null;
                 return Ok(updateAccountResponse);
             }
@@ -178,7 +172,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             if (!isValidToken)
             {
                 deleteAccountResponse.Success = false;
-                deleteAccountResponse.Error = "Token is not valid";
+                deleteAccountResponse.Error = TextConstants.TokenNotValid;
                 deleteAccountResponse.Result = null;
                 return Ok(deleteAccountResponse);
             }
@@ -191,14 +185,12 @@ namespace UM_LOGISTIC_V1.Controllers.Account
                 if (isDeleted)
                 {
                     deleteAccountResponse.Success = true;
-                    deleteAccountResponse.Error = "";
                     deleteAccountResponse.Result = null;
                     return Ok(deleteAccountResponse);
                 }
                 else
                 {
                     deleteAccountResponse.Success = false;
-                    deleteAccountResponse.Error = "";
                     deleteAccountResponse.Result = null;
                     return Ok(deleteAccountResponse);
                 }
@@ -206,7 +198,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             else
             {
                 deleteAccountResponse.Success = false;
-                deleteAccountResponse.Error = "Access is denied";
+                deleteAccountResponse.Error = TextConstants.AccessDenied;
                 deleteAccountResponse.Result = null;
                 return Ok(deleteAccountResponse);
             }
@@ -221,7 +213,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             if (!isValidToken)
             {
                 getAccountsByPageAndCountResponse.Success = false;
-                getAccountsByPageAndCountResponse.Error = "Token is not valid";
+                getAccountsByPageAndCountResponse.Error = TextConstants.TokenNotValid;
                 getAccountsByPageAndCountResponse.Result = null;
                 return Ok(getAccountsByPageAndCountResponse);
             }
@@ -233,14 +225,12 @@ namespace UM_LOGISTIC_V1.Controllers.Account
                 if (users != null)
                 {
                     getAccountsByPageAndCountResponse.Success = true;
-                    getAccountsByPageAndCountResponse.Error = "";
                     getAccountsByPageAndCountResponse.Result = users;
                     return Ok(getAccountsByPageAndCountResponse);
                 }
                 else
                 {
                     getAccountsByPageAndCountResponse.Success = false;
-                    getAccountsByPageAndCountResponse.Error = "";
                     getAccountsByPageAndCountResponse.Result = null;
                     return Ok(getAccountsByPageAndCountResponse);
                 }
@@ -248,7 +238,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             else
             {
                 getAccountsByPageAndCountResponse.Success = false;
-                getAccountsByPageAndCountResponse.Error = "Access is denied";
+                getAccountsByPageAndCountResponse.Error = TextConstants.AccessDenied;
                 getAccountsByPageAndCountResponse.Result = null;
                 return Ok(getAccountsByPageAndCountResponse);
             }
@@ -263,7 +253,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             if(isEmailExist)
             {
                 response.Success = false;
-                response.Error = "Такий логін вже існує в базі";
+                response.Error = TextConstants.LoginAlreadyExists;
                 return Ok(response);
             }
             response.Result = accountService.RegisterAccount(request);
@@ -281,7 +271,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             if (!isValidToken)
             {
                 response.Success = false;
-                response.Error = "Token is not valid";
+                response.Error = TextConstants.TokenNotValid;
                 response.Result = null;
                 return Ok(response);
             }
@@ -293,14 +283,12 @@ namespace UM_LOGISTIC_V1.Controllers.Account
                 if (user != null)
                 {
                     response.Success = true;
-                    response.Error = "";
                     response.Result = user;
                     return Ok(response);
                 }
                 else
                 {
                     response.Success = false;
-                    response.Error = "";
                     response.Result = null;
                     return Ok(response);
                 }
@@ -308,7 +296,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             else
             {
                 response.Success = false;
-                response.Error = "Access is denied";
+                response.Error = TextConstants.AccessDenied;
                 response.Result = null;
                 return Ok(response);
             }
@@ -332,7 +320,6 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             if (user != null)
             {
                 response.Success = true;
-                response.Error = "";
                 response.Result = user;
                 return Ok(response);
             }
