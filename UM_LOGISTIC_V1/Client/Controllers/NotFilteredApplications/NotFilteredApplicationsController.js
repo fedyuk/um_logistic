@@ -29,7 +29,7 @@
 		.success(response => {
 		    $scope.isLoading = false;
 		    $scope.isPartLoading = false;
-		    if (response.Success) {
+		    if (response && response.Success == true) {
 		        for (let i = 0; i < response.Result.length; i++) {
 		            $scope.applications.push({
 		                id: FormHelper.getFormValue(response.Result[i].Id),
@@ -54,7 +54,7 @@
        .success(response => {
            $scope.isLoading = false;
            $scope.isPartLoading = false;
-           if (response.Success) {
+           if (response && response.Success == true) {
                for (let i = 0; i < response.Result.length; i++) {
                    $scope.applications.push({
                        id: FormHelper.getFormValue(response.Result[i].Id),
@@ -89,7 +89,7 @@
     $scope.getPicture = (id, type) => {
         ApplicationPictureService.getApplicationPicture(id, type)
 		.success(response => {
-		    if (response.Success) {
+		    if (response && response.Success == true) {
 		        $scope.pictures[id] = response.Result;
 		    }
 		    else {
@@ -128,7 +128,7 @@
                 if (ok == true) {
                     FilterService.acceptApplication(type, id)
                     .success(response => {
-                        if (response.Success) {
+                        if (response && response.Success == true) {
                             for (let i = 0; i < $scope.applications.length; i++)
                                 if ($scope.applications[i].id === id) {
                                     $scope.applications.splice(i, 1);
@@ -166,7 +166,7 @@
                 if (ok == true) {
                     FilterService.declineApplication(type, id)
                     .success(response => {
-                        if (response.Success) {
+                        if (response && response.Success == true) {
                             NotificationService.success(moduleConstants.deletingInfoSuccess);
                             for (let i = 0; i < $scope.applications.length; i++)
                                 if ($scope.applications[i].id === id) {

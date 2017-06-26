@@ -39,7 +39,7 @@
         CooperationService.getCooperation(user, token, id)
 		.success(response => {
 		    $scope.isLoading = false;
-		    if (response.Success) {
+		    if (response && response.Success == true) {
 		        if (response.Result != null) {
 		            $scope.cooperationToView.Id = FormHelper.getFormValue(response.Result.Id);
 		            $scope.cooperationToView.FullName = FormHelper.getFormValue(response.Result.FullName);
@@ -76,7 +76,7 @@
         let type = false;
         ApplicationPictureService.getApplicationPictures(id, type)
 		.success(response => {
-		    if (response.Success) {
+		    if (response && response.Success == true) {
 		        if (response.Result != null) {
 		            for (let i = 0; i < response.Result.length; i++) {
 		                $scope.pictures.push({ url: response.Result[i], number: i });
@@ -155,7 +155,7 @@
         request.TypeId = 3;
         ClientTaskService.createApplicationTask(request)
         .success(response => {
-            if (response.Success) {
+            if (response && response.Success == true) {
                 NotificationService.success(moduleConstants.callFeedbackAccepted);
                 $scope.isLoading = false;
             }
@@ -183,10 +183,10 @@
             UserId: userId
         };
         ApplicationTrashService.createApplicationTrash(request).success(response => {
-            if (response.Success == false) {
+            if (response && response.Success == false) {
                 NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
             }
-            if (response.Success == true) {
+            if (response && response.Success == true) {
                 let isTrashAdded = SessionService.addTrashElement(id, false, title);
                 if (isTrashAdded == true) {
                     $rootScope.$broadcast("trashElementAdded", null);
@@ -212,7 +212,7 @@
         }
         ApplicationTrashService.removeTrashElement(id, false)
         .success(response => {
-            if (response.Success) {
+            if (response && response.Success == true) {
                 $scope.isLoading = false;
                 SessionService.removeShopTrashElement(id, false);
                 $rootScope.$broadcast("trashElementRemoved", null);

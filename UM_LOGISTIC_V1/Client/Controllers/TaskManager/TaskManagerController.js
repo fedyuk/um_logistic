@@ -20,7 +20,7 @@
         ClientTaskService.getClientTasks(page, count, '').success(response => {
             $scope.isLoading = false;
             $scope.isPartLoading = false;
-            if (response.Success) {
+            if (response && response.Success == true) {
                 for (let i = 0; i < response.Result.length; i++) {
                     $scope.tasks.push({
                         id: FormHelper.getFormValue(response.Result[i].Id),
@@ -76,10 +76,10 @@
 
     $scope.$on("taskManagerChanged", (event, args) => {
         if (args.taskId == 0) {
-            NotificationService.warning("Задача виконана");
+            NotificationService.warning(moduleConstants.tasksDoneMessage);
         }
         if (args.taskId > 0) {
-            NotificationService.warning("Нова задача");
+            NotificationService.warning(moduleConstants.newTaskMessage);
         }
         $scope.tasks = [];
         $scope.isLoading = true;

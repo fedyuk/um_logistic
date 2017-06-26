@@ -39,10 +39,14 @@
 	uploadPictureSuccess: "Картинка завантажена",
 	internalErrorCaption: "Внутрішня помилка",
 	profileSettings: "/profilesettings",
-  notifyWindowDelay: 1000,
+    notifyWindowDelay: 1000,
 	notifyWindowDelay: 1000,
 	taskManagerLimitRows: 50,
 	limitTrashCount: 20,
 	limitTrashCountMessage: "Перевищено ліміт елементів в корзині",
-    defaultPageTitle: "Головна"
+	defaultPageTitle: "Головна",
+	phoneMask: "(999) 999-9999",
+	profileIconGetUrl: "/api/u_pictures?id=",
+	tasksDoneMessage: "Задача виконана",
+	newTaskMessage: "Нова задача"
 });

@@ -124,7 +124,7 @@
 	
 	$scope.phoneMask = function () {
 	    jQuery(function ($) {
-	        $("#contactPhone").mask("(999) 999-9999");
+	        $("#contactPhone").mask(moduleConstants.phoneMask);
 	    });
 	}
 

@@ -29,7 +29,7 @@
         CooperationService.updateCooperation($scope.cooperationToEdit)
 		.success(response => {
 		    $scope.isLoading = false;
-		    if (response.Success) {
+		    if (response && response.Success == true) {
 		        $location.path(moduleConstants.myApplicationsPath);
 		    }
 		    else {
@@ -53,7 +53,7 @@
         };
         ApplicationPictureService.createApplicationPicture(request)
 		.success(response => {
-		    if (response.Success) {
+		    if (response && response.Success == true) {
 		        NotificationService.success(moduleConstants.uploadPictureSuccess);
 		    }
 		    else {
@@ -123,7 +123,7 @@
         CooperationService.getCooperation(user, token, id)
 		.success(response => {
 		    $scope.isLoading = false;
-		    if (response.Success) {
+		    if (response && response.Success == true) {
 		        if (response.Result != null) {
 		            $scope.loadWorkTypes(response.Result.WorkType.Id);
 		            $scope.cooperationToEdit.Id = response.Result.Id;
@@ -161,7 +161,7 @@
         let type = false;
         ApplicationPictureService.getApplicationPicturesHtml(id, type)
 		.success(response => {
-		    if (response && response.length > 0) {
+		    if (response && response && response.length > 0) {
 		        for (let i = 0; i < response.length; i++) {
 		            $scope.htmlPicuresContent += response[i];
 		        }

@@ -1,7 +1,7 @@
 ﻿mainModule.controller('TasksController', function ($scope, $log, ClientTaskService, SessionService, moduleConstants, NotificationService, FormHelper) {
 
     //variables
-    $scope.tasks = [];
+    $scope.tasks = new Array();
     $scope.isLoading = false;
     $scope.isPartLoading = false;
     $scope.currentPage = 0;
@@ -20,7 +20,7 @@
         ClientTaskService.getClientTasks(page, count, 'OwnerId==' + userId + ';').success(response => {
             $scope.isLoading = false;
             $scope.isPartLoading = false;
-            if (response.Success) {
+            if (response && response.Success == true) {
                 for (let i = 0; i < response.Result.length; i++) {
                     $scope.tasks.push({
                         id: FormHelper.getFormValue(response.Result[i].Id),

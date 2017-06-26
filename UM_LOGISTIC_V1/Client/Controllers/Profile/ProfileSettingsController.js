@@ -24,13 +24,13 @@
         }
     }
     $scope.getImageUrl = () => {
-        return url = protocol + '://' + host + ':' + port + '/api/u_pictures?id=' + userId;
+        return url = protocol + '://' + host + ':' + port + moduleConstants.profileIconGetUrl + userId;
     }
 
     $scope.getUserInformation = () => {
         AccountService.getUserInfo(userId).success(response => {
             $scope.isLoading = false;
-            if (response.Success == true) {
+            if (response && response.Success == true) {
                 $scope.User.UserName = response.Result.UserName,
                 $scope.User.UserPassword = response.Result.UserPassword,
                 $scope.User.Account.FullName = response.Result.Account.FullName,

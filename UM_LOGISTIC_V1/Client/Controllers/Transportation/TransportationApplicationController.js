@@ -35,7 +35,7 @@
         TransportationService.createTransportation($scope.transportation)
 		.success(response => {
 		    $scope.isLoading = false;
-		    if (response.Success) {
+		    if (response && response.Success == true) {
 		        $scope.loadPicture(response.Id, true);
 		        $location.path(moduleConstants.homePath);
 		    }
@@ -60,7 +60,7 @@
         };
         ApplicationPictureService.createApplicationPicture(request)
 		.success(response => {
-		    if (response.Success) {
+		    if (response && response.Success == true) {
 		    }
 		    else {
 		        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
@@ -96,7 +96,7 @@
 
     $scope.phoneMask = () => {
         jQuery( ($) => {
-            $("#contactPhone").mask("(999) 999-9999");
+            $("#contactPhone").mask(moduleConstants.phoneMask);
         });
     }
 

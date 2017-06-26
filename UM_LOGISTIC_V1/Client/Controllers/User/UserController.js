@@ -15,7 +15,7 @@
 	    AccountService.getAccounts(user, token, page, count).success(response => {
 	        $scope.isLoading = false;
 	        $scope.isPartLoading = false;
-	        if (response.Success) {
+	        if (response && response.Success == true) {
 	            for (let i = 0; i < response.Result.length; i++) {
 	                $scope.users.push({
 	                    id: FormHelper.getFormValue(response.Result[i].Id),
@@ -76,7 +76,7 @@
 	                let token = SessionService.getSessionToken();
 	                AccountService.removeAccount(user, token, id).success(response => {
 	                    $scope.isLoading = false;
-	                    if (response.Success == false) {
+	                    if (response && response.Success == false) {
 	                        NotificationService.error(response.Error != null ? JSON.stringify(response.Error) : moduleConstants.internalErrorCaption);
 	                    } else {
 	                        for (let i = 0; i < $scope.users.length; i++)
