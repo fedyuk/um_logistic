@@ -38,16 +38,9 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             if (isAccessedToResource)
             {
                 var accountInfo = accountService.GetAccount(id);
-                if (user != null)
-                {
-                    ResponseHelper.FillResponse(ref getAccountResponse, true, null, accountInfo);
-                    return Ok(getAccountResponse);
-                }
-                else
-                {
-                    ResponseHelper.FillResponse(ref getAccountResponse, false, null, null);
-                    return Ok(getAccountResponse);
-                }
+                var success = user != null;
+                ResponseHelper.FillResponse(ref getAccountResponse, success, null, success ? accountInfo : null);
+                return Ok(getAccountResponse);
             }
             else
             {
@@ -82,16 +75,8 @@ namespace UM_LOGISTIC_V1.Controllers.Account
                     Street = request.Street
                 };
                 var isCreate = accountService.CreateAccount(accountToCreate);
-                if (isCreate)
-                {
-                    ResponseHelper.FillResponse(ref createAccountResponse, true, null, null);
-                    return Ok(createAccountResponse);
-                }
-                else
-                {
-                    ResponseHelper.FillResponse(ref createAccountResponse, false, null, null);
-                    return Ok(createAccountResponse);
-                }
+                ResponseHelper.FillResponse(ref createAccountResponse, isCreate, null, null);
+                return Ok(createAccountResponse);
             }
             else
             {
@@ -127,16 +112,9 @@ namespace UM_LOGISTIC_V1.Controllers.Account
                     Street = request.Street
                 };
                 var isUpdate = accountService.UpdateAccount(accountToUpdate);
-                if (isUpdate)
-                {
-                    ResponseHelper.FillResponse(ref updateAccountResponse, true, null, null);
-                    return Ok(updateAccountResponse);
-                }
-                else
-                {
-                    ResponseHelper.FillResponse(ref updateAccountResponse, false, null, null);
-                    return Ok(updateAccountResponse);
-                }
+                ResponseHelper.FillResponse(ref updateAccountResponse, isUpdate, null, null);
+                return Ok(updateAccountResponse);
+                
             }
             else
             {
@@ -188,16 +166,9 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             if (isAccessedToResource)
             {
                 var users = accountService.GetAccounts(page, count);
-                if (users != null)
-                {
-                    ResponseHelper.FillResponse(ref getAccountsByPageAndCountResponse, true, null, users);
-                    return Ok(getAccountsByPageAndCountResponse);
-                }
-                else
-                {
-                    ResponseHelper.FillResponse(ref getAccountsByPageAndCountResponse, true, null, users);
-                    return Ok(getAccountsByPageAndCountResponse);
-                }
+                var success = users != null;
+                ResponseHelper.FillResponse(ref getAccountsByPageAndCountResponse, success, null, users);
+                return Ok(getAccountsByPageAndCountResponse);
             }
             else
             {
