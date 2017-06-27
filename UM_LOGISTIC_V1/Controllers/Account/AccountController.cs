@@ -30,9 +30,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             var IsValidToken = TokenService.ValidateToken(user, token);
             if (!IsValidToken)
             {
-                getAccountResponse.Success = false;
-                getAccountResponse.Error = TextConstants.TokenNotValid;
-                getAccountResponse.Result = null;
+                ResponseHelper.FillResponse(ref getAccountResponse, false, TextConstants.TokenNotValid, null);
                 return Ok(getAccountResponse);
             }
             var tokenRole = TokenService.GetRole(user, token);
@@ -42,22 +40,18 @@ namespace UM_LOGISTIC_V1.Controllers.Account
                 var accountInfo = accountService.GetAccount(id);
                 if (user != null)
                 {
-                    getAccountResponse.Success = true;
-                    getAccountResponse.Result = accountInfo;
+                    ResponseHelper.FillResponse(ref getAccountResponse, true, null, accountInfo);
                     return Ok(getAccountResponse);
                 }
                 else
                 {
-                    getAccountResponse.Success = false;
-                    getAccountResponse.Result = null;
+                    ResponseHelper.FillResponse(ref getAccountResponse, false, null, null);
                     return Ok(getAccountResponse);
                 }
             }
             else
             {
-                getAccountResponse.Success = false;
-                getAccountResponse.Error = TextConstants.AccessDenied;
-                getAccountResponse.Result = null;
+                ResponseHelper.FillResponse(ref getAccountResponse, false, TextConstants.AccessDenied, null);
                 return Ok(getAccountResponse);
             }
         }
@@ -70,9 +64,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             var isValidToken = TokenService.ValidateToken(request.user, request.token);
             if (!isValidToken)
             {
-                createAccountResponse.Success = false;
-                createAccountResponse.Error = TextConstants.TokenNotValid;
-                createAccountResponse.Result = null;
+                ResponseHelper.FillResponse(ref createAccountResponse, false, TextConstants.TokenNotValid, null);
                 return Ok(createAccountResponse);
             }
             var tokenRole = TokenService.GetRole(request.user, request.token);
@@ -92,22 +84,18 @@ namespace UM_LOGISTIC_V1.Controllers.Account
                 var isCreate = accountService.CreateAccount(accountToCreate);
                 if (isCreate)
                 {
-                    createAccountResponse.Success = true;
-                    createAccountResponse.Result = null;
+                    ResponseHelper.FillResponse(ref createAccountResponse, true, null, null);
                     return Ok(createAccountResponse);
                 }
                 else
                 {
-                    createAccountResponse.Success = false;
-                    createAccountResponse.Result = null;
+                    ResponseHelper.FillResponse(ref createAccountResponse, false, null, null);
                     return Ok(createAccountResponse);
                 }
             }
             else
             {
-                createAccountResponse.Success = false;
-                createAccountResponse.Error = TextConstants.AccessDenied;
-                createAccountResponse.Result = null;
+                ResponseHelper.FillResponse(ref createAccountResponse, false, TextConstants.AccessDenied, null);
                 return Ok(createAccountResponse);
             }
         }
@@ -120,9 +108,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             var isValidToken = TokenService.ValidateToken(request.user, request.token);
             if (!isValidToken)
             {
-                updateAccountResponse.Success = false;
-                updateAccountResponse.Error = TextConstants.TokenNotValid;
-                updateAccountResponse.Result = null;
+                ResponseHelper.FillResponse(ref updateAccountResponse, false, TextConstants.TokenNotValid, null);
                 return Ok(updateAccountResponse);
             }
             var tokenRole = TokenService.GetRole(request.user, request.token);
@@ -143,22 +129,18 @@ namespace UM_LOGISTIC_V1.Controllers.Account
                 var isUpdate = accountService.UpdateAccount(accountToUpdate);
                 if (isUpdate)
                 {
-                    updateAccountResponse.Success = true;
-                    updateAccountResponse.Result = null;
+                    ResponseHelper.FillResponse(ref updateAccountResponse, true, null, null);
                     return Ok(updateAccountResponse);
                 }
                 else
                 {
-                    updateAccountResponse.Success = false;
-                    updateAccountResponse.Result = null;
+                    ResponseHelper.FillResponse(ref updateAccountResponse, false, null, null);
                     return Ok(updateAccountResponse);
                 }
             }
             else
             {
-                updateAccountResponse.Success = false;
-                updateAccountResponse.Error = TextConstants.AccessDenied;
-                updateAccountResponse.Result = null;
+                ResponseHelper.FillResponse(ref updateAccountResponse, false, TextConstants.AccessDenied, null);
                 return Ok(updateAccountResponse);
             }
         }
@@ -171,9 +153,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             var isValidToken = TokenService.ValidateToken(request.user, request.token);
             if (!isValidToken)
             {
-                deleteAccountResponse.Success = false;
-                deleteAccountResponse.Error = TextConstants.TokenNotValid;
-                deleteAccountResponse.Result = null;
+                ResponseHelper.FillResponse(ref deleteAccountResponse, false, TextConstants.TokenNotValid, null);
                 return Ok(deleteAccountResponse);
             }
             var tokenRole = TokenService.GetRole(request.user, request.token);
@@ -182,24 +162,12 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             {
                 var accountIdToDelete = request.Id;
                 var isDeleted = accountService.RemoveAccount(accountIdToDelete);
-                if (isDeleted)
-                {
-                    deleteAccountResponse.Success = true;
-                    deleteAccountResponse.Result = null;
-                    return Ok(deleteAccountResponse);
-                }
-                else
-                {
-                    deleteAccountResponse.Success = false;
-                    deleteAccountResponse.Result = null;
-                    return Ok(deleteAccountResponse);
-                }
+                ResponseHelper.FillResponse(ref deleteAccountResponse, isDeleted ? true : false, null, null);
+                return Ok(deleteAccountResponse);
             }
             else
             {
-                deleteAccountResponse.Success = false;
-                deleteAccountResponse.Error = TextConstants.AccessDenied;
-                deleteAccountResponse.Result = null;
+                ResponseHelper.FillResponse(ref deleteAccountResponse, false, TextConstants.AccessDenied, null);
                 return Ok(deleteAccountResponse);
             }
         }
@@ -212,9 +180,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             var isValidToken = TokenService.ValidateToken(user, token);
             if (!isValidToken)
             {
-                getAccountsByPageAndCountResponse.Success = false;
-                getAccountsByPageAndCountResponse.Error = TextConstants.TokenNotValid;
-                getAccountsByPageAndCountResponse.Result = null;
+                ResponseHelper.FillResponse(ref getAccountsByPageAndCountResponse, false, TextConstants.TokenNotValid, null);
                 return Ok(getAccountsByPageAndCountResponse);
             }
             var tokenRole = TokenService.GetRole(user, token);
@@ -224,22 +190,18 @@ namespace UM_LOGISTIC_V1.Controllers.Account
                 var users = accountService.GetAccounts(page, count);
                 if (users != null)
                 {
-                    getAccountsByPageAndCountResponse.Success = true;
-                    getAccountsByPageAndCountResponse.Result = users;
+                    ResponseHelper.FillResponse(ref getAccountsByPageAndCountResponse, true, null, users);
                     return Ok(getAccountsByPageAndCountResponse);
                 }
                 else
                 {
-                    getAccountsByPageAndCountResponse.Success = false;
-                    getAccountsByPageAndCountResponse.Result = null;
+                    ResponseHelper.FillResponse(ref getAccountsByPageAndCountResponse, true, null, users);
                     return Ok(getAccountsByPageAndCountResponse);
                 }
             }
             else
             {
-                getAccountsByPageAndCountResponse.Success = false;
-                getAccountsByPageAndCountResponse.Error = TextConstants.AccessDenied;
-                getAccountsByPageAndCountResponse.Result = null;
+                ResponseHelper.FillResponse(ref getAccountsByPageAndCountResponse, false, TextConstants.AccessDenied, null);
                 return Ok(getAccountsByPageAndCountResponse);
             }
         }
@@ -252,13 +214,11 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             var isEmailExist = accountService.IsEmailExist(request.Login);
             if(isEmailExist)
             {
-                response.Success = false;
-                response.Error = TextConstants.LoginAlreadyExists;
+                ResponseHelper.FillResponse(ref response, false, TextConstants.LoginAlreadyExists, null, null);
                 return Ok(response);
             }
-            response.Result = accountService.RegisterAccount(request);
-            response.Success = response.Result != null ? true : false;
-            response.Token = TokenService.GenerateToken(request.Login, response.Result != null ? response.Result.RoleId : 0);
+            var token = TokenService.GenerateToken(request.Login, response.Result != null ? response.Result.RoleId : 0);
+            ResponseHelper.FillResponse(ref response, response.Result != null ? true : false, null, accountService.RegisterAccount(request), token);
             return Ok(response);
         }
 
@@ -270,9 +230,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             var isValidToken = TokenService.ValidateToken(request.user, request.token);
             if (!isValidToken)
             {
-                response.Success = false;
-                response.Error = TextConstants.TokenNotValid;
-                response.Result = null;
+                ResponseHelper.FillResponse(ref response, false, TextConstants.TokenNotValid, null, null);
                 return Ok(response);
             }
             var tokenRole = TokenService.GetRole(request.user, request.token);
@@ -280,24 +238,12 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             if (isAccessedToResource)
             {
                 var user = accountService.AddAccountUser(request);
-                if (user != null)
-                {
-                    response.Success = true;
-                    response.Result = user;
-                    return Ok(response);
-                }
-                else
-                {
-                    response.Success = false;
-                    response.Result = null;
-                    return Ok(response);
-                }
+                ResponseHelper.FillResponse(ref response, user != null ? true : false, null, user != null ? user : null, null);
+                return Ok(response);
             }
             else
             {
-                response.Success = false;
-                response.Error = TextConstants.AccessDenied;
-                response.Result = null;
+                ResponseHelper.FillResponse(ref response, false, TextConstants.AccessDenied, null, null);
                 return Ok(response);
             }
         }
@@ -319,8 +265,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
             var user = userService.GetUserInfo(id);
             if (user != null)
             {
-                response.Success = true;
-                response.Result = user;
+                ResponseHelper.FillResponse(ref response, true, null, user);
                 return Ok(response);
             }
             return NotFound();

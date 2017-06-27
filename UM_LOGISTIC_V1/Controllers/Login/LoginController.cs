@@ -30,16 +30,13 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             var user = userService.AuthenticateUser(userToAuthenticate);
             if(user != null)
             {
-                authenticateUserResponse.Success = true;
-                authenticateUserResponse.Token = TokenService.GenerateToken(request.UserName, user.RoleId);
-                authenticateUserResponse.Result = user;
+                var token = TokenService.GenerateToken(request.UserName, user.RoleId);
+                ResponseHelper.FillResponse(ref authenticateUserResponse, true, null, user, token);
                 return Ok(authenticateUserResponse);
             }
             else
             {
-                authenticateUserResponse.Success = false;
-                authenticateUserResponse.Error = TextConstants.InvalidLoginOrPassword;
-                authenticateUserResponse.Result = null;
+                ResponseHelper.FillResponse(ref authenticateUserResponse, false, TextConstants.InvalidLoginOrPassword, null, null);
                 return Ok(authenticateUserResponse);
             }
         }
@@ -52,9 +49,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             var IsValidToken = TokenService.ValidateToken(user, token);
             if(!IsValidToken)
             {
-                getUserResponse.Success = false;
-                getUserResponse.Error = TextConstants.TokenNotValid;
-                getUserResponse.Result = null;
+                ResponseHelper.FillResponse(ref getUserResponse, false, TextConstants.TokenNotValid, null);
                 return Ok(getUserResponse);
             }
             var tokenRole = TokenService.GetRole(user, token);
@@ -64,22 +59,20 @@ namespace UM_LOGISTIC_V1.Controllers.Login
                 var userInfo = userService.GetUser(id);
                 if (user != null)
                 {
+                    ResponseHelper.FillResponse(ref getUserResponse, true, null, userInfo);
                     getUserResponse.Success = true;
                     getUserResponse.Result = userInfo;
                     return Ok(getUserResponse);
                 }
                 else
                 {
-                    getUserResponse.Success = false;
-                    getUserResponse.Result = null;
+                    ResponseHelper.FillResponse(ref getUserResponse, false, null, null);
                     return Ok(getUserResponse);
                 }
             }
             else
             {
-                getUserResponse.Success = false;
-                getUserResponse.Error = TextConstants.AccessDenied;
-                getUserResponse.Result = null;
+                ResponseHelper.FillResponse(ref getUserResponse, false, TextConstants.AccessDenied, null);
                 return Ok(getUserResponse);
             }
         }
@@ -92,9 +85,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             var isValidToken = TokenService.ValidateToken(request.user, request.token);
             if(!isValidToken)
             {
-                createUserResponse.Success = false;
-                createUserResponse.Error = TextConstants.TokenNotValid;
-                createUserResponse.Result = null;
+                ResponseHelper.FillResponse(ref createUserResponse, false, TextConstants.TokenNotValid, null);
                 return Ok(createUserResponse);
             }
             var tokenRole = TokenService.GetRole(request.user, request.token);
@@ -109,24 +100,12 @@ namespace UM_LOGISTIC_V1.Controllers.Login
                     RoleId = request.RoleId
                 };
                 var isCreate = userService.CreateUser(userToCreate);
-                if (isCreate)
-                {
-                    createUserResponse.Success = true;
-                    createUserResponse.Result = null;
-                    return Ok(createUserResponse);
-                }
-                else
-                {
-                    createUserResponse.Success = false;
-                    createUserResponse.Result = null;
-                    return Ok(createUserResponse);
-                }
+                ResponseHelper.FillResponse(ref createUserResponse, isCreate, null, null);
+                return Ok(createUserResponse);
             }
             else
             {
-                createUserResponse.Success = false;
-                createUserResponse.Error = TextConstants.AccessDenied;
-                createUserResponse.Result = null;
+                ResponseHelper.FillResponse(ref createUserResponse, false, TextConstants.AccessDenied, null);
                 return Ok(createUserResponse);
             }
         }
@@ -139,9 +118,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             var isValidToken = TokenService.ValidateToken(request.user, request.token);
             if (!isValidToken)
             {
-                updateUserResponse.Success = false;
-                updateUserResponse.Error = TextConstants.TokenNotValid;
-                updateUserResponse.Result = null;
+                ResponseHelper.FillResponse(ref updateUserResponse, false, TextConstants.TokenNotValid, null);
                 return Ok(updateUserResponse);
             }
             var tokenRole = TokenService.GetRole(request.user, request.token);
@@ -157,24 +134,12 @@ namespace UM_LOGISTIC_V1.Controllers.Login
                     RoleId = request.RoleId
                 };
                 var isUpdated = userService.UpdateUser(userToUpdate);
-                if (isUpdated)
-                {
-                    updateUserResponse.Success = true;
-                    updateUserResponse.Result = null;
-                    return Ok(updateUserResponse);
-                }
-                else
-                {
-                    updateUserResponse.Success = false;
-                    updateUserResponse.Result = null;
-                    return Ok(updateUserResponse);
-                }
+                ResponseHelper.FillResponse(ref updateUserResponse, isUpdated, null, null);
+                return Ok(updateUserResponse);
             }
             else
             {
-                updateUserResponse.Success = false;
-                updateUserResponse.Error = TextConstants.AccessDenied;
-                updateUserResponse.Result = null;
+                ResponseHelper.FillResponse(ref updateUserResponse, false, TextConstants.AccessDenied, null);
                 return Ok(updateUserResponse);
             }
         }
@@ -187,9 +152,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             var isValidToken = TokenService.ValidateToken(request.user, request.token);
             if (!isValidToken)
             {
-                deleteUserResponse.Success = false;
-                deleteUserResponse.Error = TextConstants.TokenNotValid;
-                deleteUserResponse.Result = null;
+                ResponseHelper.FillResponse(ref deleteUserResponse, false, TextConstants.TokenNotValid, null);
                 return Ok(deleteUserResponse);
             }
             var tokenRole = TokenService.GetRole(request.user, request.token);
@@ -198,24 +161,12 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             {
                 var userIdToDelete = request.Id;
                 var isDeleted = userService.RemoveUser(userIdToDelete);
-                if (isDeleted)
-                {
-                    deleteUserResponse.Success = true;
-                    deleteUserResponse.Result = null;
-                    return Ok(deleteUserResponse);
-                }
-                else
-                {
-                    deleteUserResponse.Success = false;
-                    deleteUserResponse.Result = null;
-                    return Ok(deleteUserResponse);
-                }
+                ResponseHelper.FillResponse(ref deleteUserResponse, isDeleted, null, null);
+                return Ok(deleteUserResponse);
             }
             else
             {
-                deleteUserResponse.Success = false;
-                deleteUserResponse.Error = TextConstants.AccessDenied;
-                deleteUserResponse.Result = null;
+                ResponseHelper.FillResponse(ref deleteUserResponse, false, TextConstants.AccessDenied, null);
                 return Ok(deleteUserResponse);
             }
         }
@@ -228,9 +179,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             var isValidToken = TokenService.ValidateToken(user, token);
             if (!isValidToken)
             {
-                getUsersByPageAndCountResponse.Success = false;
-                getUsersByPageAndCountResponse.Error = TextConstants.TokenNotValid;
-                getUsersByPageAndCountResponse.Result = null;
+                ResponseHelper.FillResponse(ref getUsersByPageAndCountResponse, false, TextConstants.TokenNotValid, null);
                 return Ok(getUsersByPageAndCountResponse);
             }
             var tokenRole = TokenService.GetRole(user, token);
@@ -238,24 +187,13 @@ namespace UM_LOGISTIC_V1.Controllers.Login
             if (isAccessedToResource)
             {
                 var users = userService.GetUsers(page, count);
-                if (users != null)
-                {
-                    getUsersByPageAndCountResponse.Success = true;
-                    getUsersByPageAndCountResponse.Result = users;
-                    return Ok(getUsersByPageAndCountResponse);
-                }
-                else
-                {
-                    getUsersByPageAndCountResponse.Success = false;
-                    getUsersByPageAndCountResponse.Result = null;
-                    return Ok(getUsersByPageAndCountResponse);
-                }
+                var success = users != null;
+                ResponseHelper.FillResponse(ref getUsersByPageAndCountResponse, success, null, users);
+                return Ok(getUsersByPageAndCountResponse);
             }
             else
             {
-                getUsersByPageAndCountResponse.Success = false;
-                getUsersByPageAndCountResponse.Error = TextConstants.AccessDenied;
-                getUsersByPageAndCountResponse.Result = null;
+                ResponseHelper.FillResponse(ref getUsersByPageAndCountResponse, false, TextConstants.AccessDenied, null);
                 return Ok(getUsersByPageAndCountResponse);
             }
         }

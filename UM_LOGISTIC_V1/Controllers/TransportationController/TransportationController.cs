@@ -26,18 +26,9 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
         {
             var getTransportationApplicationResponse = new GetTransportationApplicationResponse();
             var applicationInfo = applicationService.GetTransportationApplication(id);
-            if (user != null)
-            {
-                getTransportationApplicationResponse.Success = true;
-                getTransportationApplicationResponse.Result = applicationInfo;
-                return Ok(getTransportationApplicationResponse);
-            }
-            else
-            {
-                getTransportationApplicationResponse.Success = false;
-                getTransportationApplicationResponse.Result = null;
-                return Ok(getTransportationApplicationResponse);
-            }
+            var success = user != null;
+            ResponseHelper.FillResponse(ref getTransportationApplicationResponse, success, null, success ? applicationInfo : null);
+            return Ok(getTransportationApplicationResponse);
         }
 
         [Route("api/transportation/create")]
@@ -61,18 +52,9 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
                 CreatedBy = request.CreatedBy
             };
             var id = applicationService.CreateTransportationApplication(applicationToCreate);
-            if (id != null)
-            {
-                createTransportationApplicationResponse.Success = true;
-                createTransportationApplicationResponse.Id = id;
-                return Ok(createTransportationApplicationResponse);
-            }
-            else
-            {
-                createTransportationApplicationResponse.Success = false;
-                createTransportationApplicationResponse.Id = null;
-                return Ok(createTransportationApplicationResponse);
-            }
+            var success = id != null;
+            ResponseHelper.FillResponse(ref createTransportationApplicationResponse, success, null, success ? id : null);
+            return Ok(createTransportationApplicationResponse);
         }
 
         [Route("api/transportation/update")]
@@ -96,18 +78,8 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
                 ShipmentWidth = request.ShipmentWidth
             };
             var isUpdate = applicationService.UpdateTransportationApplication(applicationToUpdate);
-            if (isUpdate)
-            {
-                updateTransportationApplicationResponse.Success = true;
-                updateTransportationApplicationResponse.Result = null;
-                return Ok(updateTransportationApplicationResponse);
-            }
-            else
-            {
-                updateTransportationApplicationResponse.Success = false;
-                updateTransportationApplicationResponse.Result = null;
-                return Ok(updateTransportationApplicationResponse);
-            }
+            ResponseHelper.FillResponse(ref updateTransportationApplicationResponse, isUpdate, null, null);
+            return Ok(updateTransportationApplicationResponse);
         }
 
         [Route("api/transportation/delete")]
@@ -117,18 +89,8 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
             var deleteTransportationApplicationResponse = new DeleteTransportationApplicationResponse();
             var applicationIdToDelete = request.Id;
             var isDeleted = applicationService.RemoveTransportationApplication(applicationIdToDelete);
-            if (isDeleted)
-            {
-                deleteTransportationApplicationResponse.Success = true;
-                deleteTransportationApplicationResponse.Result = null;
-                return Ok(deleteTransportationApplicationResponse);
-            }
-            else
-            {
-                deleteTransportationApplicationResponse.Success = false;
-                deleteTransportationApplicationResponse.Result = null;
-                return Ok(deleteTransportationApplicationResponse);
-            }
+            ResponseHelper.FillResponse(ref deleteTransportationApplicationResponse, isDeleted, null, null);
+            return Ok(deleteTransportationApplicationResponse);
         }
 
         [Route("api/transportations")]
@@ -137,18 +99,9 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
         {
             var getTransportationApplicationsByPageAndCountResponse = new GetTransportationApplicationsByPageAndCountResponse();
             var applications = applicationService.GetTransportationApplications(page, count);
-            if (applications != null)
-            {
-                getTransportationApplicationsByPageAndCountResponse.Success = true;
-                getTransportationApplicationsByPageAndCountResponse.Result = applications;
-                return Ok(getTransportationApplicationsByPageAndCountResponse);
-            }
-            else
-            {
-                getTransportationApplicationsByPageAndCountResponse.Success = false;
-                getTransportationApplicationsByPageAndCountResponse.Result = null;
-                return Ok(getTransportationApplicationsByPageAndCountResponse);
-            }
+            var success = applications != null;
+            ResponseHelper.FillResponse(ref getTransportationApplicationsByPageAndCountResponse, success, null, applications);
+            return Ok(getTransportationApplicationsByPageAndCountResponse);
         }
 
         [Route("api/trans_not_filtered")]
@@ -157,18 +110,9 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
         {
             var getTransportationApplicationsByPageAndCountResponse = new GetTransportationApplicationsByPageAndCountResponse();
             var applications = applicationService.GetNotFilteredTransportationApplications(page, count);
-            if (applications != null)
-            {
-                getTransportationApplicationsByPageAndCountResponse.Success = true;
-                getTransportationApplicationsByPageAndCountResponse.Result = applications;
-                return Ok(getTransportationApplicationsByPageAndCountResponse);
-            }
-            else
-            {
-                getTransportationApplicationsByPageAndCountResponse.Success = false;
-                getTransportationApplicationsByPageAndCountResponse.Result = null;
-                return Ok(getTransportationApplicationsByPageAndCountResponse);
-            }
+            var success = applications != null;
+            ResponseHelper.FillResponse(ref getTransportationApplicationsByPageAndCountResponse, success, null, applications);
+            return Ok(getTransportationApplicationsByPageAndCountResponse);
         }
 
         [Route("api/t_applications")]

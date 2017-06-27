@@ -21,14 +21,7 @@ namespace UM_LOGISTIC_V1.Controllers.Application
         {
             var response = new CreateCooperationApplicationResponse();
             var applicationId = service.AcceptApplication(request.Type, request.Id);
-            if (applicationId == 0L)
-            {
-                response.Success = false;
-                response.Id = applicationId;
-                return Ok(response);
-            }
-            response.Success = true;
-            response.Id = applicationId;
+            ResponseHelper.FillResponse(ref response, applicationId == 0 ? false : true, null, applicationId);
             return Ok(response);
         }
 
@@ -38,14 +31,7 @@ namespace UM_LOGISTIC_V1.Controllers.Application
         {
             var response = new CreateCooperationApplicationResponse();
             var isDeclined = service.DeclineApplication(request.Type, request.Id);
-            if (!isDeclined)
-            {
-                response.Success = false;
-                response.Id = 0;
-                return Ok(response);
-            }
-            response.Success = true;
-            response.Id = 0;
+            ResponseHelper.FillResponse(ref response, !isDeclined ? false : true, null, 0);
             return Ok(response);
         }
 
