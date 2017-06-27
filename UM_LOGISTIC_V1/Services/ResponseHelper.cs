@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using UM_LOGISTIC_V1.Models.Account;
+using UM_LOGISTIC_V1.Models.CooperationApplication;
 using UM_LOGISTIC_V1.Models.TransportationApplication;
 using UM_LOGISTIC_V1.Models.User;
 using UM_LOGISTIC_V1.Response.Account;
@@ -135,6 +136,41 @@ namespace UM_LOGISTIC_V1.Services
         }
 
         public static void FillResponse(ref GetTransportationApplicationsByPageAndCountResponse response, bool success, string error, List<TransportationApplication> applications)
+        {
+            response.Success = success;
+            response.Error = error;
+            response.Result = applications;
+        }
+
+        public static void FillResponse(ref GetCooperationApplicationResponse response, bool success, string error, CooperationApplication application)
+        {
+            response.Success = success;
+            response.Error = error;
+            response.Result = application;
+        }
+
+        public static void FillResponse(ref CreateCooperationApplicationResponse response, bool success, string error, long? id)
+        {
+            response.Success = success;
+            response.Error = error;
+            response.Id = id;
+        }
+
+        public static void FillResponse(ref UpdateCooperationApplicationResponse response, bool success, string error, CooperationApplication application)
+        {
+            response.Success = success;
+            response.Error = error;
+            response.Result = application;
+        }
+
+        public static void FillResponse(ref DeleteCooperationApplicationResponse response, bool success, string error, CooperationApplication application)
+        {
+            response.Success = success;
+            response.Error = error;
+            response.Result = application;
+        }
+
+        public static void FillResponse(ref GetCooperationApplicationsByPageAndCountResponse response, bool success, string error, List<CooperationApplication> applications)
         {
             response.Success = success;
             response.Error = error;

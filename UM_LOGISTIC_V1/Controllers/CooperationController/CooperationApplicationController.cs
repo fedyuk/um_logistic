@@ -26,18 +26,9 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
             var getCooperationApplicationResponse = new GetCooperationApplicationResponse();
 
             var applicationInfo = applicationService.GetCooperationApplication(id);
-            if (user != null)
-            {
-                getCooperationApplicationResponse.Success = true;
-                getCooperationApplicationResponse.Result = applicationInfo;
-                return Ok(getCooperationApplicationResponse);
-            }
-            else
-            {
-                getCooperationApplicationResponse.Success = false;
-                getCooperationApplicationResponse.Result = null;
-                return Ok(getCooperationApplicationResponse);
-            }
+            var success = user != null;
+            ResponseHelper.FillResponse(ref getCooperationApplicationResponse, success, null, success ? applicationInfo : null);
+            return Ok(getCooperationApplicationResponse);
         }
 
         [Route("api/cooperation/create")]
@@ -66,18 +57,10 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
                 CreatedBy = request.CreatedBy
             };
             var id = applicationService.CreateCooperationApplication(applicationToCreate);
-            if (id != null)
-            {
-                createCooperationApplicationResponse.Success = true;
-                createCooperationApplicationResponse.Id = id;
-                return Ok(createCooperationApplicationResponse);
-            }
-            else
-            {
-                createCooperationApplicationResponse.Success = false;
-                createCooperationApplicationResponse.Id = null;
-                return Ok(createCooperationApplicationResponse);
-            }
+            var success = id != null;
+            ResponseHelper.FillResponse(ref createCooperationApplicationResponse, success, null, success ? id : null);
+            return Ok(createCooperationApplicationResponse);
+
         }
 
         [Route("api/cooperation/update")]
@@ -106,18 +89,8 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
                 DeliveryCost = request.DeliveryCost
             };
             var isUpdate = applicationService.UpdateCooperationApplication(applicationToUpdate);
-            if (isUpdate)
-            {
-                updateCooperationApplicationResponse.Success = true;
-                updateCooperationApplicationResponse.Result = null;
-                return Ok(updateCooperationApplicationResponse);
-            }
-            else
-            {
-                updateCooperationApplicationResponse.Success = false;
-                updateCooperationApplicationResponse.Result = null;
-                return Ok(updateCooperationApplicationResponse);
-            }
+            ResponseHelper.FillResponse(ref updateCooperationApplicationResponse, isUpdate, null, null);
+            return Ok(updateCooperationApplicationResponse);
         }
 
         [Route("api/cooperation/delete")]
@@ -127,18 +100,8 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
             var deleteCooperationApplicationResponse = new DeleteCooperationApplicationResponse();
             var applicationIdToDelete = request.Id;
             var isDeleted = applicationService.RemoveCooperationApplication(applicationIdToDelete);
-            if (isDeleted)
-            {
-                deleteCooperationApplicationResponse.Success = true;
-                deleteCooperationApplicationResponse.Result = null;
-                return Ok(deleteCooperationApplicationResponse);
-            }
-            else
-            {
-                deleteCooperationApplicationResponse.Success = false;
-                deleteCooperationApplicationResponse.Result = null;
-                return Ok(deleteCooperationApplicationResponse);
-            }
+            ResponseHelper.FillResponse(ref deleteCooperationApplicationResponse, isDeleted, null, null);
+            return Ok(deleteCooperationApplicationResponse);
         }
 
         [Route("api/cooperations")]
@@ -147,18 +110,9 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
         {
             var getCooperationApplicationsByPageAndCountResponse = new GetCooperationApplicationsByPageAndCountResponse();
             var applications = applicationService.GetCooperationApplications(page, count);
-            if (applications != null)
-            {
-                getCooperationApplicationsByPageAndCountResponse.Success = true;
-                getCooperationApplicationsByPageAndCountResponse.Result = applications;
-                return Ok(getCooperationApplicationsByPageAndCountResponse);
-            }
-            else
-            {
-                getCooperationApplicationsByPageAndCountResponse.Success = false;
-                getCooperationApplicationsByPageAndCountResponse.Result = null;
-                return Ok(getCooperationApplicationsByPageAndCountResponse);
-            }
+            var success = applications != null;
+            ResponseHelper.FillResponse(ref getCooperationApplicationsByPageAndCountResponse, success, null, applications);
+            return Ok(getCooperationApplicationsByPageAndCountResponse);
         }
 
         [Route("api/coops_not_filtered")]
@@ -167,18 +121,9 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
         {
             var getCooperationApplicationsByPageAndCountResponse = new GetCooperationApplicationsByPageAndCountResponse();
             var applications = applicationService.GetNotFilteredCooperationApplications(page, count);
-            if (applications != null)
-            {
-                getCooperationApplicationsByPageAndCountResponse.Success = true;
-                getCooperationApplicationsByPageAndCountResponse.Result = applications;
-                return Ok(getCooperationApplicationsByPageAndCountResponse);
-            }
-            else
-            {
-                getCooperationApplicationsByPageAndCountResponse.Success = false;
-                getCooperationApplicationsByPageAndCountResponse.Result = null;
-                return Ok(getCooperationApplicationsByPageAndCountResponse);
-            }
+            var success = applications != null;
+            ResponseHelper.FillResponse(ref getCooperationApplicationsByPageAndCountResponse, success, null, applications);
+            return Ok(getCooperationApplicationsByPageAndCountResponse);
         }
 
         [Route("api/appworktype")]
