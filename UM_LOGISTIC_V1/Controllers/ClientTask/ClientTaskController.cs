@@ -20,7 +20,7 @@ namespace UM_LOGISTIC_V1.Controllers.ClientTask
 
         [Route("api/tasks/call_feedback")]
         [HttpPost]
-        public IHttpActionResult CreateCallFeedback([FromBody]CallFeedbackRequest request)
+        public virtual IHttpActionResult CreateCallFeedback([FromBody]CallFeedbackRequest request)
         {
             var response = new BaseResponse();
             var isCreated = service.CreateCallFeedback(request);
@@ -30,7 +30,7 @@ namespace UM_LOGISTIC_V1.Controllers.ClientTask
 
         [Route("api/tasks")]
         [HttpGet]
-        public IHttpActionResult GetClientTasksByPageAndCount(string filter, int page, int count)
+        public virtual IHttpActionResult GetClientTasksByPageAndCount(string filter, int page, int count)
         {
 			filter = WebUtility.UrlDecode(filter);
             var response = new GetClientTasksResponse();
@@ -51,7 +51,7 @@ namespace UM_LOGISTIC_V1.Controllers.ClientTask
 
         [Route("api/tasks/count")]
         [HttpGet]
-        public IHttpActionResult GetClientTasksCount(string filter)
+        public virtual IHttpActionResult GetClientTasksCount(string filter)
         {
 			filter = WebUtility.UrlDecode(filter);
             var response = new GetClientTasksCountResponse();
@@ -69,7 +69,7 @@ namespace UM_LOGISTIC_V1.Controllers.ClientTask
         }
         [Route("api/tasks/accept")]
         [HttpPost]
-        public IHttpActionResult AcceptTask([FromBody] AcceptTaskRequest request)
+        public virtual IHttpActionResult AcceptTask([FromBody] AcceptTaskRequest request)
         {
             var response = new BaseResponse();
             response.Success = service.AcceptTask(request.Id);
@@ -78,7 +78,7 @@ namespace UM_LOGISTIC_V1.Controllers.ClientTask
 
         [Route("api/tasks/app_task")]
         [HttpPost]
-        public IHttpActionResult CreateApplicationTask([FromBody]ApplicationTaskRequest request)
+        public virtual IHttpActionResult CreateApplicationTask([FromBody]ApplicationTaskRequest request)
         {
             var response = new BaseResponse();
             var isCreated = service.CreateApplicationTask(request);

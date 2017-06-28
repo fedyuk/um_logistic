@@ -24,7 +24,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
 
         [Route("api/account")]
         [HttpGet]
-        public IHttpActionResult GetAccount(long id, string token, string user)
+        public virtual IHttpActionResult GetAccount(long id, string token, string user)
         {
             var getAccountResponse = new GetAccountResponse();
             var IsValidToken = TokenService.ValidateToken(user, token);
@@ -51,7 +51,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
 
         [Route("api/account/create")]
         [HttpPost]
-        public IHttpActionResult CreateAccount([FromBody]CreateAccountRequest request)
+        public virtual IHttpActionResult CreateAccount([FromBody]CreateAccountRequest request)
         {
             var createAccountResponse = new CreateAccountResponse();
             var isValidToken = TokenService.ValidateToken(request.user, request.token);
@@ -87,7 +87,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
 
         [Route("api/account/update")]
         [HttpPost]
-        public IHttpActionResult UpdateAccount([FromBody]UpdateAccountRequest request)
+        public virtual IHttpActionResult UpdateAccount([FromBody]UpdateAccountRequest request)
         {
             var updateAccountResponse = new UpdateAccountResponse();
             var isValidToken = TokenService.ValidateToken(request.user, request.token);
@@ -125,7 +125,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
 
         [Route("api/account/delete")]
         [HttpPost]
-        public IHttpActionResult RemoveAccount([FromBody]RemoveAccountRequest request)
+        public virtual IHttpActionResult RemoveAccount([FromBody]RemoveAccountRequest request)
         {
             var deleteAccountResponse = new DeleteAccountResponse();
             var isValidToken = TokenService.ValidateToken(request.user, request.token);
@@ -152,7 +152,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
 
         [Route("api/accounts")]
         [HttpGet]
-        public IHttpActionResult GetAccountsByPageAndCount(int page, int count, string token, string user)
+        public virtual IHttpActionResult GetAccountsByPageAndCount(int page, int count, string token, string user)
         {
             var getAccountsByPageAndCountResponse = new GetAccountsByPageAndCountResponse();
             var isValidToken = TokenService.ValidateToken(user, token);
@@ -179,7 +179,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
 
         [Route("api/account/register")]
         [HttpPost]
-        public IHttpActionResult RegisterAccount([FromBody]RegisterAccountRequest request)
+        public virtual IHttpActionResult RegisterAccount([FromBody]RegisterAccountRequest request)
         {
             var response = new RegisterAccountResponse();
             var isEmailExist = accountService.IsEmailExist(request.Login);
@@ -195,7 +195,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
 
         [Route("api/account/add")]
         [HttpPost]
-        public IHttpActionResult AddUserAccount([FromBody]AddAccountAndLoginRequest request)
+        public virtual IHttpActionResult AddUserAccount([FromBody]AddAccountAndLoginRequest request)
         {
             var response = new RegisterAccountResponse();
             var isValidToken = TokenService.ValidateToken(request.user, request.token);
@@ -221,7 +221,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
 
         [Route("api/roles")]
         [HttpGet]
-        public IHttpActionResult GetRoles()
+        public virtual IHttpActionResult GetRoles()
         {
             var roles = accountService.GetRoles();
             return Ok(roles);
@@ -230,7 +230,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
 
         [Route("api/user/info")]
         [HttpGet]
-        public IHttpActionResult GetUserInformation(long id)
+        public virtual IHttpActionResult GetUserInformation(long id)
         {
             var response = new GetUserResponse();
             var user = userService.GetUserInfo(id);
@@ -244,7 +244,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
 
         [Route("api/u_pictures")]
         [HttpGet]
-        public HttpResponseMessage GetPictureidlong(long id)
+        public virtual HttpResponseMessage GetPictureidlong(long id)
         {
             var image = String.Empty;
             var defaultImage = String.Empty;
@@ -271,7 +271,7 @@ namespace UM_LOGISTIC_V1.Controllers.Account
 
         [Route("api/update_user")]
         [HttpPut]
-        public IHttpActionResult UpdateUserData([FromBody]User user)
+        public virtual IHttpActionResult UpdateUserData([FromBody]User user)
         {
             var response = new UpdateUserResponse();
             if (user != null)

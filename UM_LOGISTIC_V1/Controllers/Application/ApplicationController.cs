@@ -17,7 +17,7 @@ namespace UM_LOGISTIC_V1.Controllers.Application
         private ApplicationService service = new ApplicationService();
         [Route("api/application/accept")]
         [HttpPost]
-        public IHttpActionResult AcceptApplication([FromBody]ApplicationAcceptRequest request)
+        public virtual IHttpActionResult AcceptApplication([FromBody]ApplicationAcceptRequest request)
         {
             var response = new CreateCooperationApplicationResponse();
             var applicationId = service.AcceptApplication(request.Type, request.Id);
@@ -27,7 +27,7 @@ namespace UM_LOGISTIC_V1.Controllers.Application
 
         [Route("api/application/decline")]
         [HttpPost]
-        public IHttpActionResult DeclineApplication([FromBody]ApplicationAcceptRequest request)
+        public virtual IHttpActionResult DeclineApplication([FromBody]ApplicationAcceptRequest request)
         {
             var response = new CreateCooperationApplicationResponse();
             var isDeclined = service.DeclineApplication(request.Type, request.Id);
@@ -37,7 +37,7 @@ namespace UM_LOGISTIC_V1.Controllers.Application
 
         [Route("api/application/count")]
         [HttpGet]
-        public IHttpActionResult GetApplicationsCount()
+        public virtual IHttpActionResult GetApplicationsCount()
         {
             var response = new AppllicationCountResponse();
             var count = service.GetNotFilteredApplicationsCount();
@@ -48,7 +48,7 @@ namespace UM_LOGISTIC_V1.Controllers.Application
 
         [Route("api/my_orderd_applications")]
         [HttpGet]
-        public IHttpActionResult GetOrderedByMyApplications(bool type, long userId, int page, int count)
+        public virtual IHttpActionResult GetOrderedByMyApplications(bool type, long userId, int page, int count)
         {
             var response = new GetOrderedByMeApplicationsResponse();
             var result = service.GetOrderedByMeApplications(type, userId, page, count);
@@ -59,7 +59,7 @@ namespace UM_LOGISTIC_V1.Controllers.Application
 
         [Route("api/up_to_date_application")]
         [HttpGet]
-        public IHttpActionResult UpToDateApplication(bool type, long id)
+        public virtual IHttpActionResult UpToDateApplication(bool type, long id)
         {
             var response = new BaseResponse();
             var isUpdated = service.UpToDateApplication(type, id);
@@ -69,7 +69,7 @@ namespace UM_LOGISTIC_V1.Controllers.Application
 
         [Route("api/application/remove")]
         [HttpGet]
-        public IHttpActionResult RemoveApplication(bool type, long id)
+        public virtual IHttpActionResult RemoveApplication(bool type, long id)
         {
             var response = new BaseResponse();
             var isRemoved = service.RemoveApplication(type, id);

@@ -21,7 +21,7 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
 
         [Route("api/cooperation")]
         [HttpGet]
-        public IHttpActionResult GetCooperationApplication(long id, string token, string user)
+        public virtual IHttpActionResult GetCooperationApplication(long id, string token, string user)
         {
             var getCooperationApplicationResponse = new GetCooperationApplicationResponse();
 
@@ -33,7 +33,7 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
 
         [Route("api/cooperation/create")]
         [HttpPost]
-        public IHttpActionResult CreateCooperationApplication([FromBody]CreateCooperationApplicationRequest request)
+        public virtual IHttpActionResult CreateCooperationApplication([FromBody]CreateCooperationApplicationRequest request)
         {
             var createCooperationApplicationResponse = new CreateCooperationApplicationResponse();
             var applicationToCreate = new UM_LOGISTIC_V1.Models.CooperationApplication.CooperationApplication()
@@ -65,7 +65,7 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
 
         [Route("api/cooperation/update")]
         [HttpPost]
-        public IHttpActionResult UpdateCooperationApplication([FromBody]UpdateCooperationApplicationRequest request)
+        public virtual IHttpActionResult UpdateCooperationApplication([FromBody]UpdateCooperationApplicationRequest request)
         {
             var updateCooperationApplicationResponse = new UpdateCooperationApplicationResponse();
             var applicationToUpdate = new UM_LOGISTIC_V1.Models.CooperationApplication.CooperationApplication()
@@ -95,7 +95,7 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
 
         [Route("api/cooperation/delete")]
         [HttpPost]
-        public IHttpActionResult RemoveCooperationApplication([FromBody]RemoveCooperationApplicationRequest request)
+        public virtual IHttpActionResult RemoveCooperationApplication([FromBody]RemoveCooperationApplicationRequest request)
         {
             var deleteCooperationApplicationResponse = new DeleteCooperationApplicationResponse();
             var applicationIdToDelete = request.Id;
@@ -106,7 +106,7 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
 
         [Route("api/cooperations")]
         [HttpGet]
-        public IHttpActionResult GetCooperationApplicationsByPageAndCount(int page, int count, string token, string user)
+        public virtual IHttpActionResult GetCooperationApplicationsByPageAndCount(int page, int count, string token, string user)
         {
             var getCooperationApplicationsByPageAndCountResponse = new GetCooperationApplicationsByPageAndCountResponse();
             var applications = applicationService.GetCooperationApplications(page, count);
@@ -117,7 +117,7 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
 
         [Route("api/coops_not_filtered")]
         [HttpGet]
-        public IHttpActionResult GetNotFilteredCooperationApplicationsByPageAndCount(int page, int count, string token, string user)
+        public virtual IHttpActionResult GetNotFilteredCooperationApplicationsByPageAndCount(int page, int count, string token, string user)
         {
             var getCooperationApplicationsByPageAndCountResponse = new GetCooperationApplicationsByPageAndCountResponse();
             var applications = applicationService.GetNotFilteredCooperationApplications(page, count);
@@ -128,7 +128,7 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
 
         [Route("api/appworktype")]
         [HttpGet]
-        public IHttpActionResult GetApplicationWorkType()
+        public virtual IHttpActionResult GetApplicationWorkType()
         {
             var workTypes = applicationService.GetApplicationWorkTypes();
             return Ok(workTypes);
@@ -137,7 +137,7 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
 
         [Route("api/c_applications")]
         [HttpGet]
-        public IHttpActionResult GetApplications(string filter, int page, int count)
+        public virtual IHttpActionResult GetApplications(string filter, int page, int count)
         {
             filter = WebUtility.UrlDecode(filter);
             var response = new GetCooperationApplicationsByPageAndCountResponse();
@@ -152,7 +152,7 @@ namespace UM_LOGISTIC_V1.Controllers.CooperationController
 
         [Route("api/c_pictures")]
         [HttpGet]
-        public HttpResponseMessage GetPicture(long id)
+        public virtual HttpResponseMessage GetPicture(long id)
         {
             var image = applicationService.GetPicture(id);
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);

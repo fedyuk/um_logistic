@@ -19,7 +19,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
         private UserService userService = new UserService();
         [Route("api/login")]
         [HttpPost]
-        public IHttpActionResult Login([FromBody]AuthenticateUserRequest request)
+        public virtual IHttpActionResult Login([FromBody]AuthenticateUserRequest request)
         {
             var authenticateUserResponse = new AuthenticateUserResponse();
             var userToAuthenticate = new User()
@@ -43,7 +43,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
 
         [Route("api/user")]
         [HttpGet]
-        public IHttpActionResult GetUser(long id, string token, string user)
+        public virtual IHttpActionResult GetUser(long id, string token, string user)
         {
             var getUserResponse = new GetUserResponse();
             var IsValidToken = TokenService.ValidateToken(user, token);
@@ -79,7 +79,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
 
         [Route("api/user/create")]
         [HttpPost]
-        public IHttpActionResult CreateUser([FromBody]CreateUserRequest request)
+        public virtual IHttpActionResult CreateUser([FromBody]CreateUserRequest request)
         {
             var createUserResponse = new CreateUserResponse();
             var isValidToken = TokenService.ValidateToken(request.user, request.token);
@@ -112,7 +112,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
 
         [Route("api/user/update")]
         [HttpPost]
-        public IHttpActionResult UpdateUser([FromBody]UpdateUserRequest request)
+        public virtual IHttpActionResult UpdateUser([FromBody]UpdateUserRequest request)
         {
             var updateUserResponse = new UpdateUserResponse();
             var isValidToken = TokenService.ValidateToken(request.user, request.token);
@@ -146,7 +146,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
 
         [Route("api/user/delete")]
         [HttpPost]
-        public IHttpActionResult RemoveUser([FromBody]RemoveUserRequest request)
+        public virtual IHttpActionResult RemoveUser([FromBody]RemoveUserRequest request)
         {
             var deleteUserResponse = new DeleteUserResponse();
             var isValidToken = TokenService.ValidateToken(request.user, request.token);
@@ -173,7 +173,7 @@ namespace UM_LOGISTIC_V1.Controllers.Login
 
         [Route("api/users")]
         [HttpGet]
-        public IHttpActionResult GetUsersByPageAndCount(int page, int count, string token, string user)
+        public virtual IHttpActionResult GetUsersByPageAndCount(int page, int count, string token, string user)
         {
             var getUsersByPageAndCountResponse = new GetUsersByPageAndCountResponse();
             var isValidToken = TokenService.ValidateToken(user, token);

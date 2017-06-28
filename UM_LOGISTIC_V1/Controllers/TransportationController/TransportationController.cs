@@ -22,7 +22,7 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
 
         [Route("api/transportation")]
         [HttpGet]
-        public IHttpActionResult GetTransportationApplication(long id, string token, string user)
+        public virtual IHttpActionResult GetTransportationApplication(long id, string token, string user)
         {
             var getTransportationApplicationResponse = new GetTransportationApplicationResponse();
             var applicationInfo = applicationService.GetTransportationApplication(id);
@@ -33,7 +33,7 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
 
         [Route("api/transportation/create")]
         [HttpPost]
-        public IHttpActionResult CreateTransportationApplication([FromBody]CreateTransportationApplicationRequest request)
+        public virtual IHttpActionResult CreateTransportationApplication([FromBody]CreateTransportationApplicationRequest request)
         {
             var createTransportationApplicationResponse = new CreateTransportationApplicationResponse();
             var applicationToCreate = new UM_LOGISTIC_V1.Models.TransportationApplication.TransportationApplication()
@@ -59,7 +59,7 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
 
         [Route("api/transportation/update")]
         [HttpPost]
-        public IHttpActionResult UpdateTransportationApplication([FromBody]UpdateTransportationApplicationRequest request)
+        public virtual IHttpActionResult UpdateTransportationApplication([FromBody]UpdateTransportationApplicationRequest request)
         {
             var updateTransportationApplicationResponse = new UpdateTransportationApplicationResponse();
             var applicationToUpdate = new UM_LOGISTIC_V1.Models.TransportationApplication.TransportationApplication()
@@ -84,7 +84,7 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
 
         [Route("api/transportation/delete")]
         [HttpPost]
-        public IHttpActionResult RemoveTransportationApplication([FromBody]RemoveTransportationApplicationRequest request)
+        public virtual IHttpActionResult RemoveTransportationApplication([FromBody]RemoveTransportationApplicationRequest request)
         {
             var deleteTransportationApplicationResponse = new DeleteTransportationApplicationResponse();
             var applicationIdToDelete = request.Id;
@@ -106,7 +106,7 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
 
         [Route("api/trans_not_filtered")]
         [HttpGet]
-        public IHttpActionResult GetNotFilteredTransportationApplicationsByPageAndCount(int page, int count, string token, string user)
+        public virtual IHttpActionResult GetNotFilteredTransportationApplicationsByPageAndCount(int page, int count, string token, string user)
         {
             var getTransportationApplicationsByPageAndCountResponse = new GetTransportationApplicationsByPageAndCountResponse();
             var applications = applicationService.GetNotFilteredTransportationApplications(page, count);
@@ -117,7 +117,7 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
 
         [Route("api/t_applications")]
         [HttpGet]
-        public IHttpActionResult GetApplications(string filter, int page, int count)
+        public virtual IHttpActionResult GetApplications(string filter, int page, int count)
         {
             filter = WebUtility.UrlDecode(filter);
             var response = new GetTransportationApplicationsByPageAndCountResponse();
@@ -132,7 +132,7 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
 
         [Route("api/t_pictures")]
         [HttpGet]
-        public HttpResponseMessage GetPicture(long id)
+        public virtual HttpResponseMessage GetPicture(long id)
         {
             var image = applicationService.GetPicture(id);
             HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
@@ -148,7 +148,7 @@ namespace UM_LOGISTIC_V1.Controllers.TransportationController
 
         [Route("api/get_list_pictures")]
         [HttpGet]
-        public IHttpActionResult GetListHtmlPictures(long id, bool type, bool isEdit = false)
+        public virtual IHttpActionResult GetListHtmlPictures(long id, bool type, bool isEdit = false)
         {
             var executeUri = type == true ? TextConstants.TrasnportationGetPicturesUrl : TextConstants.CooperationGetPicturesUrl;
             var currentRequestUri = HttpContext.Current.Request;

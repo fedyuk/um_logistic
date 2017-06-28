@@ -17,7 +17,7 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationTrash
 
         [Route("api/trash/add")]
         [HttpPost]
-        public IHttpActionResult AddApplicationTrash([FromBody] CreateApplicationTrashRequest request)
+        public virtual IHttpActionResult AddApplicationTrash([FromBody] CreateApplicationTrashRequest request)
         {
             var response = new BaseResponse();
             response.Success = service.InsertTrashApplication(request.UserId, request.ApplicationId, request.Type);
@@ -26,7 +26,7 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationTrash
 
         [Route("api/trash/count")]
         [HttpGet]
-        public IHttpActionResult GetApplicationTrashCount(long id)
+        public virtual IHttpActionResult GetApplicationTrashCount(long id)
         {
             var response = new AppllicationCountResponse();
             response.Result = service.GetApplicationTrashCountByCreatedBy(id);
@@ -36,7 +36,7 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationTrash
 
         [Route("api/trash/userApplications")]
         [HttpGet]
-        public IHttpActionResult GetApplicationTrashList(long id)
+        public virtual IHttpActionResult GetApplicationTrashList(long id)
         {
             var response = new GetApplicationTrashListResponse();
             response.Result = service.GetApplicationTrashesList(id);
@@ -46,7 +46,7 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationTrash
 
         [Route("api/trash/remove")]
         [HttpGet]
-        public IHttpActionResult RemoveTrashElement(long id, bool type)
+        public virtual IHttpActionResult RemoveTrashElement(long id, bool type)
         {
             var response = new BaseResponse();
             response.Success = service.RemoveTrashElement(id, type);

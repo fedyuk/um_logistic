@@ -19,7 +19,7 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationPicture
 
         [Route("api/picture")]
         [HttpGet]
-        public IHttpActionResult GetPicture(long applicationId, bool type)
+        public virtual IHttpActionResult GetPicture(long applicationId, bool type)
         {
 			var response = new GetApplicationPictureResponse();
             var picture = service.GetPicture(applicationId, type);
@@ -30,7 +30,7 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationPicture
 
         [Route("api/pictures")]
         [HttpGet]
-        public IHttpActionResult GetPictures(long applicationId, bool type)
+        public virtual IHttpActionResult GetPictures(long applicationId, bool type)
         {
             var response = new GetApplicationPicturesResponse();
             response.Success = true;
@@ -52,7 +52,7 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationPicture
 
         [Route("api/picture/load")]
         [HttpPost]
-        public IHttpActionResult LoadPicture([FromBody]LoadApplicationPictureRequest request)
+        public virtual IHttpActionResult LoadPicture([FromBody]LoadApplicationPictureRequest request)
         {
 			var response = new LoadApplicationPictureResponse();
             var isLoaded = service.LoadPicture(request.Image, request.ApplicationId, request.Type);
@@ -62,7 +62,7 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationPicture
 		
 		[Route("api/picture/update")]
         [HttpPost]
-        public IHttpActionResult UpdatePicture([FromBody]LoadApplicationPictureRequest request)
+        public virtual IHttpActionResult UpdatePicture([FromBody]LoadApplicationPictureRequest request)
         {
 			var response = new LoadApplicationPictureResponse();
             var isUpdated = service.UpdatePicture(request.Image, request.ApplicationId, request.Type);
@@ -72,7 +72,7 @@ namespace UM_LOGISTIC_V1.Controllers.ApplicationPicture
 
         [Route("api/picture/delete")]
         [HttpGet]
-        public IHttpActionResult RemovePicture(long applicationId, bool type)
+        public virtual IHttpActionResult RemovePicture(long applicationId, bool type)
         {
 			var response = new DeleteApplicationPictureResponse();
             var isRemoved = service.RemovePicture(applicationId, type);
