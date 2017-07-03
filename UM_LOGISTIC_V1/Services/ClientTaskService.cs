@@ -61,7 +61,6 @@ namespace UM_LOGISTIC_V1.Services
                 var eventsHub = GlobalHost.ConnectionManager.GetHubContext<EventsHub>();
                 eventsHub.Clients.All.onTaskGot(owner, title, 1);
                 var taskManagerHub = GlobalHost.ConnectionManager.GetHubContext<TaskManagerHub>();
-                //taskManagerHub.Clients.Clients(userService.GetAdminConnectionIds()).taskManagerChanged(feedBack.Id);
                 taskManagerHub.Clients.All.taskManagerChanged(feedBack.Id);
                 return true;
             }
@@ -114,7 +113,6 @@ namespace UM_LOGISTIC_V1.Services
                 {
                     db.SaveChanges();
                     var taskManagerHub = GlobalHost.ConnectionManager.GetHubContext<TaskManagerHub>();
-                    //taskManagerHub.Clients.Clients(userService.GetAdminConnectionIds()).taskManagerChanged(0);
                     taskManagerHub.Clients.All.taskManagerChanged(0);
                     return true;
                 }
@@ -130,10 +128,6 @@ namespace UM_LOGISTIC_V1.Services
         {
             var columns = DBColumns.clientTaskcolumns;
             var query = db.ClientTasks.AsQueryable<ClientTask>();
-            /*if (filters.Count == 0)
-            {
-                return new List<ClientTask>();
-            }*/
             foreach (var filter in filters)
             {
                 object value = Convert.ChangeType(filter.value, columns.Where(s => s.column == filter.column).Select(x => x.type).FirstOrDefault());
@@ -184,11 +178,11 @@ namespace UM_LOGISTIC_V1.Services
             {
                 case 2:
                     applicationTask.TransportationApplicationId = request.ApplicationId;
-                    title = "Оформлено заявку на перевезення";
+                    title = TextConstants.TransportationApplicationAccepted;
                     break;
                 case 3:
                     applicationTask.CooperationApplicationId = request.ApplicationId;
-                    title = "Оформлено заявку на співробітництво";
+                    title = TextConstants.CooperationApplicationAccepted;
                     break;
             }
             applicationTask.Title = title;
@@ -199,7 +193,6 @@ namespace UM_LOGISTIC_V1.Services
                 var eventsHub = GlobalHost.ConnectionManager.GetHubContext<EventsHub>();
                 eventsHub.Clients.All.onTaskGot(owner, title, request.TypeId);
                 var taskManagerHub = GlobalHost.ConnectionManager.GetHubContext<TaskManagerHub>();
-                //taskManagerHub.Clients.Clients(userService.GetAdminConnectionIds()).taskManagerChanged(applicationTask.Id);
                 taskManagerHub.Clients.All.taskManagerChanged(applicationTask.Id);
                 return true;
             }
